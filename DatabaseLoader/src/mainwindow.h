@@ -1,6 +1,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "database.h"
+
 #include <QMainWindow>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
@@ -18,6 +20,11 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    QString getRealDataDbPath();
+    void SetupNetworkManager();
+    void SetupDb();
+    void CollectData();
+
 private slots:
     void on_pushButton_clicked();
 
@@ -25,5 +32,8 @@ private:
     Ui::MainWindow *ui;
     QNetworkAccessManager* manager;
     QNetworkRequest request;
+    DATABASE* realDataDb;
+    QString RequestBuffer;
+    QList<LEAGUE*> allLeagues;
 };
 #endif // MAINWINDOW_H

@@ -13,8 +13,11 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
+    delete realDataDb;
     delete manager;
     delete ui;
+    qDeleteAll(allLeagues);
+    delete RequestBuffer;
 }
 
 QString MainWindow::getRealDataDbPath()
@@ -37,15 +40,16 @@ QString MainWindow::getRealDataDbPath()
 
 void MainWindow::SetupNetworkManager()
 {
+    RequestBuffer = new REQUEST_BUFFER();
     manager = new QNetworkAccessManager();
     QObject::connect(manager, &QNetworkAccessManager::finished, this, [=](QNetworkReply *reply)
     {
          if (reply->error()) {
-            qDebug() << reply->errorString();
+            qDebug() << "Reply error: " + reply->errorString();
             return;
          }
-         RequestBuffer = reply->readAll();
-         qDebug() << RequestBuffer;
+         RequestBuffer->setBuffer(QString(reply->readAll()));
+         qDebug() << RequestBuffer->getBufferRef();
         }
     );
 }
@@ -59,10 +63,12 @@ void MainWindow::SetupDb()
 
 void MainWindow::on_pushButton_clicked()
 {
+    SetupRequestAuth();
     CollectData();
-    request.setUrl(QUrl("https://transfermarket.p.rapidapi.com/clubs/get-profile?id=1"));
-    request.setRawHeader("x-rapidapi-host", "transfermarket.p.rapidapi.com");
-    request.setRawHeader("x-rapidapi-key", "b9f7af25f5msh32a9cb7f56a4119p1d835ejsnd02ec50257bf");
-    manager->get(request);
 }
 
+void MainWindow::SetupRequestAuth()
+{
+    request.setRawHeader("x-rapidapi-host", "transfermarket.p.rapidapi.com");
+    request.setRawHeader("x-rapidapi-key", "b9f7af25f5msh32a9cb7f56a4119p1d835ejsnd02ec50257bf");
+}

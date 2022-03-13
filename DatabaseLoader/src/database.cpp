@@ -28,15 +28,6 @@ QList<QPair<QString, int> > DATABASE::getAllLeagues()
     return allLeagues;
 }
 
-LEAGUE *DATABASE::InitLeagueByIdAndFed(QPair<QString, int> info)
-{
-    LEAGUE* league = new LEAGUE(info.first, info.second);
-    QSqlQuery query(*db);
-    query.exec("SELECT name FROM leagues WHERE id = " + info.first + ";");
-    QString league_name = query.value(0).toString();
-    league->setName(league_name);
-}
-
 void DATABASE::SetupConnection(QString& dbPath)
 {
     db = new QSqlDatabase(QSqlDatabase::addDatabase("QSQLITE"));

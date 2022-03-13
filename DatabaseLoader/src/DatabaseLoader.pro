@@ -14,13 +14,15 @@ SOURCES += \
     database.cpp \
     league.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    request_buffer.cpp
 
 HEADERS += \
     club.h \
     database.h \
     league.h \
-    mainwindow.h
+    mainwindow.h \
+    request_buffer.h
 
 FORMS += \
     mainwindow.ui

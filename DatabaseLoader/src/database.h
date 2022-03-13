@@ -15,7 +15,6 @@ class DATABASE
 public:
     DATABASE(QString& dbPath);
     QList<QPair<QString, int>> getAllLeagues();
-    LEAGUE *InitLeagueByIdAndFed(QPair<QString, int> info);
 private:
     void SetupConnection(QString& dbPath);
 private:

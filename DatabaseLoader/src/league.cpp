@@ -15,7 +15,17 @@ LEAGUE::LEAGUE(QString id, QString name, int federation, QList<CLUB *> clubs) : 
 
 }
 
+LEAGUE::~LEAGUE()
+{
+    qDeleteAll(clubs);
+}
+
 void LEAGUE::setName(QString &league_name)
+{
+    name = league_name;
+}
+
+void LEAGUE::setName(QString league_name)
 {
     name = league_name;
 }

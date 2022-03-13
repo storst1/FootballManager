@@ -1,3 +1,4 @@
+#pragma once
 #ifndef REQUEST_BUFFER_H
 #define REQUEST_BUFFER_H
 

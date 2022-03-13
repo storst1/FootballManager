@@ -14,10 +14,9 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete realDataDb;
-    delete manager;
+    delete netManager;
     delete ui;
     qDeleteAll(allLeagues);
-    delete RequestBuffer;
 }
 
 QString MainWindow::getRealDataDbPath()
@@ -40,18 +39,7 @@ QString MainWindow::getRealDataDbPath()
 
 void MainWindow::SetupNetworkManager()
 {
-    RequestBuffer = new REQUEST_BUFFER();
-    manager = new QNetworkAccessManager();
-    QObject::connect(manager, &QNetworkAccessManager::finished, this, [=](QNetworkReply *reply)
-    {
-         if (reply->error()) {
-            qDebug() << "Reply error: " + reply->errorString();
-            return;
-         }
-         RequestBuffer->setBuffer(QString(reply->readAll()));
-         qDebug() << RequestBuffer->getBufferRef();
-        }
-    );
+    netManager = new NETWORK_MANAGER();
 }
 
 void MainWindow::SetupDb()
@@ -63,12 +51,6 @@ void MainWindow::SetupDb()
 
 void MainWindow::on_pushButton_clicked()
 {
-    SetupRequestAuth();
+    netManager->SetupRequestAuth();
     CollectData();
-}
-
-void MainWindow::SetupRequestAuth()
-{
-    request.setRawHeader("x-rapidapi-host", "transfermarket.p.rapidapi.com");
-    request.setRawHeader("x-rapidapi-key", "b9f7af25f5msh32a9cb7f56a4119p1d835ejsnd02ec50257bf");
 }

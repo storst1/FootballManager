@@ -77,6 +77,29 @@ QList<CLUB> NETWORK_MANAGER::GatherClubsListByComp(const QString &compId)
     return clubList;
 }
 
+QList<PLAYER *> NETWORK_MANAGER::GatherPlayersListByClub(const int clubId)
+{
+    request.setUrl(QUrl("https://transfermarket.p.rapidapi.com/clubs/get-squad?id=" + QString::number(clubId)));
+    qDebug() << request.url().toString();
+    QNetworkReply* reply = manager->get(request);
+    QEventLoop loop;
+    connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
+    loop.exec();
+    JSON_PARSER_SQUAD Squad(RequestBuffer->getBuffer());
+    QList<JSON_PARSER_PLAYER> playersInfo = Squad.getPlayersParsers();
+    QList<PLAYER*> players;
+    for(auto pI : playersInfo){
+        players.push_back(new PLAYER(pI));
+        qDebug() << pI.getName();
+    }
+    return players;
+    /*
+    QString nameJsonProperty = "\"competitionName\":\"";
+    int idxOfName = RequestBuffer->indexOf(nameJsonProperty);
+    QString name = RequestBuffer->GetValueFromRequestBuffer(idxOfName + nameJsonProperty.length());
+    */
+}
+
 QString NETWORK_MANAGER::GatherLeagueName(const QString &leagueId)
 {
     request.setUrl(QUrl("https://transfermarket.p.rapidapi.com/competitions/get-header-info?id=" + leagueId));

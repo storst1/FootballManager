@@ -12,6 +12,9 @@ SOURCES += \
     club.cpp \
     data_collector.cpp \
     database.cpp \
+    json_parser.cpp \
+    json_parser_player.cpp \
+    json_parser_squad.cpp \
     league.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -22,6 +25,9 @@ SOURCES += \
 HEADERS += \
     club.h \
     database.h \
+    json_parser.h \
+    json_parser_player.h \
+    json_parser_squad.h \
     league.h \
     mainwindow.h \
     network_manager.h \

@@ -3,7 +3,7 @@
 void MainWindow::CollectData()
 {
     FillAllLeagues();
-
+    FillAllPlayers();
 }
 
 void MainWindow::FillAllLeagues()
@@ -27,7 +27,10 @@ void MainWindow::FillAllLeaguesWithBaseInfo()
 
 void MainWindow::FillAllPlayers()
 {
-
+    for(int i = 0; i < allClubs.size(); ++i){
+        QList<PLAYER*> curSquad = netManager->GatherPlayersListByClub(allClubs[i]->getId());
+        allPlayers.append(curSquad);
+    }
 }
 
 QList<CLUB *> MainWindow::InitClubs(QList<CLUB> clubList)

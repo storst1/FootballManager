@@ -4,6 +4,8 @@
 
 #include "request_buffer.h"
 #include "club.h"
+#include "json_parser_squad.h"
+#include "json_parser_player.h"
 
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
@@ -24,6 +26,7 @@ public:
     QString GatherLeagueName(const QString& leagueId);
     void SetupRequestAuth();
     QList<CLUB> GatherClubsListByComp(const QString& compId);
+    QList<PLAYER*> GatherPlayersListByClub(const int clubId);
 private:
     QNetworkAccessManager* manager;
     QNetworkRequest request;

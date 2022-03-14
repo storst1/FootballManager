@@ -22,7 +22,7 @@ QList<JSON_PARSER_PLAYER> JSON_PARSER_SQUAD::getPlayersParsers() const
 
 void JSON_PARSER_SQUAD::InitPlayersInfoWithVals()
 {
-    for(auto o : playerObjs){
+    for(const auto &o : playerObjs){
         playersInfo.push_back(JSON_PARSER_PLAYER(o));
     }
 }

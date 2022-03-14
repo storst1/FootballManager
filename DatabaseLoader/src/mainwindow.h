@@ -27,7 +27,7 @@ public:
     void FillAllLeaguesWithBaseInfo();
     void FillAllPlayers();
     QList<CLUB*> InitClubs(QList<CLUB> clubList);
-    void SaveAllData(QList<LEAGUE*> leagues, QList<CLUB*> clubs);
+    void SaveAllData(QList<LEAGUE*> leagues, QList<CLUB*> clubs, QList<PLAYER*> players);
 
 private slots:
     void on_pushButton_clicked();

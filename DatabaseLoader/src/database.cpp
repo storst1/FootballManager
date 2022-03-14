@@ -56,6 +56,12 @@ void DATABASE::OverrideClubsInfo(QList<CLUB *> clubsList)
     SaveClubsInfo(clubsList);
 }
 
+void DATABASE::OverridePlayersInfo(QList<PLAYER *> playersList)
+{
+    DeleteTableInfo("players");
+    SavePlayersInfo(playersList);
+}
+
 void DATABASE::SaveClubsInfo(QList<CLUB *> clubsList)
 {
     QSqlQuery query(*db);
@@ -101,5 +107,30 @@ void DATABASE::DeleteTableInfo(QString table_name)
     QString queryStatement = "DELETE FROM " + table_name;
     if(!query.exec(queryStatement)){
         qDebug() << "Table was not deleted. Error: " + query.lastError().text();
+    }
+}
+
+void DATABASE::SavePlayersInfo(QList<PLAYER *> playersList)
+{
+    QSqlQuery query(*db);
+    QString queryStatement = "INSERT INTO players (id, name, TW, FN, SN, age, height, FP, SP) VALUES ";
+    for(auto p : playersList){
+        queryStatement +=
+                "('" + QString::number(p->getId()) +
+                "', '" + SqlGetStringReady(p->getName()) +
+                "', '" + QString::number(p->getTW()) +
+                "', '" + QString::number(p->getFN()) +
+                "', '" + QString::number(p->getSN()) +
+                "', '" + QString::number(p->getAge()) +
+                "', '" + p->getHeight() +
+                "', '" + QString::number(p->getFP()) +
+                "', '" + QString::number(p->getSP()) + "'), ";
+    }
+    //Replace ", " with ";" at the end
+    queryStatement.erase(std::prev(queryStatement.cend(), 2), queryStatement.cend());
+    queryStatement += ";";
+    //qDebug() << queryStatement;
+    if(!query.exec(queryStatement)){
+        qDebug() << "Insert query error. Error: " + query.lastError().text();
     }
 }

@@ -48,10 +48,11 @@ void MainWindow::SetupDb()
     realDataDb = new DATABASE(dbPath);
 }
 
-void MainWindow::SaveAllData(QList<LEAGUE *> leagues, QList<CLUB *> clubs)
+void MainWindow::SaveAllData(QList<LEAGUE *> leagues, QList<CLUB *> clubs, QList<PLAYER *> players)
 {
     realDataDb->OverrideLeaguesInfo(leagues);
     realDataDb->OverrideClubsInfo(clubs);
+    realDataDb->OverridePlayersInfo(players);
 }
 
 void MainWindow::on_pushButton_clicked()
@@ -62,5 +63,5 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_pushButton_2_clicked()
 {
-    SaveAllData(allLeagues, allClubs);
+    SaveAllData(allLeagues, allClubs, allPlayers);
 }

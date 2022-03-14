@@ -16,13 +16,15 @@ public:
     DATABASE(QString& dbPath);
     QList<QPair<QString, int>> getAllLeagues();
     void OverrideLeaguesInfo(QList<LEAGUE *> leaguesList);
-    void SaveLeaguesInfo(QList<LEAGUE *> leaguesList);
     void OverrideClubsInfo(QList<CLUB*> clubsList);
-    void SaveClubsInfo(QList<CLUB*> clubsList);
+    void OverridePlayersInfo(QList<PLAYER*> playersList);
     static QString SqlGetStringReady(QString str);
 private:
     void SetupConnection(QString& dbPath);
     void DeleteTableInfo(QString table_name);
+    void SavePlayersInfo(QList<PLAYER*> playersList);
+    void SaveClubsInfo(QList<CLUB*> clubsList);
+    void SaveLeaguesInfo(QList<LEAGUE *> leaguesList);
 private:
     QSqlDatabase* db;
 };

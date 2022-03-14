@@ -23,3 +23,48 @@ PLAYER::PLAYER(JSON_PARSER_PLAYER playerInfo)
     SP = playerInfo.getSP();
     TW = playerInfo.getTW();
 }
+
+int PLAYER::getId() const
+{
+    return id;
+}
+
+QString PLAYER::getHeight() const
+{
+    return height;
+}
+
+QString PLAYER::getName() const
+{
+    return name;
+}
+
+int PLAYER::getAge() const
+{
+    return age;
+}
+
+int PLAYER::getFN() const
+{
+    return FN;
+}
+
+int PLAYER::getSN() const
+{
+    return SN;
+}
+
+int PLAYER::getFP() const
+{
+    return FP;
+}
+
+int PLAYER::getSP() const
+{
+    return SP;
+}
+
+int PLAYER::getTW() const
+{
+    return TW;
+}

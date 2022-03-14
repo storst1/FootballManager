@@ -11,7 +11,7 @@ NETWORK_MANAGER::NETWORK_MANAGER()
             return;
          }
          //char* data = (reply->readAll()).data();
-         std::string s = reply->readAll().data();
+         RequestBuffer->setBuffer(reply->readAll().data());
          /*
          for (int i = 0; i < s.size(); i++) {
              if (s[i] == 'é')
@@ -23,7 +23,6 @@ NETWORK_MANAGER::NETWORK_MANAGER()
              }
          }
          */
-         QString result = QString::fromStdString(s);
          /*
          for(int i = 0; i < rawData.size(); ++i) {
              QChar qc = rawData.at(i);
@@ -36,7 +35,7 @@ NETWORK_MANAGER::NETWORK_MANAGER()
              }
          }
          */
-         RequestBuffer->setBuffer(result);
+
          qDebug() << RequestBuffer->getBufferRef();
         }
     );

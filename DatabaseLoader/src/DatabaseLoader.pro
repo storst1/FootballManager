@@ -16,6 +16,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     network_manager.cpp \
+    player.cpp \
     request_buffer.cpp
 
 HEADERS += \
@@ -24,6 +25,7 @@ HEADERS += \
     league.h \
     mainwindow.h \
     network_manager.h \
+    player.h \
     request_buffer.h
 
 FORMS += \

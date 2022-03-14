@@ -25,6 +25,11 @@ void MainWindow::FillAllLeaguesWithBaseInfo()
     }
 }
 
+void MainWindow::FillAllPlayers()
+{
+
+}
+
 QList<CLUB *> MainWindow::InitClubs(QList<CLUB> clubList)
 {
     QList<CLUB*> clubsList;

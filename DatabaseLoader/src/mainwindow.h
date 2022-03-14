@@ -25,6 +25,7 @@ public:
     void CollectData();
     void FillAllLeagues();
     void FillAllLeaguesWithBaseInfo();
+    void FillAllPlayers();
     QList<CLUB*> InitClubs(QList<CLUB> clubList);
     void SaveAllData(QList<LEAGUE*> leagues, QList<CLUB*> clubs);
 
@@ -39,5 +40,6 @@ private:
     NETWORK_MANAGER* netManager;
     QList<LEAGUE*> allLeagues;
     QList<CLUB*> allClubs;
+    QList<PLAYER*> allPlayers;
 };
 #endif // MAINWINDOW_H

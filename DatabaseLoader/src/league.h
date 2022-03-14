@@ -16,6 +16,7 @@ public:
     void setName(QString& league_name);
     void setName(QString league_name);
     void setClubs(QList<CLUB*>& clubs_list);
+    QString getId() const;
 private:
     QString id;
     QString name;

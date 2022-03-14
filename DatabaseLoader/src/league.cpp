@@ -34,3 +34,8 @@ void LEAGUE::setClubs(QList<CLUB *> &clubs_list)
 {
     clubs = clubs_list;
 }
+
+QString LEAGUE::getId() const
+{
+    return id;
+}

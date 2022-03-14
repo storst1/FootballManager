@@ -7,6 +7,8 @@ class CLUB
 {
 public:
     CLUB();
+    CLUB(int id);
+    ~CLUB() = default;
 private:
     int id;
     QString name;

@@ -1,4 +1,5 @@
 #include "request_buffer.h"
+#include <QtDebug>
 
 REQUEST_BUFFER::REQUEST_BUFFER()
 {
@@ -31,9 +32,33 @@ QString REQUEST_BUFFER::GetValueFromRequestBuffer(const int beginingIdx)
     return value;
 }
 
+QList<QString> REQUEST_BUFFER::GetAllValuesFromRequestBuffer(const QList<int> &idxs, const int strLength)
+{
+    QList<QString> retList;
+    for(auto aidx : idxs){
+        retList.push_back(GetValueFromRequestBuffer(aidx + strLength));
+    }
+    return retList;
+}
+
 int REQUEST_BUFFER::indexOf(const QString &str)
 {
     return buffer.indexOf(str);
+}
+
+QList<int> REQUEST_BUFFER::indexOfAll(const QString &str)
+{
+    QList<int> idxs;
+    int startingElem = 0;
+    while(int cur = buffer.indexOf(str, startingElem)){
+        if(cur < 0){
+            break;
+        }
+        idxs.push_back(cur);
+        startingElem = str.length() + cur + 1;
+    }
+    qDebug() << idxs;
+    return idxs;
 }
 
 void REQUEST_BUFFER::operator=(const QString &str)

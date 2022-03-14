@@ -23,6 +23,9 @@ public:
     void SetupNetworkManager();
     void SetupDb();
     void CollectData();
+    void FillAllLeagues();
+    void FillAllLeaguesWithBaseInfo();
+    QList<CLUB*> InitClubs(QList<QString> idList);
 
 private slots:
     void on_pushButton_clicked();
@@ -32,5 +35,6 @@ private:
     DATABASE* realDataDb;
     NETWORK_MANAGER* netManager;
     QList<LEAGUE*> allLeagues;
+    QList<CLUB*> allClubs;
 };
 #endif // MAINWINDOW_H

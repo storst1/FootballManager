@@ -19,6 +19,7 @@ public:
 
     QString GatherLeagueName(const QString& leagueId);
     void SetupRequestAuth();
+    QList<QString> GatherClubsListByComp(const QString& compId);
 private:
     QNetworkAccessManager* manager;
     QNetworkRequest request;

@@ -11,6 +11,8 @@ void MainWindow::FillAllLeagues()
     FillAllLeaguesWithBaseInfo();
     for(int i = 0; i < allLeagues.size(); ++i){
         QList<CLUB*> curCompClubsList = InitClubs(netManager->GatherClubsListByComp(allLeagues[i]->getId()));
+        //Do smth to complete club info
+        allClubs.append(curCompClubsList);
     }
 }
 
@@ -23,11 +25,11 @@ void MainWindow::FillAllLeaguesWithBaseInfo()
     }
 }
 
-QList<CLUB *> MainWindow::InitClubs(QList<QString> idList)
+QList<CLUB *> MainWindow::InitClubs(QList<CLUB> clubList)
 {
     QList<CLUB*> clubsList;
-    for(int i = 0; i < idList.size(); ++i){
-        clubsList.push_back(new CLUB(idList[i].toInt()));
+    for(int i = 0; i < clubList.size(); ++i){
+        clubsList.push_back(new CLUB(clubList[i]));
     }
     return clubsList;
 }

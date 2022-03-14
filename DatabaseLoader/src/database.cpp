@@ -28,6 +28,61 @@ QList<QPair<QString, int> > DATABASE::getAllLeagues()
     return allLeagues;
 }
 
+void DATABASE::OverrideLeaguesInfo(QList<LEAGUE*> leaguesList)
+{
+    DeleteTableInfo("leagues");
+    SaveLeaguesInfo(leaguesList);
+}
+
+void DATABASE::SaveLeaguesInfo(QList<LEAGUE *> leaguesList)
+{
+    QSqlQuery query(*db);
+    QString queryStatement = "INSERT INTO leagues (id, name) VALUES ";
+    for(auto l : leaguesList){
+        queryStatement += "('" + SqlGetStringReady(l->getId()) + "', '" + SqlGetStringReady(l->getName()) + "'), ";
+    }
+    //Replace ", " with ";" at the end
+    queryStatement.erase(std::prev(queryStatement.cend(), 2), queryStatement.cend());
+    queryStatement += ";";
+    qDebug() << queryStatement;
+    if(!query.exec(queryStatement)){
+        qDebug() << "Insert query error. Error: " + query.lastError().text();
+    }
+}
+
+void DATABASE::OverrideClubsInfo(QList<CLUB *> clubsList)
+{
+    DeleteTableInfo("clubs");
+    SaveClubsInfo(clubsList);
+}
+
+void DATABASE::SaveClubsInfo(QList<CLUB *> clubsList)
+{
+    QSqlQuery query(*db);
+    QString queryStatement = "INSERT INTO clubs (id, name) VALUES ";
+    for(auto c : clubsList){
+        queryStatement += "('" + SqlGetStringReady(c->getStrId()) + "', '" + SqlGetStringReady(c->getName()) + "'), ";
+    }
+    //Replace ", " with ";" at the end
+    queryStatement.erase(std::prev(queryStatement.cend(), 2), queryStatement.cend());
+    queryStatement += ";";
+    qDebug() << queryStatement;
+    if(!query.exec(queryStatement)){
+        qDebug() << "Insert query error. Error: " + query.lastError().text();
+    }
+}
+
+QString DATABASE::SqlGetStringReady(QString str)
+{
+    for(int i = 0; i < str.size(); ++i){
+        if(QString(str[i]) == "'"){
+            str.insert(i, "'");
+            ++i;
+        }
+    }
+    return str;
+}
+
 void DATABASE::SetupConnection(QString& dbPath)
 {
     db = new QSqlDatabase(QSqlDatabase::addDatabase("QSQLITE"));
@@ -37,5 +92,14 @@ void DATABASE::SetupConnection(QString& dbPath)
     }
     else{
         qDebug() << "Database was successfuly opened!";
+    }
+}
+
+void DATABASE::DeleteTableInfo(QString table_name)
+{
+    QSqlQuery query(*db);
+    QString queryStatement = "DELETE FROM " + table_name;
+    if(!query.exec(queryStatement)){
+        qDebug() << "Table was not deleted. Error: " + query.lastError().text();
     }
 }

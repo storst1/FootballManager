@@ -25,10 +25,13 @@ public:
     void CollectData();
     void FillAllLeagues();
     void FillAllLeaguesWithBaseInfo();
-    QList<CLUB*> InitClubs(QList<QString> idList);
+    QList<CLUB*> InitClubs(QList<CLUB> clubList);
+    void SaveAllData(QList<LEAGUE*> leagues, QList<CLUB*> clubs);
 
 private slots:
     void on_pushButton_clicked();
+
+    void on_pushButton_2_clicked();
 
 private:
     Ui::MainWindow *ui;

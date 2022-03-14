@@ -1,3 +1,4 @@
+#pragma once
 #ifndef LEAGUE_H
 #define LEAGUE_H
 
@@ -17,6 +18,7 @@ public:
     void setName(QString league_name);
     void setClubs(QList<CLUB*>& clubs_list);
     QString getId() const;
+    QString getName() const;
 private:
     QString id;
     QString name;

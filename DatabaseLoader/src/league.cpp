@@ -39,3 +39,8 @@ QString LEAGUE::getId() const
 {
     return id;
 }
+
+QString LEAGUE::getName() const
+{
+    return name;
+}

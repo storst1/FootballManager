@@ -48,9 +48,19 @@ void MainWindow::SetupDb()
     realDataDb = new DATABASE(dbPath);
 }
 
+void MainWindow::SaveAllData(QList<LEAGUE *> leagues, QList<CLUB *> clubs)
+{
+    realDataDb->OverrideLeaguesInfo(leagues);
+    realDataDb->OverrideClubsInfo(clubs);
+}
 
 void MainWindow::on_pushButton_clicked()
 {
     netManager->SetupRequestAuth();
     CollectData();
+}
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    SaveAllData(allLeagues, allClubs);
 }

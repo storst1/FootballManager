@@ -11,7 +11,7 @@ public:
     REQUEST_BUFFER();
     ~REQUEST_BUFFER() = default;
 
-    QString getBuffer();
+    QString getBuffer() const;
     QString &getBufferRef();
     void setBuffer(const QString& str);
     QString GetValueFromRequestBuffer(const int beginingIdx);
@@ -21,6 +21,11 @@ public:
 
     void operator=(const QString& str);
     QChar operator[](int idx);
+
+    static void NormalizeValue(QString& str);
+    static QString NormalizeAndCopyValue(QString str);
+    static void NormalizeValues(QList<QString>& str_list);
+    static void ReplaceAllNonEnglishSymbols(QString& s);
 private:
     QString buffer;
 };

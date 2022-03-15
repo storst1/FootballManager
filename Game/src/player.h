@@ -27,6 +27,10 @@ public:
     int getSP() const;
     int getTW() const;
     int getClubId() const;
+
+    float getSkill() const;
+
+    void recountSkill();
 private:
     int id;
     QString name;
@@ -38,6 +42,8 @@ private:
     QString height;
     int age;
     int club_id;
+
+    float skill = 0.f;
 };
 
 #endif // PLAYER_H

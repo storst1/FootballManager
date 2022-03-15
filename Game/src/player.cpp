@@ -84,3 +84,13 @@ int PLAYER::getClubId() const
 {
     return club_id;
 }
+
+float PLAYER::getSkill() const
+{
+    return skill;
+}
+
+void PLAYER::recountSkill()
+{
+
+}

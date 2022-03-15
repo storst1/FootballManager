@@ -12,6 +12,7 @@ SOURCES += \
     club.cpp \
     data_collector.cpp \
     database.cpp \
+    database_real_data.cpp \
     json_parser.cpp \
     json_parser_player.cpp \
     json_parser_squad.cpp \
@@ -25,6 +26,7 @@ SOURCES += \
 HEADERS += \
     club.h \
     database.h \
+    database_real_data.h \
     json_parser.h \
     json_parser_player.h \
     json_parser_squad.h \

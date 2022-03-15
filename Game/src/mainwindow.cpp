@@ -45,7 +45,7 @@ void MainWindow::SetupNetworkManager()
 void MainWindow::SetupDb()
 {
     QString dbPath = getRealDataDbPath();
-    realDataDb = new DATABASE(dbPath);
+    realDataDb = new DATABASE_REAL_DATA(dbPath);
 }
 
 void MainWindow::SaveAllData(QList<LEAGUE *> leagues, QList<CLUB *> clubs, QList<PLAYER *> players)
@@ -66,6 +66,7 @@ void MainWindow::LoadAllDataFromDB()
     realDataDb->SelectAllLeagues(allLeagues);
     realDataDb->SelectAllClubs(allClubs);
     realDataDb->SelectAllPlayers(allPlayers);
+    qDebug() << "Loading real data from db finished";
 }
 
 void MainWindow::on_pushButton_clicked()

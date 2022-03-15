@@ -2,7 +2,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "database.h"
+#include "database_real_data.h"
 #include "network_manager.h"
 
 #include <QMainWindow>
@@ -40,7 +40,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    DATABASE* realDataDb;
+    DATABASE_REAL_DATA* realDataDb;
     NETWORK_MANAGER* netManager;
     QList<LEAGUE*> allLeagues;
     QList<CLUB*> allClubs;

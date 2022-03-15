@@ -10,7 +10,7 @@ void MainWindow::FillAllLeagues()
 {
     FillAllLeaguesWithBaseInfo();
     for(int i = 0; i < allLeagues.size(); ++i){
-        QList<CLUB*> curCompClubsList = InitClubs(netManager->GatherClubsListByComp(allLeagues[i]->getId()));
+        QList<API_CLUB*> curCompClubsList = InitClubs(netManager->GatherClubsListByComp(allLeagues[i]->getId()));
         for(auto cl : curCompClubsList){
             cl->setLeagueId(allLeagues[i]->getId());
         }
@@ -23,7 +23,7 @@ void MainWindow::FillAllLeaguesWithBaseInfo()
 {
     QList<QPair<QString, int>> allLeaguesInfo = realDataDb->getAllLeagues();
     for(int i = 0; i < allLeaguesInfo.size(); ++i){
-        allLeagues.push_back(new LEAGUE(allLeaguesInfo[i].first, allLeaguesInfo[i].second));
+        allLeagues.push_back(new API_LEAGUE(allLeaguesInfo[i].first, allLeaguesInfo[i].second));
         allLeagues[i]->setName(netManager->GatherLeagueName(allLeaguesInfo[i].first));
     }
 }
@@ -31,7 +31,7 @@ void MainWindow::FillAllLeaguesWithBaseInfo()
 void MainWindow::FillAllPlayers()
 {
     for(int i = 0; i < allClubs.size(); ++i){
-        QList<PLAYER*> curSquad = netManager->GatherPlayersListByClub(allClubs[i]->getId());
+        QList<API_PLAYER*> curSquad = netManager->GatherPlayersListByClub(allClubs[i]->getId());
         for(auto csq : curSquad){
             csq->setClubId(allClubs[i]->getId());
         }
@@ -39,11 +39,11 @@ void MainWindow::FillAllPlayers()
     }
 }
 
-QList<CLUB *> MainWindow::InitClubs(QList<CLUB> clubList)
+QList<API_CLUB *> MainWindow::InitClubs(QList<API_CLUB> clubList)
 {
-    QList<CLUB*> clubsList;
+    QList<API_CLUB*> clubsList;
     for(int i = 0; i < clubList.size(); ++i){
-        clubsList.push_back(new CLUB(clubList[i]));
+        clubsList.push_back(new API_CLUB(clubList[i]));
     }
     return clubsList;
 }

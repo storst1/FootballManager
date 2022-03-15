@@ -21,6 +21,14 @@ MainWindow::~MainWindow()
 
 QString MainWindow::getRealDataDbPath()
 {
+    QString path = getDbFolderPath();
+    qDebug() << path;
+    path += "/Databases/realdata.db";
+    return path;
+}
+
+QString MainWindow::getDbFolderPath()
+{
     qDebug() << qApp->applicationDirPath();
     QString path = qApp->applicationDirPath();
     int cnt = 0;
@@ -32,9 +40,7 @@ QString MainWindow::getRealDataDbPath()
         --i;
     }
     path.erase(path.cbegin() + i + 1, path.cend());
-    qDebug() << path;
-    path += "/Databases/realdata.db";
-    return path;
+    return path + "/Databases/";
 }
 
 void MainWindow::SetupNetworkManager()
@@ -44,11 +50,12 @@ void MainWindow::SetupNetworkManager()
 
 void MainWindow::SetupDb()
 {
-    QString dbPath = getRealDataDbPath();
-    realDataDb = new DATABASE_REAL_DATA(dbPath);
+    QString dbFolPath = getDbFolderPath();
+    realDataDb = new DATABASE_REAL_DATA(dbFolPath + "realdata.db", "DB_REAL");
+    skillConvDb = new DATABASE_SKILL_CONVERTER(dbFolPath + "skill_convertation_rules.db", "DB_SKILL", 1);
 }
 
-void MainWindow::SaveAllData(QList<LEAGUE *> leagues, QList<CLUB *> clubs, QList<PLAYER *> players)
+void MainWindow::SaveAllData(QList<API_LEAGUE *> leagues, QList<API_CLUB *> clubs, QList<API_PLAYER *> players)
 {
     realDataDb->OverrideLeaguesInfo(leagues);
     realDataDb->OverrideClubsInfo(clubs);
@@ -82,5 +89,14 @@ void MainWindow::on_pushButton_2_clicked()
 void MainWindow::on_pushButton_3_clicked()
 {
     LoadAllDataFromDB();
+}
+
+
+void MainWindow::on_pushButton_4_clicked()
+{
+    for(int i = 0; i < allPlayers.size(); ++i){
+        allPlayers[i]->setSkill(skillConvDb->CountPlayerSkill(allPlayers[i]));
+    }
+    realDataDb->OverridePlayersSkill(allPlayers);
 }
 

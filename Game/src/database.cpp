@@ -1,15 +1,36 @@
 #include "database.h"
 
-DATABASE::DATABASE(QString& dbPath)
+DATABASE::DATABASE(const QString &dbPath, const QString& connectionName)
 {
-    SetupConnection(dbPath);
+    SetupConnection(dbPath, connectionName);
 }
 
-
-
-void DATABASE::SetupConnection(QString& dbPath)
+DATABASE::~DATABASE()
 {
-    db = new QSqlDatabase(QSqlDatabase::addDatabase("QSQLITE"));
+    delete db;
+}
+
+QList<QString> DATABASE::ParseStringBy(QString& s, QChar c)
+{
+    QList<QString> list;
+    QString cur = "";
+    for(int i = 0; i < s.size(); ++i){
+        if(s[i] == c){
+            list.push_back(cur);
+            cur.clear();
+            continue;
+        }
+        cur += s[i];
+    }
+    if(!cur.isEmpty()){
+        list.push_back(cur);
+    }
+    return list;
+}
+
+void DATABASE::SetupConnection(const QString& dbPath, const QString& connectionName)
+{
+    db = new QSqlDatabase(QSqlDatabase::addDatabase("QSQLITE", connectionName));
     db->setDatabaseName(dbPath);
     if(!db->open()){
         qDebug() << "Database failed to open with given path " << dbPath << "! Error: " << db->lastError().text();

@@ -2,17 +2,17 @@
 #ifndef LEAGUE_H
 #define LEAGUE_H
 
-#include "club.h"
+#include "api_club.h"
 
 #include <QList>
 
-class LEAGUE
+class API_LEAGUE
 {
 public:
-    LEAGUE();
-    LEAGUE(QString id, int fed_id);
-    LEAGUE(QString id, QString name, int federation);
-    ~LEAGUE();
+    API_LEAGUE();
+    API_LEAGUE(QString id, int fed_id);
+    API_LEAGUE(QString id, QString name, int federation);
+    ~API_LEAGUE();
 
     void setName(QString& league_name);
     void setName(QString league_name);

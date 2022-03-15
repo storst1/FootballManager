@@ -1,6 +1,6 @@
 #include "database_real_data.h"
 
-DATABASE_REAL_DATA::DATABASE_REAL_DATA(QString &dbPath) : DATABASE(dbPath)
+DATABASE_REAL_DATA::DATABASE_REAL_DATA(const QString &dbPath, const QString& connectionName) : DATABASE(dbPath, connectionName)
 {
 }
 
@@ -27,13 +27,13 @@ QList<QPair<QString, int> > DATABASE_REAL_DATA::getAllLeagues()
     return allLeagues;
 }
 
-void DATABASE_REAL_DATA::OverrideLeaguesInfo(QList<LEAGUE*> leaguesList)
+void DATABASE_REAL_DATA::OverrideLeaguesInfo(QList<API_LEAGUE*> leaguesList)
 {
     DeleteTableInfo("leagues");
     SaveLeaguesInfo(leaguesList);
 }
 
-void DATABASE_REAL_DATA::SaveLeaguesInfo(QList<LEAGUE *> leaguesList)
+void DATABASE_REAL_DATA::SaveLeaguesInfo(QList<API_LEAGUE *> leaguesList)
 {
     QSqlQuery query(*db);
     QString queryStatement = "INSERT INTO leagues (id, name, federation) VALUES ";
@@ -52,19 +52,33 @@ void DATABASE_REAL_DATA::SaveLeaguesInfo(QList<LEAGUE *> leaguesList)
     }
 }
 
-void DATABASE_REAL_DATA::OverrideClubsInfo(QList<CLUB *> clubsList)
+void DATABASE_REAL_DATA::OverrideClubsInfo(QList<API_CLUB *> clubsList)
 {
     DeleteTableInfo("clubs");
     SaveClubsInfo(clubsList);
 }
 
-void DATABASE_REAL_DATA::OverridePlayersInfo(QList<PLAYER *> playersList)
+void DATABASE_REAL_DATA::OverridePlayersInfo(QList<API_PLAYER *> playersList)
 {
     DeleteTableInfo("players");
     SavePlayersInfo(playersList);
 }
 
-void DATABASE_REAL_DATA::SaveClubsInfo(QList<CLUB *> clubsList)
+void DATABASE_REAL_DATA::OverridePlayersSkill(QList<API_PLAYER *> playersList)
+{
+    QSqlQuery query(*db);
+    for(auto p : playersList){
+        QString queryStatement =
+                "UPDATE players SET skill = " +
+                p->getStrSkill() +
+                " WHERE id = " +
+                QString::number(p->getId());
+        //qDebug() << queryStatement;
+        query.exec(queryStatement);
+    }
+}
+
+void DATABASE_REAL_DATA::SaveClubsInfo(QList<API_CLUB *> clubsList)
 {
     QSqlQuery query(*db);
     QString queryStatement = "INSERT INTO clubs (id, league, name) VALUES ";
@@ -94,7 +108,7 @@ QString DATABASE_REAL_DATA::SqlGetStringReady(QString str)
     return str;
 }
 
-void DATABASE_REAL_DATA::SelectAllLeagues(QList<LEAGUE*>& leagues)
+void DATABASE_REAL_DATA::SelectAllLeagues(QList<API_LEAGUE*>& leagues)
 {
     QSqlQuery query(*db);
     query.exec("SELECT id, name, federation FROM leagues;");
@@ -102,11 +116,11 @@ void DATABASE_REAL_DATA::SelectAllLeagues(QList<LEAGUE*>& leagues)
         QString cur_id = query.value(0).toString();
         QString cur_name = query.value(1).toString();
         int cur_fed = query.value(2).toInt();
-        leagues.push_back(new LEAGUE(cur_id, cur_name, cur_fed));
+        leagues.push_back(new API_LEAGUE(cur_id, cur_name, cur_fed));
     }
 }
 
-void DATABASE_REAL_DATA::SelectAllClubs(QList<CLUB *> &clubs)
+void DATABASE_REAL_DATA::SelectAllClubs(QList<API_CLUB *> &clubs)
 {
     QSqlQuery query(*db);
     query.exec("SELECT id, league, name FROM clubs;");
@@ -114,11 +128,11 @@ void DATABASE_REAL_DATA::SelectAllClubs(QList<CLUB *> &clubs)
         int cur_id = query.value(0).toInt();
         QString cur_league = query.value(1).toString();
         QString cur_name = query.value(2).toString();
-        clubs.push_back(new CLUB(cur_id, cur_name, cur_league));
+        clubs.push_back(new API_CLUB(cur_id, cur_name, cur_league));
     }
 }
 
-void DATABASE_REAL_DATA::SelectAllPlayers(QList<PLAYER *> &players)
+void DATABASE_REAL_DATA::SelectAllPlayers(QList<API_PLAYER *> &players)
 {
     QSqlQuery query(*db);
     query.exec("SELECT id, name, club, TW, FN, SN, age, height, FP, SP FROM players;");
@@ -133,11 +147,11 @@ void DATABASE_REAL_DATA::SelectAllPlayers(QList<PLAYER *> &players)
         QString height = query.value(7).toString();
         int FP = query.value(8).toInt();
         int SP = query.value(9).toInt();
-        players.push_back(new PLAYER(id, name, TW, FN, SN, FP, SP, height, age, club));
+        players.push_back(new API_PLAYER(id, name, TW, FN, SN, FP, SP, height, age, club));
     }
 }
 
-void DATABASE_REAL_DATA::SavePlayersInfo(QList<PLAYER *> playersList)
+void DATABASE_REAL_DATA::SavePlayersInfo(QList<API_PLAYER *> playersList)
 {
     QSqlQuery query(*db);
     QString queryStatement = "INSERT INTO players (id, name, club, TW, FN, SN, age, height, FP, SP) VALUES ";

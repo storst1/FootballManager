@@ -2,19 +2,19 @@
 #ifndef CLUB_H
 #define CLUB_H
 
-#include "player.h"
+#include "api_player.h"
 
 #include <QString>
 #include <QList>
 
-class CLUB
+class API_CLUB
 {
 public:
-    CLUB();
-    CLUB(int id);
-    CLUB(int id, QString name);
-    CLUB(int id, QString name, QString league_id);
-    ~CLUB();
+    API_CLUB();
+    API_CLUB(int id);
+    API_CLUB(int id, QString name);
+    API_CLUB(int id, QString name, QString league_id);
+    ~API_CLUB();
 
     void setLeagueId(QString leagueId);
     void setName(QString club_name);

@@ -1,5 +1,4 @@
 #include "request_buffer.h"
-#include <QtDebug>
 
 REQUEST_BUFFER::REQUEST_BUFFER()
 {

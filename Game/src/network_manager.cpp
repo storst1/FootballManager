@@ -53,7 +53,7 @@ void NETWORK_MANAGER::SetupRequestAuth()
     request.setRawHeader("x-rapidapi-key", "12032aa377msh46fb0a42a344ab2p1ebf1bjsn370bc4f86b95");
 }
 
-QList<CLUB> NETWORK_MANAGER::GatherClubsListByComp(const QString &compId)
+QList<API_CLUB> NETWORK_MANAGER::GatherClubsListByComp(const QString &compId)
 {
     request.setUrl(QUrl("https://transfermarket.p.rapidapi.com/clubs/list-by-competition?id=" + compId));
     qDebug() << request.url().toString();
@@ -63,7 +63,7 @@ QList<CLUB> NETWORK_MANAGER::GatherClubsListByComp(const QString &compId)
     loop.exec();
     QString idJsonProperty = "\"id\":\"";
     QString nameJsonProperty = "\"name\":\"";
-    QList<CLUB> clubList;
+    QList<API_CLUB> clubList;
     QList<int> idxsOfId = RequestBuffer->indexOfAll(idJsonProperty);
     QList<int> idxsOfNames = RequestBuffer->indexOfAll(nameJsonProperty);
     QList<QString> idVals = RequestBuffer->GetAllValuesFromRequestBuffer(idxsOfId, idJsonProperty.length());
@@ -72,12 +72,12 @@ QList<CLUB> NETWORK_MANAGER::GatherClubsListByComp(const QString &compId)
     REQUEST_BUFFER::NormalizeValues(idVals);
     //qDebug() << idVals;
     for(int i = 0; i < (int)idVals.size(); ++i){
-        clubList.push_back(CLUB(idVals[i].toInt(), nameVals[i]));
+        clubList.push_back(API_CLUB(idVals[i].toInt(), nameVals[i]));
     }
     return clubList;
 }
 
-QList<PLAYER *> NETWORK_MANAGER::GatherPlayersListByClub(const int clubId)
+QList<API_PLAYER *> NETWORK_MANAGER::GatherPlayersListByClub(const int clubId)
 {
     request.setUrl(QUrl("https://transfermarket.p.rapidapi.com/clubs/get-squad?id=" + QString::number(clubId)));
     qDebug() << request.url().toString();
@@ -87,9 +87,9 @@ QList<PLAYER *> NETWORK_MANAGER::GatherPlayersListByClub(const int clubId)
     loop.exec();
     JSON_PARSER_SQUAD Squad(RequestBuffer->getBuffer());
     QList<JSON_PARSER_PLAYER> playersInfo = Squad.getPlayersParsers();
-    QList<PLAYER*> players;
+    QList<API_PLAYER*> players;
     for(auto pI : playersInfo){
-        players.push_back(new PLAYER(pI));
+        players.push_back(new API_PLAYER(pI));
         qDebug() << pI.getName();
     }
     return players;

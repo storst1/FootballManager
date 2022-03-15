@@ -2,18 +2,18 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include <json_parser_player.h>
+#include "json_parser_player.h"
 
 #include <QString>
 
-class PLAYER
+class API_PLAYER
 {
 public:
-    PLAYER();
-    PLAYER(int id, QString name, int TW, int FNid, int SNid, QString height);
-    PLAYER(JSON_PARSER_PLAYER playerInfo);
-    PLAYER(int id, QString name, int TW, int FN, int SN, int FP, int SP, QString height, int age, int club);
-    ~PLAYER() = default;
+    API_PLAYER();
+    API_PLAYER(int id, QString name, int TW, int FNid, int SNid, QString height);
+    API_PLAYER(JSON_PARSER_PLAYER playerInfo);
+    API_PLAYER(int id, QString name, int TW, int FN, int SN, int FP, int SP, QString height, int age, int club);
+    ~API_PLAYER() = default;
 
     void setClubId(int id);
 
@@ -29,8 +29,9 @@ public:
     int getClubId() const;
 
     float getSkill() const;
+    QString getStrSkill() const;
 
-    void recountSkill();
+    void setSkill(float val);
 private:
     int id;
     QString name;

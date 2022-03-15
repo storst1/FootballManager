@@ -37,9 +37,12 @@ void DATABASE::OverrideLeaguesInfo(QList<LEAGUE*> leaguesList)
 void DATABASE::SaveLeaguesInfo(QList<LEAGUE *> leaguesList)
 {
     QSqlQuery query(*db);
-    QString queryStatement = "INSERT INTO leagues (id, name) VALUES ";
+    QString queryStatement = "INSERT INTO leagues (id, name, federation) VALUES ";
     for(auto l : leaguesList){
-        queryStatement += "('" + SqlGetStringReady(l->getId()) + "', '" + SqlGetStringReady(l->getName()) + "'), ";
+        queryStatement +=
+                "('" + l->getId() +
+                "', '" + SqlGetStringReady(l->getName()) +
+                "', '" + l->getStrFed() + "'), ";
     }
     //Replace ", " with ";" at the end
     queryStatement.erase(std::prev(queryStatement.cend(), 2), queryStatement.cend());
@@ -65,9 +68,12 @@ void DATABASE::OverridePlayersInfo(QList<PLAYER *> playersList)
 void DATABASE::SaveClubsInfo(QList<CLUB *> clubsList)
 {
     QSqlQuery query(*db);
-    QString queryStatement = "INSERT INTO clubs (id, name) VALUES ";
+    QString queryStatement = "INSERT INTO clubs (id, league, name) VALUES ";
     for(auto c : clubsList){
-        queryStatement += "('" + SqlGetStringReady(c->getStrId()) + "', '" + SqlGetStringReady(c->getName()) + "'), ";
+        queryStatement +=
+                "('" + SqlGetStringReady(c->getStrId()) +
+                "', '" + c->getLeagueId() +
+                "', '" + SqlGetStringReady(c->getName()) + "'), ";
     }
     //Replace ", " with ";" at the end
     queryStatement.erase(std::prev(queryStatement.cend(), 2), queryStatement.cend());
@@ -87,6 +93,49 @@ QString DATABASE::SqlGetStringReady(QString str)
         }
     }
     return str;
+}
+
+void DATABASE::SelectAllLeagues(QList<LEAGUE*>& leagues)
+{
+    QSqlQuery query(*db);
+    query.exec("SELECT id, name, federation FROM leagues;");
+    while(query.next()){
+        QString cur_id = query.value(0).toString();
+        QString cur_name = query.value(1).toString();
+        int cur_fed = query.value(2).toInt();
+        leagues.push_back(new LEAGUE(cur_id, cur_name, cur_fed));
+    }
+}
+
+void DATABASE::SelectAllClubs(QList<CLUB *> &clubs)
+{
+    QSqlQuery query(*db);
+    query.exec("SELECT id, league, name FROM clubs;");
+    while(query.exec()){
+        int cur_id = query.value(0).toInt();
+        QString cur_league = query.value(1).toString();
+        QString cur_name = query.value(2).toString();
+        clubs.push_back(new CLUB(cur_id, cur_name, cur_league));
+    }
+}
+
+void DATABASE::SelectAllPlayers(QList<PLAYER *> &players)
+{
+    QSqlQuery query(*db);
+    query.exec("SELECT id, name, club, TW, FN, SN, age, height, FP, SP FROM players;");
+    while(query.exec()){
+        int id = query.value(0).toInt();
+        QString name = query.value(1).toString();
+        int club = query.value(2).toInt();
+        int TW = query.value(3).toInt();
+        int FN = query.value(4).toInt();
+        int SN = query.value(5).toInt();
+        int age = query.value(6).toInt();
+        QString height = query.value(7).toString();
+        int FP = query.value(8).toInt();
+        int SP = query.value(9).toInt();
+        players.push_back(new PLAYER(id, name, TW, FN, SN, FP, SP, height, age, club));
+    }
 }
 
 void DATABASE::SetupConnection(QString& dbPath)
@@ -113,11 +162,12 @@ void DATABASE::DeleteTableInfo(QString table_name)
 void DATABASE::SavePlayersInfo(QList<PLAYER *> playersList)
 {
     QSqlQuery query(*db);
-    QString queryStatement = "INSERT INTO players (id, name, TW, FN, SN, age, height, FP, SP) VALUES ";
+    QString queryStatement = "INSERT INTO players (id, name, club, TW, FN, SN, age, height, FP, SP) VALUES ";
     for(auto p : playersList){
         queryStatement +=
                 "('" + QString::number(p->getId()) +
                 "', '" + SqlGetStringReady(p->getName()) +
+                "', '" + QString::number(p->getClubId()) +
                 "', '" + QString::number(p->getTW()) +
                 "', '" + QString::number(p->getFN()) +
                 "', '" + QString::number(p->getSN()) +

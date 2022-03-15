@@ -55,13 +55,31 @@ void MainWindow::SaveAllData(QList<LEAGUE *> leagues, QList<CLUB *> clubs, QList
     realDataDb->OverridePlayersInfo(players);
 }
 
-void MainWindow::on_pushButton_clicked()
+void MainWindow::LoadAllDataFromAPI()
 {
     netManager->SetupRequestAuth();
     CollectData();
+}
+
+void MainWindow::LoadAllDataFromDB()
+{
+    realDataDb->SelectAllLeagues(allLeagues);
+    realDataDb->SelectAllClubs(allClubs);
+    realDataDb->SelectAllPlayers(allPlayers);
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    LoadAllDataFromAPI();
 }
 
 void MainWindow::on_pushButton_2_clicked()
 {
     SaveAllData(allLeagues, allClubs, allPlayers);
 }
+
+void MainWindow::on_pushButton_3_clicked()
+{
+    LoadAllDataFromDB();
+}
+

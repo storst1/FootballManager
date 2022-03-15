@@ -12,7 +12,10 @@ public:
     PLAYER();
     PLAYER(int id, QString name, int TW, int FNid, int SNid, QString height);
     PLAYER(JSON_PARSER_PLAYER playerInfo);
+    PLAYER(int id, QString name, int TW, int FN, int SN, int FP, int SP, QString height, int age, int club);
     ~PLAYER() = default;
+
+    void setClubId(int id);
 
     int getId() const;
     QString getHeight() const;
@@ -23,6 +26,7 @@ public:
     int getFP() const;
     int getSP() const;
     int getTW() const;
+    int getClubId() const;
 private:
     int id;
     QString name;
@@ -33,6 +37,7 @@ private:
     int SP;
     QString height;
     int age;
+    int club_id;
 };
 
 #endif // PLAYER_H

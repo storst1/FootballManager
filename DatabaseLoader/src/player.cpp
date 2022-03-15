@@ -24,6 +24,17 @@ PLAYER::PLAYER(JSON_PARSER_PLAYER playerInfo)
     TW = playerInfo.getTW();
 }
 
+PLAYER::PLAYER(int id, QString name, int TW, int FN, int SN, int FP, int SP, QString height, int age, int club)
+    : id(id), name(name), TW(TW), FN(FN), SN(SN), FP(FP), SP(SP), height(height), age(age), club_id(club)
+{
+
+}
+
+void PLAYER::setClubId(int id)
+{
+    club_id = id;
+}
+
 int PLAYER::getId() const
 {
     return id;
@@ -67,4 +78,9 @@ int PLAYER::getSP() const
 int PLAYER::getTW() const
 {
     return TW;
+}
+
+int PLAYER::getClubId() const
+{
+    return club_id;
 }

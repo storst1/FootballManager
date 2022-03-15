@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Collect</string>
+     <string>Collect data from API</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_2">
@@ -40,6 +40,19 @@
      <string>Save</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="pushButton_3">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>150</y>
+      <width>141</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Load data from DB</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -47,7 +60,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>21</height>
+     <height>25</height>
     </rect>
    </property>
   </widget>

@@ -11,6 +11,9 @@ void MainWindow::FillAllLeagues()
     FillAllLeaguesWithBaseInfo();
     for(int i = 0; i < allLeagues.size(); ++i){
         QList<CLUB*> curCompClubsList = InitClubs(netManager->GatherClubsListByComp(allLeagues[i]->getId()));
+        for(auto cl : curCompClubsList){
+            cl->setLeagueId(allLeagues[i]->getId());
+        }
         //Do smth to complete club info
         allClubs.append(curCompClubsList);
     }
@@ -29,6 +32,9 @@ void MainWindow::FillAllPlayers()
 {
     for(int i = 0; i < allClubs.size(); ++i){
         QList<PLAYER*> curSquad = netManager->GatherPlayersListByClub(allClubs[i]->getId());
+        for(auto csq : curSquad){
+            csq->setClubId(allClubs[i]->getId());
+        }
         allPlayers.append(curSquad);
     }
 }

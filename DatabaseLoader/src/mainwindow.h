@@ -28,11 +28,15 @@ public:
     void FillAllPlayers();
     QList<CLUB*> InitClubs(QList<CLUB> clubList);
     void SaveAllData(QList<LEAGUE*> leagues, QList<CLUB*> clubs, QList<PLAYER*> players);
+    void LoadAllDataFromAPI();
+    void LoadAllDataFromDB();
 
 private slots:
     void on_pushButton_clicked();
 
     void on_pushButton_2_clicked();
+
+    void on_pushButton_3_clicked();
 
 private:
     Ui::MainWindow *ui;

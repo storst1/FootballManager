@@ -19,6 +19,9 @@ public:
     void OverrideClubsInfo(QList<CLUB*> clubsList);
     void OverridePlayersInfo(QList<PLAYER*> playersList);
     static QString SqlGetStringReady(QString str);
+    void SelectAllLeagues(QList<LEAGUE *> &leagues);
+    void SelectAllClubs(QList<CLUB*> &clubs);
+    void SelectAllPlayers(QList<PLAYER*> &players);
 private:
     void SetupConnection(QString& dbPath);
     void DeleteTableInfo(QString table_name);

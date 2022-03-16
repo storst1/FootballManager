@@ -9,6 +9,7 @@ class DATABASE_REAL_DATA : public DATABASE
 public:
     DATABASE_REAL_DATA(const QString& dbPath, const QString& connectionName);
     ~DATABASE_REAL_DATA() = default;
+
     QList<QPair<QString, int>> getAllLeagues();
     void OverrideLeaguesInfo(QList<API_LEAGUE *> leaguesList);
     void OverrideClubsInfo(QList<API_CLUB*> clubsList);

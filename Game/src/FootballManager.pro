@@ -15,6 +15,16 @@ SOURCES += \
     database/database.cpp \
     database/database_real_data.cpp \
     database/database_skill_converter.cpp \
+    game/data/club.cpp \
+    game/data/coach.cpp \
+    game/data/confederation.cpp \
+    game/data/cup.cpp \
+    game/data/federation.cpp \
+    game/data/fifa.cpp \
+    game/data/league.cpp \
+    game/data/national_team.cpp \
+    game/data/player.cpp \
+    game/data/team.cpp \
     json/json_parser.cpp \
     json/json_parser_player.cpp \
     json/json_parser_squad.cpp \
@@ -31,6 +41,16 @@ HEADERS += \
     database/database.h \
     database/database_real_data.h \
     database/database_skill_converter.h \
+    game/data/club.h \
+    game/data/coach.h \
+    game/data/confederation.h \
+    game/data/cup.h \
+    game/data/federation.h \
+    game/data/fifa.h \
+    game/data/league.h \
+    game/data/national_team.h \
+    game/data/player.h \
+    game/data/team.h \
     json/json_parser.h \
     json/json_parser_player.h \
     json/json_parser_squad.h \

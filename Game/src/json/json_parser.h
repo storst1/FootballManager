@@ -14,6 +14,7 @@ class JSON_PARSER
 {
 public:
     JSON_PARSER();
+    ~JSON_PARSER() = default;
 protected:
     void setJsonProperties(QByteArray jsonArr);
 protected:

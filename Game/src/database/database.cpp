@@ -12,20 +12,20 @@ DATABASE::~DATABASE()
 
 QList<QString> DATABASE::ParseStringBy(QString& s, QChar c)
 {
-    QList<QString> list;
+    QList<QString> slist;
     QString cur = "";
     for(int i = 0; i < s.size(); ++i){
         if(s[i] == c){
-            list.push_back(cur);
+            slist.push_back(cur);
             cur.clear();
             continue;
         }
         cur += s[i];
     }
     if(!cur.isEmpty()){
-        list.push_back(cur);
+        slist.push_back(cur);
     }
-    return list;
+    return slist;
 }
 
 void DATABASE::SetupConnection(const QString& dbPath, const QString& connectionName)

@@ -32,9 +32,11 @@ void DATABASE_SKILL_CONVERTER::ReadVariables(int config){
     QList<QString> PosParsed = ParseStringBy(PosConvStr, '\n');
     AssignPosConv(PosParsed);
 
+    /*
     qDebug() << TWconv;
     qDebug() << AgeCoefMap;
     qDebug() << PosCoefMap;
+    */
 }
 
 void DATABASE_SKILL_CONVERTER::AssignTWConv(QList<QString> &list)

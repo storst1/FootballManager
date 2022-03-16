@@ -2,8 +2,8 @@
 #ifndef DATABASE_H
 #define DATABASE_H
 
-#include "api_league.h"
-#include "api_player.h"
+#include "api/api_league.h"
+#include "api/api_player.h"
 
 #include <QSql>
 #include <QSqlDatabase>

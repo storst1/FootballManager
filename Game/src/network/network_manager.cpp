@@ -50,7 +50,7 @@ NETWORK_MANAGER::~NETWORK_MANAGER()
 void NETWORK_MANAGER::SetupRequestAuth()
 {
     request.setRawHeader("x-rapidapi-host", "transfermarket.p.rapidapi.com");
-    request.setRawHeader("x-rapidapi-key", "12032aa377msh46fb0a42a344ab2p1ebf1bjsn370bc4f86b95");
+    request.setRawHeader("x-rapidapi-key", "509dcc14d8msh0dff5c7814beafep13e189jsn0bcfad6401dd");
 }
 
 QList<API_CLUB> NETWORK_MANAGER::GatherClubsListByComp(const QString &compId)

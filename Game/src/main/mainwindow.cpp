@@ -70,6 +70,13 @@ void MainWindow::LoadAllDataFromAPI()
 
 void MainWindow::LoadAllDataFromDB()
 {
+    qDeleteAll(allPlayers);
+    qDeleteAll(allLeagues);
+    qDeleteAll(allClubs);
+    allPlayers.clear();
+    allLeagues.clear();
+    allClubs.clear();
+
     realDataDb->SelectAllLeagues(allLeagues);
     realDataDb->SelectAllClubs(allClubs);
     realDataDb->SelectAllPlayers(allPlayers);

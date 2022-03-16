@@ -2,7 +2,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "json_parser_player.h"
+#include "json/json_parser_player.h"
 
 #include <QString>
 

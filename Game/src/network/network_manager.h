@@ -2,10 +2,10 @@
 #ifndef NETWORK_MANAGER_H
 #define NETWORK_MANAGER_H
 
-#include "request_buffer.h"
-#include "api_club.h"
-#include "json_parser_squad.h"
-#include "json_parser_player.h"
+#include "network/request_buffer.h"
+#include "api/api_club.h"
+#include "json/json_parser_squad.h"
+#include "json/json_parser_player.h"
 
 #include <QNetworkAccessManager>
 #include <QNetworkReply>

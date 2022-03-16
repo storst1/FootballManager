@@ -2,9 +2,9 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "database_real_data.h"
-#include "database_skill_converter.h"
-#include "network_manager.h"
+#include "database/database_real_data.h"
+#include "database/database_skill_converter.h"
+#include "network/network_manager.h"
 
 #include <QMainWindow>
 

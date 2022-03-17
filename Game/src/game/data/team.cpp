@@ -4,3 +4,8 @@ TEAM::TEAM()
 {
 
 }
+
+TEAM::~TEAM()
+{
+    qDeleteAll(players);
+}

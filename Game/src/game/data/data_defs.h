@@ -17,5 +17,6 @@ class NATIONAL_TEAM;
 class PLAYER;
 class TABLE;
 class POSITION;
+class STADIUM;
 
 #endif // DATA_DEFS_H

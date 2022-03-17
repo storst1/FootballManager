@@ -15,7 +15,10 @@ private:
 
     QList<CLUB*> clubs;
 
-    //some stats field
+    CUP* leagueCup; //may be nullptr
+
+    //stats fields
+    TABLE* table;
 };
 
 #endif // LEAGUE_H

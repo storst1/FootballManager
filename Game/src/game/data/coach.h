@@ -7,6 +7,10 @@ class COACH
 {
 public:
     COACH();
+
+private:
+    QString name;
+    int id;
 };
 
 #endif // COACH_H

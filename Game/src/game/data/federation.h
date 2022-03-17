@@ -19,6 +19,8 @@ private:
     int leaguesTiers;
     QList<LEAGUE*> leagues;
 
+    CUP* natCup;
+
     NATIONAL_TEAM* nationalTeam;
 };
 

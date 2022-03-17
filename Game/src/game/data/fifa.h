@@ -17,6 +17,8 @@ private:
     CONFEDERATION* CONCACAF;
     CONFEDERATION* OFC;
     CONFEDERATION* CONMEBOL;
+
+    QList<FEDERATION*> fifaRating;
 };
 
 #endif // FIFA_H

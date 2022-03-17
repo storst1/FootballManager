@@ -4,3 +4,9 @@ FEDERATION::FEDERATION()
 {
 
 }
+
+FEDERATION::~FEDERATION()
+{
+    qDeleteAll(leagues);
+    delete nationalTeam;
+}

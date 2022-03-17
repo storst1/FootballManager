@@ -2,15 +2,16 @@
 #ifndef FEDERATION_H
 #define FEDERATION_H
 
+#include "data_defs.h"
+#include "game/data/confederation.h"
 #include "game/data/league.h"
 #include "game/data/national_team.h"
-
-#include <QList>
 
 class FEDERATION
 {
 public:
     FEDERATION();
+    ~FEDERATION();
 private:
     int fedId;
     QString name;

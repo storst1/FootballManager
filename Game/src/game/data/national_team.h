@@ -2,7 +2,8 @@
 #ifndef NATIONAL_TEAM_H
 #define NATIONAL_TEAM_H
 
-#include "team.h"
+#include "game/data/data_defs.h"
+#include "game/data/team.h"
 
 class NATIONAL_TEAM : public TEAM
 {

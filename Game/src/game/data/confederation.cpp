@@ -4,3 +4,8 @@ CONFEDERATION::CONFEDERATION()
 {
 
 }
+
+CONFEDERATION::~CONFEDERATION()
+{
+    qDeleteAll(fedList);
+}

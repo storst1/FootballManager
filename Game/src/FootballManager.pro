@@ -24,6 +24,7 @@ SOURCES += \
     game/data/league.cpp \
     game/data/national_team.cpp \
     game/data/player.cpp \
+    game/data/table.cpp \
     game/data/team.cpp \
     json/json_parser.cpp \
     json/json_parser_player.cpp \
@@ -45,11 +46,13 @@ HEADERS += \
     game/data/coach.h \
     game/data/confederation.h \
     game/data/cup.h \
+    game/data/data_defs.h \
     game/data/federation.h \
     game/data/fifa.h \
     game/data/league.h \
     game/data/national_team.h \
     game/data/player.h \
+    game/data/table.h \
     game/data/team.h \
     json/json_parser.h \
     json/json_parser_player.h \

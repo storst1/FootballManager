@@ -1,4 +1,3 @@
-#pragma once
 #ifndef DATA_DEFS_H
 #define DATA_DEFS_H
 

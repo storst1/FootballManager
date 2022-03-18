@@ -45,7 +45,7 @@ QString MainWindow::getDbFolderPath()
 
 void MainWindow::SetupNetworkManager()
 {
-    netManager = new NETWORK_MANAGER();
+    netManager = new NETWORK_MANAGER(getDbFolderPath() + "api_keys.db");
 }
 
 void MainWindow::SetupDb()
@@ -62,6 +62,9 @@ void MainWindow::SaveAllData(QList<API_LEAGUE *> leagues, QList<API_CLUB *> club
     realDataDb->OverwriteLeaguesInfo(leagues);
     realDataDb->OverwriteClubsInfo(clubs);
     realDataDb->OverwritePlayersInfo(players);
+    QString dbFolPath = getDbFolderPath();
+    realDataDb->MakeBackup(dbFolPath + "backups/realdata.db");
+    skillConvDb->MakeBackup(dbFolPath + "backups/skill_convertation_rules.db");
 }
 
 void MainWindow::LoadAllDataFromAPI()

@@ -1,4 +1,3 @@
-#pragma once
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
@@ -21,7 +20,7 @@ public:
     ~MainWindow();
 
     QString getRealDataDbPath();
-    QString getDbFolderPath();
+    static QString getDbFolderPath();
     void SetupNetworkManager();
     void SetupDb();
     void CollectData();

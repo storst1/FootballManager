@@ -1,4 +1,3 @@
-#pragma once
 #ifndef STADIUM_H
 #define STADIUM_H
 

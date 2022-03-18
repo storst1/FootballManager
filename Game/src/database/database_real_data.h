@@ -1,4 +1,3 @@
-#pragma once
 #ifndef DATABASE_REAL_DATA_H
 #define DATABASE_REAL_DATA_H
 

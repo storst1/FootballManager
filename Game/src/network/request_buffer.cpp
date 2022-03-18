@@ -64,7 +64,7 @@ bool REQUEST_BUFFER::isErrorMsg()
 {
     static const QString errMsg = "You have exceeded the MONTHLY quota for Requests on your current plan, BASIC. "
                            "Upgrade your plan at https://rapidapi.com/apidojo/api/transfermarket";
-    if(getBuffer().contains(errMsg)){
+    if(getBufferRef().contains(errMsg)){
         return true;
     }
     return false;
@@ -114,4 +114,5 @@ void REQUEST_BUFFER::ReplaceAllNonEnglishSymbols(QString &s)
     s.replace("\\u00fc", "u");
     s.replace("\\u00f6", "o");
     s.replace("\\u00f3", "o");
+    s.replace("\u00fc", "u");
 }

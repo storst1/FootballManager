@@ -1,4 +1,3 @@
-#pragma once
 #ifndef LEAGUE_H
 #define LEAGUE_H
 

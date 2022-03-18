@@ -1,8 +1,9 @@
 #include "network_manager.h"
 
-NETWORK_MANAGER::NETWORK_MANAGER()
+NETWORK_MANAGER::NETWORK_MANAGER(const QString& ApiDbPath)
 {
     RequestBuffer = new REQUEST_BUFFER();
+    keyList = new API_KEYS(ApiDbPath);
     manager = new QNetworkAccessManager();
     QObject::connect(manager, &QNetworkAccessManager::finished, this, [=](QNetworkReply *reply)
     {
@@ -12,7 +13,6 @@ NETWORK_MANAGER::NETWORK_MANAGER()
          }
          //char* data = (reply->readAll()).data();
          RequestBuffer->setBuffer(reply->readAll().data());
-
          qDebug() << RequestBuffer->getBufferRef();
         }
     );
@@ -22,12 +22,19 @@ NETWORK_MANAGER::~NETWORK_MANAGER()
 {
     delete manager;
     delete RequestBuffer;
+    delete keyList;
 }
 
 void NETWORK_MANAGER::SetupRequestAuth()
 {
     request.setRawHeader("x-rapidapi-host", "transfermarket.p.rapidapi.com");
-    request.setRawHeader("x-rapidapi-key", "509dcc14d8msh0dff5c7814beafep13e189jsn0bcfad6401dd");
+    request.setRawHeader("x-rapidapi-key", keyList->cur().toLocal8Bit());
+}
+
+void NETWORK_MANAGER::SetupRequestAuth(const QString &key)
+{
+    request.setRawHeader("x-rapidapi-host", "transfermarket.p.rapidapi.com");
+    request.setRawHeader("x-rapidapi-key", key.toLocal8Bit());
 }
 
 QList<API_CLUB> NETWORK_MANAGER::GatherClubsListByComp(const QString &compId)
@@ -62,6 +69,11 @@ QList<API_PLAYER *> NETWORK_MANAGER::GatherPlayersListByClub(const int clubId)
     QEventLoop loop;
     connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
     loop.exec();
+    if(RequestBuffer->isErrorMsg()){
+        HandleRequestError();
+        //retry
+        return GatherPlayersListByClub(clubId);
+    }
     JSON_PARSER_SQUAD Squad(RequestBuffer->getBuffer());
     QList<JSON_PARSER_PLAYER> playersInfo = Squad.getPlayersParsers();
     QList<API_PLAYER*> players;
@@ -77,6 +89,11 @@ QList<API_PLAYER *> NETWORK_MANAGER::GatherPlayersListByClub(const int clubId)
     */
 }
 
+void NETWORK_MANAGER::HandleRequestError()
+{
+    SetupRequestAuth(keyList->next());
+}
+
 QString NETWORK_MANAGER::GatherLeagueName(const QString &leagueId)
 {
     request.setUrl(QUrl("https://transfermarket.p.rapidapi.com/competitions/get-header-info?id=" + leagueId));
@@ -88,6 +105,7 @@ QString NETWORK_MANAGER::GatherLeagueName(const QString &leagueId)
     QString nameJsonProperty = "\"competitionName\":\"";
     int idxOfName = RequestBuffer->indexOf(nameJsonProperty);
     QString name = RequestBuffer->GetValueFromRequestBuffer(idxOfName + nameJsonProperty.length());
+    REQUEST_BUFFER::NormalizeValue(name);
     qDebug() << name;
     return name;
 }

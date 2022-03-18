@@ -1,4 +1,3 @@
-#pragma once
 #ifndef NATIONAL_TEAM_H
 #define NATIONAL_TEAM_H
 

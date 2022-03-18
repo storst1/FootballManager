@@ -1,4 +1,3 @@
-#pragma once
 #ifndef FIFA_H
 #define FIFA_H
 

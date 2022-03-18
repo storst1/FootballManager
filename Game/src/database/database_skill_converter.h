@@ -1,4 +1,3 @@
-#pragma once
 #ifndef DATABASE_SKILL_CONVERTER_H
 #define DATABASE_SKILL_CONVERTER_H
 

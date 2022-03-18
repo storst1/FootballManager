@@ -1,4 +1,3 @@
-#pragma once
 #ifndef FEDERATION_H
 #define FEDERATION_H
 

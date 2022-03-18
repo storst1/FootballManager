@@ -1,8 +1,6 @@
-#pragma once
 #ifndef CLUB_H
 #define CLUB_H
 
-#include <qstring.h>
 #include "api_player.h"
 
 #include <QString>

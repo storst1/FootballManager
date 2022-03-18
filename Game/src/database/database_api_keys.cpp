@@ -5,3 +5,14 @@ DATABASE_API_KEYS::DATABASE_API_KEYS(const QString &dbPath, const QString &dbCon
 {
 
 }
+
+QList<QString> DATABASE_API_KEYS::GetAllKeys()
+{
+    QSqlQuery query(*db);
+    query.exec("SELECT key FROM keys;");
+    QList<QString> keyList;
+    while(query.next()){
+        keyList.push_back(query.value(0).toString());
+    }
+    return keyList;
+}

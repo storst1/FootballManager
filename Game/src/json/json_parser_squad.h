@@ -1,4 +1,3 @@
-#pragma once
 #ifndef JSON_PARSER_SQUAD_H
 #define JSON_PARSER_SQUAD_H
 

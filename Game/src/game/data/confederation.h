@@ -1,4 +1,3 @@
-#pragma once
 #ifndef CONFEDERATION_H
 #define CONFEDERATION_H
 

@@ -37,8 +37,8 @@ private:
     int TW;
     int FN; //first nationality id
     int SN; //second nationionality id
-    int FP;
-    int SP;
+    int FP; //first position id
+    int SP; //second position id
     QString height;
     int age;
     int club_id;

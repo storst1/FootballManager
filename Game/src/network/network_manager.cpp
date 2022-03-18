@@ -48,19 +48,6 @@ QList<API_CLUB> NETWORK_MANAGER::GatherClubsListByComp(const QString &compId)
     connect(reply, &QNetworkReply::errorOccurred, this, [this]{HandleRequestError();});
     connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
     loop.exec();
-    /*
-    if(reply->error()){
-        HandleRequestError();
-        //retry
-        return GatherClubsListByComp(compId);
-    }
-
-    if(RequestBuffer->isErrorMsg()){
-        HandleRequestError();
-        //retry
-        return GatherClubsListByComp(compId);
-    }
-    */
     QString idJsonProperty = "\"id\":\"";
     QString nameJsonProperty = "\"name\":\"";
     QList<API_CLUB> clubList;
@@ -86,31 +73,14 @@ QList<API_PLAYER *> NETWORK_MANAGER::GatherPlayersListByClub(const int clubId)
     connect(reply, &QNetworkReply::errorOccurred, this, [this]{HandleRequestError();});
     connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
     loop.exec();
-     /*
-    if(reply->error()){
-        HandleRequestError();
-        //retry
-        return GatherPlayersListByClub(clubId);
-    }
-    if(RequestBuffer->isErrorMsg()){
-        HandleRequestError();
-        //retry
-        return GatherPlayersListByClub(clubId);
-    }
-    */
     JSON_PARSER_SQUAD Squad(RequestBuffer->getBuffer());
     QList<JSON_PARSER_PLAYER> playersInfo = Squad.getPlayersParsers();
     QList<API_PLAYER*> players;
     for(const auto &pI : playersInfo){
         players.push_back(new API_PLAYER(pI));
-        qDebug() << pI.getName();
+        //qDebug() << pI.getName();
     }
     return players;
-    /*
-    QString nameJsonProperty = "\"competitionName\":\"";
-    int idxOfName = RequestBuffer->indexOf(nameJsonProperty);
-    QString name = RequestBuffer->GetValueFromRequestBuffer(idxOfName + nameJsonProperty.length());
-    */
 }
 
 QString NETWORK_MANAGER::GatherLeagueName(const QString &leagueId)
@@ -123,18 +93,6 @@ QString NETWORK_MANAGER::GatherLeagueName(const QString &leagueId)
     connect(reply, &QNetworkReply::errorOccurred, this, [this]{HandleRequestError();});
     connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
     loop.exec();
-     /*
-    if(reply->error()){
-        HandleRequestError();
-        //retry
-        return GatherLeagueName(leagueId);
-    }
-    if(RequestBuffer->isErrorMsg()){
-        HandleRequestError();
-        //retry
-        return GatherLeagueName(leagueId);
-    }
-    */
     QString nameJsonProperty = "\"competitionName\":\"";
     int idxOfName = RequestBuffer->indexOf(nameJsonProperty);
     QString name = RequestBuffer->GetValueFromRequestBuffer(idxOfName + nameJsonProperty.length());

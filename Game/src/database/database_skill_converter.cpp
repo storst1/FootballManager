@@ -1,7 +1,12 @@
 #include "database_skill_converter.h"
 
-DATABASE_SKILL_CONVERTER::DATABASE_SKILL_CONVERTER(const QString &dbPath, const QString& connectionName, int config) : DATABASE(dbPath, connectionName)
+DATABASE_SKILL_CONVERTER::DATABASE_SKILL_CONVERTER(const QString &dbPath, const QString& connectionName, int config)
+    : DATABASE(dbPath, connectionName)
 {
+    if(config == -1){
+        //Just set up the connection
+        return;
+    }
     TWconv.resize(100, 0);
     lastZeroInTWconv = 0;
     AgeCoefMap.resize(60);
@@ -12,6 +17,27 @@ DATABASE_SKILL_CONVERTER::DATABASE_SKILL_CONVERTER(const QString &dbPath, const 
 float DATABASE_SKILL_CONVERTER::CountPlayerSkill(API_PLAYER *player)
 {
     return GetBaseByTW(player->getTW() * GetAgeCoef(player->getAge()) * GetPosCoef(player->getFP()));
+}
+
+void DATABASE_SKILL_CONVERTER::MakeBackup(const QString &backupDbPath)
+{
+    DATABASE_SKILL_CONVERTER backupDb(backupDbPath, "DB_SKILL_BACKUP", -1);
+    //backupDb.db->setDatabaseName("");
+    QSqlQuery   backupQuery(*backupDb.db);
+    backupQuery.exec("CREATE TABLE 'rules' ("
+                     "'config'	INTEGER UNIQUE,"
+                     "'TW_conv'	TEXT,"
+                     "'Age_coef_conv'	TEXT,"
+                     "'Pos_coef_conv'	TEXT,"
+                     "'Age_start_point'	INTEGER,"
+                     "PRIMARY KEY('config' AUTOINCREMENT)"
+                 ")");
+
+    backupDb.DeleteTableInfo("rules");
+
+    QSqlQuery query(*db);
+    query.exec("ATTACH DATABASE '" + backupDbPath + "' AS backup;");
+    query.exec("INSERT INTO backup.rules SELECT * FROM rules");
 }
 
 void DATABASE_SKILL_CONVERTER::ReadVariables(int config){

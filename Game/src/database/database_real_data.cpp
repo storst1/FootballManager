@@ -27,7 +27,7 @@ QList<QPair<QString, int> > DATABASE_REAL_DATA::getAllLeagues()
     return allLeagues;
 }
 
-void DATABASE_REAL_DATA::OverrideLeaguesInfo(QList<API_LEAGUE*> leaguesList)
+void DATABASE_REAL_DATA::OverwriteLeaguesInfo(QList<API_LEAGUE*> leaguesList)
 {
     DeleteTableInfo("leagues");
     SaveLeaguesInfo(leaguesList);
@@ -52,19 +52,19 @@ void DATABASE_REAL_DATA::SaveLeaguesInfo(QList<API_LEAGUE *> leaguesList)
     }
 }
 
-void DATABASE_REAL_DATA::OverrideClubsInfo(QList<API_CLUB *> clubsList)
+void DATABASE_REAL_DATA::OverwriteClubsInfo(QList<API_CLUB *> clubsList)
 {
     DeleteTableInfo("clubs");
     SaveClubsInfo(clubsList);
 }
 
-void DATABASE_REAL_DATA::OverridePlayersInfo(QList<API_PLAYER *> playersList)
+void DATABASE_REAL_DATA::OverwritePlayersInfo(QList<API_PLAYER *> playersList)
 {
     DeleteTableInfo("players");
     SavePlayersInfo(playersList);
 }
 
-void DATABASE_REAL_DATA::OverridePlayersSkill(QList<API_PLAYER *> playersList)
+void DATABASE_REAL_DATA::OverwritePlayersSkill(QList<API_PLAYER *> playersList)
 {
     QSqlQuery query(*db);
     for(auto p : playersList){
@@ -149,6 +149,52 @@ void DATABASE_REAL_DATA::SelectAllPlayers(QList<API_PLAYER *> &players)
         int SP = query.value(9).toInt();
         players.push_back(new API_PLAYER(id, name, TW, FN, SN, FP, SP, height, age, club));
     }
+}
+
+void DATABASE_REAL_DATA::MakeBackup(const QString &backupDbPath)
+{
+    DATABASE_REAL_DATA backupDb(backupDbPath, "DB_REAL_BACKUP");
+    //backupDb.db->setDatabaseName("");
+    QSqlQuery backupQuery(*backupDb.db);
+    backupQuery.exec("CREATE TABLE IF NOT EXISTS 'clubs' ( "
+                     "'id'	INTEGER UNIQUE, "
+                     "'league'	TEXT, "
+                     "'name'	TEXT"
+                     ")");
+    backupQuery.exec("CREATE TABLE IF NOT EXISTS 'federations' ("
+                     "'id'	INTEGER UNIQUE, 'country'	TEXT, "
+                     "'league_first'	TEXT,"
+                     "'league_second'	TEXT,"
+                     "'league_third'	TEXT"
+                    ")");
+    backupQuery.exec("CREATE TABLE 'leagues' ("
+                  "'id'	TEXT UNIQUE,"
+                  "'name'	TEXT, "
+                  "'federation'	INTEGER)");
+    backupQuery.exec("CREATE TABLE 'players' ("
+                     "'id'	INTEGER,"
+                     "'name'	TEXT,"
+                     "'club'	INTEGER,"
+                     "'TW'	INTEGER,"
+                     "'FN'	TEXT,"
+                     "'SN'	TEXT,"
+                     "'age'	INTEGER,"
+                     "'height'	TEXT,"
+                     "'FP'	INTEGER,"
+                     "'SP'	INTEGER,"
+                     "'skill'	REAL)");
+
+    backupDb.DeleteTableInfo("federations");
+    backupDb.DeleteTableInfo("clubs");
+    backupDb.DeleteTableInfo("leagues");
+    backupDb.DeleteTableInfo("players");
+
+    QSqlQuery query(*db);
+    query.exec("ATTACH DATABASE '" + backupDbPath + "' AS backup;");
+    query.exec("INSERT INTO backup.federations SELECT * FROM federations");
+    query.exec("INSERT INTO backup.clubs SELECT * FROM clubs");
+    query.exec("INSERT INTO backup.leagues SELECT * FROM leagues");
+    query.exec("INSERT INTO backup.players SELECT * FROM players");
 }
 
 void DATABASE_REAL_DATA::SavePlayersInfo(QList<API_PLAYER *> playersList)

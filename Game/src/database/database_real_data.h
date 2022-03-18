@@ -11,14 +11,15 @@ public:
     ~DATABASE_REAL_DATA() = default;
 
     QList<QPair<QString, int>> getAllLeagues();
-    void OverrideLeaguesInfo(QList<API_LEAGUE *> leaguesList);
-    void OverrideClubsInfo(QList<API_CLUB*> clubsList);
-    void OverridePlayersInfo(QList<API_PLAYER*> playersList); //does not include skill column
-    void OverridePlayersSkill(QList<API_PLAYER*> playersList);
+    void OverwriteLeaguesInfo(QList<API_LEAGUE *> leaguesList);
+    void OverwriteClubsInfo(QList<API_CLUB*> clubsList);
+    void OverwritePlayersInfo(QList<API_PLAYER*> playersList); //does not include skill column
+    void OverwritePlayersSkill(QList<API_PLAYER*> playersList);
     static QString SqlGetStringReady(QString str);
     void SelectAllLeagues(QList<API_LEAGUE *> &leagues);
     void SelectAllClubs(QList<API_CLUB*> &clubs);
     void SelectAllPlayers(QList<API_PLAYER*> &players);
+    void MakeBackup(const QString& backupDbPath);
 private:
     void SavePlayersInfo(QList<API_PLAYER*> playersList);
     void SaveClubsInfo(QList<API_CLUB*> clubsList);

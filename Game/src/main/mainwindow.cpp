@@ -52,14 +52,16 @@ void MainWindow::SetupDb()
 {
     QString dbFolPath = getDbFolderPath();
     realDataDb = new DATABASE_REAL_DATA(dbFolPath + "realdata.db", "DB_REAL");
+    realDataDb->MakeBackup(dbFolPath + "backups/realdata.db");
     skillConvDb = new DATABASE_SKILL_CONVERTER(dbFolPath + "skill_convertation_rules.db", "DB_SKILL", 1);
+    skillConvDb->MakeBackup(dbFolPath + "backups/skill_convertation_rules.db");
 }
 
 void MainWindow::SaveAllData(QList<API_LEAGUE *> leagues, QList<API_CLUB *> clubs, QList<API_PLAYER *> players)
 {
-    realDataDb->OverrideLeaguesInfo(leagues);
-    realDataDb->OverrideClubsInfo(clubs);
-    realDataDb->OverridePlayersInfo(players);
+    realDataDb->OverwriteLeaguesInfo(leagues);
+    realDataDb->OverwriteClubsInfo(clubs);
+    realDataDb->OverwritePlayersInfo(players);
 }
 
 void MainWindow::LoadAllDataFromAPI()
@@ -104,6 +106,6 @@ void MainWindow::on_pushButton_4_clicked()
     for(int i = 0; i < allPlayers.size(); ++i){
         allPlayers[i]->setSkill(skillConvDb->CountPlayerSkill(allPlayers[i]));
     }
-    realDataDb->OverridePlayersSkill(allPlayers);
+    realDataDb->OverwritePlayersSkill(allPlayers);
 }
 

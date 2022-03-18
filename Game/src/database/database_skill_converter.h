@@ -11,6 +11,7 @@ public:
     ~DATABASE_SKILL_CONVERTER() = default;
 
     float CountPlayerSkill(API_PLAYER* player);
+    void MakeBackup(const QString& backupDbName);
 private:
     void ReadVariables(int config);
     void AssignTWConv(QList<QString>& list);

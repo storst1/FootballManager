@@ -60,6 +60,16 @@ QList<int> REQUEST_BUFFER::indexOfAll(const QString &str)
     return idxs;
 }
 
+bool REQUEST_BUFFER::isErrorMsg()
+{
+    static const QString errMsg = "You have exceeded the MONTHLY quota for Requests on your current plan, BASIC. "
+                           "Upgrade your plan at https://rapidapi.com/apidojo/api/transfermarket";
+    if(getBuffer().contains(errMsg)){
+        return true;
+    }
+    return false;
+}
+
 void REQUEST_BUFFER::operator=(const QString &str)
 {
     this->buffer = str;
@@ -67,20 +77,15 @@ void REQUEST_BUFFER::operator=(const QString &str)
 
 QChar REQUEST_BUFFER::operator[](int idx)
 {
+    if(idx < 0 || idx > buffer.size() - 1){
+        //Exception: index id out of buffer's range
+        return ' ';
+    }
     return buffer[idx];
 }
 
 void REQUEST_BUFFER::NormalizeValue(QString &str)
 {
-    /*
-    for(int i = 0; i < str.length(); ++i){
-        if(QString(str[i]) == "'"){
-            str.erase(std::next(str.cbegin(), i), std::next(str.cbegin(), i + 1));
-            --i;
-        }
-    }
-    */
-    //qDebug() << str;
     ReplaceAllNonEnglishSymbols(str);
     //qDebug() << str;
 }

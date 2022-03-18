@@ -19,6 +19,7 @@ public:
     QList<QString> GetAllValuesFromRequestBuffer(const QList<int>& idxs, const int strLength);
     int indexOf(const QString& str);
     QList<int> indexOfAll(const QString& str);
+    bool isErrorMsg();
 
     void operator=(const QString& str);
     QChar operator[](int idx);

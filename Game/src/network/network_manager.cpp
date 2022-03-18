@@ -12,29 +12,6 @@ NETWORK_MANAGER::NETWORK_MANAGER()
          }
          //char* data = (reply->readAll()).data();
          RequestBuffer->setBuffer(reply->readAll().data());
-         /*
-         for (int i = 0; i < s.size(); i++) {
-             if (s[i] == 'é')
-             {
-                 // erase function to erase
-                 // the character
-                 s.erase(i, 1);
-                 i--;
-             }
-         }
-         */
-         /*
-         for(int i = 0; i < rawData.size(); ++i) {
-             QChar qc = rawData.at(i);
-             unsigned char c = *(unsigned char*)(&qc);
-             if(c >= 127) {
-                 result.append("?");
-             }
-             else if (QChar(c).isPrint()) {
-                 result.append(QChar(c));
-             }
-         }
-         */
 
          qDebug() << RequestBuffer->getBufferRef();
         }
@@ -88,7 +65,7 @@ QList<API_PLAYER *> NETWORK_MANAGER::GatherPlayersListByClub(const int clubId)
     JSON_PARSER_SQUAD Squad(RequestBuffer->getBuffer());
     QList<JSON_PARSER_PLAYER> playersInfo = Squad.getPlayersParsers();
     QList<API_PLAYER*> players;
-    for(auto pI : playersInfo){
+    for(const auto &pI : playersInfo){
         players.push_back(new API_PLAYER(pI));
         qDebug() << pI.getName();
     }

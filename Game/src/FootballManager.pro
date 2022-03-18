@@ -6,9 +6,11 @@ CONFIG += c++17
 
 SOURCES += \
     api/api_club.cpp \
+    api/api_keys.cpp \
     api/api_league.cpp \
     api/api_player.cpp \
     database/database.cpp \
+    database/database_api_keys.cpp \
     database/database_real_data.cpp \
     database/database_skill_converter.cpp \
     game/data/club.cpp \
@@ -34,9 +36,11 @@ SOURCES += \
 
 HEADERS += \
     api/api_club.h \
+    api/api_keys.h \
     api/api_league.h \
     api/api_player.h \
     database/database.h \
+    database/database_api_keys.h \
     database/database_real_data.h \
     database/database_skill_converter.h \
     game/data/club.h \

@@ -62,9 +62,10 @@ QList<int> REQUEST_BUFFER::indexOfAll(const QString &str)
 
 bool REQUEST_BUFFER::isErrorMsg()
 {
-    static const QString errMsg = "You have exceeded the MONTHLY quota for Requests on your current plan, BASIC. "
+    static const QString errMsg1 = "You have exceeded the MONTHLY quota for Requests on your current plan, BASIC. "
                            "Upgrade your plan at https://rapidapi.com/apidojo/api/transfermarket";
-    if(getBufferRef().contains(errMsg)){
+    static const QString errMsg2 = "server replied: Too Many Requests";
+    if(getBufferRef().contains(errMsg1) || getBufferRef().contains(errMsg2)){
         return true;
     }
     return false;

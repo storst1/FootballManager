@@ -13,7 +13,7 @@ NETWORK_MANAGER::NETWORK_MANAGER(const QString& ApiDbPath)
          }
          //char* data = (reply->readAll()).data();
          RequestBuffer->setBuffer(reply->readAll().data());
-         qDebug() << RequestBuffer->getBufferRef();
+         //qDebug() << RequestBuffer->getBufferRef();
         }
     );
 }
@@ -29,12 +29,14 @@ void NETWORK_MANAGER::SetupRequestAuth()
 {
     request.setRawHeader("x-rapidapi-host", "transfermarket.p.rapidapi.com");
     request.setRawHeader("x-rapidapi-key", keyList->cur().toLocal8Bit());
+    qDebug() << "API key is set to " << keyList->cur();
 }
 
 void NETWORK_MANAGER::SetupRequestAuth(const QString &key)
 {
     request.setRawHeader("x-rapidapi-host", "transfermarket.p.rapidapi.com");
     request.setRawHeader("x-rapidapi-key", key.toLocal8Bit());
+    qDebug() << "API key is set to " << key;
 }
 
 QList<API_CLUB> NETWORK_MANAGER::GatherClubsListByComp(const QString &compId)
@@ -43,8 +45,22 @@ QList<API_CLUB> NETWORK_MANAGER::GatherClubsListByComp(const QString &compId)
     qDebug() << request.url().toString();
     QNetworkReply* reply = manager->get(request);
     QEventLoop loop;
+    connect(reply, &QNetworkReply::errorOccurred, this, [this]{HandleRequestError();});
     connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
     loop.exec();
+    /*
+    if(reply->error()){
+        HandleRequestError();
+        //retry
+        return GatherClubsListByComp(compId);
+    }
+
+    if(RequestBuffer->isErrorMsg()){
+        HandleRequestError();
+        //retry
+        return GatherClubsListByComp(compId);
+    }
+    */
     QString idJsonProperty = "\"id\":\"";
     QString nameJsonProperty = "\"name\":\"";
     QList<API_CLUB> clubList;
@@ -67,13 +83,21 @@ QList<API_PLAYER *> NETWORK_MANAGER::GatherPlayersListByClub(const int clubId)
     qDebug() << request.url().toString();
     QNetworkReply* reply = manager->get(request);
     QEventLoop loop;
+    connect(reply, &QNetworkReply::errorOccurred, this, [this]{HandleRequestError();});
     connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
     loop.exec();
+     /*
+    if(reply->error()){
+        HandleRequestError();
+        //retry
+        return GatherPlayersListByClub(clubId);
+    }
     if(RequestBuffer->isErrorMsg()){
         HandleRequestError();
         //retry
         return GatherPlayersListByClub(clubId);
     }
+    */
     JSON_PARSER_SQUAD Squad(RequestBuffer->getBuffer());
     QList<JSON_PARSER_PLAYER> playersInfo = Squad.getPlayersParsers();
     QList<API_PLAYER*> players;
@@ -89,23 +113,38 @@ QList<API_PLAYER *> NETWORK_MANAGER::GatherPlayersListByClub(const int clubId)
     */
 }
 
-void NETWORK_MANAGER::HandleRequestError()
-{
-    SetupRequestAuth(keyList->next());
-}
-
 QString NETWORK_MANAGER::GatherLeagueName(const QString &leagueId)
 {
     request.setUrl(QUrl("https://transfermarket.p.rapidapi.com/competitions/get-header-info?id=" + leagueId));
     qDebug() << request.url().toString();
+    qDebug() << "Cur key: " << request.rawHeader("x-rapidapi-key");
     QNetworkReply* reply = manager->get(request);
     QEventLoop loop;
+    connect(reply, &QNetworkReply::errorOccurred, this, [this]{HandleRequestError();});
     connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
     loop.exec();
+     /*
+    if(reply->error()){
+        HandleRequestError();
+        //retry
+        return GatherLeagueName(leagueId);
+    }
+    if(RequestBuffer->isErrorMsg()){
+        HandleRequestError();
+        //retry
+        return GatherLeagueName(leagueId);
+    }
+    */
     QString nameJsonProperty = "\"competitionName\":\"";
     int idxOfName = RequestBuffer->indexOf(nameJsonProperty);
     QString name = RequestBuffer->GetValueFromRequestBuffer(idxOfName + nameJsonProperty.length());
     REQUEST_BUFFER::NormalizeValue(name);
     qDebug() << name;
     return name;
+}
+
+void NETWORK_MANAGER::HandleRequestError()
+{
+    qDebug() << "Error in request appeared!";
+    SetupRequestAuth(keyList->next());
 }

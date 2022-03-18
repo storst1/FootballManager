@@ -8,6 +8,7 @@ class NATIONAL_TEAM : public TEAM
 {
 public:
     NATIONAL_TEAM();
+    ~NATIONAL_TEAM() = default;
 };
 
 #endif // NATIONAL_TEAM_H

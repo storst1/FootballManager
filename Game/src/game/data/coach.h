@@ -7,6 +7,7 @@ class COACH
 {
 public:
     COACH();
+    ~COACH() = default;
 
 private:
     QString name;

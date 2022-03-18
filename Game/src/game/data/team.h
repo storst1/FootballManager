@@ -3,6 +3,9 @@
 
 #include "game/data/data_defs.h"
 
+class COACH;
+class PLAYER;
+
 class TEAM
 {
 public:

@@ -1,6 +1,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include "game/data/data_defs.h"
 
 class PLAYER
 {

@@ -5,6 +5,7 @@
 
 class COACH;
 class PLAYER;
+class STADIUM;
 
 class TEAM
 {
@@ -16,6 +17,30 @@ protected:
     QString name;
     QList<PLAYER*> players;
     COACH* coach;
+    STADIUM* stadium;
+};
+
+
+//CLASS NATIONAL TEAM
+class NATIONAL_TEAM : public TEAM
+{
+public:
+    NATIONAL_TEAM();
+    ~NATIONAL_TEAM() = default;
+};
+
+
+//CLASS CLUB
+class CLUB : public TEAM
+{
+public:
+    CLUB();
+    ~CLUB() = default;
+
+private:
+    int TV;
+    int budget;
+
 };
 
 #endif // TEAM_H

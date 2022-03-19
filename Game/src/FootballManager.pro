@@ -13,14 +13,12 @@ SOURCES += \
     database/database_api_keys.cpp \
     database/database_real_data.cpp \
     database/database_skill_converter.cpp \
-    game/data/club.cpp \
     game/data/coach.cpp \
     game/data/confederation.cpp \
     game/data/cup.cpp \
     game/data/federation.cpp \
     game/data/fifa.cpp \
     game/data/league.cpp \
-    game/data/national_team.cpp \
     game/data/player.cpp \
     game/data/stadium.cpp \
     game/data/table.cpp \
@@ -43,7 +41,6 @@ HEADERS += \
     database/database_api_keys.h \
     database/database_real_data.h \
     database/database_skill_converter.h \
-    game/data/club.h \
     game/data/coach.h \
     game/data/confederation.h \
     game/data/cup.h \
@@ -51,7 +48,6 @@ HEADERS += \
     game/data/federation.h \
     game/data/fifa.h \
     game/data/league.h \
-    game/data/national_team.h \
     game/data/player.h \
     game/data/stadium.h \
     game/data/table.h \

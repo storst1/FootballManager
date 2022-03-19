@@ -1,4 +1,6 @@
 #include "fifa.h"
+#include "confederation.h"
+#include "federation.h"
 
 FIFA::FIFA()
 {

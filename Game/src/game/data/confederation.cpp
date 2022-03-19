@@ -1,4 +1,5 @@
 #include "confederation.h"
+#include "federation.h"
 
 CONFEDERATION::CONFEDERATION()
 {

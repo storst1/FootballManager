@@ -1,10 +1,11 @@
 #ifndef FEDERATION_H
 #define FEDERATION_H
 
-#include "data_defs.h"
-#include "game/data/confederation.h"
-#include "game/data/league.h"
-#include "game/data/national_team.h"
+#include "game/data/data_defs.h"
+
+class LEAGUE;
+class CUP;
+class NATIONAL_TEAM;
 
 class FEDERATION
 {

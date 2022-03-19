@@ -4,6 +4,7 @@
 #include <QString>
 #include <QList>
 
+/*
 #include "game/data/club.h"
 #include "game/data/coach.h"
 #include "game/data/confederation.h"
@@ -16,8 +17,8 @@
 #include "game/data/stadium.h"
 #include "game/data/table.h"
 #include "game/data/team.h"
+*/
 
-/*
 class TEAM;
 class FEDERATION;
 class CLUB;
@@ -31,6 +32,5 @@ class PLAYER;
 class TABLE;
 class POSITION;
 class STADIUM;
-*/
 
 #endif // DATA_DEFS_H

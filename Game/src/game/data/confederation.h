@@ -1,10 +1,9 @@
 #ifndef CONFEDERATION_H
 #define CONFEDERATION_H
 
-//#include "federation.h"
+#include "game/data/data_defs.h"
 
-#include "data_defs.h"
-#include "federation.h"
+class FEDERATION;
 
 class CONFEDERATION
 {

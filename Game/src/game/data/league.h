@@ -2,7 +2,10 @@
 #define LEAGUE_H
 
 #include "game/data/data_defs.h"
-#include "game/data/club.h"
+
+class CLUB;
+class CUP;
+class TABLE;
 
 class LEAGUE
 {

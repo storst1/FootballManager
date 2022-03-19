@@ -1,4 +1,7 @@
 #include "team.h"
+#include "coach.h"
+#include "player.h"
+#include "stadium.h"
 
 TEAM::TEAM()
 {

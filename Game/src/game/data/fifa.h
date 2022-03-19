@@ -2,7 +2,9 @@
 #define FIFA_H
 
 #include "game/data/data_defs.h"
-#include "game/data/confederation.h"
+
+class CONFEDERATION;
+class FEDERATION;
 
 class FIFA
 {

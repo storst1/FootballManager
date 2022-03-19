@@ -7,7 +7,16 @@ class PLAYER
 {
 public:
     PLAYER();
-    ~PLAYER() = default;
+    ~PLAYER();
+private:
+    int id;
+    QString name;
+    int8_t age;
+    float skill;
+    FEDERATION* FF;
+    FEDERATION* SF;
+    PLAYER_POSITION* pos;
+    CLUB* club;
 };
 
 #endif // PLAYER_H

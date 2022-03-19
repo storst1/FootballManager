@@ -10,8 +10,9 @@ public:
     ~COACH() = default;
 
 private:
-    QString name;
     int id;
+    QString name;
+    int age;
 };
 
 #endif // COACH_H

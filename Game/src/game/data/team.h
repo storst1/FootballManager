@@ -16,8 +16,7 @@ public:
 protected:
     QString name;
     QList<PLAYER*> players;
-    COACH* coach;
-    STADIUM* stadium;
+    //COACH* coach;
 };
 
 
@@ -27,6 +26,8 @@ class NATIONAL_TEAM : public TEAM
 public:
     NATIONAL_TEAM();
     ~NATIONAL_TEAM() = default;
+private:
+    QList<STADIUM*> stadiumList;
 };
 
 
@@ -40,7 +41,7 @@ public:
 private:
     int TV;
     int budget;
-
+    STADIUM* stadium;
 };
 
 #endif // TEAM_H

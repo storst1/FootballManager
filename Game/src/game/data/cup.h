@@ -7,6 +7,7 @@ class CUP
 {
 public:
     CUP();
+    ~CUP() = default;
 };
 
 #endif // CUP_H

@@ -16,9 +16,7 @@ private:
     int fedId;
     QString name;
 
-    int leaguesTiers;
     QList<LEAGUE*> leagues;
-
     CUP* natCup;
 
     NATIONAL_TEAM* nationalTeam;

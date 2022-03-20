@@ -11,6 +11,7 @@ SOURCES += \
     api/api_player.cpp \
     database/database.cpp \
     database/database_api_keys.cpp \
+    database/database_dynamic_data.cpp \
     database/database_real_data.cpp \
     database/database_skill_converter.cpp \
     game/data/coach.cpp \
@@ -29,6 +30,7 @@ SOURCES += \
     json/json_parser_squad.cpp \
     layouts/new_game_scene.cpp \
     layouts/starting_scene.cpp \
+    layouts/user_team_picker.cpp \
     main/data_collector.cpp \
     main/main.cpp \
     main/mainwindow.cpp \
@@ -42,6 +44,7 @@ HEADERS += \
     api/api_player.h \
     database/database.h \
     database/database_api_keys.h \
+    database/database_dynamic_data.h \
     database/database_real_data.h \
     database/database_skill_converter.h \
     game/data/coach.h \
@@ -59,6 +62,7 @@ HEADERS += \
     json/json_parser.h \
     json/json_parser_player.h \
     json/json_parser_squad.h \
+    layouts/user_team_picker.h \
     main/mainwindow.h \
     network/network_manager.h \
     network/request_buffer.h

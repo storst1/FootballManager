@@ -15,6 +15,8 @@
 #include <QGuiApplication>
 #include <QFont>
 
+#include <algorithm>
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -44,12 +46,16 @@ public:
     //General layout methods
     void SetupMainLay();
     void PushBackEmptyToLay(int amount = 1);
+    void TakeSpaceInLay(int h);
     void ClearLay();
     void ClearLay(QLayout* lay);
 
     //Scene-dependent methods
+
+    //Starting scene
     void SetupStartingScene();
 
+    //New game scene
     void SetupNewGameScene();
 
 private slots:
@@ -69,11 +75,16 @@ private:
     int height;
     QGridLayout* mainLay;
 
+    //Real data
     DATABASE_REAL_DATA* realDataDb;
     DATABASE_SKILL_CONVERTER* skillConvDb;
     NETWORK_MANAGER* netManager;
     QList<API_LEAGUE*> allLeagues;
     QList<API_CLUB*> allClubs;
     QList<API_PLAYER*> allPlayers;
+
+    //Dynamic data
+    std::map<int, QString> CountryIdToName;
+    std::map<QString, int> CountryNameToId;
 };
 #endif // MAINWINDOW_H

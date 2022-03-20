@@ -42,9 +42,16 @@ void MainWindow::SetupMainLay(){
 
 void MainWindow::PushBackEmptyToLay(int amount)
 {
-    while(--amount){
+    while(amount--){
         mainLay->addWidget(new QLabel(""));
     }
+}
+
+void MainWindow::TakeSpaceInLay(int h)
+{
+    QLabel* label = new QLabel("");
+    label->setFixedHeight(h);
+    mainLay->addWidget(label);
 }
 
 void MainWindow::ClearLay()

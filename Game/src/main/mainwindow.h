@@ -40,6 +40,7 @@ public:
 
     //Layouts methods
     void SetupMainLay();
+    void PushBackEmptyToLay(int amount = 1);
 
     void SetupStartingScene();
 

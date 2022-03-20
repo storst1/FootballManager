@@ -11,5 +11,5 @@ TEAM::TEAM()
 TEAM::~TEAM()
 {
     qDeleteAll(players);
-    delete coach;
+    //delete coach;
 }

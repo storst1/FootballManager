@@ -6,6 +6,11 @@
 #include "network/network_manager.h"
 
 #include <QMainWindow>
+#include <QGridLayout>
+#include <QLabel>
+#include <QPushButton>
+#include <QPixmap>
+#include <QPalette>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -19,6 +24,7 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    //Database & API methods
     QString getRealDataDbPath();
     static QString getDbFolderPath();
     void SetupNetworkManager();
@@ -32,6 +38,11 @@ public:
     void LoadAllDataFromAPI();
     void LoadAllDataFromDB();
 
+    //Layouts methods
+    void SetupMainLay();
+
+    void SetupStartingScene();
+
 private slots:
     void on_pushButton_clicked();
 
@@ -43,6 +54,10 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    int width;
+    int height;
+    QGridLayout* mainLay;
+
     DATABASE_REAL_DATA* realDataDb;
     DATABASE_SKILL_CONVERTER* skillConvDb;
     NETWORK_MANAGER* netManager;

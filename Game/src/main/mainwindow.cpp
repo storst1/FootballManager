@@ -6,9 +6,13 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    width = size().width();
+    height = size().height();
+    qDebug() << width << " " << height;
+    SetupMainLay();
     SetupDb();
     SetupNetworkManager();
-    //allLeagues = realDataDb->getAllLeagues();
+    SetupStartingScene();
 }
 
 MainWindow::~MainWindow()
@@ -17,6 +21,17 @@ MainWindow::~MainWindow()
     delete netManager;
     delete ui;
     qDeleteAll(allLeagues);
+}
+
+void MainWindow::SetupMainLay(){
+    QPixmap background(":/background7.jpg");
+    background = background.scaled(1600, 900, Qt::IgnoreAspectRatio);
+    QPalette palette;
+    palette.setBrush(QPalette::Window, background);
+    setPalette(palette);
+
+    mainLay = new QGridLayout();
+    ui->centralwidget->setLayout(mainLay);
 }
 
 QString MainWindow::getRealDataDbPath()

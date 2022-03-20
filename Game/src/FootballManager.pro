@@ -27,6 +27,7 @@ SOURCES += \
     json/json_parser.cpp \
     json/json_parser_player.cpp \
     json/json_parser_squad.cpp \
+    layouts/starting_scene.cpp \
     main/data_collector.cpp \
     main/main.cpp \
     main/mainwindow.cpp \
@@ -68,3 +69,6 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    ../../Resources/backgrounds.qrc

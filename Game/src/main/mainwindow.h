@@ -11,6 +11,8 @@
 #include <QPushButton>
 #include <QPixmap>
 #include <QPalette>
+#include <QScreen>
+#include <QGuiApplication>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }

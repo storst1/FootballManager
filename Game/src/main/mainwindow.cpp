@@ -28,7 +28,10 @@ MainWindow::~MainWindow()
 
 void MainWindow::SetupMainLay(){
     QPixmap background(":/background7.jpg");
-    background = background.scaled(1600, 900, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+    int w = QGuiApplication::primaryScreen()->geometry().width();
+    int h = QGuiApplication::primaryScreen()->geometry().height();
+    qDebug() << "QGuiApplication::primaryScreen->geometry() == {" << w << ", " << h << "}";
+    background = background.scaled(w, h, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
     QPalette palette;
     palette.setBrush(QPalette::Window, background);
     setPalette(palette);

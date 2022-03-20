@@ -8,6 +8,9 @@
         <file>background4.jpg</file>
         <file>background6.jpg</file>
         <file>background7.jpg</file>
+        <file>icon.jpg</file>
+        <file>icon5.png</file>
+        <file>icon4.png</file>
     </qresource>
     <qresource prefix="/back"/>
 </RCC>

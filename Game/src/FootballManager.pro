@@ -27,6 +27,7 @@ SOURCES += \
     json/json_parser.cpp \
     json/json_parser_player.cpp \
     json/json_parser_squad.cpp \
+    layouts/new_game_scene.cpp \
     layouts/starting_scene.cpp \
     main/data_collector.cpp \
     main/main.cpp \

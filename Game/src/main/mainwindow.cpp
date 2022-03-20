@@ -27,7 +27,7 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::SetupMainLay(){
-    QPixmap background(":/background7.jpg");
+    QPixmap background(":/backgroundCutSize.jpg");
     int w = QGuiApplication::primaryScreen()->geometry().width();
     int h = QGuiApplication::primaryScreen()->geometry().height();
     qDebug() << "QGuiApplication::primaryScreen->geometry() == {" << w << ", " << h << "}";
@@ -44,6 +44,36 @@ void MainWindow::PushBackEmptyToLay(int amount)
 {
     while(--amount){
         mainLay->addWidget(new QLabel(""));
+    }
+}
+
+void MainWindow::ClearLay()
+{
+    while(mainLay->count()){
+        QLayoutItem* curItem = mainLay->takeAt(0);
+        if(curItem->layout()){
+            ClearLay(curItem->layout());
+            delete curItem->layout();
+        }
+        if(curItem->widget()){
+            delete curItem->widget();
+        }
+        delete curItem;
+    }
+}
+
+void MainWindow::ClearLay(QLayout *lay)
+{
+    while(lay->count()){
+        QLayoutItem* curItem = lay->takeAt(0);
+        if(curItem->layout()){
+            ClearLay(curItem->layout());
+            delete curItem->layout();
+        }
+        if(curItem->widget()){
+            delete curItem->widget();
+        }
+        delete curItem;
     }
 }
 
@@ -116,6 +146,7 @@ void MainWindow::LoadAllDataFromDB()
     qDebug() << "Loading real data from db finished";
 }
 
+/*
 void MainWindow::on_pushButton_clicked()
 {
     LoadAllDataFromAPI();
@@ -139,4 +170,4 @@ void MainWindow::on_pushButton_4_clicked()
     }
     realDataDb->OverwritePlayersSkill(allPlayers);
 }
-
+*/

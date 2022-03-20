@@ -1,18 +1,12 @@
 <RCC>
-    <qresource prefix="/">
-        <file>background5.jpg</file>
-        <file>background4.jpg</file>
-        <file>background6.jpg</file>
-        <file>background7.jpg</file>
-        <file>icon5.png</file>
-        <file>icon4.png</file>
-        <file>button2.png</file>
-        <file>button4.png</file>
-        <file>button3.png</file>
-        <file>button6.png</file>
-        <file>button7.png</file>
-        <file>button8.png</file>
-        <file>button9.png</file>
-    </qresource>
     <qresource prefix="/back"/>
+    <qresource prefix="/">
+        <file>backgroundCutSize.jpg</file>
+        <file>backgroundFullSize.jpg</file>
+        <file>greenLay280x100.png</file>
+        <file>greenLay280x100Highlighted.png</file>
+        <file>greenLayOriginal.png</file>
+        <file>greenLayOriginalCut.png</file>
+        <file>iconOriginal.png</file>
+    </qresource>
 </RCC>

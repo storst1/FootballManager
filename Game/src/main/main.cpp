@@ -6,7 +6,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MainWindow w;
-    w.setWindowIcon(QIcon(":/icon5.png"));
+    w.setWindowIcon(QIcon(":/iconOriginal.png"));
     w.setWindowState(Qt::WindowMaximized);
     w.show();
     return a.exec();

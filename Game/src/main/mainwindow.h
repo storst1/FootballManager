@@ -13,6 +13,7 @@
 #include <QPalette>
 #include <QScreen>
 #include <QGuiApplication>
+#include <QFont>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -40,13 +41,19 @@ public:
     void LoadAllDataFromAPI();
     void LoadAllDataFromDB();
 
-    //Layouts methods
+    //General layout methods
     void SetupMainLay();
     void PushBackEmptyToLay(int amount = 1);
+    void ClearLay();
+    void ClearLay(QLayout* lay);
 
+    //Scene-dependent methods
     void SetupStartingScene();
 
+    void SetupNewGameScene();
+
 private slots:
+    /*
     void on_pushButton_clicked();
 
     void on_pushButton_2_clicked();
@@ -54,6 +61,7 @@ private slots:
     void on_pushButton_3_clicked();
 
     void on_pushButton_4_clicked();
+    */
 
 private:
     Ui::MainWindow *ui;

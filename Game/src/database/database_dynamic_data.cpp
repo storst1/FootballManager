@@ -4,3 +4,8 @@ DATABASE_DYNAMIC_DATA::DATABASE_DYNAMIC_DATA(const QString &dbPath, const QStrin
     : DATABASE(dbPath, connectionName)
 {
 }
+
+void DATABASE_DYNAMIC_DATA::LoadAllDataFromAPILists()
+{
+
+}

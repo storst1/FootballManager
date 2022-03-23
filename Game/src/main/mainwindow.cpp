@@ -11,7 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
     qDebug() << width << " " << height;
     SetupMainLay();
     SetupDb();
-    LoadAllDataFromDB();
+    //LoadAllDataFromDB();
     SetupNetworkManager();
     SetupStartingScene();
 }

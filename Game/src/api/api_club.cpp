@@ -87,6 +87,16 @@ void API_CLUB::addTV(int playerTV)
     totalTV += playerTV;
 }
 
+void API_CLUB::setStadName(QString name)
+{
+    stadName = name;
+}
+
+void API_CLUB::setStadCap(int cap)
+{
+    stadCapacity = cap;
+}
+
 void API_CLUB::countBudget()
 {
     budget = totalTV / 8;

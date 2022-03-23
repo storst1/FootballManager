@@ -20,6 +20,8 @@ public:
     void setName(QString club_name);
     void insertAdditionalInfoFromJson(JSON_PARSER_CLUB clubAddInfo);
     void addTV(int playerTV);
+    void setStadName(QString name);
+    void setStadCap(int cap);
 
     void countBudget();
 

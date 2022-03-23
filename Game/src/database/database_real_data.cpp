@@ -88,7 +88,7 @@ void DATABASE_REAL_DATA::SaveClubsInfo(QList<API_CLUB *> clubsList)
                 "('" + SqlGetStringReady(c->getStrId()) +
                 "', '" + c->getLeagueId() +
                 "', '" + SqlGetStringReady(c->getName()) +
-                "', '" + c->getStadName() +
+                "', '" + SqlGetStringReady(c->getStadName()) +
                 "', '" + QString::number(c->getStadCapacity()) +
                 "', '" + QString::number(c->getTV()) +
                 "'), ";

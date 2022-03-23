@@ -18,7 +18,7 @@ QString JSON_PARSER_CLUB::getStadName() const
 
 int JSON_PARSER_CLUB::getStadCapacity() const
 {
-    return stadCapacity.toInt();
+    return stadCapacity.toString().toInt();
 }
 
 void JSON_PARSER_CLUB::BindJsonValues(QJsonObject obj)

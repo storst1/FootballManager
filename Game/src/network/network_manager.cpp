@@ -111,10 +111,12 @@ void NETWORK_MANAGER::FillAdditionalClubInfo(API_CLUB *club)
     connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
     loop.exec();
     if(errOccured){
-        return FillAdditionalClubInfo(club);
+        FillAdditionalClubInfo(club);
+        return;
     }
     JSON_PARSER_CLUB ClubProfile(RequestBuffer->getBuffer());
-
+    club->setStadName(ClubProfile.getStadName());
+    club->setStadCap(ClubProfile.getStadCapacity());
 }
 
 QString NETWORK_MANAGER::GatherLeagueName(const QString &leagueId)

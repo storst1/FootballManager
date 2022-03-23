@@ -26,6 +26,7 @@ SOURCES += \
     game/data/table.cpp \
     game/data/team.cpp \
     json/json_parser.cpp \
+    json/json_parser_club.cpp \
     json/json_parser_player.cpp \
     json/json_parser_squad.cpp \
     layouts/new_game_scene.cpp \
@@ -60,6 +61,7 @@ HEADERS += \
     game/data/table.h \
     game/data/team.h \
     json/json_parser.h \
+    json/json_parser_club.h \
     json/json_parser_player.h \
     json/json_parser_squad.h \
     layouts/user_team_picker.h \

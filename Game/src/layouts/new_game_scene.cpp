@@ -24,4 +24,8 @@ void MainWindow::SetupNewGameScene()
     mainLay->addWidget(startButton);
 
     PushBackEmptyToLay(4);
+
+    //LoadAllDataFromAPI();
+    //SaveAllData(allLeagues, allClubs, allPlayers);
+    //RecountAllSkills();
 }

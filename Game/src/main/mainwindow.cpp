@@ -153,6 +153,14 @@ void MainWindow::LoadAllDataFromDB()
     qDebug() << "Loading real data from db finished";
 }
 
+void MainWindow::RecountAllSkills()
+{
+    for(int i = 0; i < allPlayers.size(); ++i){
+        allPlayers[i]->setSkill(skillConvDb->CountPlayerSkill(allPlayers[i]));
+    }
+    realDataDb->OverwritePlayersSkill(allPlayers);
+}
+
 /*
 void MainWindow::on_pushButton_clicked()
 {

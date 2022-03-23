@@ -38,10 +38,12 @@ public:
     void FillAllLeagues();
     void FillAllLeaguesWithBaseInfo();
     void FillAllPlayers();
+    void FillAllClubsInfo();
     QList<API_CLUB*> InitClubs(QList<API_CLUB> clubList);
     void SaveAllData(QList<API_LEAGUE*> leagues, QList<API_CLUB*> clubs, QList<API_PLAYER*> players);
     void LoadAllDataFromAPI();
     void LoadAllDataFromDB();
+    void RecountAllSkills();
 
     //General layout methods
     void SetupMainLay();

@@ -3,6 +3,7 @@
 void MainWindow::CollectData()
 {
     FillAllLeagues();
+    FillAllClubsInfo();
     FillAllPlayers();
 }
 
@@ -36,6 +37,13 @@ void MainWindow::FillAllPlayers()
             csq->setClubId(allClubs[i]->getId());
         }
         allPlayers.append(curSquad);
+    }
+}
+
+void MainWindow::FillAllClubsInfo()
+{
+    for(int i = 0; i < allClubs.size(); ++i){
+        netManager->FillAdditionalClubInfo(allClubs[i]);
     }
 }
 

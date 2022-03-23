@@ -28,6 +28,7 @@ public:
     void SetupRequestAuth(const QString& key);
     QList<API_CLUB> GatherClubsListByComp(const QString& compId);
     QList<API_PLAYER*> GatherPlayersListByClub(const int clubId);
+    void FillAdditionalClubInfo(API_CLUB* club);
     void HandleRequestError();
 private:
     QNetworkAccessManager* manager;

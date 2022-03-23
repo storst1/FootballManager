@@ -11,7 +11,20 @@ JSON_PARSER_CLUB::JSON_PARSER_CLUB(QString str)
     BindJsonValues(mainObj);
 }
 
+QString JSON_PARSER_CLUB::getStadName() const
+{
+    return stadName.toString();
+}
+
+int JSON_PARSER_CLUB::getStadCapacity() const
+{
+    return stadCapacity.toInt();
+}
+
 void JSON_PARSER_CLUB::BindJsonValues(QJsonObject obj)
 {
-    int i = 0;
+    QJsonObject stadObj = obj.value("stadium").toObject();
+    stadName = stadObj.value("name");
+    stadCapacity = stadObj.value("totalCapacity");
+    qDebug() << stadName.toString() << " " << stadCapacity.toString();
 }

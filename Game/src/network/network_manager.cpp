@@ -113,6 +113,7 @@ void NETWORK_MANAGER::FillAdditionalClubInfo(API_CLUB *club)
     if(errOccured){
         return FillAdditionalClubInfo(club);
     }
+    JSON_PARSER_CLUB ClubProfile(RequestBuffer->getBuffer());
 
 }
 

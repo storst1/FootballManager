@@ -6,6 +6,7 @@
 #include "api/api_keys.h"
 #include "json/json_parser_squad.h"
 #include "json/json_parser_player.h"
+#include "json/json_parser_club.h"
 
 #include <QNetworkAccessManager>
 #include <QNetworkReply>

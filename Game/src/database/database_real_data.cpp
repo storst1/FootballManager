@@ -82,12 +82,16 @@ void DATABASE_REAL_DATA::OverwritePlayersSkill(QList<API_PLAYER *> playersList)
 void DATABASE_REAL_DATA::SaveClubsInfo(QList<API_CLUB *> clubsList)
 {
     QSqlQuery query(*db);
-    QString queryStatement = "INSERT INTO clubs (id, league, name) VALUES ";
+    QString queryStatement = "INSERT INTO clubs (id, league, name, stadiumName, stadiumCapacity, playersTV) VALUES ";
     for(auto c : clubsList){
         queryStatement +=
                 "('" + SqlGetStringReady(c->getStrId()) +
                 "', '" + c->getLeagueId() +
-                "', '" + SqlGetStringReady(c->getName()) + "'), ";
+                "', '" + SqlGetStringReady(c->getName()) +
+                "', '" + c->getStadName() +
+                "', '" + QString::number(c->getStadCapacity()) +
+                "', '" + QString::number(c->getTV()) +
+                "'), ";
     }
     //Replace ", " with ";" at the end
     queryStatement.erase(std::prev(queryStatement.cend(), 2), queryStatement.cend());
@@ -124,12 +128,15 @@ void DATABASE_REAL_DATA::SelectAllLeagues(QList<API_LEAGUE*>& leagues)
 void DATABASE_REAL_DATA::SelectAllClubs(QList<API_CLUB *> &clubs)
 {
     QSqlQuery query(*db);
-    query.exec("SELECT id, league, name FROM clubs;");
+    query.exec("SELECT id, league, name, stadiumName, stadiumCapacity, playersTV FROM clubs;");
     while(query.next()){
         int cur_id = query.value(0).toInt();
         QString cur_league = query.value(1).toString();
         QString cur_name = query.value(2).toString();
-        clubs.push_back(new API_CLUB(cur_id, cur_name, cur_league));
+        QString cur_sd_name = query.value(3).toString();
+        int cur_sd_cap = query.value(4).toInt();
+        int cur_TV = query.value(5).toInt();
+        clubs.push_back(new API_CLUB(cur_id, cur_name, cur_league, cur_sd_name, cur_sd_cap, cur_TV));
     }
 }
 

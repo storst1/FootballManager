@@ -20,6 +20,12 @@ API_CLUB::API_CLUB(int id, QString name, QString league_id) : id(id), name(name)
 
 }
 
+API_CLUB::API_CLUB(int id, QString name, QString league_id, QString sd_name, int sd_cap, int totalTV)
+    : id(id), name(name), league_id(league_id), stadName(sd_name), stadCapacity(sd_cap), totalTV(totalTV)
+{
+
+}
+
 API_CLUB::~API_CLUB()
 {
     //qDeleteAll(players);
@@ -55,9 +61,33 @@ QString API_CLUB::getLeagueId() const
     return league_id;
 }
 
-/*
-void CLUB::setPlayers(QList<PLAYER *> playerList)
+QString API_CLUB::getStadName() const
 {
-    players = playerList;
+    return stadName;
 }
-*/
+
+int API_CLUB::getStadCapacity() const
+{
+    return stadCapacity;
+}
+
+int API_CLUB::getTV() const
+{
+    return totalTV;
+}
+
+void API_CLUB::insertAdditionalInfoFromJson(JSON_PARSER_CLUB clubAddInfo)
+{
+    stadName = clubAddInfo.getStadName();
+    stadCapacity = clubAddInfo.getStadCapacity();
+}
+
+void API_CLUB::addTV(int playerTV)
+{
+    totalTV += playerTV;
+}
+
+void API_CLUB::countBudget()
+{
+    budget = totalTV / 8;
+}

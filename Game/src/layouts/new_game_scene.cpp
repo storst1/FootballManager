@@ -25,7 +25,7 @@ void MainWindow::SetupNewGameScene()
 
     PushBackEmptyToLay(4);
 
-    //LoadAllDataFromAPI();
-    //SaveAllData(allLeagues, allClubs, allPlayers);
+    LoadAllDataFromAPI();
+    SaveAllData(allLeagues, allClubs, allPlayers);
     //RecountAllSkills();
 }

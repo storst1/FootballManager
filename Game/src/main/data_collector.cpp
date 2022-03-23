@@ -3,6 +3,9 @@
 void MainWindow::CollectData()
 {
     FillAllLeagues();
+    for(const auto a : allLeagues){
+        qDebug() << a->getName();
+    }
     FillAllClubsInfo();
     FillAllPlayers();
 }
@@ -35,7 +38,9 @@ void MainWindow::FillAllPlayers()
         QList<API_PLAYER*> curSquad = netManager->GatherPlayersListByClub(allClubs[i]->getId());
         for(auto csq : curSquad){
             csq->setClubId(allClubs[i]->getId());
+            allClubs[i]->addTV(csq->getTW());
         }
+        allClubs[i]->countBudget();
         allPlayers.append(curSquad);
     }
 }

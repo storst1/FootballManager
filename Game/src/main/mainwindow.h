@@ -41,14 +41,18 @@ public:
     void FillAllClubsInfo();
     QList<API_CLUB*> InitClubs(QList<API_CLUB> clubList);
     void SaveAllData(QList<API_LEAGUE*> leagues, QList<API_CLUB*> clubs, QList<API_PLAYER*> players);
+    void SaveAllDataDefault();
     void LoadAllDataFromAPI();
     void LoadAllDataFromDB();
     void RecountAllSkills();
+    void RecountClubsBudgets();
+    void RecountEverything();
 
     //General layout methods
     void SetupMainLay();
     void PushBackEmptyToLay(int amount = 1);
     void TakeSpaceInLay(int h);
+    void TakeSpaceInLay(int h, int row, int col_amount);
     void ClearLay();
     void ClearLay(QLayout* lay);
 
@@ -59,6 +63,9 @@ public:
 
     //New game scene
     void SetupNewGameScene();
+
+    //Settings scene
+    void SetupSettingsScene();
 
 private slots:
     /*

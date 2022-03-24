@@ -32,5 +32,12 @@ void MainWindow::SetupStartingScene(){
     loadButton->setStyleSheet(style);
     mainLay->addWidget(loadButton);
 
+    QPushButton* settingsButton = new QPushButton("Settings");
+    settingsButton->setFixedWidth(280);
+    settingsButton->setFixedHeight(100);
+    settingsButton->setStyleSheet(style);
+    connect(settingsButton, &QPushButton::clicked, this, &MainWindow::SetupSettingsScene);
+    mainLay->addWidget(settingsButton);
+
     PushBackEmptyToLay(2);
 }

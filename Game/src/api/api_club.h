@@ -32,6 +32,7 @@ public:
     QString getStadName() const;
     int getStadCapacity() const;
     int getTV() const;
+    int getBudget() const;
 private:
     int id;
     QString name;

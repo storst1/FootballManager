@@ -54,6 +54,15 @@ void MainWindow::TakeSpaceInLay(int h)
     mainLay->addWidget(label);
 }
 
+void MainWindow::TakeSpaceInLay(int h, int row, int col_amount)
+{
+    for(int i = 0; i < col_amount; ++i){
+        QLabel* label = new QLabel("");
+        label->setFixedHeight(h);
+        mainLay->addWidget(label, row, i);
+    }
+}
+
 void MainWindow::ClearLay()
 {
     while(mainLay->count()){
@@ -132,6 +141,11 @@ void MainWindow::SaveAllData(QList<API_LEAGUE *> leagues, QList<API_CLUB *> club
     skillConvDb->MakeBackup(dbFolPath + "backups/skill_convertation_rules.db");
 }
 
+void MainWindow::SaveAllDataDefault()
+{
+    SaveAllData(allLeagues, allClubs, allPlayers);
+}
+
 void MainWindow::LoadAllDataFromAPI()
 {
     netManager->SetupRequestAuth();
@@ -159,6 +173,19 @@ void MainWindow::RecountAllSkills()
         allPlayers[i]->setSkill(skillConvDb->CountPlayerSkill(allPlayers[i]));
     }
     realDataDb->OverwritePlayersSkill(allPlayers);
+}
+
+void MainWindow::RecountClubsBudgets()
+{
+    for(const auto &c : allClubs){
+        c->countBudget();
+    }
+}
+
+void MainWindow::RecountEverything()
+{
+    RecountAllSkills();
+    RecountClubsBudgets();
 }
 
 /*

@@ -8,5 +8,8 @@
         <file>greenLayOriginal.png</file>
         <file>greenLayOriginalCut.png</file>
         <file>iconOriginal.png</file>
+        <file>greenLay1000x120.png</file>
+        <file>leftArrow120x120.png</file>
+        <file>rightArrow120x120.png</file>
     </qresource>
 </RCC>

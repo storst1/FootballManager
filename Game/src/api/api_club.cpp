@@ -76,6 +76,11 @@ int API_CLUB::getTV() const
     return totalTV;
 }
 
+int API_CLUB::getBudget() const
+{
+    return budget;
+}
+
 void API_CLUB::insertAdditionalInfoFromJson(JSON_PARSER_CLUB clubAddInfo)
 {
     stadName = clubAddInfo.getStadName();
@@ -99,5 +104,5 @@ void API_CLUB::setStadCap(int cap)
 
 void API_CLUB::countBudget()
 {
-    budget = totalTV / 8;
+    budget = totalTV / 4;
 }

@@ -82,7 +82,7 @@ void DATABASE_REAL_DATA::OverwritePlayersSkill(QList<API_PLAYER *> playersList)
 void DATABASE_REAL_DATA::SaveClubsInfo(QList<API_CLUB *> clubsList)
 {
     QSqlQuery query(*db);
-    QString queryStatement = "INSERT INTO clubs (id, league, name, stadiumName, stadiumCapacity, playersTV) VALUES ";
+    QString queryStatement = "INSERT INTO clubs (id, league, name, stadiumName, stadiumCapacity, playersTV, budget) VALUES ";
     for(auto c : clubsList){
         queryStatement +=
                 "('" + SqlGetStringReady(c->getStrId()) +
@@ -91,6 +91,7 @@ void DATABASE_REAL_DATA::SaveClubsInfo(QList<API_CLUB *> clubsList)
                 "', '" + SqlGetStringReady(c->getStadName()) +
                 "', '" + QString::number(c->getStadCapacity()) +
                 "', '" + QString::number(c->getTV()) +
+                "', '" + QString::number(c->getBudget()) +
                 "'), ";
     }
     //Replace ", " with ";" at the end
@@ -167,10 +168,16 @@ void DATABASE_REAL_DATA::MakeBackup(const QString &backupDbPath)
     backupQuery.exec("CREATE TABLE IF NOT EXISTS 'clubs' ( "
                      "'id'	INTEGER UNIQUE, "
                      "'league'	TEXT, "
-                     "'name'	TEXT"
+                     "'name'	TEXT, "
+                     "'stadiumName' TEXT, "
+                     "'stadiumCapacity' INTEGER, "
+                     "'playersTV' INTEGER, "
+                     "'budget' INTEGER, "
+                     "'prestige' INTEGER"
                      ")");
     backupQuery.exec("CREATE TABLE IF NOT EXISTS 'federations' ("
-                     "'id'	INTEGER UNIQUE, 'country'	TEXT, "
+                     "'id'	INTEGER UNIQUE, "
+                     "'country'	TEXT, "
                      "'league_first'	TEXT,"
                      "'league_second'	TEXT,"
                      "'league_third'	TEXT"

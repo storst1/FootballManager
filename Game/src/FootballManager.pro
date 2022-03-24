@@ -30,6 +30,7 @@ SOURCES += \
     json/json_parser_player.cpp \
     json/json_parser_squad.cpp \
     layouts/new_game_scene.cpp \
+    layouts/settings_scene.cpp \
     layouts/starting_scene.cpp \
     layouts/user_team_picker.cpp \
     main/data_collector.cpp \

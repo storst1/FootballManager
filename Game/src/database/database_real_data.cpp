@@ -212,6 +212,19 @@ void DATABASE_REAL_DATA::MakeBackup(const QString &backupDbPath)
     query.exec("INSERT INTO backup.players SELECT * FROM players");
 }
 
+QList<QPair<int, QString> > DATABASE_REAL_DATA::GetAllCountries()
+{
+    QSqlQuery query(*db);
+    query.exec("SELECT id, name FROM countries");
+    QList<QPair<int, QString>> list;
+    while(query.next()){
+        int curId = query.value(0).toInt();
+        QString curName = query.value(1).toString();
+        list.push_back({curId, curName});
+    }
+    return list;
+}
+
 void DATABASE_REAL_DATA::SavePlayersInfo(QList<API_PLAYER *> playersList)
 {
     QSqlQuery query(*db);

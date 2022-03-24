@@ -19,6 +19,7 @@ public:
     void SelectAllClubs(QList<API_CLUB*> &clubs);
     void SelectAllPlayers(QList<API_PLAYER*> &players);
     void MakeBackup(const QString& backupDbPath);
+    QList<QPair<int, QString>> GetAllCountries();
 private:
     void SavePlayersInfo(QList<API_PLAYER*> playersList);
     void SaveClubsInfo(QList<API_CLUB*> clubsList);

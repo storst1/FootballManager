@@ -11,7 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
     qDebug() << width << " " << height;
     SetupMainLay();
     SetupDb();
-    //LoadAllDataFromDB();
+    SetupCountryMap();
     SetupNetworkManager();
     SetupStartingScene();
 }
@@ -129,6 +129,8 @@ void MainWindow::SetupDb()
     realDataDb->MakeBackup(dbFolPath + "backups/realdata.db");
     skillConvDb = new DATABASE_SKILL_CONVERTER(dbFolPath + "skill_convertation_rules.db", "DB_SKILL", 1);
     skillConvDb->MakeBackup(dbFolPath + "backups/skill_convertation_rules.db");
+    dynDataDb = new DATABASE_DYNAMIC_DATA(dbFolPath + "dynamicdata.db", "DB_DYN");
+    dynDataDb->CopyDataFromRealDb(dbFolPath + "realdata.db", countryMap);
 }
 
 void MainWindow::SaveAllData(QList<API_LEAGUE *> leagues, QList<API_CLUB *> clubs, QList<API_PLAYER *> players)
@@ -186,6 +188,12 @@ void MainWindow::RecountEverything()
 {
     RecountAllSkills();
     RecountClubsBudgets();
+}
+
+void MainWindow::SetupCountryMap()
+{
+    QList<QPair<int, QString>> countryList = realDataDb->GetAllCountries();
+    countryMap = new COUNTRY_MAP(countryList);
 }
 
 /*

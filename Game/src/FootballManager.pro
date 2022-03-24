@@ -16,6 +16,7 @@ SOURCES += \
     database/database_skill_converter.cpp \
     game/data/coach.cpp \
     game/data/confederation.cpp \
+    game/data/country_map.cpp \
     game/data/cup.cpp \
     game/data/federation.cpp \
     game/data/fifa.cpp \
@@ -51,6 +52,7 @@ HEADERS += \
     database/database_skill_converter.h \
     game/data/coach.h \
     game/data/confederation.h \
+    game/data/country_map.h \
     game/data/cup.h \
     game/data/data_defs.h \
     game/data/federation.h \

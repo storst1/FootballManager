@@ -9,6 +9,8 @@
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QString>
+#include <QPair>
+#include <QList>
 
 class DATABASE
 {

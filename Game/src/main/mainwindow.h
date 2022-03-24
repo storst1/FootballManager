@@ -3,7 +3,9 @@
 
 #include "database/database_real_data.h"
 #include "database/database_skill_converter.h"
+#include "database/database_dynamic_data.h"
 #include "network/network_manager.h"
+#include "game/data/country_map.h"
 
 #include <QMainWindow>
 #include <QGridLayout>
@@ -47,6 +49,7 @@ public:
     void RecountAllSkills();
     void RecountClubsBudgets();
     void RecountEverything();
+    void SetupCountryMap();
 
     //General layout methods
     void SetupMainLay();
@@ -87,7 +90,11 @@ private:
     //Real data
     DATABASE_REAL_DATA* realDataDb;
     DATABASE_SKILL_CONVERTER* skillConvDb;
+    DATABASE_DYNAMIC_DATA* dynDataDb;
+    COUNTRY_MAP* countryMap;
+
     NETWORK_MANAGER* netManager;
+
     QList<API_LEAGUE*> allLeagues;
     QList<API_CLUB*> allClubs;
     QList<API_PLAYER*> allPlayers;

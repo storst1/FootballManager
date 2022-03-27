@@ -10,8 +10,8 @@ MainWindow::MainWindow(QWidget *parent)
     height = size().height();
     qDebug() << width << " " << height;
     SetupMainLay();
-    SetupDb();
     SetupCountryMap();
+    SetupDb();
     SetupNetworkManager();
     SetupStartingScene();
 }
@@ -127,6 +127,7 @@ void MainWindow::SetupDb()
     QString dbFolPath = getDbFolderPath();
     realDataDb = new DATABASE_REAL_DATA(dbFolPath + "realdata.db", "DB_REAL");
     realDataDb->MakeBackup(dbFolPath + "backups/realdata.db");
+    FillCountryMap();
     skillConvDb = new DATABASE_SKILL_CONVERTER(dbFolPath + "skill_convertation_rules.db", "DB_SKILL", 1);
     skillConvDb->MakeBackup(dbFolPath + "backups/skill_convertation_rules.db");
     dynDataDb = new DATABASE_DYNAMIC_DATA(dbFolPath + "dynamicdata.db", "DB_DYN");
@@ -192,8 +193,14 @@ void MainWindow::RecountEverything()
 
 void MainWindow::SetupCountryMap()
 {
+
+    countryMap = new COUNTRY_MAP();
+}
+
+void MainWindow::FillCountryMap()
+{
     QList<QPair<int, QString>> countryList = realDataDb->GetAllCountries();
-    countryMap = new COUNTRY_MAP(countryList);
+    countryMap->fillMaps(countryList);
 }
 
 /*

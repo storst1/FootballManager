@@ -5,6 +5,8 @@
 #include "database_real_data.h"
 #include "game/data/country_map.h"
 
+#include <QMap>
+
 class DATABASE_DYNAMIC_DATA : public DATABASE
 {
 public:

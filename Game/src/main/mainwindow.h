@@ -50,6 +50,7 @@ public:
     void RecountClubsBudgets();
     void RecountEverything();
     void SetupCountryMap();
+    void FillCountryMap();
 
     //General layout methods
     void SetupMainLay();

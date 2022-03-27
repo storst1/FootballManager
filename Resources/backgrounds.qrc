@@ -11,5 +11,6 @@
         <file>greenLay1000x120.png</file>
         <file>leftArrow120x120.png</file>
         <file>rightArrow120x120.png</file>
+        <file>IconActualPng.png</file>
     </qresource>
 </RCC>

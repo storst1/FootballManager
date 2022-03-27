@@ -1,0 +1,15 @@
+debug/api_club.o
+debug/api_league.o
+debug/api_player.o
+debug/database.o
+debug/database_real_data.o
+debug/database_skill_converter.o
+debug/json_parser.o
+debug/json_parser_player.o
+debug/json_parser_squad.o
+debug/data_collector.o
+debug/main.o
+debug/mainwindow.o
+debug/network_manager.o
+debug/request_buffer.o
+debug/moc_mainwindow.o

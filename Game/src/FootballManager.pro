@@ -20,6 +20,7 @@ SOURCES += \
     game/data/cup.cpp \
     game/data/federation.cpp \
     game/data/fifa.cpp \
+    game/data/game_data.cpp \
     game/data/league.cpp \
     game/data/player.cpp \
     game/data/player_position.cpp \
@@ -57,6 +58,7 @@ HEADERS += \
     game/data/data_defs.h \
     game/data/federation.h \
     game/data/fifa.h \
+    game/data/game_data.h \
     game/data/league.h \
     game/data/player.h \
     game/data/player_position.h \

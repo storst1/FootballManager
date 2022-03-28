@@ -19,10 +19,14 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete realDataDb;
+    delete dynDataDb;
+    delete skillConvDb;
+    delete countryMap;
     delete netManager;
     qDeleteAll(allLeagues);
     qDeleteAll(allClubs);
     qDeleteAll(allPlayers);
+    delete gameData;
     delete ui;
 }
 
@@ -201,6 +205,12 @@ void MainWindow::FillCountryMap()
 {
     QList<QPair<int, QString>> countryList = realDataDb->GetAllCountries();
     countryMap->fillMaps(countryList);
+}
+
+void MainWindow::LoadGameData()
+{
+    gameData = new GAME_DATA();
+
 }
 
 /*

@@ -6,6 +6,7 @@
 #include "database/database_dynamic_data.h"
 #include "network/network_manager.h"
 #include "game/data/country_map.h"
+#include "game/data/game_data.h"
 
 #include <QMainWindow>
 #include <QGridLayout>
@@ -51,6 +52,7 @@ public:
     void RecountEverything();
     void SetupCountryMap();
     void FillCountryMap();
+    void LoadGameData();
 
     //General layout methods
     void SetupMainLay();
@@ -103,5 +105,7 @@ private:
     //Dynamic data
     std::map<int, QString> CountryIdToName;
     std::map<QString, int> CountryNameToId;
+
+    GAME_DATA* gameData;
 };
 #endif // MAINWINDOW_H

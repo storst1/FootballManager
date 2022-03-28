@@ -8,6 +8,15 @@ class PLAYER
 public:
     PLAYER();
     ~PLAYER();
+
+    int getId();
+    QString getName();
+    int8_t getAge();
+    float getSkill();
+    FEDERATION* getFF();
+    FEDERATION* getSF();
+    PLAYER_POSITION* getPos();
+    CLUB* getClub();
 private:
     int id;
     QString name;

@@ -13,3 +13,18 @@ FEDERATION::~FEDERATION()
     qDeleteAll(leagues);
     delete nationalTeam;
 }
+
+int FEDERATION::getId()
+{
+    return fedId;
+}
+
+QString FEDERATION::getName()
+{
+    return name;
+}
+
+QList<LEAGUE *> FEDERATION::getLeagues()
+{
+    return leagues;
+}

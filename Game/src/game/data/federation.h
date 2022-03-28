@@ -12,6 +12,10 @@ class FEDERATION
 public:
     FEDERATION();
     ~FEDERATION();
+
+    int getId();
+    QString getName();
+    QList<LEAGUE*> getLeagues();
 private:
     int fedId;
     QString name;

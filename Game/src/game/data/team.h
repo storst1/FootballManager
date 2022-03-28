@@ -13,7 +13,11 @@ public:
     TEAM();
     ~TEAM();
 
+    int getId();
+    QString getName();
+    QList<PLAYER*> getPlayers();
 protected:
+    int id;
     QString name;
     QList<PLAYER*> players;
     //COACH* coach;

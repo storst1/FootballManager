@@ -11,6 +11,11 @@ class LEAGUE
 {
 public:
     LEAGUE();
+    ~LEAGUE();
+
+    QString getId();
+    QString getName();
+    QList<CLUB*> getClubs();
 private:
     QString id;
     QString name;

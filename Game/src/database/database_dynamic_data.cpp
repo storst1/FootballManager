@@ -67,6 +67,11 @@ void DATABASE_DYNAMIC_DATA::CopyPlayersTable(QSqlQuery& query)
     qDebug() << "Copying players data into dynamic database finished. Last error: " + query.lastError().text();
 }
 
+void DATABASE_DYNAMIC_DATA::FillGameData(GAME_DATA *gameData)
+{
+
+}
+
 /*
 void DATABASE_DYNAMIC_DATA::LoadAllDataFromAPILists()
 {

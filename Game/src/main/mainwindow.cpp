@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
     SetupCountryMap();
     SetupDb();
     SetupNetworkManager();
+    LoadGameData();
     SetupStartingScene();
 }
 

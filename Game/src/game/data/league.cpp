@@ -15,17 +15,22 @@ LEAGUE::~LEAGUE()
     qDeleteAll(clubs);
 }
 
-QString LEAGUE::getId()
+QString LEAGUE::getId() const
 {
     return id;
 }
 
-QString LEAGUE::getName()
+QString LEAGUE::getName() const
 {
     return name;
 }
 
-QList<CLUB *> LEAGUE::getClubs()
+QList<CLUB *> LEAGUE::getClubs() const
 {
     return clubs;
+}
+
+int LEAGUE::getTier() const
+{
+    return tier;
 }

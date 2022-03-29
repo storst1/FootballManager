@@ -3,22 +3,20 @@
 
 #include "game/data/data_defs.h"
 
-class CLUB;
-class CUP;
-class TABLE;
-
 class LEAGUE
 {
 public:
     LEAGUE();
     ~LEAGUE();
 
-    QString getId();
-    QString getName();
-    QList<CLUB*> getClubs();
+    QString getId() const;
+    QString getName() const;
+    QList<CLUB*> getClubs() const;
+    int getTier() const;
 private:
     QString id;
     QString name;
+    int tier;
 
     QList<CLUB*> clubs;
 

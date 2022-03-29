@@ -3,14 +3,11 @@
 
 #include "game/data/data_defs.h"
 
-class LEAGUE;
-class CUP;
-class NATIONAL_TEAM;
-
 class FEDERATION
 {
 public:
     FEDERATION();
+    FEDERATION(int _id, QString _name, int _countryId, QList<LEAGUE*> leaguesList);
     ~FEDERATION();
 
     int getId();
@@ -18,6 +15,7 @@ public:
     QList<LEAGUE*> getLeagues();
 private:
     int fedId;
+    int countryId;
     QString name;
 
     QList<LEAGUE*> leagues;

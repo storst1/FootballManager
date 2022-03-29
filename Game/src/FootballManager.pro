@@ -34,7 +34,6 @@ SOURCES += \
     layouts/new_game_scene.cpp \
     layouts/settings_scene.cpp \
     layouts/starting_scene.cpp \
-    layouts/user_team_picker.cpp \
     main/data_collector.cpp \
     main/main.cpp \
     main/mainwindow.cpp \
@@ -69,7 +68,6 @@ HEADERS += \
     json/json_parser_club.h \
     json/json_parser_player.h \
     json/json_parser_squad.h \
-    layouts/user_team_picker.h \
     main/mainwindow.h \
     network/network_manager.h \
     network/request_buffer.h

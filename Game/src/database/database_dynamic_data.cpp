@@ -1,4 +1,8 @@
 #include "database_dynamic_data.h"
+#include "game/data/game_data.h"
+#include "game/data/player.h"
+#include "game/data/federation.h"
+#include "game/data/team.h"
 
 DATABASE_DYNAMIC_DATA::DATABASE_DYNAMIC_DATA(const QString &dbPath, const QString &connectionName)
     : DATABASE(dbPath, connectionName)
@@ -69,7 +73,38 @@ void DATABASE_DYNAMIC_DATA::CopyPlayersTable(QSqlQuery& query)
 
 void DATABASE_DYNAMIC_DATA::FillGameData(GAME_DATA *gameData)
 {
+    FillFederationsGameData(gameData);
+}
 
+void DATABASE_DYNAMIC_DATA::FillFederationsGameData(GAME_DATA *gameData)
+{
+    QSqlQuery query(*db);
+    query.exec("SELECT * from federations");
+    while(query.next()){
+        int fedId = query.value(0).toInt();
+        QString name = query.value(1).toString();
+        int countryId = query.value(2).toInt();
+        QList<QString> leagueIdsList;
+        for(int i = 3; i <= 5; ++i){
+            QString curLeague = query.value(i).toString();
+            if(curLeague != ""){
+                leagueIdsList.push_back(curLeague);
+            }
+        }
+        QList<LEAGUE*> leaguesList = InitLeagueList(leagueIdsList);
+        gameData->addFederation(new FEDERATION(fedId, name, countryId, leaguesList));
+    }
+}
+
+QList<LEAGUE *> DATABASE_DYNAMIC_DATA::InitLeagueList(QList<QString> &leagueIdsList)
+{
+    QSqlQuery query(*db);
+    for(int i = 0; i < leagueIdsList.size(); ++i){
+        CLUB* c = new CLUB();
+        PLAYER* p = new PLAYER();
+        NATIONAL_TEAM* nt = new NATIONAL_TEAM();
+
+    }
 }
 
 /*

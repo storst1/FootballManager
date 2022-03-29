@@ -4,6 +4,7 @@
 #include "database.h"
 #include "database_real_data.h"
 #include "game/data/country_map.h"
+#include "game/data/data_defs.h"
 #include "game/data/game_data.h"
 
 #include <QMap>
@@ -21,6 +22,9 @@ public:
     void CopyPlayersTable(QSqlQuery &query);
 
     void FillGameData(GAME_DATA* gameData);
+    void FillFederationsGameData(GAME_DATA* gameData);
+
+    QList<LEAGUE*> InitLeagueList(QList<QString>& leagueIdsList);
 };
 
 #endif // DATABASE_DYNAMIC_DATA_H

@@ -1,5 +1,5 @@
-#ifndef PLAYER_H
-#define PLAYER_H
+#ifndef API_PLAYER_H
+#define API_PLAYER_H
 
 #include "json/json_parser_player.h"
 
@@ -46,4 +46,4 @@ private:
     float skill = 0.f;
 };
 
-#endif // PLAYER_H
+#endif // API_PLAYER_H

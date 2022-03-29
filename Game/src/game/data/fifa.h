@@ -3,9 +3,6 @@
 
 #include "game/data/data_defs.h"
 
-class CONFEDERATION;
-class FEDERATION;
-
 class FIFA
 {
 public:

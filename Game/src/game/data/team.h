@@ -3,10 +3,6 @@
 
 #include "game/data/data_defs.h"
 
-class COACH;
-class PLAYER;
-class STADIUM;
-
 class TEAM
 {
 public:
@@ -28,7 +24,7 @@ protected:
 class NATIONAL_TEAM : public TEAM
 {
 public:
-    NATIONAL_TEAM();
+    NATIONAL_TEAM() = default;
     ~NATIONAL_TEAM() = default;
 private:
     QList<STADIUM*> stadiumList;
@@ -39,7 +35,7 @@ private:
 class CLUB : public TEAM
 {
 public:
-    CLUB();
+    CLUB() = default;
     ~CLUB() = default;
 
 private:

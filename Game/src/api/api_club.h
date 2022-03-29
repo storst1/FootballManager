@@ -1,5 +1,5 @@
-#ifndef CLUB_H
-#define CLUB_H
+#ifndef API_CLUB_H
+#define API_CLUB_H
 
 #include "json/json_parser_club.h"
 
@@ -44,4 +44,4 @@ private:
     int budget;
 };
 
-#endif // CLUB_H
+#endif // API_CLUB_H

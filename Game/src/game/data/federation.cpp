@@ -8,6 +8,12 @@ FEDERATION::FEDERATION()
 
 }
 
+FEDERATION::FEDERATION(int _id, QString _name, int _countryId, QList<LEAGUE *> leaguesList)
+    : fedId(_id), name(_name), countryId(_countryId), leagues(leaguesList)
+{
+
+}
+
 FEDERATION::~FEDERATION()
 {
     qDeleteAll(leagues);

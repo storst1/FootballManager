@@ -1,5 +1,5 @@
-#ifndef LEAGUE_H
-#define LEAGUE_H
+#ifndef API_LEAGUE_H
+#define API_LEAGUE_H
 
 #include "api_club.h"
 
@@ -27,4 +27,4 @@ private:
     //QList<CLUB*> clubs;
 };
 
-#endif // LEAGUE_H
+#endif // API_LEAGUE_H

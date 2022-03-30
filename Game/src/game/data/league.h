@@ -16,6 +16,7 @@ public:
 
     void setName(QString& _name);
     void setTier(int t);
+    void setClubList(QList<CLUB*> clubList);
 private:
     QString id;
     QString name;

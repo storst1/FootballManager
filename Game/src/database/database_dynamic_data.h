@@ -24,7 +24,9 @@ public:
     void FillGameData(GAME_DATA* gameData);
     void FillFederationsGameData(GAME_DATA* gameData);
 
-    QList<LEAGUE*> InitLeagueList(QList<QString>& leagueIdsList);
+    QList<LEAGUE*> InitLeagueList(const QList<QString> &leagueIdsList);
+    QList<CLUB*> InitClubsByLeague(const QString &leagueId);
+    QList<PLAYER*> InitPlayersByClub(const int clubId);
 };
 
 #endif // DATABASE_DYNAMIC_DATA_H

@@ -11,6 +11,7 @@
 #include <QString>
 #include <QPair>
 #include <QList>
+#include <QDebug>
 
 class DATABASE
 {
@@ -19,6 +20,8 @@ public:
     ~DATABASE();
 
     static QList<QString> ParseStringBy(QString& s, QChar c);
+    static void PrintSqlExecInfoIfErr(QSqlQuery& query);
+    static void PrintSqlExecInfo(QSqlQuery& query);
 protected:
     void SetupConnection(const QString &dbPath, const QString &connectionName);
     void DeleteTableInfo(QString table_name);

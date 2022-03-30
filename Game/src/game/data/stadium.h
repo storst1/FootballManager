@@ -7,10 +7,13 @@ class STADIUM
 {
 public:
     STADIUM();
+    STADIUM(QString name, int capacity);
     ~STADIUM() = default;
 
     int getCapacity() const;
+    QString getName() const;
 private:
+    QString name;
     int capacity;
 };
 

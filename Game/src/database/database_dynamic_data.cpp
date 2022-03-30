@@ -58,7 +58,11 @@ void DATABASE_DYNAMIC_DATA::CopyLeaguesTable(QSqlQuery& query)
 void DATABASE_DYNAMIC_DATA::CopyClubsTable(QSqlQuery& query)
 {
     DeleteTableInfo("clubs");
-    query.exec("INSERT INTO clubs SELECT * FROM real.clubs");
+    query.exec("INSERT INTO clubs"
+               " (id, name, leagueId, stadiumName, stadiumCapacity, playersTV, transferBudget, prestige) "
+               "SELECT "
+               " id, name, league, stadiumName, stadiumCapacity, playersTV, budget, prestige "
+               " FROM real.clubs");
     qDebug() << "Copying clubs data into dynamic database finished. Last error: " + query.lastError().text();
 }
 
@@ -100,7 +104,7 @@ void DATABASE_DYNAMIC_DATA::FillFederationsGameData(GAME_DATA *gameData)
     }
 }
 
-QList<LEAGUE *> DATABASE_DYNAMIC_DATA::InitLeagueList(QList<QString> &leagueIdsList)
+QList<LEAGUE *> DATABASE_DYNAMIC_DATA::InitLeagueList(const QList<QString> &leagueIdsList)
 {
     QList<LEAGUE*> leagueList;
     QSqlQuery query(*db);
@@ -114,12 +118,40 @@ QList<LEAGUE *> DATABASE_DYNAMIC_DATA::InitLeagueList(QList<QString> &leagueIdsL
         curLeague->setTier(curTier);
         leagueList.push_back(curLeague);
     }
+    for(const auto &l : leagueList){
+        l->setClubList(InitClubsByLeague(l->getId()));
+    }
     return leagueList;
 }
 
-/*
-void DATABASE_DYNAMIC_DATA::LoadAllDataFromAPILists()
+QList<CLUB *> DATABASE_DYNAMIC_DATA::InitClubsByLeague(const QString &leagueId)
 {
-
+    QSqlQuery query(*db);
+    QList<CLUB*> clubList;
+    query.exec("SELECT "
+               "id, name, stadiumName, stadiumCapacity, playersTV, transferBudget, prestige "
+               "FROM clubs "
+               "WHERE leagueId = " + leagueId + ";");
+    DATABASE::PrintSqlExecInfoIfErr(query);
+    while(query.next()){
+        int curId = query.value(0).toInt();
+        QString curName = query.value(1).toString();
+        QString curSN = query.value(2).toString();
+        int curSC = query.value(3).toInt();
+        int curTV = query.value(4).toInt();
+        int curTB = query.value(5).toInt();
+        int curPrestige = query.value(6).toInt();
+        CLUB* curClub = new CLUB(curId, curName, curTV, curTB, curSN, curSC, curPrestige);
+        curClub->setPlayerList(InitPlayersByClub(curClub->getId()));
+        clubList.push_back(curClub);
+    }
+    return clubList;
 }
-*/
+
+QList<PLAYER *> DATABASE_DYNAMIC_DATA::InitPlayersByClub(const int clubId)
+{
+    QSqlQuery query(*db);
+    QList<PLAYER*> playersList;
+
+    return playersList;
+}

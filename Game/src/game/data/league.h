@@ -13,6 +13,9 @@ public:
     QString getName() const;
     QList<CLUB*> getClubs() const;
     int getTier() const;
+
+    void setName(QString& _name);
+    void setTier(int t);
 private:
     QString id;
     QString name;
@@ -20,7 +23,7 @@ private:
 
     QList<CLUB*> clubs;
 
-    CUP* leagueCup; //may be nullptr
+    CUP* leagueCup = nullptr; //may be nullptr
 
     //stats fields
     TABLE* table;

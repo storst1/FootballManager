@@ -15,10 +15,15 @@ public:
     QMap<QString, LEAGUE*> getLeagues();
     QMap<int, CLUB*> getClubs();
     QMap<int, PLAYER*> getPlayers();
+
     void addFederation(FEDERATION* fed);
+    void addFederations(QList<FEDERATION*>& listFed);
     void addLeague(LEAGUE* league);
+    void addLeagues(QList<LEAGUE*>& listLeague);
     void addClub(CLUB* club);
+    void addClubs(QList<CLUB*>& listClubs);
     void addPlayer(PLAYER* player);
+    void addPlayers(QList<PLAYER*>& listPlayers);
 private:
     FIFA* fifa;
     QMap<int, FEDERATION*> federations;

@@ -34,3 +34,13 @@ int LEAGUE::getTier() const
 {
     return tier;
 }
+
+void LEAGUE::setName(QString &_name)
+{
+    name = _name;
+}
+
+void LEAGUE::setTier(int t)
+{
+    tier = t;
+}

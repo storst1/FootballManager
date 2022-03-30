@@ -3,6 +3,7 @@
 #include "game/data/player.h"
 #include "game/data/federation.h"
 #include "game/data/team.h"
+#include "game/data/league.h"
 
 DATABASE_DYNAMIC_DATA::DATABASE_DYNAMIC_DATA(const QString &dbPath, const QString &connectionName)
     : DATABASE(dbPath, connectionName)
@@ -13,6 +14,7 @@ void DATABASE_DYNAMIC_DATA::CopyDataFromRealDb(const QString& realDbPath, COUNTR
 {
     QSqlQuery query(*db);
     query.exec("ATTACH DATABASE '" + realDbPath + "' AS real;");
+    DATABASE::PrintSqlExecInfoIfErr(query);
     CopyFederationsTable(query, countryMap);
     CopyLeaguesTable(query);
     CopyClubsTable(query);
@@ -40,6 +42,7 @@ void DATABASE_DYNAMIC_DATA::CopyFederationsTable(QSqlQuery& query, COUNTRY_MAP* 
         query.exec("UPDATE federations SET countryId = " +
                    QString::number(curCountryId) +
                    " WHERE name = '" + curCountryName + "';");
+        DATABASE::PrintSqlExecInfoIfErr(query);
     }
 
     qDebug() << "Updating federations data into dynamic database finished. Last error: " + query.lastError().text();
@@ -80,6 +83,7 @@ void DATABASE_DYNAMIC_DATA::FillFederationsGameData(GAME_DATA *gameData)
 {
     QSqlQuery query(*db);
     query.exec("SELECT * from federations");
+    DATABASE::PrintSqlExecInfoIfErr(query);
     while(query.next()){
         int fedId = query.value(0).toInt();
         QString name = query.value(1).toString();
@@ -98,13 +102,19 @@ void DATABASE_DYNAMIC_DATA::FillFederationsGameData(GAME_DATA *gameData)
 
 QList<LEAGUE *> DATABASE_DYNAMIC_DATA::InitLeagueList(QList<QString> &leagueIdsList)
 {
+    QList<LEAGUE*> leagueList;
     QSqlQuery query(*db);
     for(int i = 0; i < leagueIdsList.size(); ++i){
-        CLUB* c = new CLUB();
-        PLAYER* p = new PLAYER();
-        NATIONAL_TEAM* nt = new NATIONAL_TEAM();
-
+        LEAGUE* curLeague = new LEAGUE();
+        query.exec("SELECT name FROM leagues WHERE id = " + leagueIdsList[i] + ";");
+        DATABASE::PrintSqlExecInfoIfErr(query);
+        QString curName = query.value(0).toString();
+        int curTier = i + 1;
+        curLeague->setName(curName);
+        curLeague->setTier(curTier);
+        leagueList.push_back(curLeague);
     }
+    return leagueList;
 }
 
 /*

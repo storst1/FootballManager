@@ -9,7 +9,7 @@ FEDERATION::FEDERATION()
 }
 
 FEDERATION::FEDERATION(int _id, QString _name, int _countryId, QList<LEAGUE *> leaguesList)
-    : fedId(_id), name(_name), countryId(_countryId), leagues(leaguesList)
+    : fedId(_id), countryId(_countryId), name(_name), leagues(leaguesList)
 {
 
 }

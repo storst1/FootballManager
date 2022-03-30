@@ -28,6 +28,18 @@ QList<QString> DATABASE::ParseStringBy(QString& s, QChar c)
     return slist;
 }
 
+void DATABASE::PrintSqlExecInfoIfErr(QSqlQuery &query)
+{
+    if(query.lastError().isValid()){
+        PrintSqlExecInfo(query);
+    }
+}
+
+void DATABASE::PrintSqlExecInfo(QSqlQuery &query)
+{
+    qDebug() << query.executedQuery() << " . Error: " << query.lastError().text();
+}
+
 void DATABASE::SetupConnection(const QString& dbPath, const QString& connectionName)
 {
     db = new QSqlDatabase(QSqlDatabase::addDatabase("QSQLITE", connectionName));

@@ -2,19 +2,24 @@
 #define GAME_DATA_H
 
 #include "game/data/data_defs.h"
+#include "game/data/country_map.h"
 
 #include <QMap>
 
 class GAME_DATA
 {
 public:
-    GAME_DATA();
+    GAME_DATA(COUNTRY_MAP* countryMap);
     ~GAME_DATA();
 
-    QMap<int, FEDERATION*> getFederations();
-    QMap<QString, LEAGUE*> getLeagues();
-    QMap<int, CLUB*> getClubs();
-    QMap<int, PLAYER*> getPlayers();
+    QMap<int, FEDERATION*> getFederations() const;
+    QMap<QString, LEAGUE*> getLeagues() const;
+    QMap<int, CLUB*> getClubs() const;
+    QMap<int, PLAYER*> getPlayers() const;
+    COUNTRY_MAP* getCountryMap() const;
+    QMap<QPair<int, int>, PLAYER_POSITION*> getPositions() const;
+
+    FEDERATION *implicitlyGetFederation(int id, QString &name);
 
     void addFederation(FEDERATION* fed);
     void addFederations(QList<FEDERATION*>& listFed);
@@ -24,12 +29,17 @@ public:
     void addClubs(QList<CLUB*>& listClubs);
     void addPlayer(PLAYER* player);
     void addPlayers(QList<PLAYER*>& listPlayers);
+    void addPos(PLAYER_POSITION* pos);
+
+    void InitPositions();
 private:
     FIFA* fifa;
     QMap<int, FEDERATION*> federations;
     QMap<QString, LEAGUE*> leagues;
     QMap<int, CLUB*> clubs;
     QMap<int, PLAYER*> players;
+    COUNTRY_MAP* countryMap;
+    QMap<QPair<int, int>, PLAYER_POSITION*> positions;
 };
 
 #endif // GAME_DATA_H

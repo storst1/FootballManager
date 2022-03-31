@@ -7,7 +7,14 @@ class PLAYER_POSITION
 {
 public:
     PLAYER_POSITION();
+    PLAYER_POSITION(int fp);
+    PLAYER_POSITION(int fp, int sp);
+    PLAYER_POSITION(int fp, int sp, QString name);
     ~PLAYER_POSITION() = default;
+
+    int getFP() const;
+    int getSP() const;
+    QString getStrName() const;
 private:
     int FP;
     int SP;

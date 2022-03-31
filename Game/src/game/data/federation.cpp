@@ -14,18 +14,24 @@ FEDERATION::FEDERATION(int _id, QString _name, int _countryId, QList<LEAGUE *> l
 
 }
 
+FEDERATION::FEDERATION(int _id, QString _name, int _countryId)
+    : fedId(_id), countryId(_countryId), name(_name)
+{
+
+}
+
 FEDERATION::~FEDERATION()
 {
     qDeleteAll(leagues);
     delete nationalTeam;
 }
 
-int FEDERATION::getId()
+int FEDERATION::getId() const
 {
     return fedId;
 }
 
-QString FEDERATION::getName()
+QString FEDERATION::getName() const
 {
     return name;
 }
@@ -33,4 +39,9 @@ QString FEDERATION::getName()
 QList<LEAGUE *> FEDERATION::getLeagues()
 {
     return leagues;
+}
+
+void FEDERATION::setLeagues(QList<LEAGUE *> leaguesList)
+{
+    leagues = leaguesList;
 }

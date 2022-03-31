@@ -8,39 +8,56 @@ PLAYER::PLAYER()
 
 }
 
+PLAYER::PLAYER(int id, QString name, int TV, int age, float skill, FEDERATION *FF, FEDERATION *SF,
+               QPair<int, int> pos, QString height) :
+    id(id), name(name), TV(TV), age(age), skill(skill), FF(FF), SF(SF), height(height)
+{
+
+}
+
 PLAYER::~PLAYER()
 {
     delete pos;
 }
 
-int PLAYER::getId(){
+int PLAYER::getId() const{
     return id;
 }
 
-QString PLAYER::getName(){
+QString PLAYER::getName() const{
     return name;
 }
 
-int8_t PLAYER::getAge(){
+int8_t PLAYER::getAge() const{
     return age;
 }
 
-float PLAYER::getSkill(){
+float PLAYER::getSkill() const{
     return skill;
 }
 
-FEDERATION* PLAYER::getFF(){
+FEDERATION* PLAYER::getFF() const{
     return FF;
 }
 
-FEDERATION* PLAYER::getSF(){
+FEDERATION* PLAYER::getSF() const{
     return SF;
 }
 
-PLAYER_POSITION* PLAYER::getPos(){
+PLAYER_POSITION* PLAYER::getPos() const{
     return pos;
 }
 
-CLUB* PLAYER::getClub(){
+CLUB* PLAYER::getClub() const{
     return club;
+}
+
+int PLAYER::getTV() const
+{
+    return TV;
+}
+
+void PLAYER::setClub(CLUB *clubPtr)
+{
+    club = clubPtr;
 }

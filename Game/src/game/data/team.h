@@ -10,8 +10,8 @@ public:
     TEAM(int id, QString name);
     ~TEAM();
 
-    int getId();
-    QString getName();
+    int getId() const;
+    QString getName() const;
     QList<PLAYER*> getPlayers();
 
     void setPlayerList(QList<PLAYER*> playerList);

@@ -210,8 +210,7 @@ void MainWindow::FillCountryMap()
 
 void MainWindow::LoadGameData()
 {
-    gameData = new GAME_DATA();
-
+    gameData = new GAME_DATA(countryMap);
 }
 
 /*

@@ -7,24 +7,30 @@ class PLAYER
 {
 public:
     PLAYER();
+    PLAYER(int id, QString name, int TV, int age, float skill, FEDERATION* FF, FEDERATION* SF, QPair<int, int> pos, QString height);
     ~PLAYER();
 
-    int getId();
-    QString getName();
-    int8_t getAge();
-    float getSkill();
-    FEDERATION* getFF();
-    FEDERATION* getSF();
-    PLAYER_POSITION* getPos();
-    CLUB* getClub();
+    int getId() const;
+    QString getName() const;
+    int8_t getAge() const;
+    float getSkill() const;
+    FEDERATION* getFF() const;
+    FEDERATION* getSF() const;
+    PLAYER_POSITION* getPos() const;
+    CLUB* getClub() const;
+    int getTV() const;
+
+    void setClub(CLUB* clubPtr);
 private:
     int id;
     QString name;
+    int TV;
     int8_t age;
     float skill;
     FEDERATION* FF;
     FEDERATION* SF;
     PLAYER_POSITION* pos;
+    QString height;
     CLUB* club;
 };
 

@@ -19,12 +19,12 @@ TEAM::~TEAM()
     //delete coach;
 }
 
-int TEAM::getId()
+int TEAM::getId() const
 {
     return id;
 }
 
-QString TEAM::getName(){
+QString TEAM::getName() const{
     return name;
 }
 

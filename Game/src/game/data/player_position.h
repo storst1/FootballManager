@@ -12,9 +12,13 @@ public:
     PLAYER_POSITION(int fp, int sp, QString name);
     ~PLAYER_POSITION() = default;
 
+    static QString posIdToStr(int id);
+
     int getFP() const;
     int getSP() const;
     QString getStrName() const;
+
+    void setStrNameToAuto();
 private:
     int FP;
     int SP;

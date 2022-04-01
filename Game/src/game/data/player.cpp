@@ -9,8 +9,8 @@ PLAYER::PLAYER()
 }
 
 PLAYER::PLAYER(int id, QString name, int TV, int age, float skill, FEDERATION *FF, FEDERATION *SF,
-               QPair<int, int> pos, QString height) :
-    id(id), name(name), TV(TV), age(age), skill(skill), FF(FF), SF(SF), height(height)
+               PLAYER_POSITION* pos, QString height) :
+    id(id), name(name), TV(TV), age(age), skill(skill), FF(FF), SF(SF), pos(pos), height(height)
 {
 
 }

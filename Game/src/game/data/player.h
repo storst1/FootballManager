@@ -7,7 +7,7 @@ class PLAYER
 {
 public:
     PLAYER();
-    PLAYER(int id, QString name, int TV, int age, float skill, FEDERATION* FF, FEDERATION* SF, QPair<int, int> pos, QString height);
+    PLAYER(int id, QString name, int TV, int age, float skill, FEDERATION* FF, FEDERATION* SF, PLAYER_POSITION* pos, QString height);
     ~PLAYER();
 
     int getId() const;

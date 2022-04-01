@@ -26,7 +26,7 @@ public:
 
     QList<LEAGUE*> InitLeagueList(const QList<QString> &leagueIdsList, GAME_DATA *gameData);
     QList<CLUB*> InitClubsByLeague(const QString &leagueId, GAME_DATA *gameData);
-    QList<PLAYER*> InitPlayersByClub(const CLUB* curClub, GAME_DATA *gameData);
+    QList<PLAYER*> InitPlayersByClub(CLUB *curClub, GAME_DATA *gameData);
 };
 
 #endif // DATABASE_DYNAMIC_DATA_H

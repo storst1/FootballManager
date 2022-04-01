@@ -119,12 +119,15 @@ void GAME_DATA::InitPositions()
     //GK
     PLAYER_POSITION* gkPos = new PLAYER_POSITION(1, 0, "GK");
     addPos(gkPos);
-    for(int i = 2; i < 15; ++i){
+    //Iterate through all the possible positions
+    for(int i = 3; i < 15; ++i){
         PLAYER_POSITION* pos0 = new PLAYER_POSITION(i);
         addPos(pos0);
-        for(int j = 2; j < 15; ++j){
+        pos0->setStrNameToAuto();
+        for(int j = 3; j < 15; ++j){
             PLAYER_POSITION* pos = new PLAYER_POSITION(i, j);
             addPos(pos);
+            pos0->setStrNameToAuto();
         }
     }
 }

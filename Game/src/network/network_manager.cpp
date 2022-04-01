@@ -68,6 +68,7 @@ QList<API_CLUB> NETWORK_MANAGER::GatherClubsListByComp(const QString &compId)
     for(int i = 0; i < (int)idVals.size(); ++i){
         clubList.push_back(API_CLUB(idVals[i].toInt(), nameVals[i]));
     }
+    delete reply;
     return clubList;
 }
 

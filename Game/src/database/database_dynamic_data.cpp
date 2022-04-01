@@ -150,8 +150,9 @@ QList<CLUB *> DATABASE_DYNAMIC_DATA::InitClubsByLeague(const QString &leagueId, 
     return clubList;
 }
 
-QList<PLAYER *> DATABASE_DYNAMIC_DATA::InitPlayersByClub(const CLUB* curClub, GAME_DATA *gameData)
+QList<PLAYER *> DATABASE_DYNAMIC_DATA::InitPlayersByClub(CLUB* curClub, GAME_DATA *gameData)
 {
+    QMap<QPair<int, int>, PLAYER_POSITION*> positionsMap = gameData->getPositions();
     const int clubId = curClub->getId();
     QSqlQuery query(*db);
     QList<PLAYER*> playersList;
@@ -164,9 +165,9 @@ QList<PLAYER *> DATABASE_DYNAMIC_DATA::InitPlayersByClub(const CLUB* curClub, GA
         int curTV = query.value(2).toInt();
         int curAge = query.value(3).toInt();
         int curFNid = query.value(4).toInt();
-        int curSNid = query.value(4).toInt();
-        int curFPid = query.value(5).toInt();
-        int curSPid = query.value(6).toInt();
+        int curSNid = query.value(5).toInt();
+        int curFPid = query.value(6).toInt();
+        int curSPid = query.value(7).toInt();
         float curSkill = query.value(8).toFloat();
         QString curH = query.value(9).toString();
         QString FFstr = gameData->getCountryMap()->getById(curFNid);
@@ -178,7 +179,8 @@ QList<PLAYER *> DATABASE_DYNAMIC_DATA::InitPlayersByClub(const CLUB* curClub, GA
             SF = gameData->implicitlyGetFederation(curSNid, SFstr);
         }
 
-        PLAYER* curPlayer = new PLAYER(curId, curName, curTV, curAge, curSkill, FF, SF, {curFPid, curSPid}, curH);
+        PLAYER* curPlayer = new PLAYER(curId, curName, curTV, curAge, curSkill, FF, SF, positionsMap[{curFPid, curSPid}], curH);
+        curPlayer->setClub(curClub);
         playersList.push_back(curPlayer);
     }
     return playersList;

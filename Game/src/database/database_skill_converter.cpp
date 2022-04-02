@@ -32,22 +32,23 @@ void DATABASE_SKILL_CONVERTER::MakeBackup(const QString &backupDbPath)
                      "'Age_start_point'	INTEGER,"
                      "PRIMARY KEY('config' AUTOINCREMENT)"
                  ")");
+    DATABASE::PrintSqlExecInfoIfErr(backupQuery);
 
     backupDb.DeleteTableInfo("rules");
 
     QSqlQuery query(*db);
     query.exec("ATTACH DATABASE '" + backupDbPath + "' AS backup;");
+    DATABASE::PrintSqlExecInfoIfErr(query);
     query.exec("INSERT INTO backup.rules SELECT * FROM rules");
+    DATABASE::PrintSqlExecInfoIfErr(query);
 }
 
 void DATABASE_SKILL_CONVERTER::ReadVariables(int config){
     QSqlQuery query(*db);
-    //qDebug() << db->connectionName();
     query.exec("SELECT TW_conv, Age_coef_conv, Pos_coef_conv, Age_start_point FROM rules WHERE config = " + QString::number(config) + " LIMIT 1;");
+    DATABASE::PrintSqlExecInfoIfErr(query);
     query.next();
-    //qDebug() << "1: " << query.lastError().text();
     QString TWConvStr = query.value(0).toString();
-    //qDebug() << "2: " << query.lastError().text();
     QString AgeConvStr = query.value(1).toString();
     QString PosConvStr = query.value(2).toString();
     int AgeSP = query.value(3).toInt();
@@ -57,12 +58,6 @@ void DATABASE_SKILL_CONVERTER::ReadVariables(int config){
     AssignAgeConv(AgeParsed, AgeSP);
     QList<QString> PosParsed = ParseStringBy(PosConvStr, '\n');
     AssignPosConv(PosParsed);
-
-    /*
-    qDebug() << TWconv;
-    qDebug() << AgeCoefMap;
-    qDebug() << PosCoefMap;
-    */
 }
 
 void DATABASE_SKILL_CONVERTER::AssignTWConv(QList<QString> &list)

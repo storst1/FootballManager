@@ -9,6 +9,7 @@ QList<QPair<QString, int> > DATABASE_REAL_DATA::getAllLeagues()
 {
     QSqlQuery query(*db);
     query.exec("SELECT id, league_first, league_second, league_third FROM federations;");
+    DATABASE::PrintSqlExecInfoIfErr(query);
     QList<QPair<QString, int>> allLeagues;
     while(query.next()){
         int fed_id = query.value(0).toInt();
@@ -48,9 +49,8 @@ void DATABASE_REAL_DATA::SaveLeaguesInfo(QList<API_LEAGUE *> leaguesList)
     queryStatement.erase(std::prev(queryStatement.cend(), 2), queryStatement.cend());
     queryStatement += ";";
     qDebug() << queryStatement;
-    if(!query.exec(queryStatement)){
-        qDebug() << "Insert query error. Error: " + query.lastError().text();
-    }
+    query.exec(queryStatement);
+    DATABASE::PrintSqlExecInfoIfErr(query);
 }
 
 void DATABASE_REAL_DATA::OverwriteClubsInfo(QList<API_CLUB *> clubsList)
@@ -76,6 +76,7 @@ void DATABASE_REAL_DATA::OverwritePlayersSkill(QList<API_PLAYER *> playersList)
                 QString::number(p->getId());
         //qDebug() << queryStatement;
         query.exec(queryStatement);
+        DATABASE::PrintSqlExecInfoIfErr(query);
     }
 }
 
@@ -98,9 +99,8 @@ void DATABASE_REAL_DATA::SaveClubsInfo(QList<API_CLUB *> clubsList)
     queryStatement.erase(std::prev(queryStatement.cend(), 2), queryStatement.cend());
     queryStatement += ";";
     qDebug() << queryStatement;
-    if(!query.exec(queryStatement)){
-        qDebug() << "Insert query error. Error: " + query.lastError().text();
-    }
+    query.exec(queryStatement);
+    DATABASE::PrintSqlExecInfoIfErr(query);
 }
 
 QString DATABASE_REAL_DATA::SqlGetStringReady(QString str)
@@ -118,6 +118,7 @@ void DATABASE_REAL_DATA::SelectAllLeagues(QList<API_LEAGUE*>& leagues)
 {
     QSqlQuery query(*db);
     query.exec("SELECT id, name, federation FROM leagues;");
+    DATABASE::PrintSqlExecInfoIfErr(query);
     while(query.next()){
         QString cur_id = query.value(0).toString();
         QString cur_name = query.value(1).toString();
@@ -130,6 +131,7 @@ void DATABASE_REAL_DATA::SelectAllClubs(QList<API_CLUB *> &clubs)
 {
     QSqlQuery query(*db);
     query.exec("SELECT id, league, name, stadiumName, stadiumCapacity, playersTV FROM clubs;");
+    DATABASE::PrintSqlExecInfoIfErr(query);
     while(query.next()){
         int cur_id = query.value(0).toInt();
         QString cur_league = query.value(1).toString();
@@ -145,6 +147,7 @@ void DATABASE_REAL_DATA::SelectAllPlayers(QList<API_PLAYER *> &players)
 {
     QSqlQuery query(*db);
     query.exec("SELECT id, name, club, TW, FN, SN, age, height, FP, SP FROM players;");
+    DATABASE::PrintSqlExecInfoIfErr(query);
     while(query.next()){
         int id = query.value(0).toInt();
         QString name = query.value(1).toString();
@@ -175,6 +178,7 @@ void DATABASE_REAL_DATA::MakeBackup(const QString &backupDbPath)
                      "'budget' INTEGER, "
                      "'prestige' INTEGER"
                      ")");
+    DATABASE::PrintSqlExecInfoIfErr(backupQuery);
     backupQuery.exec("CREATE TABLE IF NOT EXISTS 'federations' ("
                      "'id'	INTEGER UNIQUE, "
                      "'country'	TEXT, "
@@ -182,10 +186,12 @@ void DATABASE_REAL_DATA::MakeBackup(const QString &backupDbPath)
                      "'league_second'	TEXT,"
                      "'league_third'	TEXT"
                     ")");
+    DATABASE::PrintSqlExecInfoIfErr(backupQuery);
     backupQuery.exec("CREATE TABLE 'leagues' ("
                   "'id'	TEXT UNIQUE,"
                   "'name'	TEXT, "
                   "'federation'	INTEGER)");
+    DATABASE::PrintSqlExecInfoIfErr(backupQuery);
     backupQuery.exec("CREATE TABLE 'players' ("
                      "'id'	INTEGER,"
                      "'name'	TEXT,"
@@ -198,7 +204,7 @@ void DATABASE_REAL_DATA::MakeBackup(const QString &backupDbPath)
                      "'FP'	INTEGER,"
                      "'SP'	INTEGER,"
                      "'skill'	REAL)");
-
+    DATABASE::PrintSqlExecInfoIfErr(backupQuery);
     backupDb.DeleteTableInfo("federations");
     backupDb.DeleteTableInfo("clubs");
     backupDb.DeleteTableInfo("leagues");
@@ -206,16 +212,22 @@ void DATABASE_REAL_DATA::MakeBackup(const QString &backupDbPath)
 
     QSqlQuery query(*db);
     query.exec("ATTACH DATABASE '" + backupDbPath + "' AS backup;");
+    DATABASE::PrintSqlExecInfoIfErr(query);
     query.exec("INSERT INTO backup.federations SELECT * FROM federations");
+    DATABASE::PrintSqlExecInfoIfErr(query);
     query.exec("INSERT INTO backup.clubs SELECT * FROM clubs");
+    DATABASE::PrintSqlExecInfoIfErr(query);
     query.exec("INSERT INTO backup.leagues SELECT * FROM leagues");
+    DATABASE::PrintSqlExecInfoIfErr(query);
     query.exec("INSERT INTO backup.players SELECT * FROM players");
+    DATABASE::PrintSqlExecInfoIfErr(query);
 }
 
 QList<QPair<int, QString> > DATABASE_REAL_DATA::GetAllCountries()
 {
     QSqlQuery query(*db);
     query.exec("SELECT id, name FROM countries");
+    DATABASE::PrintSqlExecInfoIfErr(query);
     QList<QPair<int, QString>> list;
     while(query.next()){
         int curId = query.value(0).toInt();
@@ -246,7 +258,6 @@ void DATABASE_REAL_DATA::SavePlayersInfo(QList<API_PLAYER *> playersList)
     queryStatement.erase(std::prev(queryStatement.cend(), 2), queryStatement.cend());
     queryStatement += ";";
     //qDebug() << queryStatement;
-    if(!query.exec(queryStatement)){
-        qDebug() << "Insert query error. Error: " + query.lastError().text();
-    }
+    query.exec(queryStatement);
+    DATABASE::PrintSqlExecInfoIfErr(query);
 }

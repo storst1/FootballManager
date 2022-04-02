@@ -27,7 +27,7 @@ MainWindow::~MainWindow()
     qDeleteAll(allLeagues);
     qDeleteAll(allClubs);
     qDeleteAll(allPlayers);
-    delete gameData;
+    //delete gameData;
     delete ui;
 }
 
@@ -144,9 +144,9 @@ void MainWindow::SaveAllData(QList<API_LEAGUE *> leagues, QList<API_CLUB *> club
     realDataDb->OverwriteLeaguesInfo(leagues);
     realDataDb->OverwriteClubsInfo(clubs);
     realDataDb->OverwritePlayersInfo(players);
-    QString dbFolPath = getDbFolderPath();
-    realDataDb->MakeBackup(dbFolPath + "backups/realdata.db");
-    skillConvDb->MakeBackup(dbFolPath + "backups/skill_convertation_rules.db");
+    //QString dbFolPath = getDbFolderPath();
+    //realDataDb->MakeBackup(dbFolPath + "backups/realdata.db");
+    //skillConvDb->MakeBackup(dbFolPath + "backups/skill_convertation_rules.db");
 }
 
 void MainWindow::SaveAllDataDefault()

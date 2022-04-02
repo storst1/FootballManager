@@ -70,11 +70,11 @@ void DATABASE_REAL_DATA::OverwritePlayersSkill(QList<API_PLAYER *> playersList)
     QSqlQuery query(*db);
     for(auto p : playersList){
         QString queryStatement =
-                "UPDATE players SET skill = " +
+                "UPDATE players SET skill = '" +
                 p->getStrSkill() +
-                " WHERE id = " +
-                QString::number(p->getId());
-        //qDebug() << queryStatement;
+                "' WHERE id = '" +
+                QString::number(p->getId()) + "';";
+        qDebug() << queryStatement;
         query.exec(queryStatement);
         DATABASE::PrintSqlExecInfoIfErr(query);
     }
@@ -187,12 +187,12 @@ void DATABASE_REAL_DATA::MakeBackup(const QString &backupDbPath)
                      "'league_third'	TEXT"
                     ")");
     DATABASE::PrintSqlExecInfoIfErr(backupQuery);
-    backupQuery.exec("CREATE TABLE 'leagues' ("
+    backupQuery.exec("CREATE TABLE IF NOT EXISTS 'leagues' ("
                   "'id'	TEXT UNIQUE,"
                   "'name'	TEXT, "
                   "'federation'	INTEGER)");
     DATABASE::PrintSqlExecInfoIfErr(backupQuery);
-    backupQuery.exec("CREATE TABLE 'players' ("
+    backupQuery.exec("CREATE TABLE IF NOT EXISTS 'players' ("
                      "'id'	INTEGER,"
                      "'name'	TEXT,"
                      "'club'	INTEGER,"

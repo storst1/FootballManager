@@ -24,7 +24,7 @@ void DATABASE_SKILL_CONVERTER::MakeBackup(const QString &backupDbPath)
     DATABASE_SKILL_CONVERTER backupDb(backupDbPath, "DB_SKILL_BACKUP", -1);
     //backupDb.db->setDatabaseName("");
     QSqlQuery   backupQuery(*backupDb.db);
-    backupQuery.exec("CREATE TABLE 'rules' ("
+    backupQuery.exec("CREATE TABLE IF NOT EXISTS 'rules' ("
                      "'config'	INTEGER UNIQUE,"
                      "'TW_conv'	TEXT,"
                      "'Age_coef_conv'	TEXT,"
@@ -102,7 +102,7 @@ void DATABASE_SKILL_CONVERTER::AssignPosConv(QList<QString> &list)
 float DATABASE_SKILL_CONVERTER::GetBaseByTW(int TW)
 {
     int i = lastZeroInTWconv;
-    while(TWconv[i] < TW && i < 100) ++i;
+    while(i < 100 && TWconv.at(i) < TW) ++i;
     return (float)i;
 }
 

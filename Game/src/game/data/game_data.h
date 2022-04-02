@@ -14,6 +14,7 @@ public:
 
     QMap<int, FEDERATION*> getFederations() const;
     QMap<QString, LEAGUE*> getLeagues() const;
+    QList<LEAGUE*> getLeaguesList() const;
     QMap<int, CLUB*> getClubs() const;
     QMap<int, PLAYER*> getPlayers() const;
     COUNTRY_MAP* getCountryMap() const;

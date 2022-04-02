@@ -222,29 +222,3 @@ void MainWindow::LoadGameData()
 {
     gameData = new GAME_DATA(countryMap);
 }
-
-/*
-void MainWindow::on_pushButton_clicked()
-{
-    LoadAllDataFromAPI();
-}
-
-void MainWindow::on_pushButton_2_clicked()
-{
-    SaveAllData(allLeagues, allClubs, allPlayers);
-}
-
-void MainWindow::on_pushButton_3_clicked()
-{
-    LoadAllDataFromDB();
-}
-
-
-void MainWindow::on_pushButton_4_clicked()
-{
-    for(int i = 0; i < allPlayers.size(); ++i){
-        allPlayers[i]->setSkill(skillConvDb->CountPlayerSkill(allPlayers[i]));
-    }
-    realDataDb->OverwritePlayersSkill(allPlayers);
-}
-*/

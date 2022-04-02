@@ -1,8 +1,11 @@
 #include "main/mainwindow.h"
+#include "game/data/league.h"
 
 void MainWindow::SetupNewGameScene()
 {
     ClearLay();
+
+    dynDataDb->FillGameData(gameData);
 
     TakeSpaceInLay(105, 0, 3);
     QString leagueLabelStyle =
@@ -35,6 +38,12 @@ void MainWindow::SetupNewGameScene()
                 "background-image:url(:/rightArrow120x120.png);"
             "}";
 
+
+
+    QList<LEAGUE*> allLeaguesList = gameData->getLeaguesList();
+    int curClubIdx = 0;
+    int curLeagueIdx = 0;
+
     QPushButton* leagueLeftButton = new QPushButton();
     leagueLeftButton->setFixedWidth(120);
     leagueLeftButton->setFixedHeight(120);
@@ -42,12 +51,12 @@ void MainWindow::SetupNewGameScene()
     mainLay->addWidget(leagueLeftButton, 1, 0);
     mainLay->setAlignment(leagueLeftButton, Qt::AlignRight);
 
-    QLabel *startButton = new QLabel("League Name");
-    startButton->setAlignment(Qt::AlignCenter);
-    startButton->setFixedWidth(1000);
-    startButton->setFixedHeight(120);
-    startButton->setStyleSheet(leagueLabelStyle);
-    mainLay->addWidget(startButton, 1, 1);
+    QLabel *leagueLabel = new QLabel(allLeaguesList[curLeagueIdx]->getName());
+    leagueLabel->setAlignment(Qt::AlignCenter);
+    leagueLabel->setFixedWidth(1000);
+    leagueLabel->setFixedHeight(120);
+    leagueLabel->setStyleSheet(leagueLabelStyle);
+    mainLay->addWidget(leagueLabel, 1, 1);
 
     QPushButton* leagueRightButton = new QPushButton();
     leagueRightButton->setFixedWidth(120);
@@ -57,4 +66,16 @@ void MainWindow::SetupNewGameScene()
     mainLay->setAlignment(leagueRightButton, Qt::AlignLeft);
 
     PushBackEmptyToLay(4);
+}
+
+QMap<QString, LEAGUE*>::iterator MainWindow::GetNextLeagueIter(const QMap<QString, LEAGUE*>::iterator curIter,
+                                                               const QMap<QString, LEAGUE*>::iterator beginIter,
+                                                               const QMap<QString, LEAGUE*>::iterator endIter)
+{
+    auto newIter = curIter;
+    newIter++;
+    if(newIter == endIter){
+        newIter = beginIter;
+    }
+    return newIter;
 }

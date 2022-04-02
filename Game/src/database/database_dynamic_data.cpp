@@ -103,6 +103,7 @@ void DATABASE_DYNAMIC_DATA::FillFederationsGameData(GAME_DATA *gameData)
         gameData->addFederation(curFed);
         QList<LEAGUE*> leaguesList = InitLeagueList(leagueIdsList, gameData);
         curFed->setLeagues(leaguesList);
+        gameData->addLeagues(leaguesList);
     }
 }
 
@@ -112,8 +113,9 @@ QList<LEAGUE *> DATABASE_DYNAMIC_DATA::InitLeagueList(const QList<QString> &leag
     QSqlQuery query(*db);
     for(int i = 0; i < leagueIdsList.size(); ++i){
         LEAGUE* curLeague = new LEAGUE();
-        query.exec("SELECT name FROM leagues WHERE id = " + leagueIdsList[i] + ";");
+        query.exec("SELECT name FROM leagues WHERE id = '" + leagueIdsList[i] + "';");
         DATABASE::PrintSqlExecInfoIfErr(query);
+        query.next();
         QString curName = query.value(0).toString();
         int curTier = i + 1;
         curLeague->setName(curName);
@@ -121,7 +123,9 @@ QList<LEAGUE *> DATABASE_DYNAMIC_DATA::InitLeagueList(const QList<QString> &leag
         leagueList.push_back(curLeague);
     }
     for(const auto &l : leagueList){
-        l->setClubList(InitClubsByLeague(l->getId(), gameData));
+        QList<CLUB*> clubsList = InitClubsByLeague(l->getId(), gameData);
+        l->setClubList(clubsList);
+        gameData->addClubs(clubsList);
     }
     return leagueList;
 }
@@ -144,7 +148,9 @@ QList<CLUB *> DATABASE_DYNAMIC_DATA::InitClubsByLeague(const QString &leagueId, 
         int curTB = query.value(5).toInt();
         int curPrestige = query.value(6).toInt();
         CLUB* curClub = new CLUB(curId, curName, curTV, curTB, curSN, curSC, curPrestige);
-        curClub->setPlayerList(InitPlayersByClub(curClub, gameData));
+        QList<PLAYER*> playersList = InitPlayersByClub(curClub, gameData);
+        curClub->setPlayerList(playersList);
+        gameData->addPlayers(playersList);
         clubList.push_back(curClub);
     }
     return clubList;

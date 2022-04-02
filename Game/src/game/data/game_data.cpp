@@ -30,6 +30,16 @@ QMap<QString, LEAGUE *> GAME_DATA::getLeagues() const
     return leagues;
 }
 
+QList<LEAGUE *> GAME_DATA::getLeaguesList() const
+{
+    //Iterates through the map and returns all the existing pointers to LEAGUE
+    QList<LEAGUE*> list;
+    for(const auto& l : leagues){
+        list.push_back(l);
+    }
+    return list;
+}
+
 QMap<int, CLUB *> GAME_DATA::getClubs() const
 {
     return clubs;

@@ -70,6 +70,9 @@ public:
 
     //New game scene
     void SetupNewGameScene();
+    QMap<QString, LEAGUE*>::iterator GetNextLeagueIter(const QMap<QString, LEAGUE*>::iterator curIter,
+                                                       const QMap<QString, LEAGUE*>::iterator beginIter,
+                                                       const QMap<QString, LEAGUE*>::iterator endIter);
 
     //Settings scene
     void SetupSettingsScene();

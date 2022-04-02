@@ -14,6 +14,8 @@ public:
     void OverwriteClubsInfo(QList<API_CLUB*> clubsList);
     void OverwritePlayersInfo(QList<API_PLAYER*> playersList); //does not include skill column
     void OverwritePlayersSkill(QList<API_PLAYER*> playersList);
+    void OverwriteClubsBudget(QList<API_CLUB*> clubsList);
+    void OverwriteClubsPrestige(QList<API_CLUB*> clubsList);
     static QString SqlGetStringReady(QString str);
     void SelectAllLeagues(QList<API_LEAGUE *> &leagues);
     void SelectAllClubs(QList<API_CLUB*> &clubs);

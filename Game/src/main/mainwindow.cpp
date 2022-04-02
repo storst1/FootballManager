@@ -188,12 +188,22 @@ void MainWindow::RecountClubsBudgets()
     for(const auto &c : allClubs){
         c->countBudget();
     }
+    realDataDb->OverwriteClubsBudget(allClubs);
+}
+
+void MainWindow::RecountClubsPrestige()
+{
+    for(const auto &c : allClubs){
+        c->countPrestige();
+    }
+    realDataDb->OverwriteClubsPrestige(allClubs);
 }
 
 void MainWindow::RecountEverything()
 {
     RecountAllSkills();
     RecountClubsBudgets();
+    RecountClubsPrestige();
 }
 
 void MainWindow::SetupCountryMap()

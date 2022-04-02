@@ -81,6 +81,11 @@ int API_CLUB::getBudget() const
     return budget;
 }
 
+int API_CLUB::getPrestige() const
+{
+    return prestige;
+}
+
 void API_CLUB::insertAdditionalInfoFromJson(JSON_PARSER_CLUB clubAddInfo)
 {
     stadName = clubAddInfo.getStadName();
@@ -105,4 +110,24 @@ void API_CLUB::setStadCap(int cap)
 void API_CLUB::countBudget()
 {
     budget = totalTV / 4;
+}
+
+void API_CLUB::countPrestige()
+{
+    prestige = API_CLUB::switchTVtoPrestige(totalTV);
+}
+
+int API_CLUB::switchTVtoPrestige(const int TV)
+{
+    float fTV = float(TV);
+    if(fTV >= 7 * 1e8f) return 10;
+    else if(fTV >= 5 * 1e8f) return 9;
+    else if(fTV >= 3.2 * 1e8f) return 8;
+    else if(fTV >= 2.5 * 1e8f) return 7;
+    else if(fTV >= 1.9 * 1e8f) return 6;
+    else if(fTV >= 1.2 * 1e8f) return 5;
+    else if(fTV >= 0.65 * 1e8f) return 4;
+    else if(fTV >= 0.4 * 1e8f) return 3;
+    else if(fTV >= 0.2 * 1e8f) return 2;
+    return 1;
 }

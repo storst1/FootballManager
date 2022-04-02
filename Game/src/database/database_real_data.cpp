@@ -74,7 +74,37 @@ void DATABASE_REAL_DATA::OverwritePlayersSkill(QList<API_PLAYER *> playersList)
                 p->getStrSkill() +
                 "' WHERE id = '" +
                 QString::number(p->getId()) + "';";
-        qDebug() << queryStatement;
+        //qDebug() << queryStatement;
+        query.exec(queryStatement);
+        DATABASE::PrintSqlExecInfoIfErr(query);
+    }
+}
+
+void DATABASE_REAL_DATA::OverwriteClubsBudget(QList<API_CLUB *> clubsList)
+{
+    QSqlQuery query(*db);
+    for(auto c : clubsList){
+        QString queryStatement =
+                "UPDATE clubs SET budget = '" +
+                QString::number(c->getBudget()) +
+                "' WHERE id = '" +
+                QString::number(c->getId()) + "';";
+        //qDebug() << queryStatement;
+        query.exec(queryStatement);
+        DATABASE::PrintSqlExecInfoIfErr(query);
+    }
+}
+
+void DATABASE_REAL_DATA::OverwriteClubsPrestige(QList<API_CLUB *> clubsList)
+{
+    QSqlQuery query(*db);
+    for(auto c : clubsList){
+        QString queryStatement =
+                "UPDATE clubs SET prestige = '" +
+                QString::number(c->getPrestige()) +
+                "' WHERE id = '" +
+                QString::number(c->getId()) + "';";
+        //qDebug() << queryStatement;
         query.exec(queryStatement);
         DATABASE::PrintSqlExecInfoIfErr(query);
     }

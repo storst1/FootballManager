@@ -49,6 +49,7 @@ public:
     void LoadAllDataFromDB();
     void RecountAllSkills();
     void RecountClubsBudgets();
+    void RecountClubsPrestige();
     void RecountEverything();
     void SetupCountryMap();
     void FillCountryMap();

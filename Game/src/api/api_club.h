@@ -24,6 +24,9 @@ public:
     void setStadCap(int cap);
 
     void countBudget();
+    void countPrestige();
+
+    static int switchTVtoPrestige(const int TV);
 
     int getId() const;
     QString getStrId() const;
@@ -33,6 +36,7 @@ public:
     int getStadCapacity() const;
     int getTV() const;
     int getBudget() const;
+    int getPrestige() const;
 private:
     int id;
     QString name;

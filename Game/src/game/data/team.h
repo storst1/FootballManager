@@ -42,6 +42,11 @@ public:
     CLUB(int id, QString name, int TV, int budget, QString stadName, int stadCap, int prestige);
     ~CLUB() = default;
 
+    int getTV() const;
+    int getBudget() const;
+    STADIUM *getStadium() const;
+    int getPrestige() const;
+
 private:
     int TV;
     int budget;

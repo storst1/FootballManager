@@ -1,6 +1,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#define EURO "€"
+
 #include "database/database_real_data.h"
 #include "database/database_skill_converter.h"
 #include "database/database_dynamic_data.h"
@@ -55,6 +57,13 @@ public:
     void FillCountryMap();
     void LoadGameData();
 
+    //Other
+    QString EuroSym() const;
+    QString NaturalizeNum(int num);
+
+    //Resources methods
+    QString GetClubLogoPath(int clubId);
+
     //General layout methods
     void SetupMainLay();
     void PushBackEmptyToLay(int amount = 1);
@@ -65,27 +74,41 @@ public:
 
     //Scene-dependent methods
 
-    //Starting scene
+    //STARTING SCENE
     QPushButton* loadButton;
     QPushButton *startButton;
     QPushButton *settingsButton;
     void SetupStartingScene();
 
-    //New game scene
+    //NEW GAME SCENE
+    int NewGameCurClubIdx = 0;
+    int NewGameCurLeagueIdx = 0;
+
     QPushButton* leagueLeftButton;
     QPushButton* leagueRightButton;
     QLabel* leagueLabel;
-    int NewGameCurClubIdx = 0;
-    int NewGameCurLeagueIdx = 0;
+
+    QGridLayout* clubLay;
+    QPushButton* clubLeftButton;
+    QPushButton* clubRightButton;
+    QLabel* clubName;
+    QLabel* clubLogo;
+    QLabel* clubTV;
+    QLabel* clubBudget;
+    QLabel* clubPrestige;
+
     QList<LEAGUE*> allLeaguesList;
+
     void SetupNewGameScene();
     void NewGameNextLeague();
     void NewGamePrevLeague();
     void ChangeLeagueLabel(LEAGUE* _league);
-    void ChangeClubLay();
+    void ChangeClubLay(CLUB* curClub);
     QMap<QString, LEAGUE*>::iterator GetNextLeagueIter(const QMap<QString, LEAGUE*>::iterator curIter,
                                                        const QMap<QString, LEAGUE*>::iterator beginIter,
                                                        const QMap<QString, LEAGUE*>::iterator endIter);
+    void NewGameNextClub();
+    void NewGamePrevClub();
 
     //Settings scene
     void SetupSettingsScene();

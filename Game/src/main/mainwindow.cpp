@@ -222,3 +222,29 @@ void MainWindow::LoadGameData()
 {
     gameData = new GAME_DATA(countryMap);
 }
+
+QString MainWindow::EuroSym() const
+{
+    return "€";
+}
+
+QString MainWindow::NaturalizeNum(int num)
+{
+    QString numStr = QString::number(num);
+    int i = numStr.length() - 1;
+    while(true){
+        int j = i - 3;
+        if(j >= 0){
+            numStr.insert(j + 1, ' ');
+        }
+        else break;
+        i = j;
+    }
+    //qDebug() << numStr;
+    return numStr;
+}
+
+QString MainWindow::GetClubLogoPath(int clubId)
+{
+    return ":/logos/200x200/" + QString::number(clubId) + ".png";
+}

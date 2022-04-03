@@ -12,5 +12,7 @@
         <file>leftArrow120x120.png</file>
         <file>rightArrow120x120.png</file>
         <file>IconActualPng.png</file>
+        <file>leftArrowHighlighted120x120.png</file>
+        <file>rightArrowHighlighted120x120.png</file>
     </qresource>
 </RCC>

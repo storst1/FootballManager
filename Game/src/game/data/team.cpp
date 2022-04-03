@@ -42,3 +42,23 @@ CLUB::CLUB(int id, QString name, int TV, int budget, QString stadName, int stadC
 {
     stadium = new STADIUM(stadName, stadCap);
 }
+
+int CLUB::getTV() const
+{
+    return TV;
+}
+
+int CLUB::getBudget() const
+{
+    return budget;
+}
+
+STADIUM *CLUB::getStadium() const
+{
+    return stadium;
+}
+
+int CLUB::getPrestige() const
+{
+    return prestige;
+}

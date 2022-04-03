@@ -81,4 +81,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
-    ../../Resources/backgrounds.qrc
+    ../../Resources/backgrounds.qrc \
+    ../../Resources/logos.qrc

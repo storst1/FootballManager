@@ -19,20 +19,20 @@ void MainWindow::SetupStartingScene(){
                 "background-image:url(:/greenLay280x100Highlighted.png);"
             "}";
 
-    QPushButton *startButton = new QPushButton("New Game");
+    startButton = new QPushButton("New Game");
     startButton->setFixedWidth(280);
     startButton->setFixedHeight(100);
     startButton->setStyleSheet(style);
     connect(startButton, &QPushButton::clicked, this, &MainWindow::SetupNewGameScene);
     mainLay->addWidget(startButton);
 
-    QPushButton* loadButton = new QPushButton("Load Game");
+    loadButton = new QPushButton("Load Game");
     loadButton->setFixedWidth(280);
     loadButton->setFixedHeight(100);
     loadButton->setStyleSheet(style);
     mainLay->addWidget(loadButton);
 
-    QPushButton* settingsButton = new QPushButton("Settings");
+    settingsButton = new QPushButton("Settings");
     settingsButton->setFixedWidth(280);
     settingsButton->setFixedHeight(100);
     settingsButton->setStyleSheet(style);

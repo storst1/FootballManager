@@ -66,10 +66,23 @@ public:
     //Scene-dependent methods
 
     //Starting scene
+    QPushButton* loadButton;
+    QPushButton *startButton;
+    QPushButton *settingsButton;
     void SetupStartingScene();
 
     //New game scene
+    QPushButton* leagueLeftButton;
+    QPushButton* leagueRightButton;
+    QLabel* leagueLabel;
+    int NewGameCurClubIdx = 0;
+    int NewGameCurLeagueIdx = 0;
+    QList<LEAGUE*> allLeaguesList;
     void SetupNewGameScene();
+    void NewGameNextLeague();
+    void NewGamePrevLeague();
+    void ChangeLeagueLabel(LEAGUE* _league);
+    void ChangeClubLay();
     QMap<QString, LEAGUE*>::iterator GetNextLeagueIter(const QMap<QString, LEAGUE*>::iterator curIter,
                                                        const QMap<QString, LEAGUE*>::iterator beginIter,
                                                        const QMap<QString, LEAGUE*>::iterator endIter);

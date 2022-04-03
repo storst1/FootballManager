@@ -45,6 +45,11 @@ void LEAGUE::setTier(int t)
     tier = t;
 }
 
+void LEAGUE::setId(QString &_id)
+{
+    id = _id;
+}
+
 void LEAGUE::setClubList(QList<CLUB *> clubList)
 {
     clubs = clubList;

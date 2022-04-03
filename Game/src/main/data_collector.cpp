@@ -18,7 +18,6 @@ void MainWindow::FillAllLeagues()
         for(auto cl : curCompClubsList){
             cl->setLeagueId(allLeagues[i]->getId());
         }
-        //Do smth to complete club info
         allClubs.append(curCompClubsList);
     }
 }

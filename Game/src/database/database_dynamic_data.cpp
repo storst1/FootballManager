@@ -32,17 +32,17 @@ void DATABASE_DYNAMIC_DATA::CopyFederationsTable(QSqlQuery& query, COUNTRY_MAP* 
 
     qDebug() << "Copying federations data into dynamic database finished. Last error: " + query.lastError().text();
 
-    query.exec("SELECT id, country FROM real.federations");
-    QMap<int, int> countryIdByFedId;
+    query.exec("SELECT id, name FROM federations");
+    DATABASE::PrintSqlExecInfoIfErr(query);
+    QSqlQuery updQuery(*db);
     while(query.next()){
         int curFedId = query.value(0).toInt();
         QString curCountryName = query.value(1).toString();
         int curCountryId = countryMap->getByName(curCountryName);
-        countryIdByFedId.insert(curFedId, curCountryId);
-        query.exec("UPDATE federations SET countryId = " +
+        updQuery.exec("UPDATE federations SET countryId = " +
                    QString::number(curCountryId) +
-                   " WHERE name = '" + curCountryName + "';");
-        DATABASE::PrintSqlExecInfoIfErr(query);
+                   " WHERE id = '" + QString::number(curFedId) + "';");
+        DATABASE::PrintSqlExecInfoIfErr(updQuery);
     }
 
     qDebug() << "Updating federations data into dynamic database finished. Last error: " + query.lastError().text();
@@ -89,7 +89,7 @@ void DATABASE_DYNAMIC_DATA::FillFederationsGameData(GAME_DATA *gameData)
     query.exec("SELECT * from federations");
     DATABASE::PrintSqlExecInfoIfErr(query);
     while(query.next()){
-        int fedId = query.value(0).toInt();
+        //int fedId = query.value(0).toInt();
         QString name = query.value(1).toString();
         int countryId = query.value(2).toInt();
         QList<QString> leagueIdsList;
@@ -99,7 +99,7 @@ void DATABASE_DYNAMIC_DATA::FillFederationsGameData(GAME_DATA *gameData)
                 leagueIdsList.push_back(curLeague);
             }
         }
-        FEDERATION* curFed = new FEDERATION(fedId, name, countryId);
+        FEDERATION* curFed = new FEDERATION(countryId, name, countryId); //countryId used twise on purpose
         gameData->addFederation(curFed);
         QList<LEAGUE*> leaguesList = InitLeagueList(leagueIdsList, gameData);
         curFed->setLeagues(leaguesList);

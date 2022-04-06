@@ -27,6 +27,7 @@ SOURCES += \
     game/data/stadium.cpp \
     game/data/table.cpp \
     game/data/team.cpp \
+    game/time/date.cpp \
     json/json_parser.cpp \
     json/json_parser_club.cpp \
     json/json_parser_player.cpp \
@@ -64,6 +65,7 @@ HEADERS += \
     game/data/stadium.h \
     game/data/table.h \
     game/data/team.h \
+    game/time/date.h \
     json/json_parser.h \
     json/json_parser_club.h \
     json/json_parser_player.h \

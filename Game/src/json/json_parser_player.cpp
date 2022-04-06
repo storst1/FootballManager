@@ -62,6 +62,16 @@ int JSON_PARSER_PLAYER::getTW() const
     return TW.toInt();
 }
 
+int JSON_PARSER_PLAYER::getTBirthday_TmType() const
+{
+    return birthday.toInt();
+}
+
+int JSON_PARSER_PLAYER::getContractExp_TmType() const
+{
+    return contractExpDate.toInt();
+}
+
 void JSON_PARSER_PLAYER::BindJsonValues(QJsonObject playerObj)
 {
     height = playerObj.value("height");
@@ -81,4 +91,7 @@ void JSON_PARSER_PLAYER::BindJsonValues(QJsonObject playerObj)
 
     TWobj = playerObj.value("marketValue").toObject();
     TW = TWobj.value("value");
+
+    birthday = playerObj.value("dateOfBirth");
+    contractExpDate = playerObj.value("contractUntil");
 }

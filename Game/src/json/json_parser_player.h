@@ -20,6 +20,8 @@ public:
     int getFP() const;
     int getSP() const;
     int getTW() const;
+    int getTBirthday_TmType() const;
+    int getContractExp_TmType() const;
 private:
     void BindJsonValues(QJsonObject playerObj);
 private:
@@ -40,6 +42,9 @@ private:
 
     QJsonObject TWobj;
     QJsonValue TW;
+
+    QJsonValue birthday;
+    QJsonValue contractExpDate;
 };
 
 #endif // JSON_PARSER_PLAYER_H

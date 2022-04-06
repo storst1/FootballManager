@@ -26,7 +26,6 @@ public:
     int getSP() const;
     int getTW() const;
     int getClubId() const;
-
     float getSkill() const;
     QString getStrSkill() const;
 

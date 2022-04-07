@@ -9,7 +9,7 @@ void MainWindow::SetupNewGameScene()
     dynDataDb->FillGameData(gameData);
     allLeaguesList = gameData->getLeaguesList();
 
-    TakeSpaceInLay(105, 0, 3);
+    TakeSpaceInLay(100, 0, 3);
     QString leagueLabelStyle =
             "QLabel{ "
                 "background-color: transparent;"
@@ -67,6 +67,21 @@ void MainWindow::SetupNewGameScene()
                 "font-size: 25px;"
                 "font-family: Comic Sans MS;"
                 "color: white;"
+            "}";
+
+    QString startButtonStyle =
+            "QPushButton{ "
+                "background-color: transparent;"
+                "border: none;"
+                "background-repeat: none;"
+                "background: none;"
+                "background-image:url(:/greenLay400x120.png);"
+                "font-size: 40px;"
+                "font-family: Comic Sans MS;"
+                "color: white;"
+            "}"
+            ":hover{"
+                "background-image:url(:/greenLay400x120Highlighted.png);"
             "}";
 
     leagueLeftButton = new QPushButton();
@@ -145,11 +160,23 @@ void MainWindow::SetupNewGameScene()
     mainLay->setAlignment(clubRightButton, Qt::AlignLeft);
     connect(clubRightButton, &QPushButton::clicked, this, [this]{NewGameNextClub();});
 
-    PushBackEmptyToLay(1);
+    startNewGameButton = new QPushButton("Start game!");
+    startNewGameButton->setFixedSize(400, 120);
+    startNewGameButton->setStyleSheet(startButtonStyle);
+    mainLay->addWidget(startNewGameButton, 3, 1, Qt::AlignCenter);
+    connect(startNewGameButton, &QPushButton::clicked, this, [this]{
+        user->setClub((allLeaguesList[NewGameCurLeagueIdx]->getClubs())[NewGameCurClubIdx]);
+        qDebug() << "User chose club: " << user->getClub()->getName();
+    });
+
+    TakeSpaceInLay(100, 4, 3);
 }
 
 void MainWindow::NewGameNextLeague()
 {
+    if(allLeaguesList.size() == 1){
+        return;
+    }
     NewGameCurLeagueIdx++;
     if(NewGameCurLeagueIdx >= allLeaguesList.size()){
         NewGameCurLeagueIdx = 0;
@@ -160,6 +187,9 @@ void MainWindow::NewGameNextLeague()
 
 void MainWindow::NewGamePrevLeague()
 {
+    if(allLeaguesList.size() == 1){
+        return;
+    }
     NewGameCurLeagueIdx--;
     if(NewGameCurLeagueIdx < 0){
         NewGameCurLeagueIdx = allLeaguesList.size() - 1;

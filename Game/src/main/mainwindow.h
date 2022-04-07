@@ -9,6 +9,7 @@
 #include "network/network_manager.h"
 #include "game/data/country_map.h"
 #include "game/data/game_data.h"
+#include "game/user/user.h"
 
 #include <QMainWindow>
 #include <QGridLayout>
@@ -56,6 +57,8 @@ public:
     void SetupCountryMap();
     void FillCountryMap();
     void LoadGameData();
+    void SetupUser();
+    void ChangeUserClub(CLUB* club);
 
     //Other
     QString EuroSym() const;
@@ -96,6 +99,7 @@ public:
     QLabel* clubTV;
     QLabel* clubBudget;
     QLabel* clubPrestige;
+    QPushButton* startNewGameButton;
 
     QList<LEAGUE*> allLeaguesList;
 
@@ -130,6 +134,10 @@ private:
     int height;
     QGridLayout* mainLay;
 
+    //GAME INFO
+    GAME_DATA* gameData;
+    USER* user;
+
     //Real data
     DATABASE_REAL_DATA* realDataDb;
     DATABASE_SKILL_CONVERTER* skillConvDb;
@@ -146,6 +154,5 @@ private:
     std::map<int, QString> CountryIdToName;
     std::map<QString, int> CountryNameToId;
 
-    GAME_DATA* gameData;
 };
 #endif // MAINWINDOW_H

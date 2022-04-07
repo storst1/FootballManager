@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
     SetupDb();
     SetupNetworkManager();
     LoadGameData();
+    SetupUser();
     SetupStartingScene();
 }
 
@@ -221,6 +222,16 @@ void MainWindow::FillCountryMap()
 void MainWindow::LoadGameData()
 {
     gameData = new GAME_DATA(countryMap);
+}
+
+void MainWindow::SetupUser()
+{
+    user = new USER();
+}
+
+void MainWindow::ChangeUserClub(CLUB *club)
+{
+    user->setClub(club);
 }
 
 QString MainWindow::EuroSym() const

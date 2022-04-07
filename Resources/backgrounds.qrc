@@ -14,5 +14,7 @@
         <file>IconActualPng.png</file>
         <file>leftArrowHighlighted120x120.png</file>
         <file>rightArrowHighlighted120x120.png</file>
+        <file>greenLay400x120.png</file>
+        <file>greenLay400x120Highlighted.png</file>
     </qresource>
 </RCC>

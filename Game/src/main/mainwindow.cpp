@@ -71,21 +71,24 @@ void MainWindow::TakeSpaceInLay(int h, int row, int col_amount)
 
 void MainWindow::ClearLay()
 {
-    while(mainLay->count()){
-        QLayoutItem* curItem = mainLay->takeAt(0);
+    /*
+    QLayoutItem* curItem;
+    while((curItem = mainLay->takeAt(0))){
         if(curItem->layout()){
             ClearLay(curItem->layout());
             delete curItem->layout();
         }
-        if(curItem->widget()){
+        else if(curItem->widget()){
             delete curItem->widget();
         }
         delete curItem;
     }
+    */
 }
 
 void MainWindow::ClearLay(QLayout *lay)
 {
+    /*
     while(lay->count()){
         QLayoutItem* curItem = lay->takeAt(0);
         if(curItem->layout()){
@@ -97,6 +100,7 @@ void MainWindow::ClearLay(QLayout *lay)
         }
         delete curItem;
     }
+    */
 }
 
 QString MainWindow::getRealDataDbPath()

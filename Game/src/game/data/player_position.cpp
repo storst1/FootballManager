@@ -1,4 +1,5 @@
 #include "player_position.h"
+#include <QDebug>
 
 PLAYER_POSITION::PLAYER_POSITION()
 {
@@ -61,4 +62,5 @@ void PLAYER_POSITION::setStrNameToAuto()
     if(SP != 0){
         strName += "/" + posIdToStr(SP);
     }
+    qDebug() << strName;
 }

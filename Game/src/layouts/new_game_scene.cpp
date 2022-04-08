@@ -167,6 +167,7 @@ void MainWindow::SetupNewGameScene()
     connect(startNewGameButton, &QPushButton::clicked, this, [this]{
         user->setClub((allLeaguesList[NewGameCurLeagueIdx]->getClubs())[NewGameCurClubIdx]);
         qDebug() << "User chose club: " << user->getClub()->getName();
+        SetupHomeScene();
     });
 
     TakeSpaceInLay(100, 4, 3);

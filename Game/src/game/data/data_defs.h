@@ -3,6 +3,9 @@
 
 #include <QString>
 #include <QList>
+#include <QtAlgorithms>
+
+#include <algorithm>
 
 /*
 #include "game/data/club.h"
@@ -33,6 +36,5 @@ class TABLE;
 class POSITION;
 class STADIUM;
 class PLAYER_POSITION;
-
 
 #endif // DATA_DEFS_H

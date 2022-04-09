@@ -15,6 +15,7 @@ public:
     QList<PLAYER*> getPlayers();
 
     void setPlayerList(QList<PLAYER*> playerList);
+    void SortPlayersListByPos();
 protected:
     int id;
     QString name;

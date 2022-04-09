@@ -21,6 +21,7 @@ public:
     int getTV() const;
 
     void setClub(CLUB* clubPtr);
+    static bool CompTwoPlayersByPos(const PLAYER* p1, const PLAYER* p2);
 private:
     int id;
     QString name;

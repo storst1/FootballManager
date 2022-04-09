@@ -35,6 +35,12 @@ QList<PLAYER*> TEAM::getPlayers(){
 void TEAM::setPlayerList(QList<PLAYER *> playerList)
 {
     players = playerList;
+    SortPlayersListByPos();
+}
+
+void TEAM::SortPlayersListByPos()
+{
+    std::sort(players.begin(), players.end(), PLAYER::CompTwoPlayersByPos);
 }
 
 CLUB::CLUB(int id, QString name, int TV, int budget, QString stadName, int stadCap, int prestige) :

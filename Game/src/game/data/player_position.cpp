@@ -62,5 +62,5 @@ void PLAYER_POSITION::setStrNameToAuto()
     if(SP != 0){
         strName += "/" + posIdToStr(SP);
     }
-    qDebug() << strName;
+    //qDebug() << strName;
 }

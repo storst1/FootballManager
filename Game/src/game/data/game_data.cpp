@@ -135,9 +135,12 @@ void GAME_DATA::InitPositions()
         addPos(pos0);
         pos0->setStrNameToAuto();
         for(int j = 3; j < 15; ++j){
+            if(j == i){
+                continue;
+            }
             PLAYER_POSITION* pos = new PLAYER_POSITION(i, j);
             addPos(pos);
-            pos0->setStrNameToAuto();
+            pos->setStrNameToAuto();
         }
     }
 }

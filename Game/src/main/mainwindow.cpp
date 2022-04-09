@@ -71,36 +71,32 @@ void MainWindow::TakeSpaceInLay(int h, int row, int col_amount)
 
 void MainWindow::ClearLay()
 {
-    /*
-    QLayoutItem* curItem;
-    while((curItem = mainLay->takeAt(0))){
-        if(curItem->layout()){
-            ClearLay(curItem->layout());
-            delete curItem->layout();
-        }
-        else if(curItem->widget()){
-            delete curItem->widget();
-        }
-        delete curItem;
-    }
-    */
+    ClearLay(mainLay);
 }
 
 void MainWindow::ClearLay(QLayout *lay)
 {
-    /*
-    while(lay->count()){
-        QLayoutItem* curItem = lay->takeAt(0);
-        if(curItem->layout()){
+    iters++;
+    QLayoutItem* curItem;
+    //qDebug() << "Entered ClearLay() with lay consist of " << lay->count() << " items";
+    int i = 0;
+    while((curItem = lay->takeAt(0)) != nullptr){
+        //qDebug() << "Entered while, i = " << i;
+        if(curItem->layout() != nullptr){
             ClearLay(curItem->layout());
-            delete curItem->layout();
+            //qDebug() << "Deleted lay: " << curItem->layout() << " i = " << i;
+            //TO DO: Figure out if following line leads to the memory leak or is it supposed to work like that
+            //delete curItem->layout();
         }
-        if(curItem->widget()){
+        else if(curItem->widget() != nullptr){
+            //qDebug() << "Deleted widget: " << curItem->widget() << " i = " << i;
             delete curItem->widget();
         }
+        //qDebug() << "Trying to delete item: " << curItem;
         delete curItem;
+        ++i;
     }
-    */
+    //qDebug() << "ClearLay() finished working";
 }
 
 QString MainWindow::getRealDataDbPath()

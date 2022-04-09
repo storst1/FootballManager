@@ -76,16 +76,14 @@ void MainWindow::ClearLay()
 
 void MainWindow::ClearLay(QLayout *lay)
 {
-    iters++;
     QLayoutItem* curItem;
     //qDebug() << "Entered ClearLay() with lay consist of " << lay->count() << " items";
-    int i = 0;
     while((curItem = lay->takeAt(0)) != nullptr){
         //qDebug() << "Entered while, i = " << i;
         if(curItem->layout() != nullptr){
             ClearLay(curItem->layout());
             //qDebug() << "Deleted lay: " << curItem->layout() << " i = " << i;
-            //TO DO: Figure out if following line leads to the memory leak or is it supposed to work like that
+            //TO DO: Figure out if following line leads to memory leak or is it supposed to work like that
             //delete curItem->layout();
         }
         else if(curItem->widget() != nullptr){
@@ -94,7 +92,6 @@ void MainWindow::ClearLay(QLayout *lay)
         }
         //qDebug() << "Trying to delete item: " << curItem;
         delete curItem;
-        ++i;
     }
     //qDebug() << "ClearLay() finished working";
 }

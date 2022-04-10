@@ -22,6 +22,7 @@
 #include <QScreen>
 #include <QGuiApplication>
 #include <QFont>
+#include <QScrollArea>
 
 #include <algorithm>
 
@@ -36,6 +37,31 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+private:
+    //Window properties
+    Ui::MainWindow *ui;
+    int width;
+    int height;
+
+    //GAME INFO
+    GAME_DATA* gameData;
+    USER* user;
+
+    //Real data
+    DATABASE_REAL_DATA* realDataDb;
+    DATABASE_SKILL_CONVERTER* skillConvDb;
+    DATABASE_DYNAMIC_DATA* dynDataDb;
+    COUNTRY_MAP* countryMap;
+
+    NETWORK_MANAGER* netManager;
+
+    QList<API_LEAGUE*> allLeagues;
+    QList<API_CLUB*> allClubs;
+    QList<API_PLAYER*> allPlayers;
+
+    //Dynamic data
+    std::map<int, QString> CountryIdToName;
+    std::map<QString, int> CountryNameToId;
 
     //Database & API methods
     QString getRealDataDbPath();
@@ -78,6 +104,8 @@ public:
     void ClearLay(QLayout* lay);
 
     //Scene-dependent methods
+
+    QGridLayout* mainLay;
 
     //STARTING SCENE
     QPushButton* loadButton;
@@ -123,32 +151,5 @@ public:
 
     //Settings scene
     void SetupSettingsScene();
-
-private:
-    Ui::MainWindow *ui;
-    int width;
-    int height;
-    QGridLayout* mainLay;
-
-    //GAME INFO
-    GAME_DATA* gameData;
-    USER* user;
-
-    //Real data
-    DATABASE_REAL_DATA* realDataDb;
-    DATABASE_SKILL_CONVERTER* skillConvDb;
-    DATABASE_DYNAMIC_DATA* dynDataDb;
-    COUNTRY_MAP* countryMap;
-
-    NETWORK_MANAGER* netManager;
-
-    QList<API_LEAGUE*> allLeagues;
-    QList<API_CLUB*> allClubs;
-    QList<API_PLAYER*> allPlayers;
-
-    //Dynamic data
-    std::map<int, QString> CountryIdToName;
-    std::map<QString, int> CountryNameToId;
-
 };
 #endif // MAINWINDOW_H

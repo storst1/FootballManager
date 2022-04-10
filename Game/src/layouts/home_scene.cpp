@@ -11,6 +11,7 @@ void MainWindow::SetupHomeScene(){
 
     TakeSpaceInLay(50, 0, 3);
 
+    QScrollArea* playersScrollArea = new QScrollArea;
     playersLay = new QGridLayout();
     int curRow = 0;
     for(const auto& p : players){
@@ -25,7 +26,8 @@ void MainWindow::SetupHomeScene(){
         ++curRow;
     }
 
-    mainLay->addLayout(playersLay, 1, 1, Qt::AlignCenter);
+
+    mainLay->addWidget(playersScrollArea, 1, 1, Qt::AlignCenter);
 
     TakeSpaceInLay(50, 0, 3);
 }

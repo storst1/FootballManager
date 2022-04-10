@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>flags/65x40/9.png</file>
+        <file>flags/65x40/157.png</file>
+        <file>flags/48x30/9.png</file>
+        <file>flags/48x30/157.png</file>
+    </qresource>
+</RCC>

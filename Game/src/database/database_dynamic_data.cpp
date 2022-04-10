@@ -4,6 +4,7 @@
 #include "game/data/federation.h"
 #include "game/data/team.h"
 #include "game/data/league.h"
+#include "main/mainwindow.h"
 
 DATABASE_DYNAMIC_DATA::DATABASE_DYNAMIC_DATA(const QString &dbPath, const QString &connectionName)
     : DATABASE(dbPath, connectionName)
@@ -104,6 +105,8 @@ void DATABASE_DYNAMIC_DATA::FillFederationsGameData(GAME_DATA *gameData)
         QList<LEAGUE*> leaguesList = InitLeagueList(leagueIdsList, curFed, gameData);
         curFed->setLeagues(leaguesList);
         gameData->addLeagues(leaguesList);
+        QPixmap* flag = new QPixmap(MainWindow::GetFlagPath(curFed, "48x30"));
+        curFed->setFlag(flag);
     }
 }
 

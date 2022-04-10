@@ -9,6 +9,8 @@
 
 #include <QMap>
 
+class MainWindow;
+
 class DATABASE_DYNAMIC_DATA : public DATABASE
 {
 public:

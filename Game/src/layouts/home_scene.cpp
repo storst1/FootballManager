@@ -49,10 +49,11 @@ void MainWindow::SetupHomeScene(){
                 "border: none;"
                 "background-repeat: none;"
                 "background: transparent;"
-                "font-size: 20px;"
+                "font-size: 23px;"
                 "font-weight: bold;"
                 "font-family: Comic Sans MS;"
                 "color: rgb(211, 242, 254);"
+                "text-align: left;"
             "}"
             ":hover{"
                 "color: orange;"
@@ -75,6 +76,12 @@ void MainWindow::SetupHomeScene(){
     playersLay = new QGridLayout(playersScrollAreaWidget);
     int curRow = 0;
     for(const auto& p : players){
+        QPixmap flagPixmap(110, 40);
+        drawPlayerFlag(flagPixmap, p->getFF(), p->getSF());
+        QLabel* flag = new QLabel();
+        flag->setFixedSize(110, 40);
+        flag->setPixmap(flagPixmap);
+
         QPushButton* name = new QPushButton(p->getName());
         name->setStyleSheet(playerButtonStyle);
         name->setFixedSize(450, playerLabelHeight);
@@ -95,11 +102,12 @@ void MainWindow::SetupHomeScene(){
         TV->setStyleSheet(infoLabelStyle);
         TV->setFixedSize(200, playerLabelHeight);
 
-        playersLay->addWidget(name, curRow, 0, Qt::AlignCenter);
-        playersLay->addWidget(pos, curRow, 1, Qt::AlignCenter);
-        playersLay->addWidget(age, curRow, 2, Qt::AlignCenter);
-        playersLay->addWidget(TV, curRow, 3, Qt::AlignCenter);
-        playersLay->addWidget(skill, curRow, 4, Qt::AlignCenter);
+        playersLay->addWidget(flag, curRow, 0, Qt::AlignCenter);
+        playersLay->addWidget(name, curRow, 1, Qt::AlignCenter);
+        playersLay->addWidget(pos, curRow, 2, Qt::AlignCenter);
+        playersLay->addWidget(age, curRow, 3, Qt::AlignCenter);
+        playersLay->addWidget(TV, curRow, 4, Qt::AlignCenter);
+        playersLay->addWidget(skill, curRow, 5, Qt::AlignCenter);
         ++curRow;
     }
 

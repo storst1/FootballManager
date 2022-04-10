@@ -41,7 +41,17 @@ QList<LEAGUE *> FEDERATION::getLeagues()
     return leagues;
 }
 
+QPixmap *FEDERATION::getFlag() const
+{
+    return flagPixmap;
+}
+
 void FEDERATION::setLeagues(QList<LEAGUE *> leaguesList)
 {
     leagues = leaguesList;
+}
+
+void FEDERATION::setFlag(QPixmap *flag)
+{
+    flagPixmap = flag;
 }

@@ -5,6 +5,7 @@
 #include "team.h"
 #include "player.h"
 #include "player_position.h"
+#include "main/mainwindow.h"
 
 GAME_DATA::GAME_DATA(COUNTRY_MAP *countryMap) : countryMap(countryMap)
 {
@@ -65,6 +66,7 @@ FEDERATION *GAME_DATA::implicitlyGetFederation(int id, QString& name)
     //Tries to find a pointer to federation with specified id, if such does not exist it creates a new federation
     if(federations.find(id) == federations.end()){
         FEDERATION* newFed = new FEDERATION(id, name, id, QList<LEAGUE*> {});
+        newFed->setFlag(new QPixmap(MainWindow::GetFlagPath(newFed, "48x30")));
         federations.insert(id, newFed);
         return newFed;
     }

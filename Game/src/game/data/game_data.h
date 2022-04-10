@@ -6,6 +6,8 @@
 
 #include <QMap>
 
+class MainWindow;
+
 class GAME_DATA
 {
 public:

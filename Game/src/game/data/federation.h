@@ -14,12 +14,15 @@ public:
     int getId() const;
     QString getName() const;
     QList<LEAGUE*> getLeagues();
+    QPixmap* getFlag() const;
 
     void setLeagues(QList<LEAGUE*> leaguesList);
+    void setFlag(QPixmap* flag);
 private:
     int fedId;
     int countryId;
     QString name;
+    QPixmap* flagPixmap = nullptr;
 
     QList<LEAGUE*> leagues;
     CUP* natCup;

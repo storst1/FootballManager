@@ -23,6 +23,8 @@
 #include <QGuiApplication>
 #include <QFont>
 #include <QScrollArea>
+#include <QPixmap>
+#include <QPainter>
 
 #include <algorithm>
 
@@ -37,6 +39,15 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+
+    //Resources methods
+    static QString GetClubLogoPath(CLUB *club);
+    static QString GetFlagPath(FEDERATION* fed, QString size);
+
+    //Other
+    static QString EuroSym();
+    static QString NaturalizeNum(int num);
+    static void drawPlayerFlag(QPixmap& flag, FEDERATION* fed1, FEDERATION* fed2);
 private:
     //Window properties
     Ui::MainWindow *ui;
@@ -87,13 +98,6 @@ private:
     void LoadGameData();
     void SetupUser();
     void ChangeUserClub(CLUB* club);
-
-    //Other
-    QString EuroSym() const;
-    QString NaturalizeNum(int num);
-
-    //Resources methods
-    QString GetClubLogoPath(CLUB *club);
 
     //General layout methods
     void SetupMainLay();

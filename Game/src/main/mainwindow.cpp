@@ -231,7 +231,7 @@ void MainWindow::ChangeUserClub(CLUB *club)
     user->setClub(club);
 }
 
-QString MainWindow::EuroSym() const
+QString MainWindow::EuroSym()
 {
     return "€";
 }
@@ -252,8 +252,28 @@ QString MainWindow::NaturalizeNum(int num)
     return numStr;
 }
 
+void MainWindow::drawPlayerFlag(QPixmap &flag, FEDERATION *fed1, FEDERATION *fed2)
+{
+    if(fed1->getFlag() == nullptr) return;
+    flag.fill(Qt::transparent);
+    QPainter painter(&flag);
+    painter.drawPixmap(0, 5, 48, 30, *fed1->getFlag());
+    if(fed2 != nullptr){
+        if(fed2->getFlag() == nullptr){
+            painter.end();
+            return;
+        }
+        painter.drawPixmap(55, 9, 35, 22, *fed2->getFlag());
+    }
+    painter.end();
+}
+
 QString MainWindow::GetClubLogoPath(CLUB* club)
 {
-    //qDebug() << ":/logos/200x200/" + club->getFederation()->getName() + "/" + QString::number(club->getId()) + ".png";
     return ":/logos/200x200/" + club->getFederation()->getName() + "/" + QString::number(club->getId()) + ".png";
+}
+
+QString MainWindow::GetFlagPath(FEDERATION *fed, QString size)
+{
+    return ":/flags/" + size + "/" + QString::number(fed->getId()) + ".png";
 }

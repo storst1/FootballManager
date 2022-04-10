@@ -4,6 +4,7 @@
 #include <QString>
 #include <QList>
 #include <QtAlgorithms>
+#include <QPixmap>
 
 #include <algorithm>
 

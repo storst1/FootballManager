@@ -98,5 +98,7 @@
         <file>logos/200x200/England/1148.png</file>
         <file>logos/200x200/England/1237.png</file>
         <file>logos/200x200/Italy/5.png</file>
+        <file>flags/65x40/9.png</file>
+        <file>flags/65x40/157.png</file>
     </qresource>
 </RCC>

@@ -254,12 +254,16 @@ QString MainWindow::NaturalizeNum(int num)
 
 void MainWindow::drawPlayerFlag(QPixmap &flag, FEDERATION *fed1, FEDERATION *fed2)
 {
-    if(fed1->getFlag() == nullptr) return;
+    if(fed1->getFlag() == nullptr){
+        qDebug() << "No flag of fed with id = " << fed1->getId();
+        return;
+    }
     flag.fill(Qt::transparent);
     QPainter painter(&flag);
     painter.drawPixmap(0, 5, 48, 30, *fed1->getFlag());
     if(fed2 != nullptr){
         if(fed2->getFlag() == nullptr){
+            qDebug() << "No flag of fed with id = " << fed2->getId();
             painter.end();
             return;
         }

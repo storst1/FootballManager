@@ -24,8 +24,8 @@ public:
     void FillGameData(GAME_DATA* gameData);
     void FillFederationsGameData(GAME_DATA* gameData);
 
-    QList<LEAGUE*> InitLeagueList(QList<QString> &leagueIdsList, GAME_DATA *gameData);
-    QList<CLUB*> InitClubsByLeague(const QString &leagueId, GAME_DATA *gameData);
+    QList<LEAGUE*> InitLeagueList(QList<QString> &leagueIdsList, FEDERATION *curFed, GAME_DATA *gameData);
+    QList<CLUB*> InitClubsByLeague(LEAGUE* league, GAME_DATA *gameData);
     QList<PLAYER*> InitPlayersByClub(CLUB *curClub, GAME_DATA *gameData);
 };
 

@@ -13,15 +13,18 @@ public:
     QString getName() const;
     QList<CLUB*> getClubs() const;
     int getTier() const;
+    FEDERATION* getFederation() const;
 
     void setName(QString& _name);
     void setTier(int t);
     void setId(QString& _id);
     void setClubList(QList<CLUB*> clubList);
+    void setFederation(FEDERATION* _fed);
 private:
     QString id;
     QString name;
     int tier;
+    FEDERATION* fed;
 
     QList<CLUB*> clubs;
 

@@ -13,13 +13,16 @@ public:
     int getId() const;
     QString getName() const;
     QList<PLAYER*> getPlayers();
+    FEDERATION* getFederation() const;
 
     void setPlayerList(QList<PLAYER*> playerList);
     void SortPlayersListByPos();
+    void setFederation(FEDERATION* _fed);
 protected:
     int id;
     QString name;
     QList<PLAYER*> players;
+    FEDERATION* fed;
     //COACH* coach;
 };
 

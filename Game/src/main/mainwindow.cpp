@@ -252,7 +252,8 @@ QString MainWindow::NaturalizeNum(int num)
     return numStr;
 }
 
-QString MainWindow::GetClubLogoPath(int clubId)
+QString MainWindow::GetClubLogoPath(CLUB* club)
 {
-    return ":/logos/200x200/" + QString::number(clubId) + ".png";
+    //qDebug() << ":/logos/200x200/" + club->getFederation()->getName() + "/" + QString::number(club->getId()) + ".png";
+    return ":/logos/200x200/" + club->getFederation()->getName() + "/" + QString::number(club->getId()) + ".png";
 }

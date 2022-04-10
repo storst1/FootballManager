@@ -119,7 +119,7 @@ void MainWindow::SetupNewGameScene()
 
     clubLogo = new QLabel();
     clubLogo->setFixedSize(1000, 200);
-    QString clubLogoPath = GetClubLogoPath(curClub->getId());
+    QString clubLogoPath = GetClubLogoPath(curClub);
     clubLogo->setPixmap(QPixmap(clubLogoPath));
     clubLogo->setAlignment(Qt::AlignCenter);
     clubLay->addWidget(clubLogo);
@@ -211,7 +211,7 @@ void MainWindow::ChangeClubLay(CLUB *curClub)
 {
     clubName->setText(curClub->getName());
 
-    QString clubLogoPath = GetClubLogoPath(curClub->getId());
+    QString clubLogoPath = GetClubLogoPath(curClub);
     clubLogo->setPixmap(QPixmap(clubLogoPath));
 
     clubTV->setText("Total transfer value of players: " + NaturalizeNum(curClub->getTV()) + EURO);

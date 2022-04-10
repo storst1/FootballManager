@@ -35,6 +35,11 @@ int LEAGUE::getTier() const
     return tier;
 }
 
+FEDERATION *LEAGUE::getFederation() const
+{
+    return fed;
+}
+
 void LEAGUE::setName(QString &_name)
 {
     name = _name;
@@ -53,4 +58,9 @@ void LEAGUE::setId(QString &_id)
 void LEAGUE::setClubList(QList<CLUB *> clubList)
 {
     clubs = clubList;
+}
+
+void LEAGUE::setFederation(FEDERATION *_fed)
+{
+    fed = _fed;
 }

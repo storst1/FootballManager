@@ -32,6 +32,11 @@ QList<PLAYER*> TEAM::getPlayers(){
     return players;
 }
 
+FEDERATION *TEAM::getFederation() const
+{
+    return fed;
+}
+
 void TEAM::setPlayerList(QList<PLAYER *> playerList)
 {
     players = playerList;
@@ -41,6 +46,11 @@ void TEAM::setPlayerList(QList<PLAYER *> playerList)
 void TEAM::SortPlayersListByPos()
 {
     std::sort(players.begin(), players.end(), PLAYER::CompTwoPlayersByPos);
+}
+
+void TEAM::setFederation(FEDERATION *_fed)
+{
+    fed = _fed;
 }
 
 CLUB::CLUB(int id, QString name, int TV, int budget, QString stadName, int stadCap, int prestige) :

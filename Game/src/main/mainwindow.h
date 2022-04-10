@@ -10,6 +10,8 @@
 #include "game/data/country_map.h"
 #include "game/data/game_data.h"
 #include "game/user/user.h"
+#include "game/data/team.h"
+#include "game/data/federation.h"
 
 #include <QMainWindow>
 #include <QGridLayout>
@@ -65,7 +67,7 @@ public:
     QString NaturalizeNum(int num);
 
     //Resources methods
-    QString GetClubLogoPath(int clubId);
+    QString GetClubLogoPath(CLUB *club);
 
     //General layout methods
     void SetupMainLay();

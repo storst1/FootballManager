@@ -16,5 +16,6 @@
         <file>rightArrowHighlighted120x120.png</file>
         <file>greenLay400x120.png</file>
         <file>greenLay400x120Highlighted.png</file>
+        <file>backgroundCutSizeLessBright.jpg</file>
     </qresource>
 </RCC>

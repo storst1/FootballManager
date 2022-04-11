@@ -33,7 +33,7 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::SetupMainLay(){
-    QPixmap background(":/backgroundCutSize.jpg");
+    QPixmap background(":/backgroundCutSizeLessBright.jpg");
     int w = QGuiApplication::primaryScreen()->geometry().width();
     int h = QGuiApplication::primaryScreen()->geometry().height();
     qDebug() << "QGuiApplication::primaryScreen->geometry() == {" << w << ", " << h << "}";

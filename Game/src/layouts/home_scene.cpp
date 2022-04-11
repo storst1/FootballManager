@@ -65,10 +65,10 @@ void MainWindow::SetupHomeScene(){
     CLUB* club = user->getClub();
     QList<PLAYER*> players = club->getPlayers();
 
-    TakeSpaceInLay(50, 0, 3);
+    TakeSpaceInLay(100, 0, 3);
 
     playersScrollArea = new QScrollArea;
-    playersScrollArea->setFixedSize(1200, 700);
+    playersScrollArea->setFixedSize(1000, 600);
     playersScrollArea->setStyleSheet(scrollAreaStyle);
     playersScrollArea->scrollBarWidgets(Qt::AlignHorizontal_Mask);
     playersScrollAreaWidget = new QWidget(playersScrollArea);
@@ -84,11 +84,11 @@ void MainWindow::SetupHomeScene(){
 
         QPushButton* name = new QPushButton(p->getName());
         name->setStyleSheet(playerButtonStyle);
-        name->setFixedSize(450, playerLabelHeight);
+        name->setFixedSize(400, playerLabelHeight);
 
         QLabel* pos = new QLabel(p->getPos()->getStrName());
         pos->setStyleSheet(infoLabelStyle);
-        pos->setFixedSize(120, playerLabelHeight);
+        pos->setFixedSize(100, playerLabelHeight);
 
         QLabel* age = new QLabel(QString::number(p->getAge()));
         age->setStyleSheet(infoLabelStyle);
@@ -100,7 +100,7 @@ void MainWindow::SetupHomeScene(){
 
         QLabel* TV = new QLabel(NaturalizeNum(p->getTV()) + EURO);
         TV->setStyleSheet(infoLabelStyle);
-        TV->setFixedSize(200, playerLabelHeight);
+        TV->setFixedSize(180, playerLabelHeight);
 
         playersLay->addWidget(flag, curRow, 0, Qt::AlignCenter);
         playersLay->addWidget(name, curRow, 1, Qt::AlignCenter);
@@ -116,5 +116,5 @@ void MainWindow::SetupHomeScene(){
 
     mainLay->addWidget(playersScrollArea, 1, 1, Qt::AlignCenter);
 
-    TakeSpaceInLay(50, 0, 3);
+    TakeSpaceInLay(100, 2, 3);
 }

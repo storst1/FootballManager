@@ -4,12 +4,6 @@
 
 void MainWindow::SetupNewGameScene()
 {
-    ClearLay();
-
-    dynDataDb->FillGameData(gameData);
-    allLeaguesList = gameData->getLeaguesList();
-
-    TakeSpaceInLay(100, 0, 3);
     QString leagueLabelStyle =
             "QLabel{ "
                 "background-color: transparent;"
@@ -83,6 +77,13 @@ void MainWindow::SetupNewGameScene()
             ":hover{"
                 "background-image:url(:/greenLay400x120Highlighted.png);"
             "}";
+
+    ClearLay();
+
+    dynDataDb->FillGameData(gameData);
+    allLeaguesList = gameData->getLeaguesList();
+
+    TakeSpaceInLay(20, 0, 3);
 
     leagueLeftButton = new QPushButton();
     leagueLeftButton->setFixedWidth(120);
@@ -170,7 +171,7 @@ void MainWindow::SetupNewGameScene()
         SetupHomeScene();
     });
 
-    TakeSpaceInLay(100, 4, 3);
+    TakeSpaceInLay(20, 7, 3);
 }
 
 void MainWindow::NewGameNextLeague()
@@ -202,7 +203,6 @@ void MainWindow::NewGamePrevLeague()
 void MainWindow::ChangeLeagueLabel(LEAGUE *_league)
 {
     leagueLabel->setText(_league->getName());
-    //mainLay->update();
     QList<CLUB*> clubs = _league->getClubs();
     ChangeClubLay(clubs[0]);
 }

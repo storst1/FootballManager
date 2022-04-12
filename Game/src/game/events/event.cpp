@@ -10,7 +10,7 @@ void EVENT::Execute()
     //Calling Execute() on the event-base class does nothing
 }
 
-bool EVENT::operator<(const EVENT &oth_event)
+bool EVENT::operator<(const EVENT &oth_event) const
 {
     if(date == oth_event.date){
         return order < oth_event.order;

@@ -9,6 +9,7 @@ class EVENT_ARRAY
 {
 public:
     EVENT_ARRAY();
+    ~EVENT_ARRAY();
 
     void addEvent(EVENT* event);
 private:

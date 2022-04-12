@@ -22,6 +22,8 @@ public:
 
     void setClub(CLUB* clubPtr);
     static bool CompTwoPlayersByPos(const PLAYER* p1, const PLAYER* p2);
+
+    void addOneYearToAge();
 private:
     int id;
     QString name;

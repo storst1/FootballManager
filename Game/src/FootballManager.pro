@@ -27,6 +27,9 @@ SOURCES += \
     game/data/stadium.cpp \
     game/data/table.cpp \
     game/data/team.cpp \
+    game/events/event.cpp \
+    game/events/event_array.cpp \
+    game/events/event_birthday.cpp \
     game/time/date.cpp \
     game/user/user.cpp \
     json/json_parser.cpp \
@@ -67,6 +70,9 @@ HEADERS += \
     game/data/stadium.h \
     game/data/table.h \
     game/data/team.h \
+    game/events/event.h \
+    game/events/event_array.h \
+    game/events/event_birthday.h \
     game/time/date.h \
     game/user/user.h \
     json/json_parser.h \

@@ -116,5 +116,5 @@ void MainWindow::SetupHomeScene(){
 
     mainLay->addWidget(playersScrollArea, 1, 1, Qt::AlignCenter);
 
-    TakeSpaceInLay(100, 2, 3);
+    TakeSpaceInLay(30, 2, 3);
 }

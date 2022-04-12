@@ -69,3 +69,8 @@ bool PLAYER::CompTwoPlayersByPos(const PLAYER *p1, const PLAYER *p2)
     }
     return p1->getPos()->getFP() < p2->getPos()->getFP();
 }
+
+void PLAYER::addOneYearToAge()
+{
+    ++age;
+}

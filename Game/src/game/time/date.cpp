@@ -32,3 +32,8 @@ QString DATE::toStringView() const
     str.insert(7, '-');
     return str;
 }
+
+unsigned int DATE::rawDateFromTMDate(uint64_t TMDate)
+{
+
+}

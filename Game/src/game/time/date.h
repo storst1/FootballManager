@@ -2,8 +2,9 @@
 #define DATE_H
 
 #include <QString>
+#include <QDate>
 
-class DATE
+class DATE : public QDate
 {
 public:
     DATE(unsigned int rawDate);
@@ -15,6 +16,8 @@ public:
     bool operator>(const DATE& oth_date) const;
 
     QString toStringView() const;
+
+    static unsigned int rawDateFromTMDate(uint64_t TMDate);
 private:
     unsigned int rawDate;
 };

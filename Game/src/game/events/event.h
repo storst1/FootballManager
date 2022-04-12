@@ -7,7 +7,7 @@ class EVENT
 {
 public:
     EVENT(DATE& date);
-    ~EVENT() = default;
+    virtual ~EVENT() = default;
 
     virtual void Execute();
 

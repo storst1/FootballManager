@@ -8,7 +8,7 @@ class EVENT_BIRTHDAY : public EVENT
 {
 public:
     EVENT_BIRTHDAY(DATE date, PLAYER* birthdayPlayer);
-    ~EVENT_BIRTHDAY() = default;
+    ~EVENT_BIRTHDAY() override = default;
 
     void Execute() override;
 private:

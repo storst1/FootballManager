@@ -2,7 +2,7 @@
 
 DATE::DATE(unsigned int rawDate) : QDateTime(), rawDate(rawDate)
 {
-    setDate(DATE::qtDateFromRawDate(rawDate)); //QDateTime function
+    setDate(DATE::qtDateFromRawDate(rawDate)); //Filling in QDateTime parent class
 }
 
 DATE::DATE(QDateTime &qt_date) : QDateTime(qt_date)

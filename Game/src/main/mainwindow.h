@@ -12,12 +12,12 @@
 #include "game/user/user.h"
 #include "game/data/team.h"
 #include "game/data/federation.h"
+#include "game/time/date.h"
 
 #include <QMainWindow>
 #include <QGridLayout>
 #include <QLabel>
 #include <QPushButton>
-#include <QPixmap>
 #include <QPalette>
 #include <QScreen>
 #include <QGuiApplication>

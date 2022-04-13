@@ -68,5 +68,3 @@ const QDate DATE::qtDateFromRawDate(unsigned int rawDate)
     int day = rawDate / FM_DATE_DAY_MULT;
     return QDate(year, month, day);
 }
-
-

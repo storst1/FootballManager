@@ -43,6 +43,34 @@ void MainWindow::SetupHomeScene(){
                 "color: white;"
             "}";
 
+    QString headerLabelStyle =
+            "QLabel{ "
+                "background-color: transparent;"
+                "border: none;"
+                "background-repeat: none;"
+                "background: transparent;"
+                "font-size: 23px;"
+                "font-weight: bold;"
+                "font-family: Comic Sans MS;"
+                "color: rgb(211, 242, 254);"
+            "}";
+
+    QString headerButtonStyle =
+            "QPushButton{ "
+                "background-color: transparent;"
+                "border: none;"
+                "background-repeat: none;"
+                "background: transparent;"
+                "font-size: 23px;"
+                "font-weight: bold;"
+                "font-family: Comic Sans MS;"
+                "color: rgb(211, 242, 254);"
+                "text-align: left;"
+            "}"
+            ":hover{"
+                "color: blue;"
+            "}";
+
     QString playerButtonStyle =
             "QPushButton{ "
                 "background-color: transparent;"
@@ -65,7 +93,43 @@ void MainWindow::SetupHomeScene(){
     CLUB* club = user->getClub();
     QList<PLAYER*> players = club->getPlayers();
 
-    TakeSpaceInLay(100, 0, 3);
+    TakeSpaceInLay(60, 0, 3);
+
+    playersHeaderLay = new QGridLayout();
+    //playersHeaderLay->setGeometry(QRect(0, 0, 1000, playerLabelHeight));
+
+    QLabel* nationHeader = new QLabel("Nation");
+    nationHeader->setFixedSize(110, playerLabelHeight);
+    nationHeader->setStyleSheet(headerLabelStyle);
+
+    QPushButton* nameHeader = new QPushButton("Name");
+    nameHeader->setStyleSheet(headerButtonStyle);
+    nameHeader->setFixedSize(400, playerLabelHeight);
+
+    QPushButton* posHeader = new QPushButton("Position");
+    posHeader->setStyleSheet(headerButtonStyle);
+    posHeader->setFixedSize(100, playerLabelHeight);
+
+    QPushButton* ageHeader = new QPushButton("Age");
+    ageHeader->setStyleSheet(headerButtonStyle);
+    ageHeader->setFixedSize(70, playerLabelHeight);
+
+    QPushButton* skillHeader = new QPushButton("Rating");
+    skillHeader->setStyleSheet(headerButtonStyle);
+    skillHeader->setFixedSize(70, playerLabelHeight);
+
+    QPushButton* TVHeader = new QPushButton("Transfer value");
+    TVHeader->setStyleSheet(headerButtonStyle);
+    TVHeader->setFixedSize(180, playerLabelHeight);
+
+    playersHeaderLay->addWidget(nationHeader, 0, 0);
+    playersHeaderLay->addWidget(nameHeader, 0, 1);
+    playersHeaderLay->addWidget(posHeader, 0, 2);
+    playersHeaderLay->addWidget(ageHeader, 0, 3);
+    playersHeaderLay->addWidget(skillHeader, 0, 5);
+    playersHeaderLay->addWidget(TVHeader, 0, 4);
+
+    mainLay->addLayout(playersHeaderLay, 1, 1, Qt::AlignLeft);
 
     playersScrollArea = new QScrollArea;
     playersScrollArea->setFixedSize(1000, 600);
@@ -114,7 +178,7 @@ void MainWindow::SetupHomeScene(){
     playersScrollArea->setWidget(playersScrollAreaWidget);
     playersScrollAreaWidget->setLayout(playersLay);
 
-    mainLay->addWidget(playersScrollArea, 1, 1, Qt::AlignCenter);
+    mainLay->addWidget(playersScrollArea, 2, 1, Qt::AlignCenter);
 
     TakeSpaceInLay(30, 2, 3);
 }

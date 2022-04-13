@@ -149,6 +149,7 @@ private:
     void NewGamePrevClub();
 
     //HOME SCENE
+    QGridLayout* playersHeaderLay;
     QScrollArea* playersScrollArea;
     QWidget* playersScrollAreaWidget;
     QGridLayout* playersLay;

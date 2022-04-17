@@ -37,6 +37,7 @@ SOURCES += \
     json/json_parser_player.cpp \
     json/json_parser_squad.cpp \
     layouts/home_scene.cpp \
+    layouts/layout_general.cpp \
     layouts/new_game_scene.cpp \
     layouts/settings_scene.cpp \
     layouts/starting_scene.cpp \

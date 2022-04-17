@@ -90,46 +90,46 @@ void MainWindow::SetupHomeScene(){
     ClearLay();
 
     const int playerLabelHeight = 40;
+    const int headerLabelHeight = 30;
     CLUB* club = user->getClub();
     QList<PLAYER*> players = club->getPlayers();
 
-    TakeSpaceInLay(60, 0, 3);
+    TakeSpaceInLay(100, 0, 3);
 
     playersHeaderLay = new QGridLayout();
-    //playersHeaderLay->setGeometry(QRect(0, 0, 1000, playerLabelHeight));
+    //playersHeaderLay->setGeometry(QRect(0, 0, 1000, headerLabelHeight));
 
     QLabel* nationHeader = new QLabel("Nation");
-    nationHeader->setFixedSize(110, playerLabelHeight);
+    nationHeader->setFixedSize(120, headerLabelHeight);
     nationHeader->setStyleSheet(headerLabelStyle);
 
     QPushButton* nameHeader = new QPushButton("Name");
     nameHeader->setStyleSheet(headerButtonStyle);
-    nameHeader->setFixedSize(400, playerLabelHeight);
+    nameHeader->setFixedSize(390, headerLabelHeight);
 
     QPushButton* posHeader = new QPushButton("Position");
     posHeader->setStyleSheet(headerButtonStyle);
-    posHeader->setFixedSize(100, playerLabelHeight);
+    posHeader->setFixedSize(90, headerLabelHeight);
 
-    QPushButton* ageHeader = new QPushButton("Age");
+    QPushButton* ageHeader = new QPushButton(" Age");
     ageHeader->setStyleSheet(headerButtonStyle);
-    ageHeader->setFixedSize(70, playerLabelHeight);
+    ageHeader->setFixedSize(60, headerLabelHeight);
 
     QPushButton* skillHeader = new QPushButton("Rating");
     skillHeader->setStyleSheet(headerButtonStyle);
-    skillHeader->setFixedSize(70, playerLabelHeight);
+    skillHeader->setFixedSize(110, headerLabelHeight);
 
-    QPushButton* TVHeader = new QPushButton("Transfer value");
+    QPushButton* TVHeader = new QPushButton("Value");
     TVHeader->setStyleSheet(headerButtonStyle);
-    TVHeader->setFixedSize(180, playerLabelHeight);
+    TVHeader->setFixedSize(170, headerLabelHeight);
+    playersHeaderLay->addWidget(nationHeader, 0, 0, Qt::AlignLeft);
+    playersHeaderLay->addWidget(nameHeader, 0, 1, Qt::AlignLeft);
+    playersHeaderLay->addWidget(posHeader, 0, 2, Qt::AlignLeft);
+    playersHeaderLay->addWidget(ageHeader, 0, 3, Qt::AlignLeft);
+    playersHeaderLay->addWidget(TVHeader, 0, 4, Qt::AlignLeft);
+    playersHeaderLay->addWidget(skillHeader, 0, 5, Qt::AlignLeft);
 
-    playersHeaderLay->addWidget(nationHeader, 0, 0);
-    playersHeaderLay->addWidget(nameHeader, 0, 1);
-    playersHeaderLay->addWidget(posHeader, 0, 2);
-    playersHeaderLay->addWidget(ageHeader, 0, 3);
-    playersHeaderLay->addWidget(skillHeader, 0, 5);
-    playersHeaderLay->addWidget(TVHeader, 0, 4);
-
-    mainLay->addLayout(playersHeaderLay, 1, 1, Qt::AlignLeft);
+    mainLay->addLayout(playersHeaderLay, 1, 1);
 
     playersScrollArea = new QScrollArea;
     playersScrollArea->setFixedSize(1000, 600);
@@ -138,6 +138,7 @@ void MainWindow::SetupHomeScene(){
     playersScrollAreaWidget = new QWidget(playersScrollArea);
     playersScrollAreaWidget->setStyleSheet(scrollAreaWidgetStyle);
     playersLay = new QGridLayout(playersScrollAreaWidget);
+
     int curRow = 0;
     for(const auto& p : players){
         QPixmap flagPixmap(110, 40);
@@ -180,5 +181,5 @@ void MainWindow::SetupHomeScene(){
 
     mainLay->addWidget(playersScrollArea, 2, 1, Qt::AlignCenter);
 
-    TakeSpaceInLay(30, 2, 3);
+    TakeSpaceInLay(150, 3, 3);
 }

@@ -44,6 +44,7 @@ SOURCES += \
     main/data_collector.cpp \
     main/main.cpp \
     main/mainwindow.cpp \
+    main/mainwindow_database.cpp \
     network/network_manager.cpp \
     network/request_buffer.cpp
 

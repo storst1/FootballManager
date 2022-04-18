@@ -22,6 +22,10 @@ public:
 
     void setClub(CLUB* clubPtr);
     static bool CompTwoPlayersByPos(const PLAYER* p1, const PLAYER* p2);
+    static bool CompTwoPlayersByName(const PLAYER* p1, const PLAYER* p2);
+    static bool CompTwoPlayersByAge(const PLAYER* p1, const PLAYER* p2);
+    static bool CompTwoPlayersByTV(const PLAYER* p1, const PLAYER* p2);
+    static bool CompTwoPlayersBySkill(const PLAYER* p1, const PLAYER* p2);
 
     void addOneYearToAge();
 private:

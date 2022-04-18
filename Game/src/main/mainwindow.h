@@ -153,8 +153,15 @@ private:
     QScrollArea* playersScrollArea;
     QWidget* playersScrollAreaWidget;
     QGridLayout* playersLay;
+    QList<PLAYER*> homeScenePlayers;
 
     void SetupHomeScene();
+    void HomeSceneAddPlayersToLay();
+    void HomeSceneSortPlayersByName();
+    void HomeSceneSortPlayersByPos();
+    void HomeSceneSortPlayersByAge();
+    void HomeSceneSortPlayersByTV();
+    void HomeSceneSortPlayersBySkill();
 
     //Settings scene
     void SetupSettingsScene();

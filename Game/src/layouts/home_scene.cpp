@@ -32,17 +32,6 @@ void MainWindow::SetupHomeScene(){
                 "background: transparent;"
             "}";
 
-    QString infoLabelStyle =
-            "QLabel{ "
-                "background-color: transparent;"
-                "border: none;"
-                "background-repeat: none;"
-                "background: transparent;"
-                "font-size: 18px;"
-                "font-family: Comic Sans MS;"
-                "color: white;"
-            "}";
-
     QString headerLabelStyle =
             "QLabel{ "
                 "background-color: transparent;"
@@ -71,28 +60,11 @@ void MainWindow::SetupHomeScene(){
                 "color: blue;"
             "}";
 
-    QString playerButtonStyle =
-            "QPushButton{ "
-                "background-color: transparent;"
-                "border: none;"
-                "background-repeat: none;"
-                "background: transparent;"
-                "font-size: 23px;"
-                "font-weight: bold;"
-                "font-family: Comic Sans MS;"
-                "color: rgb(211, 242, 254);"
-                "text-align: left;"
-            "}"
-            ":hover{"
-                "color: orange;"
-            "}";
-
     ClearLay();
 
-    const int playerLabelHeight = 40;
     const int headerLabelHeight = 30;
     CLUB* club = user->getClub();
-    QList<PLAYER*> players = club->getPlayers();
+    homeScenePlayers = club->getPlayers();
 
     TakeSpaceInLay(100, 0, 3);
 
@@ -106,22 +78,48 @@ void MainWindow::SetupHomeScene(){
     QPushButton* nameHeader = new QPushButton("Name");
     nameHeader->setStyleSheet(headerButtonStyle);
     nameHeader->setFixedSize(390, headerLabelHeight);
+    connect(nameHeader, &QPushButton::clicked, this, [this]{
+        HomeSceneSortPlayersByName();
+        ClearLay(playersLay);
+        HomeSceneAddPlayersToLay();
+    });
 
     QPushButton* posHeader = new QPushButton("Position");
     posHeader->setStyleSheet(headerButtonStyle);
     posHeader->setFixedSize(90, headerLabelHeight);
+    connect(posHeader, &QPushButton::clicked, this, [this]{
+        HomeSceneSortPlayersByPos();
+        ClearLay(playersLay);
+        HomeSceneAddPlayersToLay();
+    });
 
     QPushButton* ageHeader = new QPushButton(" Age");
     ageHeader->setStyleSheet(headerButtonStyle);
     ageHeader->setFixedSize(60, headerLabelHeight);
+    connect(ageHeader, &QPushButton::clicked, this, [this]{
+        HomeSceneSortPlayersByAge();
+        ClearLay(playersLay);
+        HomeSceneAddPlayersToLay();
+    });
 
     QPushButton* skillHeader = new QPushButton("Rating");
     skillHeader->setStyleSheet(headerButtonStyle);
     skillHeader->setFixedSize(110, headerLabelHeight);
+    connect(skillHeader, &QPushButton::clicked, this, [this]{
+        HomeSceneSortPlayersBySkill();
+        ClearLay(playersLay);
+        HomeSceneAddPlayersToLay();
+    });
 
     QPushButton* TVHeader = new QPushButton("Value");
     TVHeader->setStyleSheet(headerButtonStyle);
     TVHeader->setFixedSize(170, headerLabelHeight);
+    connect(TVHeader, &QPushButton::clicked, this, [this]{
+        HomeSceneSortPlayersByTV();
+        ClearLay(playersLay);
+        HomeSceneAddPlayersToLay();
+    });
+
     playersHeaderLay->addWidget(nationHeader, 0, 0, Qt::AlignLeft);
     playersHeaderLay->addWidget(nameHeader, 0, 1, Qt::AlignLeft);
     playersHeaderLay->addWidget(posHeader, 0, 2, Qt::AlignLeft);
@@ -139,8 +137,48 @@ void MainWindow::SetupHomeScene(){
     playersScrollAreaWidget->setStyleSheet(scrollAreaWidgetStyle);
     playersLay = new QGridLayout(playersScrollAreaWidget);
 
+    HomeSceneAddPlayersToLay();
+
+    playersScrollArea->setWidget(playersScrollAreaWidget);
+    playersScrollAreaWidget->setLayout(playersLay);
+
+    mainLay->addWidget(playersScrollArea, 2, 1, Qt::AlignCenter);
+
+    TakeSpaceInLay(150, 3, 3);
+}
+
+void MainWindow::HomeSceneAddPlayersToLay(){
+    QString playerButtonStyle =
+            "QPushButton{ "
+                "background-color: transparent;"
+                "border: none;"
+                "background-repeat: none;"
+                "background: transparent;"
+                "font-size: 23px;"
+                "font-weight: bold;"
+                "font-family: Comic Sans MS;"
+                "color: rgb(211, 242, 254);"
+                "text-align: left;"
+            "}"
+            ":hover{"
+                "color: orange;"
+            "}";
+
+    QString infoLabelStyle =
+            "QLabel{ "
+                "background-color: transparent;"
+                "border: none;"
+                "background-repeat: none;"
+                "background: transparent;"
+                "font-size: 18px;"
+                "font-family: Comic Sans MS;"
+                "color: white;"
+            "}";
+
+    const int playerLabelHeight = 40;
+
     int curRow = 0;
-    for(const auto& p : players){
+    for(const auto& p : homeScenePlayers){
         QPixmap flagPixmap(110, 40);
         drawPlayerFlag(flagPixmap, p->getFF(), p->getSF());
         QLabel* flag = new QLabel();
@@ -175,11 +213,29 @@ void MainWindow::SetupHomeScene(){
         playersLay->addWidget(skill, curRow, 5, Qt::AlignCenter);
         ++curRow;
     }
+}
 
-    playersScrollArea->setWidget(playersScrollAreaWidget);
-    playersScrollAreaWidget->setLayout(playersLay);
+void MainWindow::HomeSceneSortPlayersByName()
+{
+    std::sort(homeScenePlayers.begin(), homeScenePlayers.end(), PLAYER::CompTwoPlayersByName);
+}
 
-    mainLay->addWidget(playersScrollArea, 2, 1, Qt::AlignCenter);
+void MainWindow::HomeSceneSortPlayersByPos()
+{
+    std::sort(homeScenePlayers.begin(), homeScenePlayers.end(), PLAYER::CompTwoPlayersByPos);
+}
 
-    TakeSpaceInLay(150, 3, 3);
+void MainWindow::HomeSceneSortPlayersByAge()
+{
+    std::sort(homeScenePlayers.begin(), homeScenePlayers.end(), PLAYER::CompTwoPlayersByAge);
+}
+
+void MainWindow::HomeSceneSortPlayersByTV()
+{
+    std::sort(homeScenePlayers.begin(), homeScenePlayers.end(), PLAYER::CompTwoPlayersByTV);
+}
+
+void MainWindow::HomeSceneSortPlayersBySkill()
+{
+    std::sort(homeScenePlayers.begin(), homeScenePlayers.end(), PLAYER::CompTwoPlayersBySkill);
 }

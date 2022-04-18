@@ -70,6 +70,29 @@ bool PLAYER::CompTwoPlayersByPos(const PLAYER *p1, const PLAYER *p2)
     return p1->getPos()->getFP() < p2->getPos()->getFP();
 }
 
+bool PLAYER::CompTwoPlayersByName(const PLAYER *p1, const PLAYER *p2)
+{
+    return p1->getName() < p2->getName();
+}
+
+bool PLAYER::CompTwoPlayersByAge(const PLAYER *p1, const PLAYER *p2)
+{
+    return p1->getAge() < p2->getAge();
+}
+
+bool PLAYER::CompTwoPlayersByTV(const PLAYER *p1, const PLAYER *p2)
+{
+    return p1->getTV() < p2->getTV();
+}
+
+bool PLAYER::CompTwoPlayersBySkill(const PLAYER *p1, const PLAYER *p2)
+{
+    if(p1->getSkill() == p2->getSkill()){
+        return CompTwoPlayersByPos(p1, p2);
+    }
+    return p1->getSkill() < p2->getSkill();
+}
+
 void PLAYER::addOneYearToAge()
 {
     ++age;

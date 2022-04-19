@@ -252,8 +252,3 @@ void MainWindow::ReverseHomeScenePlayers()
 {
     std::reverse(homeScenePlayers.begin(), homeScenePlayers.end());
 }
-
-void MainWindow::SetupTransfersScene()
-{
-
-}

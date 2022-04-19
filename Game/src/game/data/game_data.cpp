@@ -1,10 +1,10 @@
-#include "game_data.h"
-#include "fifa.h"
-#include "federation.h"
-#include "league.h"
-#include "team.h"
-#include "player.h"
-#include "player_position.h"
+#include "game/data/game_data.h"
+#include "game/data/fifa.h"
+#include "game/data/federation.h"
+#include "game/data/league.h"
+#include "game/data/team.h"
+#include "game/data/player.h"
+#include "game/data/player_position.h"
 #include "main/mainwindow.h"
 
 GAME_DATA::GAME_DATA(COUNTRY_MAP *countryMap) : countryMap(countryMap)

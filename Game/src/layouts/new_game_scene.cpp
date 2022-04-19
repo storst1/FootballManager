@@ -171,7 +171,7 @@ void MainWindow::SetupNewGameScene()
         SetupHomeScene();
     });
 
-    TakeSpaceInLay(20, 7, 3);
+    TakeSpaceInLay(20, 4, 3);
 }
 
 void MainWindow::NewGameNextLeague()

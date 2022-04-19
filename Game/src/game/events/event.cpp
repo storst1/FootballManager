@@ -1,4 +1,4 @@
-#include "event.h"
+#include "game/events/event.h"
 
 EVENT::EVENT(DATE& date) : date(date)
 {

@@ -1,7 +1,7 @@
-#include "league.h"
-#include "cup.h"
-#include "team.h"
-#include "table.h"
+#include "game/data/league.h"
+#include "game/data/cup.h"
+#include "game/data/team.h"
+#include "game/data/table.h"
 
 LEAGUE::LEAGUE()
 {

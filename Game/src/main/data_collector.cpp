@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+#include "main/mainwindow.h"
 
 void MainWindow::CollectData()
 {

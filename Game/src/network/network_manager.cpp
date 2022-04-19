@@ -1,4 +1,4 @@
-#include "network_manager.h"
+#include "network/network_manager.h"
 
 NETWORK_MANAGER::NETWORK_MANAGER(const QString& ApiDbPath)
 {

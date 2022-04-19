@@ -62,11 +62,14 @@ void MainWindow::SetupHomeScene(){
 
     ClearLay();
 
+    SetupNavigationLay();
+    mainLay->addLayout(navigationLay, 0, 1);
+
     const int headerLabelHeight = 30;
     CLUB* club = user->getClub();
     homeScenePlayers = club->getPlayers();
 
-    TakeSpaceInLay(100, 0, 3);
+    //TakeSpaceInLay(100, 0, 3);
 
     playersHeaderLay = new QGridLayout();
     //playersHeaderLay->setGeometry(QRect(0, 0, 1000, headerLabelHeight));
@@ -248,4 +251,9 @@ void MainWindow::HomeSceneSortPlayersBySkill()
 void MainWindow::ReverseHomeScenePlayers()
 {
     std::reverse(homeScenePlayers.begin(), homeScenePlayers.end());
+}
+
+void MainWindow::SetupTransfersScene()
+{
+
 }

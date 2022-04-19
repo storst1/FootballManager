@@ -1,4 +1,4 @@
-#include "event_birthday.h"
+#include "game/events/event_birthday.h"
 
 EVENT_BIRTHDAY::EVENT_BIRTHDAY(DATE date, PLAYER* birthdayPlayer) :
     EVENT(date), player(birthdayPlayer)

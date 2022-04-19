@@ -1,4 +1,4 @@
-#include "cup.h"
+#include "game/data/cup.h"
 
 CUP::CUP()
 {

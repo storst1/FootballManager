@@ -1,4 +1,4 @@
-#include "json_parser_club.h"
+#include "json/json_parser_club.h"
 
 JSON_PARSER_CLUB::JSON_PARSER_CLUB()
 {

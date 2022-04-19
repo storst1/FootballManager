@@ -1,4 +1,4 @@
-#include "json_parser_squad.h"
+#include "json/json_parser_squad.h"
 
 JSON_PARSER_SQUAD::JSON_PARSER_SQUAD()
 {

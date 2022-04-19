@@ -1,4 +1,4 @@
-#include "database_skill_converter.h"
+#include "database/database_skill_converter.h"
 
 DATABASE_SKILL_CONVERTER::DATABASE_SKILL_CONVERTER(const QString &dbPath, const QString& connectionName, int config)
     : DATABASE(dbPath, connectionName)

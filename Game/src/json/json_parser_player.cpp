@@ -1,4 +1,4 @@
-#include "json_parser_player.h"
+#include "json/json_parser_player.h"
 
 JSON_PARSER_PLAYER::JSON_PARSER_PLAYER()
 {

@@ -1,4 +1,4 @@
-#include "table.h"
+#include "game/data/table.h"
 
 TABLE::TABLE()
 {

@@ -84,3 +84,49 @@ void MainWindow::drawPlayerFlag(QPixmap &flag, FEDERATION *fed1, FEDERATION *fed
     }
     painter.end();
 }
+
+void MainWindow::SetupNavigationLay(){
+    navigationLay = new QGridLayout();
+
+    QString navigationButtonStyle =
+            "QPushButton{ "
+                "background-color: transparent;"
+                "border: none;"
+                "background-repeat: none;"
+                "background: transparent;"
+                "font-size: 30px;"
+                "font-weight: bold;"
+                "font-family: Comic Sans MS;"
+                "color: rgb(211, 242, 254);"
+                "text-align: left;"
+            "}"
+            ":hover{"
+                "color: orange;"
+            "}";
+
+    const int navigationHeight = 120;
+
+    navigationHomeButton = new QPushButton("Home");
+    navigationHomeButton->setStyleSheet(navigationButtonStyle);
+    navigationHomeButton->setFixedSize(200, navigationHeight);
+    connect(navigationHomeButton, &QPushButton::clicked, this, [this]{
+        //Temporary solution to make debugging easier
+        SetupNewGameScene();
+        //SetupHomeScene();
+    });
+
+    navigationTransfersButton = new QPushButton("Transfers");
+    navigationTransfersButton->setStyleSheet(navigationButtonStyle);
+    navigationTransfersButton->setFixedSize(200, navigationHeight);
+    connect(navigationTransfersButton, &QPushButton::clicked, this, [this]{
+        SetupTransfersScene();
+    });
+
+    navigationTournamentsButton = new QPushButton("Tournaments");
+    navigationTournamentsButton->setStyleSheet(navigationButtonStyle);
+    navigationTournamentsButton->setFixedSize(200, navigationHeight);
+
+    navigationLay->addWidget(navigationHomeButton, 0, 0);
+    navigationLay->addWidget(navigationTransfersButton, 0, 1);
+    navigationLay->addWidget(navigationTournamentsButton, 0, 2);
+}

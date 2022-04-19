@@ -1,7 +1,7 @@
-#include "player.h"
-#include "player_position.h"
-#include "team.h"
-#include "federation.h"
+#include "game/data/player.h"
+#include "game/data/player_position.h"
+#include "game/data/team.h"
+#include "game/data/federation.h"
 
 PLAYER::PLAYER()
 {

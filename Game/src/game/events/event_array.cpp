@@ -1,4 +1,4 @@
-#include "event_array.h"
+#include "game/events/event_array.h"
 
 EVENT_ARRAY::EVENT_ARRAY()
 {

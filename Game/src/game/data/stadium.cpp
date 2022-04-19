@@ -1,4 +1,4 @@
-#include "stadium.h"
+#include "game/data/stadium.h"
 
 STADIUM::STADIUM()
 {

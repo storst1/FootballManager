@@ -54,7 +54,7 @@ private:
     int width;
     int height;
 
-    //GAME INFO
+    //Game info
     GAME_DATA* gameData;
     USER* user;
 
@@ -110,6 +110,12 @@ private:
     //Scene-dependent methods
 
     QGridLayout* mainLay;
+    QGridLayout* navigationLay;
+    QPushButton* navigationHomeButton;
+    QPushButton* navigationTransfersButton;
+    QPushButton* navigationTournamentsButton;
+
+    void SetupNavigationLay();
 
     //STARTING SCENE
     QPushButton* loadButton;
@@ -165,6 +171,9 @@ private:
     void HomeSceneSortPlayersByTV();
     void HomeSceneSortPlayersBySkill();
     void ReverseHomeScenePlayers();
+
+    //TRANSFERS SCENE
+    void SetupTransfersScene();
 
     //Settings scene
     void SetupSettingsScene();

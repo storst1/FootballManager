@@ -1,4 +1,4 @@
-#include "database.h"
+#include "database/database.h"
 
 DATABASE::DATABASE(const QString &dbPath, const QString& connectionName)
 {

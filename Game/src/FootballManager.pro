@@ -41,6 +41,7 @@ SOURCES += \
     layouts/new_game_scene.cpp \
     layouts/settings_scene.cpp \
     layouts/starting_scene.cpp \
+    layouts/transfers_scene.cpp \
     main/data_collector.cpp \
     main/main.cpp \
     main/mainwindow.cpp \

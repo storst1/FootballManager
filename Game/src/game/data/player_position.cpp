@@ -1,5 +1,4 @@
-#include "player_position.h"
-#include <QDebug>
+#include "game/data/player_position.h"
 
 PLAYER_POSITION::PLAYER_POSITION()
 {

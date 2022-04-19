@@ -1,7 +1,7 @@
-#include "federation.h"
-#include "league.h"
-#include "team.h"
-#include "cup.h"
+#include "game/data/federation.h"
+#include "game/data/league.h"
+#include "game/data/team.h"
+#include "game/data/cup.h"
 
 FEDERATION::FEDERATION()
 {

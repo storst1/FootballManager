@@ -68,10 +68,11 @@ void MainWindow::SetupHomeScene(){
     const int headerLabelHeight = 30;
     CLUB* club = user->getClub();
     homeScenePlayers = club->getPlayers();
+    homeSceneLastSortClicked = Pos;
 
     //TakeSpaceInLay(100, 0, 3);
 
-    playersHeaderLay = new QGridLayout();
+    homeScenePlayersHeaderLay = new QGridLayout();
     //playersHeaderLay->setGeometry(QRect(0, 0, 1000, headerLabelHeight));
 
     QLabel* nationHeader = new QLabel("Nation");
@@ -82,75 +83,75 @@ void MainWindow::SetupHomeScene(){
     nameHeader->setStyleSheet(headerButtonStyle);
     nameHeader->setFixedSize(390, headerLabelHeight);
     connect(nameHeader, &QPushButton::clicked, this, [this]{
-        lastSortClicked == Name ? ReverseHomeScenePlayers() : HomeSceneSortPlayersByName();
-        ClearLay(playersLay);
+        homeSceneLastSortClicked == Name ? ReverseHomeScenePlayers() : HomeSceneSortPlayersByName();
+        ClearLay(homeScenePlayersLay);
         HomeSceneAddPlayersToLay();
-        lastSortClicked = Name;
+        homeSceneLastSortClicked = Name;
     });
 
     QPushButton* posHeader = new QPushButton("Position");
     posHeader->setStyleSheet(headerButtonStyle);
     posHeader->setFixedSize(90, headerLabelHeight);
     connect(posHeader, &QPushButton::clicked, this, [this]{
-        lastSortClicked == Pos ? ReverseHomeScenePlayers() : HomeSceneSortPlayersByPos();
-        ClearLay(playersLay);
+        homeSceneLastSortClicked == Pos ? ReverseHomeScenePlayers() : HomeSceneSortPlayersByPos();
+        ClearLay(homeScenePlayersLay);
         HomeSceneAddPlayersToLay();
-        lastSortClicked = Pos;
+        homeSceneLastSortClicked = Pos;
     });
 
     QPushButton* ageHeader = new QPushButton(" Age");
     ageHeader->setStyleSheet(headerButtonStyle);
     ageHeader->setFixedSize(60, headerLabelHeight);
     connect(ageHeader, &QPushButton::clicked, this, [this]{
-        lastSortClicked == Age ? ReverseHomeScenePlayers() : HomeSceneSortPlayersByAge();
-        ClearLay(playersLay);
+        homeSceneLastSortClicked == Age ? ReverseHomeScenePlayers() : HomeSceneSortPlayersByAge();
+        ClearLay(homeScenePlayersLay);
         HomeSceneAddPlayersToLay();
-        lastSortClicked = Age;
+        homeSceneLastSortClicked = Age;
     });
 
     QPushButton* skillHeader = new QPushButton("Rating");
     skillHeader->setStyleSheet(headerButtonStyle);
     skillHeader->setFixedSize(110, headerLabelHeight);
     connect(skillHeader, &QPushButton::clicked, this, [this]{
-        lastSortClicked == Skill ? ReverseHomeScenePlayers() : HomeSceneSortPlayersBySkill();
-        ClearLay(playersLay);
+        homeSceneLastSortClicked == Skill ? ReverseHomeScenePlayers() : HomeSceneSortPlayersBySkill();
+        ClearLay(homeScenePlayersLay);
         HomeSceneAddPlayersToLay();
-        lastSortClicked = Skill;
+        homeSceneLastSortClicked = Skill;
     });
 
     QPushButton* TVHeader = new QPushButton("Value");
     TVHeader->setStyleSheet(headerButtonStyle);
     TVHeader->setFixedSize(170, headerLabelHeight);
     connect(TVHeader, &QPushButton::clicked, this, [this]{
-        lastSortClicked == TV ? ReverseHomeScenePlayers() : HomeSceneSortPlayersByTV();
-        ClearLay(playersLay);
+        homeSceneLastSortClicked == TV ? ReverseHomeScenePlayers() : HomeSceneSortPlayersByTV();
+        ClearLay(homeScenePlayersLay);
         HomeSceneAddPlayersToLay();
-        lastSortClicked = TV;
+        homeSceneLastSortClicked = TV;
     });
 
-    playersHeaderLay->addWidget(nationHeader, 0, 0, Qt::AlignLeft);
-    playersHeaderLay->addWidget(nameHeader, 0, 1, Qt::AlignLeft);
-    playersHeaderLay->addWidget(posHeader, 0, 2, Qt::AlignLeft);
-    playersHeaderLay->addWidget(ageHeader, 0, 3, Qt::AlignLeft);
-    playersHeaderLay->addWidget(TVHeader, 0, 4, Qt::AlignLeft);
-    playersHeaderLay->addWidget(skillHeader, 0, 5, Qt::AlignLeft);
+    homeScenePlayersHeaderLay->addWidget(nationHeader, 0, 0, Qt::AlignLeft);
+    homeScenePlayersHeaderLay->addWidget(nameHeader, 0, 1, Qt::AlignLeft);
+    homeScenePlayersHeaderLay->addWidget(posHeader, 0, 2, Qt::AlignLeft);
+    homeScenePlayersHeaderLay->addWidget(ageHeader, 0, 3, Qt::AlignLeft);
+    homeScenePlayersHeaderLay->addWidget(TVHeader, 0, 4, Qt::AlignLeft);
+    homeScenePlayersHeaderLay->addWidget(skillHeader, 0, 5, Qt::AlignLeft);
 
-    mainLay->addLayout(playersHeaderLay, 1, 1);
+    mainLay->addLayout(homeScenePlayersHeaderLay, 1, 1);
 
-    playersScrollArea = new QScrollArea;
-    playersScrollArea->setFixedSize(1000, 600);
-    playersScrollArea->setStyleSheet(scrollAreaStyle);
-    playersScrollArea->scrollBarWidgets(Qt::AlignHorizontal_Mask);
-    playersScrollAreaWidget = new QWidget(playersScrollArea);
-    playersScrollAreaWidget->setStyleSheet(scrollAreaWidgetStyle);
-    playersLay = new QGridLayout(playersScrollAreaWidget);
+    homeScenePlayersScrollArea = new QScrollArea;
+    homeScenePlayersScrollArea->setFixedSize(1000, 600);
+    homeScenePlayersScrollArea->setStyleSheet(scrollAreaStyle);
+    homeScenePlayersScrollArea->scrollBarWidgets(Qt::AlignHorizontal_Mask);
+    homeScenePlayersScrollAreaWidget = new QWidget(homeScenePlayersScrollArea);
+    homeScenePlayersScrollAreaWidget->setStyleSheet(scrollAreaWidgetStyle);
+    homeScenePlayersLay = new QGridLayout(homeScenePlayersScrollAreaWidget);
 
     HomeSceneAddPlayersToLay();
 
-    playersScrollArea->setWidget(playersScrollAreaWidget);
-    playersScrollAreaWidget->setLayout(playersLay);
+    homeScenePlayersScrollArea->setWidget(homeScenePlayersScrollAreaWidget);
+    homeScenePlayersScrollAreaWidget->setLayout(homeScenePlayersLay);
 
-    mainLay->addWidget(playersScrollArea, 2, 1, Qt::AlignCenter);
+    mainLay->addWidget(homeScenePlayersScrollArea, 2, 1, Qt::AlignCenter);
 
     TakeSpaceInLay(150, 3, 3);
 }
@@ -213,12 +214,12 @@ void MainWindow::HomeSceneAddPlayersToLay(){
         TV->setStyleSheet(infoLabelStyle);
         TV->setFixedSize(180, playerLabelHeight);
 
-        playersLay->addWidget(flag, curRow, 0, Qt::AlignCenter);
-        playersLay->addWidget(name, curRow, 1, Qt::AlignCenter);
-        playersLay->addWidget(pos, curRow, 2, Qt::AlignCenter);
-        playersLay->addWidget(age, curRow, 3, Qt::AlignCenter);
-        playersLay->addWidget(TV, curRow, 4, Qt::AlignCenter);
-        playersLay->addWidget(skill, curRow, 5, Qt::AlignCenter);
+        homeScenePlayersLay->addWidget(flag, curRow, 0, Qt::AlignCenter);
+        homeScenePlayersLay->addWidget(name, curRow, 1, Qt::AlignCenter);
+        homeScenePlayersLay->addWidget(pos, curRow, 2, Qt::AlignCenter);
+        homeScenePlayersLay->addWidget(age, curRow, 3, Qt::AlignCenter);
+        homeScenePlayersLay->addWidget(TV, curRow, 4, Qt::AlignCenter);
+        homeScenePlayersLay->addWidget(skill, curRow, 5, Qt::AlignCenter);
         ++curRow;
     }
 }

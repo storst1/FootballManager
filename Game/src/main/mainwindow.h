@@ -149,11 +149,13 @@ private:
     void NewGamePrevClub();
 
     //HOME SCENE
+    enum SortType {None, Nation, Name, Pos, Age, TV, Skill};
     QGridLayout* playersHeaderLay;
     QScrollArea* playersScrollArea;
     QWidget* playersScrollAreaWidget;
     QGridLayout* playersLay;
     QList<PLAYER*> homeScenePlayers;
+    SortType lastSortClicked = None;
 
     void SetupHomeScene();
     void HomeSceneAddPlayersToLay();
@@ -162,6 +164,7 @@ private:
     void HomeSceneSortPlayersByAge();
     void HomeSceneSortPlayersByTV();
     void HomeSceneSortPlayersBySkill();
+    void ReverseHomeScenePlayers();
 
     //Settings scene
     void SetupSettingsScene();

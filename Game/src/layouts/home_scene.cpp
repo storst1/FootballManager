@@ -79,45 +79,50 @@ void MainWindow::SetupHomeScene(){
     nameHeader->setStyleSheet(headerButtonStyle);
     nameHeader->setFixedSize(390, headerLabelHeight);
     connect(nameHeader, &QPushButton::clicked, this, [this]{
-        HomeSceneSortPlayersByName();
+        lastSortClicked == Name ? ReverseHomeScenePlayers() : HomeSceneSortPlayersByName();
         ClearLay(playersLay);
         HomeSceneAddPlayersToLay();
+        lastSortClicked = Name;
     });
 
     QPushButton* posHeader = new QPushButton("Position");
     posHeader->setStyleSheet(headerButtonStyle);
     posHeader->setFixedSize(90, headerLabelHeight);
     connect(posHeader, &QPushButton::clicked, this, [this]{
-        HomeSceneSortPlayersByPos();
+        lastSortClicked == Pos ? ReverseHomeScenePlayers() : HomeSceneSortPlayersByPos();
         ClearLay(playersLay);
         HomeSceneAddPlayersToLay();
+        lastSortClicked = Pos;
     });
 
     QPushButton* ageHeader = new QPushButton(" Age");
     ageHeader->setStyleSheet(headerButtonStyle);
     ageHeader->setFixedSize(60, headerLabelHeight);
     connect(ageHeader, &QPushButton::clicked, this, [this]{
-        HomeSceneSortPlayersByAge();
+        lastSortClicked == Age ? ReverseHomeScenePlayers() : HomeSceneSortPlayersByAge();
         ClearLay(playersLay);
         HomeSceneAddPlayersToLay();
+        lastSortClicked = Age;
     });
 
     QPushButton* skillHeader = new QPushButton("Rating");
     skillHeader->setStyleSheet(headerButtonStyle);
     skillHeader->setFixedSize(110, headerLabelHeight);
     connect(skillHeader, &QPushButton::clicked, this, [this]{
-        HomeSceneSortPlayersBySkill();
+        lastSortClicked == Skill ? ReverseHomeScenePlayers() : HomeSceneSortPlayersBySkill();
         ClearLay(playersLay);
         HomeSceneAddPlayersToLay();
+        lastSortClicked = Skill;
     });
 
     QPushButton* TVHeader = new QPushButton("Value");
     TVHeader->setStyleSheet(headerButtonStyle);
     TVHeader->setFixedSize(170, headerLabelHeight);
     connect(TVHeader, &QPushButton::clicked, this, [this]{
-        HomeSceneSortPlayersByTV();
+        lastSortClicked == TV ? ReverseHomeScenePlayers() : HomeSceneSortPlayersByTV();
         ClearLay(playersLay);
         HomeSceneAddPlayersToLay();
+        lastSortClicked = TV;
     });
 
     playersHeaderLay->addWidget(nationHeader, 0, 0, Qt::AlignLeft);
@@ -238,4 +243,9 @@ void MainWindow::HomeSceneSortPlayersByTV()
 void MainWindow::HomeSceneSortPlayersBySkill()
 {
     std::sort(homeScenePlayers.begin(), homeScenePlayers.end(), PLAYER::CompTwoPlayersBySkill);
+}
+
+void MainWindow::ReverseHomeScenePlayers()
+{
+    std::reverse(homeScenePlayers.begin(), homeScenePlayers.end());
 }

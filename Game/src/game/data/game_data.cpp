@@ -51,6 +51,16 @@ QMap<int, PLAYER *> GAME_DATA::getPlayers() const
     return players;
 }
 
+QList<PLAYER *> GAME_DATA::getPlayersList() const
+{
+    //Iterates through the map and returns all the existing pointers to PLAYER
+    QList<PLAYER*> list;
+    for(const auto& p : players){
+        list.push_back(p);
+    }
+    return list;
+}
+
 COUNTRY_MAP *GAME_DATA::getCountryMap() const
 {
     return countryMap;
@@ -145,4 +155,156 @@ void GAME_DATA::InitPositions()
             pos->setStrNameToAuto();
         }
     }
+}
+
+QList<PLAYER *> GAME_DATA::getPlayersListConditional(QList<FEDERATION *> nations,
+                                                     QList<FEDERATION *> secondNations,
+                                                     QString name,
+                                                     QString team,
+                                                     QList<LEAGUE *> leagues,
+                                                     int minAge,
+                                                     int maxAge,
+                                                     QList<int> positions,
+                                                     QList<int> secondPositions,
+                                                     int minTV,
+                                                     int maxTV,
+                                                     int minSkill,
+                                                     int maxSkill
+                                                     ) const
+{
+    QList<PLAYER*> list = getPlayersList();
+    QList<PLAYER*> listToReturn;
+    for(int i = 0; i < list.size(); ++i){
+        if(!PlayerFirstNationConditionCheck(list[i], nations)){
+            continue;
+        }
+        if(!PlayerSecondNationConditionCheck(list[i], secondNations)){
+            continue;
+        }
+        if(!PlayerNameConditionCheck(list[i], name)){
+            continue;
+        }
+        if(!PlayerTeamConditionCheck(list[i], team)){
+            continue;
+        }
+        if(!PlayerLeagueConditionCheck(list[i], leagues)){
+            continue;
+        }
+        if(!PlayerAgeConditionCheck(list[i], minAge, maxAge)){
+            continue;
+        }
+        if(!PlayerFirstPosConditionCheck(list[i], positions)){
+            continue;
+        }
+        if(!PlayerSecondPosConditionCheck(list[i], secondPositions)){
+            continue;
+        }
+        if(!PlayerTVConditionCheck(list[i], minTV, maxTV)){
+            continue;
+        }
+        if(!PlayerSkillConditionCheck(list[i], minSkill, maxSkill)){
+            continue;
+        }
+        //If player hasn't been skipped up to this point means he met all the conditions
+        listToReturn.push_back(list[i]);
+    }
+    return listToReturn;
+}
+
+bool GAME_DATA::PlayerFirstNationConditionCheck(PLAYER *player, QList<FEDERATION *> &nations) const
+{
+    if(nations.empty()){
+        return true;
+    }
+    for(const auto &n : nations){
+        if(player->getFF() == n){
+            return true;
+        }
+    }
+    return false;
+}
+
+bool GAME_DATA::PlayerSecondNationConditionCheck(PLAYER *player, QList<FEDERATION *> &nations) const
+{
+    if(nations.empty()){
+        return true;
+    }
+    for(const auto &n : nations){
+        if(player->getSF() == n){
+            return true;
+        }
+    }
+    return false;
+}
+
+bool GAME_DATA::PlayerNameConditionCheck(PLAYER *player, QString &name) const
+{
+    if(name == ""){
+        return true;
+    }
+    return player->getName().contains(name, Qt::CaseInsensitive);
+}
+
+bool GAME_DATA::PlayerTeamConditionCheck(PLAYER *player, QString &team) const
+{
+    if(team == ""){
+        return true;
+    }
+    return player->getClub()->getName().contains(team, Qt::CaseInsensitive);
+}
+
+bool GAME_DATA::PlayerLeagueConditionCheck(PLAYER *player, QList<LEAGUE *> leagues) const
+{
+    //TO DO: Implement this method
+
+    /*
+    if(leagues.empty()){
+        return true;
+    }
+    for(const auto& l : leagues){
+        if(player->getClub()->)
+    }
+    */
+    return true;
+}
+
+bool GAME_DATA::PlayerAgeConditionCheck(PLAYER *player, int minAge, int maxAge) const
+{
+    return (player->getAge() >= minAge && player->getAge() <= maxAge);
+}
+
+bool GAME_DATA::PlayerFirstPosConditionCheck(PLAYER *player, QList<int> &posList) const
+{
+    if(posList.empty()){
+        return true;
+    }
+    for(const auto &p : posList){
+        if(player->getPos()->getFP() == p){
+            return true;
+        }
+    }
+    return false;
+}
+
+bool GAME_DATA::PlayerSecondPosConditionCheck(PLAYER *player, QList<int> &posList) const
+{
+    if(posList.empty()){
+        return true;
+    }
+    for(const auto &p : posList){
+        if(player->getPos()->getSP() == p){
+            return true;
+        }
+    }
+    return false;
+}
+
+bool GAME_DATA::PlayerTVConditionCheck(PLAYER *player, int minTV, int maxTV) const
+{
+    return (player->getTV() >= minTV && player->getTV() <= maxTV);
+}
+
+bool GAME_DATA::PlayerSkillConditionCheck(PLAYER *player, int minSkill, int maxSkill) const
+{
+    return (player->getSkill() >= minSkill && player->getSkill() <= maxSkill);
 }

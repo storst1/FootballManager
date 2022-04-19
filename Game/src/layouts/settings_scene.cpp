@@ -1,5 +1,7 @@
 #include "main/mainwindow.h"
 
+//TO DO: Complete redesign settins page to match possible user intrests
+
 void MainWindow::SetupSettingsScene(){
     ClearLay();
 

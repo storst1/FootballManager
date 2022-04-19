@@ -75,7 +75,7 @@ private:
     std::map<QString, int> CountryNameToId;
 
     //Other data
-    enum SortType {Nation, Name, Pos, Age, TV, Skill};
+    enum PlayerSortType {Nation, Name, Pos, Age, TV, Skill};
 
     //Database & API methods
     QString getRealDataDbPath();
@@ -164,7 +164,7 @@ private:
     QWidget* homeScenePlayersScrollAreaWidget;
     QGridLayout* homeScenePlayersLay;
     QList<PLAYER*> homeScenePlayers;
-    SortType homeSceneLastSortClicked = Pos;
+    PlayerSortType homeSceneLastSortClicked = Pos;
 
     void SetupHomeScene();
     void HomeSceneAddPlayersToLay();
@@ -176,8 +176,15 @@ private:
     void ReverseHomeScenePlayers();
 
     //TRANSFERS SCENE
+    QGridLayout* transfersScenePlayersHeaderLay;
+    QScrollArea* transfersScenePlayersScrollArea;
+    QWidget* transfersScenePlayersScrollAreaWidget;
+    QGridLayout* transfersScenePlayersLay;
+    QList<PLAYER*> transfersScenePlayers;
+    PlayerSortType transfersSceneLastSortClicked = Pos;
 
     void SetupTransfersScene();
+    void TransfersSceneAddPlayersToLay();
 
     //Settings scene
     void SetupSettingsScene();

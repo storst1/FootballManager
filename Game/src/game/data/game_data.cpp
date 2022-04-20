@@ -157,7 +157,8 @@ void GAME_DATA::InitPositions()
     }
 }
 
-QList<PLAYER *> GAME_DATA::getPlayersListConditional(QList<FEDERATION *> nations,
+QList<PLAYER *> GAME_DATA::getPlayersListConditional(int maxSize,
+                                                     QList<FEDERATION *> nations,
                                                      QList<FEDERATION *> secondNations,
                                                      QString name,
                                                      QString team,
@@ -207,6 +208,9 @@ QList<PLAYER *> GAME_DATA::getPlayersListConditional(QList<FEDERATION *> nations
         }
         //If player hasn't been skipped up to this point means he met all the conditions
         listToReturn.push_back(list[i]);
+        if(maxSize > 0 && listToReturn.size() == maxSize){
+            return listToReturn;
+        }
     }
     return listToReturn;
 }

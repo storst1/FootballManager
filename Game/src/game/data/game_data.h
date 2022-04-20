@@ -41,7 +41,8 @@ public:
 
     void InitPositions();
 
-    QList<PLAYER*> getPlayersListConditional(QList<FEDERATION*> nations = {},
+    QList<PLAYER*> getPlayersListConditional(int maxSize = -1,
+                                             QList<FEDERATION*> nations = {},
                                              QList<FEDERATION*> secondNations = {},
                                              QString name = "",
                                              QString team = "",

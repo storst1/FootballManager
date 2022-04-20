@@ -6,37 +6,59 @@
 
 void MainWindow::SetupTransfersScene()
 {
-    ClearLay();
 
-    QString playerButtonStyle =
-            "QPushButton{ "
+    QString scrollAreaStyle =
+            "QScrollArea{ "
                 "background-color: transparent;"
                 "border: none;"
                 "background-repeat: none;"
                 "background: transparent;"
-                "font-size: 23px;"
-                "font-weight: bold;"
-                "font-family: Comic Sans MS;"
-                "color: rgb(211, 242, 254);"
-                "text-align: left;"
             "}"
-            ":hover{"
-                "color: orange;"
+            "QScrollArea > QWidget > QScrollBar:vertical {"
+                "background: palette(base)"
+            "}"
+            "QScrollArea > QWidget > QScrollBar:handle:vertical {"
+                "background: rgb(141,232,123);"
+            "}"
+            "QScrollArea > QWidget > QScrollBar:add-page:vertical {"
+                "background: rgb(225,252,220);"
+            "}"
+            "QScrollArea > QWidget > QScrollBar:sub-page:vertical {"
+                "background: rgb(225,252,220);"
             "}";
 
-    QString infoLabelStyle =
-            "QLabel{ "
+    QString scrollAreaWidgetStyle =
+            "QScrollArea > QWidget > QWidget{"
                 "background-color: transparent;"
                 "border: none;"
                 "background-repeat: none;"
                 "background: transparent;"
-                "font-size: 18px;"
-                "font-family: Comic Sans MS;"
-                "color: white;"
             "}";
+
+    ClearLay();
 
     SetupNavigationLay();
     mainLay->addLayout(navigationLay, 0, 1);
+
+    transfersScenePlayers = gameData->getPlayersListConditional(100);
+    transfersSceneLastSortClicked = None;
+
+    transfersScenePlayersScrollArea = new QScrollArea;
+    transfersScenePlayersScrollArea->setFixedSize(1000, 600);
+    transfersScenePlayersScrollArea->setStyleSheet(scrollAreaStyle);
+    transfersScenePlayersScrollArea->scrollBarWidgets(Qt::AlignHorizontal_Mask);
+    transfersScenePlayersScrollAreaWidget = new QWidget(transfersScenePlayersScrollArea);
+    transfersScenePlayersScrollAreaWidget->setStyleSheet(scrollAreaWidgetStyle);
+    transfersScenePlayersLay = new QGridLayout(transfersScenePlayersScrollAreaWidget);
+
+    TransfersSceneAddPlayersToLay();
+
+    transfersScenePlayersScrollArea->setWidget(transfersScenePlayersScrollAreaWidget);
+    transfersScenePlayersScrollAreaWidget->setLayout(transfersScenePlayersLay);
+
+    mainLay->addWidget(transfersScenePlayersScrollArea, 2, 1, Qt::AlignCenter);
+
+    TakeSpaceInLay(50, 3, 3);
 }
 
 void MainWindow::TransfersSceneAddPlayersToLay(){
@@ -70,7 +92,7 @@ void MainWindow::TransfersSceneAddPlayersToLay(){
     const int playerLabelHeight = 40;
 
     int curRow = 0;
-    for(const auto& p : homeScenePlayers){
+    for(const auto& p : transfersScenePlayers){
         QPixmap flagPixmap(110, 40);
         drawPlayerFlag(flagPixmap, p->getFF(), p->getSF());
         QLabel* flag = new QLabel();
@@ -97,12 +119,12 @@ void MainWindow::TransfersSceneAddPlayersToLay(){
         TV->setStyleSheet(infoLabelStyle);
         TV->setFixedSize(180, playerLabelHeight);
 
-        homeScenePlayersLay->addWidget(flag, curRow, 0, Qt::AlignCenter);
-        homeScenePlayersLay->addWidget(name, curRow, 1, Qt::AlignCenter);
-        homeScenePlayersLay->addWidget(pos, curRow, 2, Qt::AlignCenter);
-        homeScenePlayersLay->addWidget(age, curRow, 3, Qt::AlignCenter);
-        homeScenePlayersLay->addWidget(TV, curRow, 4, Qt::AlignCenter);
-        homeScenePlayersLay->addWidget(skill, curRow, 5, Qt::AlignCenter);
+        transfersScenePlayersLay->addWidget(flag, curRow, 0, Qt::AlignCenter);
+        transfersScenePlayersLay->addWidget(name, curRow, 1, Qt::AlignCenter);
+        transfersScenePlayersLay->addWidget(pos, curRow, 2, Qt::AlignCenter);
+        transfersScenePlayersLay->addWidget(age, curRow, 3, Qt::AlignCenter);
+        transfersScenePlayersLay->addWidget(TV, curRow, 4, Qt::AlignCenter);
+        transfersScenePlayersLay->addWidget(skill, curRow, 5, Qt::AlignCenter);
         ++curRow;
     }
 }

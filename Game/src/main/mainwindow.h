@@ -75,7 +75,7 @@ private:
     std::map<QString, int> CountryNameToId;
 
     //Other data
-    enum PlayerSortType {Nation, Name, Pos, Age, TV, Skill};
+    enum PlayerSortType {None, Nation, Name, Pos, Age, TV, Skill};
 
     //Database & API methods
     QString getRealDataDbPath();

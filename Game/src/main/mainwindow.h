@@ -25,6 +25,7 @@
 #include <QScrollArea>
 #include <QPixmap>
 #include <QPainter>
+#include <QLineEdit>
 
 #include <algorithm>
 
@@ -176,6 +177,7 @@ private:
     void ReverseHomeScenePlayers();
 
     //TRANSFERS SCENE
+    bool transfersSceneLoaded = false;
     QGridLayout* transfersScenePlayersHeaderLay;
     QScrollArea* transfersScenePlayersScrollArea;
     QWidget* transfersScenePlayersScrollAreaWidget;

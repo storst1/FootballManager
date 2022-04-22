@@ -7,6 +7,8 @@
 void MainWindow::SetupTransfersScene()
 {
 
+    transfersSceneLoaded = false;
+
     QString scrollAreaStyle =
             "QScrollArea{ "
                 "background-color: transparent;"
@@ -35,16 +37,38 @@ void MainWindow::SetupTransfersScene()
                 "background: transparent;"
             "}";
 
+    QString lineEditStyle = "QLineEdit {"
+            "border: 2px solid gray;"
+            "border-radius: 10px;"
+            "padding: 0 8px;"
+            "background: yellow;"
+            "selection-background-color: darkgray;"
+        "}";
+
     ClearLay();
 
     SetupNavigationLay();
     mainLay->addLayout(navigationLay, 0, 1);
 
+    QLineEdit* nameInput = new QLineEdit("Name");
+    nameInput->setFixedSize(300, 50);
+    nameInput->setStyleSheet(lineEditStyle);
+    nameInput->setClearButtonEnabled(true);
+    connect(nameInput, &QLineEdit::cursorPositionChanged, this, [this, nameInput]{
+        if(transfersSceneLoaded){
+            return;
+        }
+        nameInput->clear();
+        transfersSceneLoaded = true;
+    });
+    mainLay->addWidget(nameInput, 1, 1, Qt::AlignCenter);
+
+    //Players lay
     transfersScenePlayers = gameData->getPlayersListConditional(100);
     transfersSceneLastSortClicked = None;
 
     transfersScenePlayersScrollArea = new QScrollArea;
-    transfersScenePlayersScrollArea->setFixedSize(1000, 600);
+    transfersScenePlayersScrollArea->setFixedSize(1300, 450);
     transfersScenePlayersScrollArea->setStyleSheet(scrollAreaStyle);
     transfersScenePlayersScrollArea->scrollBarWidgets(Qt::AlignHorizontal_Mask);
     transfersScenePlayersScrollAreaWidget = new QWidget(transfersScenePlayersScrollArea);
@@ -62,6 +86,7 @@ void MainWindow::SetupTransfersScene()
 }
 
 void MainWindow::TransfersSceneAddPlayersToLay(){
+
     QString playerButtonStyle =
             "QPushButton{ "
                 "background-color: transparent;"
@@ -87,6 +112,22 @@ void MainWindow::TransfersSceneAddPlayersToLay(){
                 "font-size: 18px;"
                 "font-family: Comic Sans MS;"
                 "color: white;"
+            "}";
+
+    QString optionsButtonStyle =
+            "QPushButton{ "
+                "background-color: transparent;"
+                "border: none;"
+                "background-repeat: none;"
+                "background: transparent;"
+                "font-size: 23px;"
+                "font-weight: bold;"
+                "font-family: Comic Sans MS;"
+                "color: rgb(144, 246, 141);"
+                "text-align: center;"
+            "}"
+            ":hover{"
+                "color: red;"
             "}";
 
     const int playerLabelHeight = 40;
@@ -119,12 +160,17 @@ void MainWindow::TransfersSceneAddPlayersToLay(){
         TV->setStyleSheet(infoLabelStyle);
         TV->setFixedSize(180, playerLabelHeight);
 
+        QPushButton* options = new QPushButton("Explore options");
+        options->setFixedSize(200, playerLabelHeight);
+        options->setStyleSheet(optionsButtonStyle);
+
         transfersScenePlayersLay->addWidget(flag, curRow, 0, Qt::AlignCenter);
         transfersScenePlayersLay->addWidget(name, curRow, 1, Qt::AlignCenter);
         transfersScenePlayersLay->addWidget(pos, curRow, 2, Qt::AlignCenter);
         transfersScenePlayersLay->addWidget(age, curRow, 3, Qt::AlignCenter);
         transfersScenePlayersLay->addWidget(TV, curRow, 4, Qt::AlignCenter);
         transfersScenePlayersLay->addWidget(skill, curRow, 5, Qt::AlignCenter);
+        transfersScenePlayersLay->addWidget(options, curRow, 6, Qt::AlignCenter);
         ++curRow;
     }
 }

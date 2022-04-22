@@ -57,7 +57,7 @@ void MainWindow::ClearLay(QLayout *lay)
         }
         else if(curItem->widget() != nullptr){
             //qDebug() << "Deleted widget: " << curItem->widget() << " i = " << i;
-            delete curItem->widget();
+            curItem->widget()->deleteLater();
         }
         //qDebug() << "Trying to delete item: " << curItem;
         delete curItem;

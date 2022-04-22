@@ -178,12 +178,13 @@ private:
 
     //TRANSFERS SCENE
     bool transfersSceneLoaded = false;
+    QGridLayout* transfersSceneFiltersLay;
     QGridLayout* transfersScenePlayersHeaderLay;
     QScrollArea* transfersScenePlayersScrollArea;
     QWidget* transfersScenePlayersScrollAreaWidget;
     QGridLayout* transfersScenePlayersLay;
     QList<PLAYER*> transfersScenePlayers;
-    PlayerSortType transfersSceneLastSortClicked = Pos;
+    PlayerSortType transfersSceneLastSortClicked = None;
 
     void SetupTransfersScene();
     void TransfersSceneAddPlayersToLay();

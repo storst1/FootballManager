@@ -50,8 +50,10 @@ void MainWindow::SetupTransfersScene()
     SetupNavigationLay();
     mainLay->addLayout(navigationLay, 0, 1);
 
+    transfersSceneFiltersLay = new QGridLayout;
+
     QLineEdit* nameInput = new QLineEdit("Name");
-    nameInput->setFixedSize(300, 50);
+    nameInput->setFixedSize(150, 30);
     nameInput->setStyleSheet(lineEditStyle);
     nameInput->setClearButtonEnabled(true);
     connect(nameInput, &QLineEdit::cursorPositionChanged, this, [this, nameInput]{
@@ -61,14 +63,15 @@ void MainWindow::SetupTransfersScene()
         nameInput->clear();
         transfersSceneLoaded = true;
     });
-    mainLay->addWidget(nameInput, 1, 1, Qt::AlignCenter);
+    transfersSceneFiltersLay->addWidget(nameInput);
+    mainLay->addLayout(transfersSceneFiltersLay, 1, 1, Qt::AlignCenter);
 
     //Players lay
     transfersScenePlayers = gameData->getPlayersListConditional(100);
     transfersSceneLastSortClicked = None;
 
     transfersScenePlayersScrollArea = new QScrollArea;
-    transfersScenePlayersScrollArea->setFixedSize(1300, 450);
+    transfersScenePlayersScrollArea->setFixedSize(1400, 450);
     transfersScenePlayersScrollArea->setStyleSheet(scrollAreaStyle);
     transfersScenePlayersScrollArea->scrollBarWidgets(Qt::AlignHorizontal_Mask);
     transfersScenePlayersScrollAreaWidget = new QWidget(transfersScenePlayersScrollArea);
@@ -82,7 +85,7 @@ void MainWindow::SetupTransfersScene()
 
     mainLay->addWidget(transfersScenePlayersScrollArea, 2, 1, Qt::AlignCenter);
 
-    TakeSpaceInLay(50, 3, 3);
+    TakeSpaceInLay(150, 3, 3);
 }
 
 void MainWindow::TransfersSceneAddPlayersToLay(){
@@ -142,11 +145,15 @@ void MainWindow::TransfersSceneAddPlayersToLay(){
 
         QPushButton* name = new QPushButton(p->getName());
         name->setStyleSheet(playerButtonStyle);
-        name->setFixedSize(400, playerLabelHeight);
+        name->setFixedSize(350, playerLabelHeight);
 
         QLabel* pos = new QLabel(p->getPos()->getStrName());
         pos->setStyleSheet(infoLabelStyle);
         pos->setFixedSize(100, playerLabelHeight);
+
+        QLabel* team = new QLabel(p->getClub()->getName());
+        team->setStyleSheet(infoLabelStyle);
+        team->setFixedSize(200, playerLabelHeight);
 
         QLabel* age = new QLabel(QString::number(p->getAge()));
         age->setStyleSheet(infoLabelStyle);
@@ -161,16 +168,17 @@ void MainWindow::TransfersSceneAddPlayersToLay(){
         TV->setFixedSize(180, playerLabelHeight);
 
         QPushButton* options = new QPushButton("Explore options");
-        options->setFixedSize(200, playerLabelHeight);
+        options->setFixedSize(170, playerLabelHeight);
         options->setStyleSheet(optionsButtonStyle);
 
         transfersScenePlayersLay->addWidget(flag, curRow, 0, Qt::AlignCenter);
         transfersScenePlayersLay->addWidget(name, curRow, 1, Qt::AlignCenter);
         transfersScenePlayersLay->addWidget(pos, curRow, 2, Qt::AlignCenter);
-        transfersScenePlayersLay->addWidget(age, curRow, 3, Qt::AlignCenter);
-        transfersScenePlayersLay->addWidget(TV, curRow, 4, Qt::AlignCenter);
-        transfersScenePlayersLay->addWidget(skill, curRow, 5, Qt::AlignCenter);
-        transfersScenePlayersLay->addWidget(options, curRow, 6, Qt::AlignCenter);
+        transfersScenePlayersLay->addWidget(team, curRow, 3, Qt::AlignCenter);
+        transfersScenePlayersLay->addWidget(age, curRow, 4, Qt::AlignCenter);
+        transfersScenePlayersLay->addWidget(TV, curRow, 5, Qt::AlignCenter);
+        transfersScenePlayersLay->addWidget(skill, curRow, 6, Qt::AlignCenter);
+        transfersScenePlayersLay->addWidget(options, curRow, 7, Qt::AlignCenter);
         ++curRow;
     }
 }

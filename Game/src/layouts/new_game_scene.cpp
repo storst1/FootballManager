@@ -169,6 +169,7 @@ void MainWindow::SetupNewGameScene()
         user->setClub((allLeaguesList[NewGameCurLeagueIdx]->getClubs())[NewGameCurClubIdx]);
         qDebug() << "User chose club: " << user->getClub()->getName();
         SetupHomeScene();
+        //SetupTransfersScene();
     });
 
     TakeSpaceInLay(20, 4, 3);

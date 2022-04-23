@@ -40,7 +40,6 @@ void MainWindow::SetupNewGameScene()
                 "background-image:url(:/rightArrowHighlighted120x120.png);"
             "}";
 
-
     QString clubNameLabelStyle =
             "QLabel{ "
                 "background-color: transparent;"

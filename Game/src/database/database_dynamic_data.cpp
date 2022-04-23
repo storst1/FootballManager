@@ -5,6 +5,7 @@
 #include "game/data/team.h"
 #include "game/data/league.h"
 #include "main/mainwindow.h"
+#include "game/time/date.h"
 
 DATABASE_DYNAMIC_DATA::DATABASE_DYNAMIC_DATA(const QString &dbPath, const QString &connectionName)
     : DATABASE(dbPath, connectionName)
@@ -46,7 +47,7 @@ void DATABASE_DYNAMIC_DATA::CopyFederationsTable(QSqlQuery& query, COUNTRY_MAP* 
         DATABASE::PrintSqlExecInfoIfErr(updQuery);
     }
 
-    qDebug() << "Updating federations data into dynamic database finished. Last error: " + query.lastError().text();
+    qDebug() << "Copying federations data into dynamic database finished. Last error: " + query.lastError().text();
 }
 
 void DATABASE_DYNAMIC_DATA::CopyLeaguesTable(QSqlQuery& query)
@@ -75,6 +76,23 @@ void DATABASE_DYNAMIC_DATA::CopyPlayersTable(QSqlQuery& query)
                " SELECT "
                "id, name, club, TW, age, FN, SN, FP, SP, skill, height"
                " FROM real.players");
+    DATABASE::PrintSqlExecInfoIfErr(query);
+
+    query.exec("SELECT id, birthday_TM, contract_TM FROM real.players;");
+    DATABASE::PrintSqlExecInfoIfErr(query);
+    while(query.next()){
+        int cur_id = query.value(0).toInt();
+        int tm_bd = query.value(1).toInt();
+        int tm_contrExp = query.value(2).toInt();
+        int raw_bd = DATE::rawDateFromTMDate(tm_bd);
+        int raw_contrExp = DATE::rawDateFromTMDate(tm_contrExp);
+        QSqlQuery updQuery(*db);
+        updQuery.exec("UPDATE players SET birthday = '" + QString::number(raw_bd) +
+                      "', contractExp = '" + QString::number(raw_contrExp) + "' WHERE "
+                      "id = '" + QString::number(cur_id) + "';");
+        DATABASE::PrintSqlExecInfoIfErr(updQuery);
+
+    }
 
     qDebug() << "Copying players data into dynamic database finished. Last error: " + query.lastError().text();
 }
@@ -168,7 +186,7 @@ QList<PLAYER *> DATABASE_DYNAMIC_DATA::InitPlayersByClub(CLUB* curClub, GAME_DAT
     const int clubId = curClub->getId();
     QSqlQuery query(*db);
     QList<PLAYER*> playersList;
-    query.exec("SELECT id, name, TV, age, FN, SN, FP, SP, skill, height FROM players "
+    query.exec("SELECT id, name, TV, age, FN, SN, FP, SP, skill, height, birthday, contractExp FROM players "
                "WHERE club = '" + QString::number(clubId) + "';");
     DATABASE::PrintSqlExecInfoIfErr(query);
     while(query.next()){
@@ -182,6 +200,9 @@ QList<PLAYER *> DATABASE_DYNAMIC_DATA::InitPlayersByClub(CLUB* curClub, GAME_DAT
         int curSPid = query.value(7).toInt();
         float curSkill = query.value(8).toFloat();
         QString curH = query.value(9).toString();
+        int curBirthdayRaw = query.value(10).toInt();
+        int curContractExpRaw = query.value(11).toInt();
+
         QString FFstr = gameData->getCountryMap()->getById(curFNid);
         FEDERATION* FF = gameData->implicitlyGetFederation(curFNid, FFstr);
         QString SFstr;
@@ -191,7 +212,11 @@ QList<PLAYER *> DATABASE_DYNAMIC_DATA::InitPlayersByClub(CLUB* curClub, GAME_DAT
             SF = gameData->implicitlyGetFederation(curSNid, SFstr);
         }
 
-        PLAYER* curPlayer = new PLAYER(curId, curName, curTV, curAge, curSkill, FF, SF, positionsMap[{curFPid, curSPid}], curH);
+        DATE curBirthday(curBirthdayRaw);
+        DATE curContractExp(curContractExpRaw);
+
+        PLAYER* curPlayer = new PLAYER(curId, curName, curTV, curAge, curSkill, FF,
+                                       SF, positionsMap[{curFPid, curSPid}], curH, curBirthday, curContractExp);
         curPlayer->setClub(curClub);
         playersList.push_back(curPlayer);
     }

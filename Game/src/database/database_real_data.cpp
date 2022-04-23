@@ -176,7 +176,7 @@ void DATABASE_REAL_DATA::SelectAllClubs(QList<API_CLUB *> &clubs)
 void DATABASE_REAL_DATA::SelectAllPlayers(QList<API_PLAYER *> &players)
 {
     QSqlQuery query(*db);
-    query.exec("SELECT id, name, club, TW, FN, SN, age, height, FP, SP FROM players;");
+    query.exec("SELECT id, name, club, TW, FN, SN, age, height, FP, SP, birthday_TM, contract_TM FROM players;");
     DATABASE::PrintSqlExecInfoIfErr(query);
     while(query.next()){
         int id = query.value(0).toInt();
@@ -189,12 +189,15 @@ void DATABASE_REAL_DATA::SelectAllPlayers(QList<API_PLAYER *> &players)
         QString height = query.value(7).toString();
         int FP = query.value(8).toInt();
         int SP = query.value(9).toInt();
-        players.push_back(new API_PLAYER(id, name, TW, FN, SN, FP, SP, height, age, club));
+        int TM_bd = query.value(10).toInt();
+        int contractExp_TM = query.value(11).toInt();
+        players.push_back(new API_PLAYER(id, name, TW, FN, SN, FP, SP, height, age, club, TM_bd, contractExp_TM));
     }
 }
 
 void DATABASE_REAL_DATA::MakeBackup(const QString &backupDbPath)
 {
+    //WARNING: OUTDATED METHOD, FIX BEFORE USING
     DATABASE_REAL_DATA backupDb(backupDbPath, "DB_REAL_BACKUP");
     //backupDb.db->setDatabaseName("");
     QSqlQuery backupQuery(*backupDb.db);
@@ -270,7 +273,8 @@ QList<QPair<int, QString> > DATABASE_REAL_DATA::GetAllCountries()
 void DATABASE_REAL_DATA::SavePlayersInfo(QList<API_PLAYER *> playersList)
 {
     QSqlQuery query(*db);
-    QString queryStatement = "INSERT INTO players (id, name, club, TW, FN, SN, age, height, FP, SP) VALUES ";
+    QString queryStatement = "INSERT INTO players (id, name, club, TW, FN, SN, age, height, "
+                             "FP, SP, birthday_TM, contract_TM) VALUES ";
     for(auto p : playersList){
         queryStatement +=
                 "('" + QString::number(p->getId()) +
@@ -282,7 +286,10 @@ void DATABASE_REAL_DATA::SavePlayersInfo(QList<API_PLAYER *> playersList)
                 "', '" + QString::number(p->getAge()) +
                 "', '" + p->getHeight() +
                 "', '" + QString::number(p->getFP()) +
-                "', '" + QString::number(p->getSP()) + "'), ";
+                "', '" + QString::number(p->getSP()) +
+                "', '" + QString::number(p->getTmBD()) +
+                "', '" + QString::number(p->getTmContrExp()) +
+                "'), ";
     }
     //Replace ", " with ";" at the end
     queryStatement.erase(std::prev(queryStatement.cend(), 2), queryStatement.cend());

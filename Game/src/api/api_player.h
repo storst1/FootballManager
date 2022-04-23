@@ -11,7 +11,19 @@ public:
     API_PLAYER();
     API_PLAYER(int id, QString name, int TW, int FNid, int SNid, QString height);
     API_PLAYER(JSON_PARSER_PLAYER playerInfo);
-    API_PLAYER(int id, QString name, int TW, int FN, int SN, int FP, int SP, QString height, int age, int club);
+    API_PLAYER(int id,
+               QString name,
+               int TW,
+               int FN,
+               int SN,
+               int FP,
+               int SP,
+               QString height,
+               int age,
+               int club,
+               int bd,
+               int contrExp
+    );
     ~API_PLAYER() = default;
 
     void setClubId(int id);
@@ -28,6 +40,8 @@ public:
     int getClubId() const;
     float getSkill() const;
     QString getStrSkill() const;
+    int getTmBD() const;
+    int getTmContrExp() const;
 
     void setSkill(float val);
 private:
@@ -41,6 +55,8 @@ private:
     QString height;
     int age;
     int club_id;
+    int Tm_Birthday;
+    int Tm_ContractExp;
 
     float skill = 0.f;
 };

@@ -20,7 +20,7 @@ public:
     int getFP() const;
     int getSP() const;
     int getTW() const;
-    int getTBirthday_TmType() const;
+    int getBirthday_TmType() const;
     int getContractExp_TmType() const;
 private:
     void BindJsonValues(QJsonObject playerObj);

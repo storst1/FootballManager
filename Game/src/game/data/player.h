@@ -2,12 +2,24 @@
 #define PLAYER_H
 
 #include "game/data/data_defs.h"
+#include "game/time/date.h"
 
 class PLAYER
 {
 public:
     PLAYER();
-    PLAYER(int id, QString name, int TV, int age, float skill, FEDERATION* FF, FEDERATION* SF, PLAYER_POSITION* pos, QString height);
+    PLAYER(int id,
+           QString name,
+           int TV,
+           int age,
+           float skill,
+           FEDERATION* FF,
+           FEDERATION* SF,
+           PLAYER_POSITION* pos,
+           QString height,
+           DATE birthday,
+           DATE contractExp
+           );
     ~PLAYER();
 
     int getId() const;
@@ -39,6 +51,8 @@ private:
     PLAYER_POSITION* pos;
     QString height;
     CLUB* club;
+    DATE birthday;
+    DATE contractExp;
 };
 
 #endif // PLAYER_H

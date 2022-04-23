@@ -13,6 +13,7 @@
 class DATE : public QDateTime
 {
 public:
+    DATE() = default;
     DATE(unsigned int rawDate);
     DATE(QDateTime& qt_date);
     ~DATE() = default;
@@ -30,7 +31,7 @@ public:
     static unsigned int rawDateFromQDateTime(const QDateTime& qt_time);
     static const QDate qtDateFromRawDate(unsigned int rawDate);
 private:
-    unsigned int rawDate;
+    unsigned int rawDate = 0;
 };
 
 #endif // DATE_H

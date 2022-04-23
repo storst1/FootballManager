@@ -62,7 +62,7 @@ int JSON_PARSER_PLAYER::getTW() const
     return TW.toInt();
 }
 
-int JSON_PARSER_PLAYER::getTBirthday_TmType() const
+int JSON_PARSER_PLAYER::getBirthday_TmType() const
 {
     return birthday.toInt();
 }

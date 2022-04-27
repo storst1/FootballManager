@@ -100,5 +100,21 @@
         <file>logos/200x200/Italy/5.png</file>
         <file>flags/65x40/9.png</file>
         <file>flags/65x40/157.png</file>
+        <file>logos/200x200/Russia/121.png</file>
+        <file>logos/200x200/Russia/232.png</file>
+        <file>logos/200x200/Russia/932.png</file>
+        <file>logos/200x200/Russia/964.png</file>
+        <file>logos/200x200/Russia/2410.png</file>
+        <file>logos/200x200/Russia/2698.png</file>
+        <file>logos/200x200/Russia/41231.png</file>
+        <file>logos/200x200/Russia/3719.png</file>
+        <file>logos/200x200/Russia/1083.png</file>
+        <file>logos/200x200/Russia/2696.png</file>
+        <file>logos/200x200/Russia/3725.png</file>
+        <file>logos/200x200/Russia/3729.png</file>
+        <file>logos/200x200/Russia/11127.png</file>
+        <file>logos/200x200/Russia/16704.png</file>
+        <file>logos/200x200/Russia/28095.png</file>
+        <file>logos/200x200/Russia/49702.png</file>
     </qresource>
 </RCC>

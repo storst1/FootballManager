@@ -73,7 +73,6 @@ void MainWindow::SetupHomeScene(){
     //TakeSpaceInLay(100, 0, 3);
 
     homeScenePlayersHeaderLay = new QGridLayout();
-    //playersHeaderLay->setGeometry(QRect(0, 0, 1000, headerLabelHeight));
 
     QLabel* nationHeader = new QLabel("Nation");
     nationHeader->setFixedSize(120, headerLabelHeight);

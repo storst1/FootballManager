@@ -1,7 +1,7 @@
 #ifndef API_LEAGUE_H
 #define API_LEAGUE_H
 
-#include "api_club.h"
+#include "api/api_club.h"
 
 #include <QList>
 

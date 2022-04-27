@@ -8,7 +8,7 @@ void MainWindow::SetupDb()
     FillCountryMap();
     skillConvDb = new DATABASE_SKILL_CONVERTER(dbFolPath + "skill_convertation_rules.db", "DB_SKILL", 1);
     //skillConvDb->MakeBackup(dbFolPath + "backups/skill_convertation_rules.db");
-    dynDataDb = new DATABASE_DYNAMIC_DATA(dbFolPath + "dynamicdata.db", "DB_DYN");
+    dynDataDb = new DATABASE_DYNAMIC_DATA(dbFolPath + "dynamicdata.db", "DB_DYN", skillConvDb);
     dynDataDb->CopyDataFromRealDb(dbFolPath + "realdata.db", countryMap);
 }
 

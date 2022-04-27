@@ -19,6 +19,16 @@ float DATABASE_SKILL_CONVERTER::CountPlayerSkill(API_PLAYER *player)
     return GetBaseByTW(player->getTW() * GetAgeCoef(player->getAge()) * GetPosCoef(player->getFP()));
 }
 
+float DATABASE_SKILL_CONVERTER::CountPlayerSkill(PLAYER *player)
+{
+    return GetBaseByTW(player->getTV() * GetAgeCoef(player->getAge()) * GetPosCoef(player->getPos()->getFP()));
+}
+
+float DATABASE_SKILL_CONVERTER::CountPlayerSkill(int TV, int age, int FP)
+{
+    return GetBaseByTW(TV * GetAgeCoef(age) * GetPosCoef(FP));
+}
+
 void DATABASE_SKILL_CONVERTER::MakeBackup(const QString &backupDbPath)
 {
     DATABASE_SKILL_CONVERTER backupDb(backupDbPath, "DB_SKILL_BACKUP", -1);
@@ -99,19 +109,19 @@ void DATABASE_SKILL_CONVERTER::AssignPosConv(QList<QString> &list)
     }
 }
 
-float DATABASE_SKILL_CONVERTER::GetBaseByTW(int TW)
+float DATABASE_SKILL_CONVERTER::GetBaseByTW(int TW) const
 {
     int i = lastZeroInTWconv;
     while(i < 100 && TWconv.at(i) < TW) ++i;
     return (float)i;
 }
 
-float DATABASE_SKILL_CONVERTER::GetAgeCoef(int age)
+float DATABASE_SKILL_CONVERTER::GetAgeCoef(int age) const
 {
     return AgeCoefMap[age];
 }
 
-float DATABASE_SKILL_CONVERTER::GetPosCoef(int pos)
+float DATABASE_SKILL_CONVERTER::GetPosCoef(int pos) const
 {
     return PosCoefMap[pos];
 }

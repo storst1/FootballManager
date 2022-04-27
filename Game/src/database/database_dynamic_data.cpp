@@ -1,3 +1,5 @@
+#define DEFAULT_CONTRACT_EXPIRING_DATE 20220629
+
 #include "database/database_dynamic_data.h"
 #include "game/data/game_data.h"
 #include "game/data/player.h"
@@ -8,8 +10,10 @@
 #include "game/time/date.h"
 #include "game/data/player_position.h"
 
-DATABASE_DYNAMIC_DATA::DATABASE_DYNAMIC_DATA(const QString &dbPath, const QString &connectionName)
-    : DATABASE(dbPath, connectionName)
+DATABASE_DYNAMIC_DATA::DATABASE_DYNAMIC_DATA(const QString &dbPath,
+                                             const QString &connectionName,
+                                             DATABASE_SKILL_CONVERTER* skillConvDb)
+    : DATABASE(dbPath, connectionName), skillConvDb(skillConvDb)
 {
 }
 
@@ -206,6 +210,17 @@ QList<PLAYER *> DATABASE_DYNAMIC_DATA::InitPlayersByClub(CLUB* curClub, GAME_DAT
         QString curH = query.value(9).toString();
         int curBirthdayRaw = query.value(10).toInt();
         int curContractExpRaw = query.value(11).toInt();
+
+        bool wasNormalizedTV = PLAYER::NormalizeTV(curTV);
+        bool wasNormalizedAge = PLAYER::NormalizeAgeAndBirthday(curAge, curBirthdayRaw);
+        if(wasNormalizedTV || wasNormalizedAge){
+            curSkill = skillConvDb->CountPlayerSkill(curTV, curAge, curFPid);
+        }
+
+        PLAYER::NormalizeHeight(curH);
+        if(!curContractExpRaw){
+            curContractExpRaw = DEFAULT_CONTRACT_EXPIRING_DATE;
+        }
 
         QString FFstr = gameData->getCountryMap()->getById(curFNid);
         FEDERATION* FF = gameData->implicitlyGetFederation(curFNid, FFstr);

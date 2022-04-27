@@ -43,6 +43,11 @@ QString DATE::toStringView() const
     return str;
 }
 
+int DATE::agesPassedSince() const
+{
+    return DATE::agesPassedSince(rawDate);
+}
+
 unsigned int DATE::rawDateFromTMDate(uint64_t TMDate)
 {
     QDateTime qt_date = QDateTime::fromSecsSinceEpoch(TMDate, Qt::TimeSpec::UTC);
@@ -67,4 +72,14 @@ const QDate DATE::qtDateFromRawDate(unsigned int rawDate)
     rawDate %= FM_DATE_MONTH_MULT;
     int day = rawDate / FM_DATE_DAY_MULT;
     return QDate(year, month, day);
+}
+
+int DATE::generateRandomRawDate(int from, int to)
+{
+    return QRandomGenerator::global()->bounded(from, to);
+}
+
+int DATE::agesPassedSince(int rawDate)
+{
+    return (START_DATE - rawDate) / FM_DATE_YEAR_MULT;
 }

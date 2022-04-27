@@ -103,6 +103,50 @@ bool PLAYER::CompTwoPlayersBySkill(const PLAYER *p1, const PLAYER *p2)
     return p1->getSkill() < p2->getSkill();
 }
 
+bool PLAYER::NormalizeTV(int& TV)
+{
+    if(TV == 0){
+        int i = QRandomGenerator::global()->bounded(0, 5);
+        if(i == 0){
+            TV = 1000;
+        }
+        else if(i == 1){
+            TV = 2500;
+        }
+        else if(i == 2){
+            TV = 5000;
+        }
+        else if(i == 3){
+            TV = 7500;
+        }
+        else{ //i == 4
+            TV = 10000;
+        }
+        return true;
+    }
+    return false;
+}
+
+bool PLAYER::NormalizeAgeAndBirthday(int &age, int& rawBirthday)
+{
+    if(age == 0 || rawBirthday == 0){
+        rawBirthday = DATE::generateRandomRawDate();
+        age = DATE::agesPassedSince(rawBirthday);
+        return true;
+    }
+    return false;
+}
+
+void PLAYER::NormalizeHeight(QString &height)
+{
+    if(height == ""){
+        int randHeight = QRandomGenerator::global()->bounded(157, 204);
+        float floatHeight = randHeight / 100.f;
+        height = QString::number(floatHeight);
+        height.replace(".", ",");
+    }
+}
+
 void PLAYER::addOneYearToAge()
 {
     ++age;

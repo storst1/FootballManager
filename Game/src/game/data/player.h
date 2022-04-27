@@ -4,6 +4,8 @@
 #include "game/data/data_defs.h"
 #include "game/time/date.h"
 
+#include <QRandomGenerator>
+
 class PLAYER
 {
 public:
@@ -38,6 +40,10 @@ public:
     static bool CompTwoPlayersByAge(const PLAYER* p1, const PLAYER* p2);
     static bool CompTwoPlayersByTV(const PLAYER* p1, const PLAYER* p2);
     static bool CompTwoPlayersBySkill(const PLAYER* p1, const PLAYER* p2);
+
+    static bool NormalizeTV(int &TV);
+    static bool NormalizeAgeAndBirthday(int& age, int &rawBirthday);
+    static void NormalizeHeight(QString& height);
 
     void addOneYearToAge();
 private:

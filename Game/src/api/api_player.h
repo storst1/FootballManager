@@ -2,6 +2,7 @@
 #define API_PLAYER_H
 
 #include "json/json_parser_player.h"
+#include "game/time/date.h"
 
 #include <QString>
 
@@ -40,10 +41,17 @@ public:
     int getClubId() const;
     float getSkill() const;
     QString getStrSkill() const;
-    int getTmBD() const;
+    int getTmBd() const;
     int getTmContrExp() const;
+    int getFmBd() const;
+    int getFmContrExp() const;
 
     void setSkill(float val);
+    void setFmBirthday(int bd_date);
+    void setFmContrExp(int ce_date);
+
+    void recountFmBirthday();
+    void recountFmContrExp();
 private:
     int id;
     QString name;
@@ -57,7 +65,8 @@ private:
     int club_id;
     int Tm_Birthday;
     int Tm_ContractExp;
-
+    int Fm_Birthday = 0;
+    int Fm_ContractExp = 0;
     float skill = 0.f;
 };
 

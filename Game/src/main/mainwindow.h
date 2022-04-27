@@ -96,6 +96,9 @@ private:
     void RecountAllSkills();
     void RecountClubsBudgets();
     void RecountClubsPrestige();
+    void RecountPlayersBirthdates();
+    void RecountPlayersContractExp();
+    void RecountPlayersDates();
     void RecountEverything();
     void SetupCountryMap();
     void FillCountryMap();

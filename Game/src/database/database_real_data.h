@@ -9,23 +9,24 @@ public:
     DATABASE_REAL_DATA(const QString& dbPath, const QString& connectionName);
     ~DATABASE_REAL_DATA() = default;
 
-    QList<QPair<QString, int>> getAllLeagues();
-    void OverwriteLeaguesInfo(QList<API_LEAGUE *> leaguesList);
-    void OverwriteClubsInfo(QList<API_CLUB*> clubsList);
-    void OverwritePlayersInfo(QList<API_PLAYER*> playersList); //does not include skill column
-    void OverwritePlayersSkill(QList<API_PLAYER*> playersList);
-    void OverwriteClubsBudget(QList<API_CLUB*> clubsList);
-    void OverwriteClubsPrestige(QList<API_CLUB*> clubsList);
+    QList<QPair<QString, int>> getAllLeagues() const;
+    void OverwriteLeaguesInfo(QList<API_LEAGUE *>& leaguesList) const;
+    void OverwriteClubsInfo(QList<API_CLUB*>& clubsList) const;
+    void OverwritePlayersInfo(QList<API_PLAYER*>& playersList) const; //does not include skill column
+    void OverwritePlayersSkill(QList<API_PLAYER*>& playersList) const;
+    void OverwriteClubsBudget(QList<API_CLUB*>& clubsList) const;
+    void OverwriteClubsPrestige(QList<API_CLUB*>& clubsList) const;
+    void OverwritePlayersFmBirthdates(QList<API_PLAYER*>& playersList) const;
+    void OverwritePlayersFmContractExpDates(QList<API_PLAYER*>& playersList) const;
     static QString SqlGetStringReady(QString str);
-    void SelectAllLeagues(QList<API_LEAGUE *> &leagues);
-    void SelectAllClubs(QList<API_CLUB*> &clubs);
-    void SelectAllPlayers(QList<API_PLAYER*> &players);
-    void MakeBackup(const QString& backupDbPath);
-    QList<QPair<int, QString>> GetAllCountries();
-private:
-    void SavePlayersInfo(QList<API_PLAYER*> playersList);
-    void SaveClubsInfo(QList<API_CLUB*> clubsList);
-    void SaveLeaguesInfo(QList<API_LEAGUE *> leaguesList);
+    void SelectAllLeagues(QList<API_LEAGUE *> &leagues) const;
+    void SelectAllClubs(QList<API_CLUB*> &clubs) const;
+    void SelectAllPlayers(QList<API_PLAYER*> &players) const;
+    void MakeBackup(const QString& backupDbPath) const;
+    QList<QPair<int, QString>> GetAllCountries() const;
+    void SavePlayersInfo(QList<API_PLAYER*>& playersList) const;
+    void SaveClubsInfo(QList<API_CLUB*>& clubsList) const;
+    void SaveLeaguesInfo(QList<API_LEAGUE*>& leaguesList) const;
 };
 
 #endif // DATABASE_REAL_DATA_H

@@ -13,7 +13,7 @@ DATABASE_DYNAMIC_DATA::DATABASE_DYNAMIC_DATA(const QString &dbPath, const QStrin
 {
 }
 
-void DATABASE_DYNAMIC_DATA::CopyDataFromRealDb(const QString& realDbPath, COUNTRY_MAP* countryMap)
+void DATABASE_DYNAMIC_DATA::CopyDataFromRealDb(const QString& realDbPath, COUNTRY_MAP* countryMap) const
 {
     QSqlQuery query(*db);
     query.exec("ATTACH DATABASE '" + realDbPath + "' AS real;");
@@ -24,7 +24,7 @@ void DATABASE_DYNAMIC_DATA::CopyDataFromRealDb(const QString& realDbPath, COUNTR
     CopyPlayersTable(query);
 }
 
-void DATABASE_DYNAMIC_DATA::CopyFederationsTable(QSqlQuery& query, COUNTRY_MAP* countryMap)
+void DATABASE_DYNAMIC_DATA::CopyFederationsTable(QSqlQuery& query, COUNTRY_MAP* countryMap) const
 {
     DeleteTableInfo("federations");
     query.exec("INSERT INTO federations"
@@ -51,14 +51,14 @@ void DATABASE_DYNAMIC_DATA::CopyFederationsTable(QSqlQuery& query, COUNTRY_MAP* 
     qDebug() << "Copying federations data into dynamic database finished. Last error: " + query.lastError().text();
 }
 
-void DATABASE_DYNAMIC_DATA::CopyLeaguesTable(QSqlQuery& query)
+void DATABASE_DYNAMIC_DATA::CopyLeaguesTable(QSqlQuery& query) const
 {
     DeleteTableInfo("leagues");
     query.exec("INSERT INTO leagues (id, name, fed_id) SELECT id, name, federation FROM real.leagues");
     qDebug() << "Copying league data into dynamic database finished. Last error: " + query.lastError().text();
 }
 
-void DATABASE_DYNAMIC_DATA::CopyClubsTable(QSqlQuery& query)
+void DATABASE_DYNAMIC_DATA::CopyClubsTable(QSqlQuery& query) const
 {
     DeleteTableInfo("clubs");
     query.exec("INSERT INTO clubs"
@@ -69,16 +69,17 @@ void DATABASE_DYNAMIC_DATA::CopyClubsTable(QSqlQuery& query)
     qDebug() << "Copying clubs data into dynamic database finished. Last error: " + query.lastError().text();
 }
 
-void DATABASE_DYNAMIC_DATA::CopyPlayersTable(QSqlQuery& query)
+void DATABASE_DYNAMIC_DATA::CopyPlayersTable(QSqlQuery& query) const
 {
     DeleteTableInfo("players");
     query.exec("INSERT INTO players"
-               "(id, name, club, TV, age, FN, SN, FP, SP, skill, height)"
-               " SELECT "
-               "id, name, club, TW, age, FN, SN, FP, SP, skill, height"
+               "(id, name, club, TV, age, FN, SN, FP, SP, skill, height, birthday, contractExp)"
+               " SELECT"
+               " id, name, club, TW, age, FN, SN, FP, SP, skill, height, birthday_FM, contract_FM"
                " FROM real.players");
     DATABASE::PrintSqlExecInfoIfErr(query);
 
+    /*
     query.exec("SELECT id, birthday_TM, contract_TM FROM real.players;");
     DATABASE::PrintSqlExecInfoIfErr(query);
     while(query.next()){
@@ -94,16 +95,17 @@ void DATABASE_DYNAMIC_DATA::CopyPlayersTable(QSqlQuery& query)
         DATABASE::PrintSqlExecInfoIfErr(updQuery);
 
     }
+    */
 
     qDebug() << "Copying players data into dynamic database finished. Last error: " + query.lastError().text();
 }
 
-void DATABASE_DYNAMIC_DATA::FillGameData(GAME_DATA *gameData)
+void DATABASE_DYNAMIC_DATA::FillGameData(GAME_DATA *gameData) const
 {
     FillFederationsGameData(gameData);
 }
 
-void DATABASE_DYNAMIC_DATA::FillFederationsGameData(GAME_DATA *gameData)
+void DATABASE_DYNAMIC_DATA::FillFederationsGameData(GAME_DATA *gameData) const
 {
     QSqlQuery query(*db);
     query.exec("SELECT * from federations");
@@ -129,7 +131,8 @@ void DATABASE_DYNAMIC_DATA::FillFederationsGameData(GAME_DATA *gameData)
     }
 }
 
-QList<LEAGUE *> DATABASE_DYNAMIC_DATA::InitLeagueList(QList<QString> &leagueIdsList, FEDERATION* curFed, GAME_DATA *gameData)
+QList<LEAGUE *> DATABASE_DYNAMIC_DATA::InitLeagueList(QList<QString> &leagueIdsList,
+                                                      FEDERATION* curFed, GAME_DATA *gameData) const
 {
     QList<LEAGUE*> leagueList;
     QSqlQuery query(*db);
@@ -154,7 +157,7 @@ QList<LEAGUE *> DATABASE_DYNAMIC_DATA::InitLeagueList(QList<QString> &leagueIdsL
     return leagueList;
 }
 
-QList<CLUB *> DATABASE_DYNAMIC_DATA::InitClubsByLeague(LEAGUE* league, GAME_DATA *gameData)
+QList<CLUB *> DATABASE_DYNAMIC_DATA::InitClubsByLeague(LEAGUE* league, GAME_DATA *gameData) const
 {
     QSqlQuery query(*db);
     QList<CLUB*> clubList;
@@ -181,7 +184,7 @@ QList<CLUB *> DATABASE_DYNAMIC_DATA::InitClubsByLeague(LEAGUE* league, GAME_DATA
     return clubList;
 }
 
-QList<PLAYER *> DATABASE_DYNAMIC_DATA::InitPlayersByClub(CLUB* curClub, GAME_DATA *gameData)
+QList<PLAYER *> DATABASE_DYNAMIC_DATA::InitPlayersByClub(CLUB* curClub, GAME_DATA *gameData) const
 {
     QMap<QPair<int, int>, PLAYER_POSITION*> positionsMap = gameData->getPositions();
     const int clubId = curClub->getId();

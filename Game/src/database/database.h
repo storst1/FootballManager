@@ -24,7 +24,7 @@ public:
     static void PrintSqlExecInfo(QSqlQuery& query);
 protected:
     void SetupConnection(const QString &dbPath, const QString &connectionName);
-    void DeleteTableInfo(QString table_name);
+    void DeleteTableInfo(QString table_name) const;
 protected:
     QSqlDatabase* db;
 };

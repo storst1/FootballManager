@@ -72,11 +72,34 @@ void MainWindow::RecountClubsPrestige()
     realDataDb->OverwriteClubsPrestige(allClubs);
 }
 
+void MainWindow::RecountPlayersBirthdates()
+{
+    for(const auto& p : allPlayers){
+        p->recountFmBirthday();
+    }
+    realDataDb->OverwritePlayersFmBirthdates(allPlayers);
+}
+
+void MainWindow::RecountPlayersContractExp()
+{
+    for(const auto& p : allPlayers){
+        p->recountFmContrExp();
+    }
+    realDataDb->OverwritePlayersFmContractExpDates(allPlayers);
+}
+
+void MainWindow::RecountPlayersDates()
+{
+    RecountPlayersBirthdates();
+    RecountPlayersContractExp();
+}
+
 void MainWindow::RecountEverything()
 {
     RecountAllSkills();
     RecountClubsBudgets();
     RecountClubsPrestige();
+    RecountPlayersDates();
 }
 
 void MainWindow::SetupCountryMap()

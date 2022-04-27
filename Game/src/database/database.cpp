@@ -52,7 +52,7 @@ void DATABASE::SetupConnection(const QString& dbPath, const QString& connectionN
     }
 }
 
-void DATABASE::DeleteTableInfo(QString table_name)
+void DATABASE::DeleteTableInfo(QString table_name) const
 {
     QSqlQuery query(*db);
     QString queryStatement = "DELETE FROM " + table_name;

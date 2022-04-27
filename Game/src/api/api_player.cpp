@@ -121,7 +121,7 @@ QString API_PLAYER::getStrSkill() const
     return s;
 }
 
-int API_PLAYER::getTmBD() const
+int API_PLAYER::getTmBd() const
 {
     return Tm_Birthday;
 }
@@ -131,7 +131,39 @@ int API_PLAYER::getTmContrExp() const
     return Tm_ContractExp;
 }
 
+int API_PLAYER::getFmBd() const
+{
+    return Fm_Birthday;
+}
+
+int API_PLAYER::getFmContrExp() const
+{
+    return Fm_ContractExp;
+}
+
 void API_PLAYER::setSkill(float val)
 {
     skill = val;
+}
+
+void API_PLAYER::setFmBirthday(int bd_date)
+{
+    Fm_Birthday = bd_date;
+}
+
+void API_PLAYER::setFmContrExp(int ce_date)
+{
+    Fm_ContractExp = ce_date;
+}
+
+void API_PLAYER::recountFmBirthday()
+{
+    DATE Fm_Birthday_Date(DATE::rawDateFromTMDate(Tm_Birthday));
+    Fm_Birthday = Fm_Birthday_Date.getRawDate();
+}
+
+void API_PLAYER::recountFmContrExp()
+{
+    DATE Fm_ContractExp_Date(DATE::rawDateFromTMDate(Tm_ContractExp));
+    Fm_ContractExp = Fm_ContractExp_Date.getRawDate();
 }

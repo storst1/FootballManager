@@ -6,6 +6,7 @@
 #include "game/data/league.h"
 #include "main/mainwindow.h"
 #include "game/time/date.h"
+#include "game/data/player_position.h"
 
 DATABASE_DYNAMIC_DATA::DATABASE_DYNAMIC_DATA(const QString &dbPath, const QString &connectionName)
     : DATABASE(dbPath, connectionName)
@@ -214,6 +215,14 @@ QList<PLAYER *> DATABASE_DYNAMIC_DATA::InitPlayersByClub(CLUB* curClub, GAME_DAT
 
         DATE curBirthday(curBirthdayRaw);
         DATE curContractExp(curContractExpRaw);
+
+        PLAYER_POSITION::NormalizeBothPosId(curFPid, curSPid);
+
+        /*
+        if(positionsMap.find({curFPid, curSPid}) == positionsMap.end()){
+            int debug = 0;
+        }
+        */
 
         PLAYER* curPlayer = new PLAYER(curId, curName, curTV, curAge, curSkill, FF,
                                        SF, positionsMap[{curFPid, curSPid}], curH, curBirthday, curContractExp);

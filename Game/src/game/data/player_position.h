@@ -19,6 +19,8 @@ public:
     QString getStrName() const;
 
     void setStrNameToAuto();
+    static void NormalizeBothPosId(int& pos1, int& pos2);
+    static void NormalizePosId(int& pos, bool mainPos);
 private:
     int FP;
     int SP;

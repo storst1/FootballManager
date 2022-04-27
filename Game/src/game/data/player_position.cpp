@@ -63,3 +63,16 @@ void PLAYER_POSITION::setStrNameToAuto()
     }
     //qDebug() << strName;
 }
+
+void PLAYER_POSITION::NormalizePosId(int &pos, bool mainPos)
+{
+    if(pos == 2){
+        mainPos ? pos = 3 : pos = 0;
+    }
+}
+
+void PLAYER_POSITION::NormalizeBothPosId(int &pos1, int &pos2)
+{
+    PLAYER_POSITION::NormalizePosId(pos1, true);
+    PLAYER_POSITION::NormalizePosId(pos2, false);
+}

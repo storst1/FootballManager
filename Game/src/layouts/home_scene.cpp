@@ -83,7 +83,7 @@ void MainWindow::SetupHomeScene(){
     nameHeader->setStyleSheet(headerButtonStyle);
     nameHeader->setFixedSize(390, headerLabelHeight);
     connect(nameHeader, &QPushButton::clicked, this, [this]{
-        homeSceneLastSortClicked == Name ? ReverseHomeScenePlayers() : HomeSceneSortPlayersByName();
+        homeSceneLastSortClicked == Name ? ReverseHomeScenePlayers() :   HomeSceneSortPlayersByName();
         ClearLay(homeScenePlayersLay);
         HomeSceneAddPlayersToLay();
         homeSceneLastSortClicked = Name;

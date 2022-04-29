@@ -68,28 +68,49 @@ void MainWindow::SetupTransfersScene()
     */
 
     transfersSceneFederationsList = gameData->getFederationsList();
+    std::sort(transfersSceneFederationsList.begin(), transfersSceneFederationsList.end(), FEDERATION::CompTwoFedsByName);
 
     transfersSceneNameCompleter = new QCompleter();
     transfersSceneNameCompleter->setCaseSensitivity(Qt::CaseInsensitive);
     transfersSceneNameCompleter->setCompletionMode(QCompleter::UnfilteredPopupCompletion);
 
     transfersSceneNameFilter = new QComboBox();
-    transfersSceneNameFilter->setEditable(true);
-    transfersSceneNameFilter->setFixedSize(75, 35);
-    transfersSceneNameFilter->setCompleter(transfersSceneNameCompleter);
+    //transfersSceneNameFilter->setEditable(true);
+    transfersSceneNameFilter->setEditable(false);
+    transfersSceneNameFilter->setFixedSize(200, 35);
+    //transfersSceneNameFilter->setCompleter(transfersSceneNameCompleter);
     transfersSceneNameFilterCurrentContents = TransfersSceneGetCurContents();
-    transfersSceneNameFilter->insertItems(0, transfersSceneNameFilterCurrentContents);
-    connect(transfersSceneNameFilter, &QComboBox::currentTextChanged, this, [this]{
+    transfersSceneNameFilter->insertItem(0, "Select country");
+    TransfersSceneFillNameFilter(transfersSceneNameFilterCurrentContents);
+    //transfersSceneNameFilter->setCurrentText("");
+    /*
+    connect(transfersSceneNameFilter, &QComboBox::editTextChanged, this, [this]{
+        if(transfersSceneNameFilter->currentText() == transferstScenePreInsertText){
+            qDebug() << "Same input";
+            return;
+        }
+        if(transferstSceneInsertSignal){
+            qDebug() << "Cutting signal";
+            transferstSceneInsertSignal = false;
+            transfersSceneNameFilter->setCurrentText(transferstScenePreInsertText);
+            return;
+        }
+        qDebug() << "Filtering contents";
+        transferstScenePreInsertText = transfersSceneNameFilter->currentText();
         transfersSceneNameFilterCurrentContents = TransfersSceneGetCurContents();
-        TransfersSceneClearNameFilter();
+        transferstSceneInsertSignal = true;
+        transfersSceneNameFilter->clear();
+        transferstSceneInsertSignal = true;
         transfersSceneNameFilter->insertItems(0, transfersSceneNameFilterCurrentContents);
+        //transfersSceneNameFilter->setCurrentText("");
     });
+    */
 
     transfersSceneFiltersLay->addWidget(transfersSceneNameFilter, 0, 0);
     mainLay->addLayout(transfersSceneFiltersLay, 1, 1, Qt::AlignCenter);
 
     //Players lay
-    transfersScenePlayers = gameData->getPlayersListConditional(100);
+    transfersScenePlayers = gameData->getPlayersListConditional(50);
     transfersSceneLastSortClicked = None;
 
     transfersScenePlayersScrollArea = new QScrollArea;
@@ -212,21 +233,28 @@ void MainWindow::TransfersSceneClearNameFilter()
     }
 }
 
-QStringList MainWindow::TransfersSceneGetCurContents()
+QList<FEDERATION *> MainWindow::TransfersSceneGetCurContents()
 {
-    QStringList curContents;
+    QList<FEDERATION *> curContents;
     QString strFilter = transfersSceneNameFilter->currentText();
     if(strFilter.length() < 3){
         for(int i = 0; i < transfersSceneFederationsList.size(); ++i){
-            curContents.push_back(transfersSceneFederationsList[i]->getName());
+            curContents.push_back(transfersSceneFederationsList[i]);
         }
     }
     else{
         for(int i = 0; i < transfersSceneFederationsList.size(); ++i){
             if(transfersSceneFederationsList[i]->getName().contains(strFilter)){
-                curContents.push_back(transfersSceneFederationsList[i]->getName());
+                curContents.push_back(transfersSceneFederationsList[i]);
             }
         }
     }
     return curContents;
+}
+
+void MainWindow::TransfersSceneFillNameFilter(QList<FEDERATION *> &list)
+{
+    for(const auto &l : list){
+        transfersSceneNameFilter->insertItem(transfersSceneNameFilter->count(), QIcon(*l->getFlag()), l->getName());
+    }
 }

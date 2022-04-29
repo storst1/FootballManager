@@ -18,6 +18,8 @@ public:
 
     void setLeagues(QList<LEAGUE*> leaguesList);
     void setFlag(QPixmap* flag);
+
+    static bool CompTwoFedsByName(const FEDERATION* f1, const FEDERATION* f2);
 private:
     int fedId;
     int countryId;

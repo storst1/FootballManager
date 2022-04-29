@@ -55,3 +55,8 @@ void FEDERATION::setFlag(QPixmap *flag)
 {
     flagPixmap = flag;
 }
+
+bool FEDERATION::CompTwoFedsByName(const FEDERATION *f1, const FEDERATION *f2)
+{
+    return f1->getName() < f2->getName();
+}

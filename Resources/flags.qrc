@@ -1,7 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>flags/65x40/9.png</file>
-        <file>flags/65x40/157.png</file>
         <file>flags/48x30/9.png</file>
         <file>flags/48x30/157.png</file>
         <file>flags/48x30/1.png</file>
@@ -207,5 +205,8 @@
         <file>flags/48x30/262.png</file>
         <file>flags/48x30/270.png</file>
         <file>flags/48x30/236.png</file>
+        <file>flags/48x30/240.png</file>
+        <file>flags/48x30/264.png</file>
+        <file>flags/48x30/271.png</file>
     </qresource>
 </RCC>

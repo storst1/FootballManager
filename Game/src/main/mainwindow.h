@@ -183,8 +183,10 @@ private:
 
     //TRANSFERS SCENE
     bool transfersSceneLoaded = false;
+    bool transferstSceneInsertSignal = false;
+    QString transferstScenePreInsertText = "";
     QList<FEDERATION*> transfersSceneFederationsList;
-    QStringList transfersSceneNameFilterCurrentContents;
+    QList<FEDERATION*> transfersSceneNameFilterCurrentContents;
     QGridLayout* transfersSceneFiltersLay;
     QGridLayout* transfersScenePlayersHeaderLay;
     QScrollArea* transfersScenePlayersScrollArea;
@@ -198,7 +200,8 @@ private:
     void SetupTransfersScene();
     void TransfersSceneAddPlayersToLay();
     void TransfersSceneClearNameFilter();
-    QStringList TransfersSceneGetCurContents();
+    QList<FEDERATION*> TransfersSceneGetCurContents();
+    void TransfersSceneFillNameFilter(QList<FEDERATION*>& list);
 
     //Settings scene
     void SetupSettingsScene();

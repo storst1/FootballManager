@@ -26,6 +26,16 @@ QMap<int, FEDERATION *> GAME_DATA::getFederations() const
     return federations;
 }
 
+QList<FEDERATION *> GAME_DATA::getFederationsList() const
+{
+    //Iterates through the map and returns all the existing pointers to FEDERATION
+    QList<FEDERATION*> list;
+    for(const auto& f : federations){
+        list.push_back(f);
+    }
+    return list;
+}
+
 QMap<QString, LEAGUE *> GAME_DATA::getLeagues() const
 {
     return leagues;

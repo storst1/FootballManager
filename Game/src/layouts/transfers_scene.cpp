@@ -52,6 +52,7 @@ void MainWindow::SetupTransfersScene()
 
     transfersSceneFiltersLay = new QGridLayout;
 
+    /*
     QLineEdit* nameInput = new QLineEdit("Name");
     nameInput->setFixedSize(150, 30);
     nameInput->setStyleSheet(lineEditStyle);
@@ -63,7 +64,28 @@ void MainWindow::SetupTransfersScene()
         nameInput->clear();
         transfersSceneLoaded = true;
     });
-    transfersSceneFiltersLay->addWidget(nameInput);
+    transfersSceneFiltersLay->addWidget(nameInput, 0, 0);
+    */
+
+    transfersSceneFederationsList = gameData->getFederationsList();
+
+    transfersSceneNameCompleter = new QCompleter();
+    transfersSceneNameCompleter->setCaseSensitivity(Qt::CaseInsensitive);
+    transfersSceneNameCompleter->setCompletionMode(QCompleter::UnfilteredPopupCompletion);
+
+    transfersSceneNameFilter = new QComboBox();
+    transfersSceneNameFilter->setEditable(true);
+    transfersSceneNameFilter->setFixedSize(75, 35);
+    transfersSceneNameFilter->setCompleter(transfersSceneNameCompleter);
+    transfersSceneNameFilterCurrentContents = TransfersSceneGetCurContents();
+    transfersSceneNameFilter->insertItems(0, transfersSceneNameFilterCurrentContents);
+    connect(transfersSceneNameFilter, &QComboBox::currentTextChanged, this, [this]{
+        transfersSceneNameFilterCurrentContents = TransfersSceneGetCurContents();
+        TransfersSceneClearNameFilter();
+        transfersSceneNameFilter->insertItems(0, transfersSceneNameFilterCurrentContents);
+    });
+
+    transfersSceneFiltersLay->addWidget(transfersSceneNameFilter, 0, 0);
     mainLay->addLayout(transfersSceneFiltersLay, 1, 1, Qt::AlignCenter);
 
     //Players lay
@@ -181,4 +203,30 @@ void MainWindow::TransfersSceneAddPlayersToLay(){
         transfersScenePlayersLay->addWidget(options, curRow, 7, Qt::AlignCenter);
         ++curRow;
     }
+}
+
+void MainWindow::TransfersSceneClearNameFilter()
+{
+    while(transfersSceneNameFilter->count()){
+        transfersSceneNameFilter->removeItem(0);
+    }
+}
+
+QStringList MainWindow::TransfersSceneGetCurContents()
+{
+    QStringList curContents;
+    QString strFilter = transfersSceneNameFilter->currentText();
+    if(strFilter.length() < 3){
+        for(int i = 0; i < transfersSceneFederationsList.size(); ++i){
+            curContents.push_back(transfersSceneFederationsList[i]->getName());
+        }
+    }
+    else{
+        for(int i = 0; i < transfersSceneFederationsList.size(); ++i){
+            if(transfersSceneFederationsList[i]->getName().contains(strFilter)){
+                curContents.push_back(transfersSceneFederationsList[i]->getName());
+            }
+        }
+    }
+    return curContents;
 }

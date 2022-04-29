@@ -19,6 +19,7 @@ public:
     ~GAME_DATA();
 
     QMap<int, FEDERATION*> getFederations() const;
+    QList<FEDERATION*> getFederationsList() const;
     QMap<QString, LEAGUE*> getLeagues() const;
     QList<LEAGUE*> getLeaguesList() const;
     QMap<int, CLUB*> getClubs() const;

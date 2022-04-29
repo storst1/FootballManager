@@ -26,6 +26,8 @@
 #include <QPixmap>
 #include <QPainter>
 #include <QLineEdit>
+#include <QCompleter>
+#include <QComboBox>
 
 #include <algorithm>
 
@@ -181,6 +183,8 @@ private:
 
     //TRANSFERS SCENE
     bool transfersSceneLoaded = false;
+    QList<FEDERATION*> transfersSceneFederationsList;
+    QStringList transfersSceneNameFilterCurrentContents;
     QGridLayout* transfersSceneFiltersLay;
     QGridLayout* transfersScenePlayersHeaderLay;
     QScrollArea* transfersScenePlayersScrollArea;
@@ -188,9 +192,13 @@ private:
     QGridLayout* transfersScenePlayersLay;
     QList<PLAYER*> transfersScenePlayers;
     PlayerSortType transfersSceneLastSortClicked = None;
+    QComboBox* transfersSceneNameFilter;
+    QCompleter* transfersSceneNameCompleter;
 
     void SetupTransfersScene();
     void TransfersSceneAddPlayersToLay();
+    void TransfersSceneClearNameFilter();
+    QStringList TransfersSceneGetCurContents();
 
     //Settings scene
     void SetupSettingsScene();

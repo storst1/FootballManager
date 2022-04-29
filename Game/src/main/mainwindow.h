@@ -186,7 +186,7 @@ private:
     bool transferstSceneInsertSignal = false;
     QString transferstScenePreInsertText = "";
     QList<FEDERATION*> transfersSceneFederationsList;
-    QList<FEDERATION*> transfersSceneNameFilterCurrentContents;
+    QList<FEDERATION*> transfersSceneCountryFilterCurrentContents;
     QGridLayout* transfersSceneFiltersLay;
     QGridLayout* transfersScenePlayersHeaderLay;
     QScrollArea* transfersScenePlayersScrollArea;
@@ -194,8 +194,8 @@ private:
     QGridLayout* transfersScenePlayersLay;
     QList<PLAYER*> transfersScenePlayers;
     PlayerSortType transfersSceneLastSortClicked = None;
-    QComboBox* transfersSceneNameFilter;
-    QCompleter* transfersSceneNameCompleter;
+    QComboBox* transfersSceneCountryFilter;
+    QCompleter* transfersSceneCountryCompleter;
 
     void SetupTransfersScene();
     void TransfersSceneAddPlayersToLay();

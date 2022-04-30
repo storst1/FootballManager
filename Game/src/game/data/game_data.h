@@ -61,6 +61,8 @@ public:
                                              int maxSkill = MAX_PLAYER_SKILL
                                              ) const;
     QList<PLAYER*> getPlayersListConditionalByFilter(int maxSize = -1, PLAYER_SEARCH_FILTER filter = PLAYER_SEARCH_FILTER()) const;
+
+    static QList<QPair<QString, int>> getPositionsSimplifiedList();
 private:
     bool PlayerFirstNationConditionCheck(PLAYER* player, QList<FEDERATION*>& nations) const;
     bool PlayerSecondNationConditionCheck(PLAYER* player, QList<FEDERATION*>& nations) const;

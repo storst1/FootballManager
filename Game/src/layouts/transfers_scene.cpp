@@ -133,7 +133,7 @@ void MainWindow::TransfersSceneAddPlayersToLay(){
         }
     }
     while(totalPlayers < 50){
-        QLabel* blankLabel = new QLabel("a");
+        QLabel* blankLabel = new QLabel("");
         blankLabel->setStyleSheet(infoLabelStyle);
         blankLabel->setFixedSize(1, playerLabelHeight);
         transfersScenePlayersLay->addWidget(blankLabel, curRow, 0, Qt::AlignCenter);
@@ -244,8 +244,15 @@ void MainWindow::TransfersSceneSetupFilters()
         //transfersSceneNameFilter->setCurrentText("");
     });
     */
-
     transfersSceneFiltersLay->addWidget(transfersSceneCountryFilter, 0, 0);
+
+    transfersScenePosFilter = new QComboBox();
+    transfersScenePosFilter->setEditable(false);
+    transfersScenePosFilter->setFixedSize(60, 35);
+    transfersScenePosFilter->setStyleSheet(comboBoxStyle);
+    transfersScenePosFilter->insertItem(0, "Any", -1);
+    TransfersSceneFillPosFilter();
+    transfersSceneFiltersLay->addWidget(transfersScenePosFilter, 0, 1);
 
     transfersSceneSearchButton = new QPushButton("Search");
     transfersSceneSearchButton->setStyleSheet(buttonStyle);
@@ -254,7 +261,7 @@ void MainWindow::TransfersSceneSetupFilters()
         TransfersSceneUpdatePlayersList();
     });
 
-    transfersSceneFiltersLay->addWidget(transfersSceneSearchButton, 0, 1);
+    transfersSceneFiltersLay->addWidget(transfersSceneSearchButton, 0, 2);
 }
 
 void MainWindow::TransfersSceneSetupPlayers()
@@ -318,5 +325,17 @@ PLAYER_SEARCH_FILTER MainWindow::TransfersSceneGetCurrentFilter() const
     if(fedId != -1){
         filter.setNations({gameData->getFederationById(fedId)});
     }
+    int curPos = transfersScenePosFilter->currentData().value<int>();
+    if(curPos != -1){
+        filter.setPos({curPos});
+    }
     return filter;
+}
+
+void MainWindow::TransfersSceneFillPosFilter() const
+{
+    QList<QPair<QString, int>> posList = GAME_DATA::getPositionsSimplifiedList();
+    for(const auto &p : posList){
+        transfersScenePosFilter->addItem(p.first, p.second);
+    }
 }

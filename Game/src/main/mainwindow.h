@@ -199,6 +199,7 @@ private:
     QComboBox* transfersSceneCountryFilter;
     QCompleter* transfersSceneCountryCompleter;
     QPushButton* transfersSceneSearchButton;
+    QComboBox* transfersScenePosFilter;
 
     void SetupTransfersScene();
     void TransfersSceneAddPlayersToLay();
@@ -209,6 +210,7 @@ private:
     void TransfersSceneSetupPlayers();
     void TransfersSceneUpdatePlayersList();
     PLAYER_SEARCH_FILTER TransfersSceneGetCurrentFilter() const;
+    void TransfersSceneFillPosFilter() const;
 
     //Settings scene
     void SetupSettingsScene();

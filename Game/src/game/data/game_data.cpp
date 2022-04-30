@@ -250,6 +250,25 @@ QList<PLAYER *> GAME_DATA::getPlayersListConditionalByFilter(int maxSize, PLAYER
                                      );
 }
 
+QList<QPair<QString, int> > GAME_DATA::getPositionsSimplifiedList()
+{
+    QList<QPair<QString, int>> list;
+    list.push_back({"GK", 1});
+    list.push_back({"CB", 3});
+    list.push_back({"LB", 4});
+    list.push_back({"RB", 5});
+    list.push_back({"DM", 6});
+    list.push_back({"CM", 7});
+    list.push_back({"RM", 8});
+    list.push_back({"LM", 9});
+    list.push_back({"CAM", 10});
+    list.push_back({"LW", 11});
+    list.push_back({"RW", 12});
+    list.push_back({"CF", 13});
+    list.push_back({"ST", 14});
+    return list;
+}
+
 bool GAME_DATA::PlayerFirstNationConditionCheck(PLAYER *player, QList<FEDERATION *> &nations) const
 {
     if(nations.empty()){

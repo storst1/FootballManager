@@ -40,6 +40,11 @@ public:
     static bool CompTwoPlayersByAge(const PLAYER* p1, const PLAYER* p2);
     static bool CompTwoPlayersByTV(const PLAYER* p1, const PLAYER* p2);
     static bool CompTwoPlayersBySkill(const PLAYER* p1, const PLAYER* p2);
+    static bool CompTwoPlayersByPosReversed(const PLAYER* p1, const PLAYER* p2);
+    static bool CompTwoPlayersByNameReversed(const PLAYER* p1, const PLAYER* p2);
+    static bool CompTwoPlayersByAgeReversed(const PLAYER* p1, const PLAYER* p2);
+    static bool CompTwoPlayersByTVReversed(const PLAYER* p1, const PLAYER* p2);
+    static bool CompTwoPlayersBySkillReversed(const PLAYER* p1, const PLAYER* p2);
 
     static bool NormalizeTV(int &TV);
     static bool NormalizeAgeAndBirthday(int& age, int &rawBirthday);

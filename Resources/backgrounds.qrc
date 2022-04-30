@@ -17,5 +17,7 @@
         <file>greenLay400x120.png</file>
         <file>greenLay400x120Highlighted.png</file>
         <file>backgroundCutSizeLessBright.jpg</file>
+        <file>greenLay160x60.png</file>
+        <file>greenLay160x60Highlighted.png</file>
     </qresource>
 </RCC>

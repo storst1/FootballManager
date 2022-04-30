@@ -151,3 +151,43 @@ void PLAYER::addOneYearToAge()
 {
     ++age;
 }
+
+bool PLAYER::CompTwoPlayersByPosReversed(const PLAYER *p1, const PLAYER *p2)
+{
+    if(p1->getPos()->getFP() == p2->getPos()->getFP()){
+        return p1->getSkill() > p2->getSkill();
+    }
+    return p1->getPos()->getFP() > p2->getPos()->getFP();
+}
+
+bool PLAYER::CompTwoPlayersByNameReversed(const PLAYER *p1, const PLAYER *p2)
+{
+    if(p1->getSkill() == p2->getSkill()){
+        return CompTwoPlayersByPos(p1, p2);
+    }
+    return p1->getName() > p2->getName();
+}
+
+bool PLAYER::CompTwoPlayersByAgeReversed(const PLAYER *p1, const PLAYER *p2)
+{
+    if(p1->getSkill() == p2->getSkill()){
+        return CompTwoPlayersByPos(p1, p2);
+    }
+    return p1->getAge() > p2->getAge();
+}
+
+bool PLAYER::CompTwoPlayersByTVReversed(const PLAYER *p1, const PLAYER *p2)
+{
+    if(p1->getSkill() == p2->getSkill()){
+        return CompTwoPlayersByPos(p1, p2);
+    }
+    return p1->getTV() > p2->getTV();
+}
+
+bool PLAYER::CompTwoPlayersBySkillReversed(const PLAYER *p1, const PLAYER *p2)
+{
+    if(p1->getSkill() == p2->getSkill()){
+        return CompTwoPlayersByPos(p1, p2);
+    }
+    return p1->getSkill() > p2->getSkill();
+}

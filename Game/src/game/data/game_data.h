@@ -1,12 +1,13 @@
 #ifndef GAME_DATA_H
 #define GAME_DATA_H
 
-#define MAX_AGE 100
-#define MAX_TV 1000000000
-#define MAX_SKILL 101
+#define MAX_PLAYER_AGE 100
+#define MAX_PLAYER_TV 1000000000
+#define MAX_PLAYER_SKILL 101
 
 #include "game/data/data_defs.h"
 #include "game/data/country_map.h"
+#include "game/data/player_search_filter.h"
 
 #include <QMap>
 
@@ -27,6 +28,8 @@ public:
     QList<PLAYER*> getPlayersList() const;
     COUNTRY_MAP* getCountryMap() const;
     QMap<QPair<int, int>, PLAYER_POSITION*> getPositions() const;
+
+    FEDERATION *getFederationById(int id) const;
 
     FEDERATION *implicitlyGetFederation(int id, QString &name);
 
@@ -49,14 +52,15 @@ public:
                                              QString team = "",
                                              QList<LEAGUE*> leagues = {},
                                              int minAge = 0,
-                                             int maxAge = MAX_AGE,
+                                             int maxAge = MAX_PLAYER_AGE,
                                              QList<int> positions = {},
                                              QList<int> secondPositions = {},
                                              int minTV = 0,
-                                             int maxTV = MAX_TV,
+                                             int maxTV = MAX_PLAYER_TV,
                                              int minSkill = 0,
-                                             int maxSkill = MAX_SKILL
+                                             int maxSkill = MAX_PLAYER_SKILL
                                              ) const;
+    QList<PLAYER*> getPlayersListConditionalByFilter(int maxSize = -1, PLAYER_SEARCH_FILTER filter = PLAYER_SEARCH_FILTER()) const;
 private:
     bool PlayerFirstNationConditionCheck(PLAYER* player, QList<FEDERATION*>& nations) const;
     bool PlayerSecondNationConditionCheck(PLAYER* player, QList<FEDERATION*>& nations) const;

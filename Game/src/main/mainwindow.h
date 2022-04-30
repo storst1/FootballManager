@@ -13,6 +13,7 @@
 #include "game/data/team.h"
 #include "game/data/federation.h"
 #include "game/time/date.h"
+#include "game/data/player_search_filter.h"
 
 #include <QMainWindow>
 #include <QGridLayout>
@@ -28,6 +29,7 @@
 #include <QLineEdit>
 #include <QCompleter>
 #include <QComboBox>
+#include <QVariant>
 
 #include <algorithm>
 
@@ -196,14 +198,17 @@ private:
     PlayerSortType transfersSceneLastSortClicked = None;
     QComboBox* transfersSceneCountryFilter;
     QCompleter* transfersSceneCountryCompleter;
+    QPushButton* transfersSceneSearchButton;
 
     void SetupTransfersScene();
     void TransfersSceneAddPlayersToLay();
     void TransfersSceneClearNameFilter();
     QList<FEDERATION*> TransfersSceneGetCurContents();
-    void TransfersSceneFillNameFilter(QList<FEDERATION*>& list);
+    void TransfersSceneFillCountryFilter(QList<FEDERATION*>& list);
     void TransfersSceneSetupFilters();
     void TransfersSceneSetupPlayers();
+    void TransfersSceneUpdatePlayersList();
+    PLAYER_SEARCH_FILTER TransfersSceneGetCurrentFilter() const;
 
     //Settings scene
     void SetupSettingsScene();

@@ -81,6 +81,11 @@ QMap<QPair<int, int>, PLAYER_POSITION *> GAME_DATA::getPositions() const
     return positions;
 }
 
+FEDERATION *GAME_DATA::getFederationById(int id) const
+{
+    return federations[id];
+}
+
 FEDERATION *GAME_DATA::implicitlyGetFederation(int id, QString& name)
 {
     //Tries to find a pointer to federation with specified id, if such does not exist it creates a new federation
@@ -184,6 +189,7 @@ QList<PLAYER *> GAME_DATA::getPlayersListConditional(int maxSize,
                                                      ) const
 {
     QList<PLAYER*> list = getPlayersList();
+    std::sort(list.begin(), list.end(), PLAYER::CompTwoPlayersBySkillReversed);
     QList<PLAYER*> listToReturn;
     for(int i = 0; i < list.size(); ++i){
         if(!PlayerFirstNationConditionCheck(list[i], nations)){
@@ -216,13 +222,32 @@ QList<PLAYER *> GAME_DATA::getPlayersListConditional(int maxSize,
         if(!PlayerSkillConditionCheck(list[i], minSkill, maxSkill)){
             continue;
         }
-        //If player hasn't been skipped up to this point means he met all the conditions
+        //If player hasn't been skipped up to this point, that means he's meeting all the required conditions
         listToReturn.push_back(list[i]);
         if(maxSize > 0 && listToReturn.size() == maxSize){
             return listToReturn;
         }
     }
     return listToReturn;
+}
+
+QList<PLAYER *> GAME_DATA::getPlayersListConditionalByFilter(int maxSize, PLAYER_SEARCH_FILTER filter) const
+{
+    return getPlayersListConditional(maxSize,
+                                     filter.getNations(),
+                                     filter.getSecondNations(),
+                                     filter.getName(),
+                                     filter.getTeam(),
+                                     filter.getLeagues(),
+                                     filter.getMinAge(),
+                                     filter.getMaxAge(),
+                                     filter.getPositions(),
+                                     filter.getSecondPositions(),
+                                     filter.getMinTV(),
+                                     filter.getMaxTV(),
+                                     filter.getMinSkill(),
+                                     filter.getMaxSkill()
+                                     );
 }
 
 bool GAME_DATA::PlayerFirstNationConditionCheck(PLAYER *player, QList<FEDERATION *> &nations) const

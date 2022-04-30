@@ -106,11 +106,13 @@ void DATABASE_DYNAMIC_DATA::CopyPlayersTable(QSqlQuery& query) const
 
 void DATABASE_DYNAMIC_DATA::FillGameData(GAME_DATA *gameData) const
 {
-    FillFederationsGameData(gameData);
+    QList<QPair<FEDERATION*, QList<QString>>> fedsList = FillFederationsGameData(gameData);
+    AttachLeaguesToFeds(fedsList, gameData);
 }
 
-void DATABASE_DYNAMIC_DATA::FillFederationsGameData(GAME_DATA *gameData) const
+QList<QPair<FEDERATION*, QList<QString>>> DATABASE_DYNAMIC_DATA::FillFederationsGameData(GAME_DATA *gameData) const
 {
+    QList<QPair<FEDERATION*, QList<QString>>> list;
     QSqlQuery query(*db);
     query.exec("SELECT * from federations");
     DATABASE::PrintSqlExecInfoIfErr(query);
@@ -127,11 +129,21 @@ void DATABASE_DYNAMIC_DATA::FillFederationsGameData(GAME_DATA *gameData) const
         }
         FEDERATION* curFed = new FEDERATION(countryId, name, countryId); //countryId used twise on purpose
         gameData->addFederation(curFed);
-        QList<LEAGUE*> leaguesList = InitLeagueList(leagueIdsList, curFed, gameData);
-        curFed->setLeagues(leaguesList);
-        gameData->addLeagues(leaguesList);
+        list.push_back({curFed, leagueIdsList});
         QPixmap* flag = new QPixmap(MainWindow::GetFlagPath(curFed, "48x30"));
         curFed->setFlag(flag);
+    }
+    return list;
+}
+
+void DATABASE_DYNAMIC_DATA::AttachLeaguesToFeds(QList<QPair<FEDERATION*, QList<QString>>> fedsList, GAME_DATA* gameData) const
+{
+    for(const auto& f : fedsList){
+        QList<QString> leaguesIdsList = f.second;
+        FEDERATION* curFed = f.first;
+        QList<LEAGUE*> leaguesList = InitLeagueList(leaguesIdsList, curFed, gameData);
+        curFed->setLeagues(leaguesList);
+        gameData->addLeagues(leaguesList);
     }
 }
 
@@ -248,4 +260,24 @@ QList<PLAYER *> DATABASE_DYNAMIC_DATA::InitPlayersByClub(CLUB* curClub, GAME_DAT
         playersList.push_back(curPlayer);
     }
     return playersList;
+}
+
+bool DATABASE_DYNAMIC_DATA::FedIsPreLoaded(QString fedName) const
+{
+    for(const auto &s : preLoadedFedList){
+        if(s == fedName){
+            return true;
+        }
+    }
+    return false;
+}
+
+void DATABASE_DYNAMIC_DATA::FillPreLoadedFedList()
+{
+    QSqlQuery query(*db);
+    query.exec("SELECT name FROM federations");
+    DATABASE::PrintSqlExecInfoIfErr(query);
+    while(query.next()){
+        preLoadedFedList.push_back(query.value(0).toString());
+    }
 }

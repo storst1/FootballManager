@@ -25,13 +25,18 @@ public:
     void CopyPlayersTable(QSqlQuery &query) const;
 
     void FillGameData(GAME_DATA* gameData) const;
-    void FillFederationsGameData(GAME_DATA* gameData) const;
+    QList<QPair<FEDERATION *, QList<QString> > > FillFederationsGameData(GAME_DATA* gameData) const;
+    void AttachLeaguesToFeds(QList<QPair<FEDERATION*, QList<QString>>> fedsList, GAME_DATA *gameData) const;
 
     QList<LEAGUE*> InitLeagueList(QList<QString> &leagueIdsList, FEDERATION *curFed, GAME_DATA *gameData) const;
     QList<CLUB*> InitClubsByLeague(LEAGUE* league, GAME_DATA *gameData) const;
     QList<PLAYER*> InitPlayersByClub(CLUB *curClub, GAME_DATA *gameData) const;
+    bool FedIsPreLoaded(QString fedName) const;
+private:
+    void FillPreLoadedFedList();
 private:
     DATABASE_SKILL_CONVERTER* skillConvDb;
+    QList<QString> preLoadedFedList;
 };
 
 #endif // DATABASE_DYNAMIC_DATA_H

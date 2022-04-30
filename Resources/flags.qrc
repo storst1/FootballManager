@@ -208,5 +208,6 @@
         <file>flags/48x30/240.png</file>
         <file>flags/48x30/264.png</file>
         <file>flags/48x30/271.png</file>
+        <file>flags/48x30/34.png</file>
     </qresource>
 </RCC>

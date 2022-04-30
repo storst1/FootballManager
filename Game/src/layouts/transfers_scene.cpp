@@ -6,133 +6,20 @@
 
 void MainWindow::SetupTransfersScene()
 {
-
     transfersSceneLoaded = false;
-
-    QString scrollAreaStyle =
-            "QScrollArea{ "
-                "background-color: transparent;"
-                "border: none;"
-                "background-repeat: none;"
-                "background: transparent;"
-            "}"
-            "QScrollArea > QWidget > QScrollBar:vertical {"
-                "background: palette(base)"
-            "}"
-            "QScrollArea > QWidget > QScrollBar:handle:vertical {"
-                "background: rgb(141,232,123);"
-            "}"
-            "QScrollArea > QWidget > QScrollBar:add-page:vertical {"
-                "background: rgb(225,252,220);"
-            "}"
-            "QScrollArea > QWidget > QScrollBar:sub-page:vertical {"
-                "background: rgb(225,252,220);"
-            "}";
-
-    QString scrollAreaWidgetStyle =
-            "QScrollArea > QWidget > QWidget{"
-                "background-color: transparent;"
-                "border: none;"
-                "background-repeat: none;"
-                "background: transparent;"
-            "}";
-
-    QString lineEditStyle = "QLineEdit {"
-            "border: 2px solid gray;"
-            "border-radius: 10px;"
-            "padding: 0 8px;"
-            "background: yellow;"
-            "selection-background-color: darkgray;"
-        "}";
-
-    QString comboBoxStyle = "QComboBox {"
-        "}"
-        "QComboBox::drop-down {"
-            "color: green;"
-        "}";
 
     ClearLay();
 
+    //Navigation lay
     SetupNavigationLay();
     mainLay->addLayout(navigationLay, 0, 1);
 
-    transfersSceneFiltersLay = new QGridLayout;
-
-    /*
-    QLineEdit* nameInput = new QLineEdit("Name");
-    nameInput->setFixedSize(150, 30);
-    nameInput->setStyleSheet(lineEditStyle);
-    nameInput->setClearButtonEnabled(true);
-    connect(nameInput, &QLineEdit::cursorPositionChanged, this, [this, nameInput]{
-        if(transfersSceneLoaded){
-            return;
-        }
-        nameInput->clear();
-        transfersSceneLoaded = true;
-    });
-    transfersSceneFiltersLay->addWidget(nameInput, 0, 0);
-    */
-
-    transfersSceneFederationsList = gameData->getFederationsList();
-    std::sort(transfersSceneFederationsList.begin(), transfersSceneFederationsList.end(), FEDERATION::CompTwoFedsByName);
-
-    transfersSceneCountryCompleter = new QCompleter();
-    transfersSceneCountryCompleter->setCaseSensitivity(Qt::CaseInsensitive);
-    transfersSceneCountryCompleter->setCompletionMode(QCompleter::UnfilteredPopupCompletion);
-
-    transfersSceneCountryFilter = new QComboBox();
-    //transfersSceneNameFilter->setEditable(true);
-    transfersSceneCountryFilter->setEditable(false);
-    transfersSceneCountryFilter->setFixedSize(200, 35);
-    //transfersSceneNameFilter->setStyleSheet(comboBoxStyle);
-    //transfersSceneNameFilter->setCompleter(transfersSceneNameCompleter);
-    transfersSceneCountryFilterCurrentContents = TransfersSceneGetCurContents();
-    transfersSceneCountryFilter->insertItem(0, "Select country");
-    TransfersSceneFillNameFilter(transfersSceneCountryFilterCurrentContents);
-    //transfersSceneNameFilter->setCurrentText("");
-    /*
-    connect(transfersSceneNameFilter, &QComboBox::editTextChanged, this, [this]{
-        if(transfersSceneNameFilter->currentText() == transferstScenePreInsertText){
-            qDebug() << "Same input";
-            return;
-        }
-        if(transferstSceneInsertSignal){
-            qDebug() << "Cutting signal";
-            transferstSceneInsertSignal = false;
-            transfersSceneNameFilter->setCurrentText(transferstScenePreInsertText);
-            return;
-        }
-        qDebug() << "Filtering contents";
-        transferstScenePreInsertText = transfersSceneNameFilter->currentText();
-        transfersSceneNameFilterCurrentContents = TransfersSceneGetCurContents();
-        transferstSceneInsertSignal = true;
-        transfersSceneNameFilter->clear();
-        transferstSceneInsertSignal = true;
-        transfersSceneNameFilter->insertItems(0, transfersSceneNameFilterCurrentContents);
-        //transfersSceneNameFilter->setCurrentText("");
-    });
-    */
-
-    transfersSceneFiltersLay->addWidget(transfersSceneCountryFilter, 0, 0);
+    //Filters lay
+    TransfersSceneSetupFilters();
     mainLay->addLayout(transfersSceneFiltersLay, 1, 1, Qt::AlignCenter);
 
     //Players lay
-    transfersScenePlayers = gameData->getPlayersListConditional(50);
-    transfersSceneLastSortClicked = None;
-
-    transfersScenePlayersScrollArea = new QScrollArea;
-    transfersScenePlayersScrollArea->setFixedSize(1400, 450);
-    transfersScenePlayersScrollArea->setStyleSheet(scrollAreaStyle);
-    transfersScenePlayersScrollArea->scrollBarWidgets(Qt::AlignHorizontal_Mask);
-    transfersScenePlayersScrollAreaWidget = new QWidget(transfersScenePlayersScrollArea);
-    transfersScenePlayersScrollAreaWidget->setStyleSheet(scrollAreaWidgetStyle);
-    transfersScenePlayersLay = new QGridLayout(transfersScenePlayersScrollAreaWidget);
-
-    TransfersSceneAddPlayersToLay();
-
-    transfersScenePlayersScrollArea->setWidget(transfersScenePlayersScrollAreaWidget);
-    transfersScenePlayersScrollAreaWidget->setLayout(transfersScenePlayersLay);
-
+    TransfersSceneSetupPlayers();
     mainLay->addWidget(transfersScenePlayersScrollArea, 2, 1, Qt::AlignCenter);
 
     TakeSpaceInLay(150, 3, 3);
@@ -264,4 +151,105 @@ void MainWindow::TransfersSceneFillNameFilter(QList<FEDERATION *> &list)
     for(const auto &l : list){
         transfersSceneCountryFilter->insertItem(transfersSceneCountryFilter->count(), QIcon(*l->getFlag()), l->getName());
     }
+}
+
+void MainWindow::TransfersSceneSetupFilters()
+{
+
+    QString comboBoxStyle = "QComboBox QAbstractItemView {"
+            "border: 2px solid darkgray;"
+            "selection-background-color: green;"
+        "}";
+
+    transfersSceneFiltersLay = new QGridLayout;
+
+    transfersSceneFederationsList = gameData->getFederationsList();
+    std::sort(transfersSceneFederationsList.begin(), transfersSceneFederationsList.end(), FEDERATION::CompTwoFedsByName);
+
+    transfersSceneCountryCompleter = new QCompleter();
+    transfersSceneCountryCompleter->setCaseSensitivity(Qt::CaseInsensitive);
+    transfersSceneCountryCompleter->setCompletionMode(QCompleter::UnfilteredPopupCompletion);
+
+    transfersSceneCountryFilter = new QComboBox();
+    //transfersSceneNameFilter->setEditable(true);
+    transfersSceneCountryFilter->setEditable(false);
+    transfersSceneCountryFilter->setFixedSize(200, 35);
+    transfersSceneCountryFilter->setStyleSheet(comboBoxStyle);
+    //transfersSceneNameFilter->setCompleter(transfersSceneNameCompleter);
+    transfersSceneCountryFilterCurrentContents = TransfersSceneGetCurContents();
+    transfersSceneCountryFilter->insertItem(0, "Select country");
+    TransfersSceneFillNameFilter(transfersSceneCountryFilterCurrentContents);
+    //transfersSceneNameFilter->setCurrentText("");
+    /*
+    connect(transfersSceneNameFilter, &QComboBox::editTextChanged, this, [this]{
+        if(transfersSceneNameFilter->currentText() == transferstScenePreInsertText){
+            qDebug() << "Same input";
+            return;
+        }
+        if(transferstSceneInsertSignal){
+            qDebug() << "Cutting signal";
+            transferstSceneInsertSignal = false;
+            transfersSceneNameFilter->setCurrentText(transferstScenePreInsertText);
+            return;
+        }
+        qDebug() << "Filtering contents";
+        transferstScenePreInsertText = transfersSceneNameFilter->currentText();
+        transfersSceneNameFilterCurrentContents = TransfersSceneGetCurContents();
+        transferstSceneInsertSignal = true;
+        transfersSceneNameFilter->clear();
+        transferstSceneInsertSignal = true;
+        transfersSceneNameFilter->insertItems(0, transfersSceneNameFilterCurrentContents);
+        //transfersSceneNameFilter->setCurrentText("");
+    });
+    */
+
+    transfersSceneFiltersLay->addWidget(transfersSceneCountryFilter, 0, 0);
+}
+
+void MainWindow::TransfersSceneSetupPlayers()
+{
+    QString scrollAreaStyle =
+            "QScrollArea{ "
+                "background-color: transparent;"
+                "border: none;"
+                "background-repeat: none;"
+                "background: transparent;"
+            "}"
+            "QScrollArea > QWidget > QScrollBar:vertical {"
+                "background: palette(base)"
+            "}"
+            "QScrollArea > QWidget > QScrollBar:handle:vertical {"
+                "background: rgb(141,232,123);"
+            "}"
+            "QScrollArea > QWidget > QScrollBar:add-page:vertical {"
+                "background: rgb(225,252,220);"
+            "}"
+            "QScrollArea > QWidget > QScrollBar:sub-page:vertical {"
+                "background: rgb(225,252,220);"
+            "}";
+
+    QString scrollAreaWidgetStyle =
+            "QScrollArea > QWidget > QWidget{"
+                "background-color: transparent;"
+                "border: none;"
+                "background-repeat: none;"
+                "background: transparent;"
+            "}";
+
+    transfersScenePlayers = gameData->getPlayersListConditional(50);
+    transfersSceneLastSortClicked = None;
+
+    transfersScenePlayersScrollArea = new QScrollArea;
+    transfersScenePlayersScrollArea->setFixedSize(1400, 450);
+    transfersScenePlayersScrollArea->setStyleSheet(scrollAreaStyle);
+    transfersScenePlayersScrollArea->scrollBarWidgets(Qt::AlignHorizontal_Mask);
+    transfersScenePlayersScrollAreaWidget = new QWidget(transfersScenePlayersScrollArea);
+    transfersScenePlayersScrollAreaWidget->setStyleSheet(scrollAreaWidgetStyle);
+    transfersScenePlayersLay = new QGridLayout(transfersScenePlayersScrollAreaWidget);
+
+    TransfersSceneAddPlayersToLay();
+
+    transfersScenePlayersScrollArea->setWidget(transfersScenePlayersScrollAreaWidget);
+    transfersScenePlayersScrollAreaWidget->setLayout(transfersScenePlayersLay);
+
 }

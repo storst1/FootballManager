@@ -202,6 +202,8 @@ private:
     void TransfersSceneClearNameFilter();
     QList<FEDERATION*> TransfersSceneGetCurContents();
     void TransfersSceneFillNameFilter(QList<FEDERATION*>& list);
+    void TransfersSceneSetupFilters();
+    void TransfersSceneSetupPlayers();
 
     //Settings scene
     void SetupSettingsScene();

@@ -223,6 +223,10 @@ QList<PLAYER *> DATABASE_DYNAMIC_DATA::InitPlayersByClub(CLUB* curClub, GAME_DAT
         int curBirthdayRaw = query.value(10).toInt();
         int curContractExpRaw = query.value(11).toInt();
 
+        if(curName == "Marquinhos"){
+            int d = 0;
+        }
+
         bool wasNormalizedTV = PLAYER::NormalizeTV(curTV);
         bool wasNormalizedAge = PLAYER::NormalizeAgeAndBirthday(curAge, curBirthdayRaw);
         if(wasNormalizedTV || wasNormalizedAge){

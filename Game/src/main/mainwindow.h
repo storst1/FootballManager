@@ -30,6 +30,7 @@
 #include <QCompleter>
 #include <QComboBox>
 #include <QVariant>
+#include <QScrollBar>
 
 #include <algorithm>
 

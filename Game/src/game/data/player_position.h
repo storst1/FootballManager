@@ -2,6 +2,7 @@
 #define PLAYER_POSITION_H
 
 #include "game/data/data_defs.h"
+#include <QRandomGenerator>
 
 class PLAYER_POSITION
 {
@@ -21,6 +22,7 @@ public:
     void setStrNameToAuto();
     static void NormalizeBothPosId(int& pos1, int& pos2);
     static void NormalizePosId(int& pos, bool mainPos);
+    static int getRandPosId();
 private:
     int FP;
     int SP;

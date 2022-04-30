@@ -316,6 +316,7 @@ void MainWindow::TransfersSceneUpdatePlayersList()
 {
     transfersScenePlayers = gameData->getPlayersListConditionalByFilter(50, TransfersSceneGetCurrentFilter());
     TransfersSceneAddPlayersToLay();
+    transfersScenePlayersScrollArea->verticalScrollBar()->setValue(0);
 }
 
 PLAYER_SEARCH_FILTER MainWindow::TransfersSceneGetCurrentFilter() const

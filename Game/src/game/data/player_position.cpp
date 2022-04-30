@@ -69,10 +69,25 @@ void PLAYER_POSITION::NormalizePosId(int &pos, bool mainPos)
     if(pos == 2){
         mainPos ? pos = 3 : pos = 0;
     }
+    else if(pos == 0 && mainPos){
+        pos = PLAYER_POSITION::getRandPosId();
+    }
+}
+
+int PLAYER_POSITION::getRandPosId()
+{
+    int pos = QRandomGenerator::global()->bounded(1, 15);
+    if(pos == 2){
+        pos = getRandPosId();
+    }
+    return pos;
 }
 
 void PLAYER_POSITION::NormalizeBothPosId(int &pos1, int &pos2)
 {
     PLAYER_POSITION::NormalizePosId(pos1, true);
     PLAYER_POSITION::NormalizePosId(pos2, false);
+    if(pos1 == pos2){
+        pos2 = 0;
+    }
 }

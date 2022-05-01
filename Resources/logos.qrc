@@ -132,5 +132,25 @@
         <file>logos/200x200/Netherlands/1269.png</file>
         <file>logos/200x200/Netherlands/1304.png</file>
         <file>logos/200x200/Netherlands/1435.png</file>
+        <file>logos/200x200/Turkey/36.png</file>
+        <file>logos/200x200/Turkey/114.png</file>
+        <file>logos/200x200/Turkey/126.png</file>
+        <file>logos/200x200/Turkey/141.png</file>
+        <file>logos/200x200/Turkey/449.png</file>
+        <file>logos/200x200/Turkey/589.png</file>
+        <file>logos/200x200/Turkey/1467.png</file>
+        <file>logos/200x200/Turkey/2293.png</file>
+        <file>logos/200x200/Turkey/2375.png</file>
+        <file>logos/200x200/Turkey/2381.png</file>
+        <file>logos/200x200/Turkey/2832.png</file>
+        <file>logos/200x200/Turkey/3205.png</file>
+        <file>logos/200x200/Turkey/3840.png</file>
+        <file>logos/200x200/Turkey/6646.png</file>
+        <file>logos/200x200/Turkey/6890.png</file>
+        <file>logos/200x200/Turkey/7775.png</file>
+        <file>logos/200x200/Turkey/10484.png</file>
+        <file>logos/200x200/Turkey/11282.png</file>
+        <file>logos/200x200/Turkey/11688.png</file>
+        <file>logos/200x200/Turkey/19789.png</file>
     </qresource>
 </RCC>

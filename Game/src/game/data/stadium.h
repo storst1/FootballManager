@@ -12,6 +12,8 @@ public:
 
     int getCapacity() const;
     QString getName() const;
+
+    static void NormalizeStadiumCapacity(int& capacity);
 private:
     QString name;
     int capacity;

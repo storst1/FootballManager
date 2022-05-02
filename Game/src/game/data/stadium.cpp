@@ -19,3 +19,11 @@ QString STADIUM::getName() const
 {
     return name;
 }
+
+void STADIUM::NormalizeStadiumCapacity(int &capacity)
+{
+    if(capacity == 0){
+        int randCap = QRandomGenerator::global()->bounded(1, 10);
+        capacity = randCap * 1000;
+    }
+}

@@ -5,6 +5,7 @@
 #include <QList>
 #include <QtAlgorithms>
 #include <QPixmap>
+#include <QRandomGenerator>
 
 #include <algorithm>
 

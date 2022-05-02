@@ -4,8 +4,6 @@
 #include "game/data/data_defs.h"
 #include "game/time/date.h"
 
-#include <QRandomGenerator>
-
 class PLAYER
 {
 public:

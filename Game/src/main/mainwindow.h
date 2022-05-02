@@ -197,21 +197,31 @@ private:
     QGridLayout* transfersScenePlayersLay;
     QList<PLAYER*> transfersScenePlayers;
     PlayerSortType transfersSceneLastSortClicked = None;
-    QComboBox* transfersSceneCountryFilter;
     QCompleter* transfersSceneCountryCompleter;
     QPushButton* transfersSceneSearchButton;
+    QComboBox* transfersSceneCountryFilter;
     QComboBox* transfersScenePosFilter;
+    QComboBox* transfersSceneSecondCountryFilter;
+    QComboBox* transfersSceneSecondPosFilter;
+    QLineEdit* transfersSceneNameFilter;
 
     void SetupTransfersScene();
     void TransfersSceneAddPlayersToLay();
-    void TransfersSceneClearNameFilter();
     QList<FEDERATION*> TransfersSceneGetCurContents();
     void TransfersSceneFillCountryFilter(QList<FEDERATION*>& list);
+    void TransfersSceneFillSecondCountryFilter(QList<FEDERATION*>& list);
     void TransfersSceneSetupFilters();
     void TransfersSceneSetupPlayers();
     void TransfersSceneUpdatePlayersList();
     PLAYER_SEARCH_FILTER TransfersSceneGetCurrentFilter() const;
-    void TransfersSceneFillPosFilter() const;
+    void TransfersSceneFillPosFilter();
+    void TransfersSceneFillSecondPosFilter();
+    void TransfersSceneFillBothPosFilters();
+    void TransfersSceneSetupNameFilter();
+    void TransfersSceneSetupCountryFilter();
+    void TransfersSceneSetupSecondCountryFilter();
+    void TransfersSceneSetupPosFilter();
+    void TransfersSceneSetupSecondPosFilter();
 
     //Settings scene
     void SetupSettingsScene();

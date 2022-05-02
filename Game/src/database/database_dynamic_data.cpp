@@ -1,14 +1,14 @@
 #define DEFAULT_CONTRACT_EXPIRING_DATE 20220629
 
 #include "database/database_dynamic_data.h"
-#include "game/data/game_data.h"
+#include "main/mainwindow.h"
 #include "game/data/player.h"
 #include "game/data/federation.h"
 #include "game/data/team.h"
 #include "game/data/league.h"
-#include "main/mainwindow.h"
 #include "game/time/date.h"
 #include "game/data/player_position.h"
+#include "game/data/stadium.h"
 
 DATABASE_DYNAMIC_DATA::DATABASE_DYNAMIC_DATA(const QString &dbPath,
                                              const QString &connectionName,
@@ -190,8 +190,13 @@ QList<CLUB *> DATABASE_DYNAMIC_DATA::InitClubsByLeague(LEAGUE* league, GAME_DATA
         int curTV = query.value(4).toInt();
         int curTB = query.value(5).toInt();
         int curPrestige = query.value(6).toInt();
+
+        STADIUM::NormalizeStadiumCapacity(curSC);
+
         CLUB* curClub = new CLUB(curId, curName, curTV, curTB, curSN, curSC, curPrestige);
+
         QList<PLAYER*> playersList = InitPlayersByClub(curClub, gameData);
+
         curClub->setPlayerList(playersList);
         curClub->setFederation(league->getFederation());
         gameData->addPlayers(playersList);

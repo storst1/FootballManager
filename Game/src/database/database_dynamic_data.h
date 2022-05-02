@@ -4,8 +4,8 @@
 #include "database/database.h"
 #include "database/database_real_data.h"
 #include "database/database_skill_converter.h"
-#include "game/data/country_map.h"
 #include "game/data/data_defs.h"
+#include "game/data/country_map.h"
 #include "game/data/game_data.h"
 
 #include <QMap>

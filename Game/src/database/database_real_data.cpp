@@ -171,6 +171,7 @@ QString DATABASE_REAL_DATA::SqlGetStringReady(QString str)
             ++i;
         }
     }
+    REQUEST_BUFFER::ReplaceAllNonEnglishSymbols(str);
     return str;
 }
 

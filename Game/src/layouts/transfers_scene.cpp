@@ -141,14 +141,6 @@ void MainWindow::TransfersSceneAddPlayersToLay(){
         ++totalPlayers;
     }
 }
-
-void MainWindow::TransfersSceneClearNameFilter()
-{
-    while(transfersSceneCountryFilter->count()){
-        transfersSceneCountryFilter->removeItem(0);
-    }
-}
-
 QList<FEDERATION *> MainWindow::TransfersSceneGetCurContents()
 {
     QList<FEDERATION *> curContents;
@@ -181,87 +173,17 @@ void MainWindow::TransfersSceneFillCountryFilter(QList<FEDERATION *> &list)
     }
 }
 
-void MainWindow::TransfersSceneSetupFilters()
+void MainWindow::TransfersSceneFillSecondCountryFilter(QList<FEDERATION *> &list)
 {
-
-    QString buttonStyle = "QPushButton{ "
-                "background-color: transparent;"
-                "border: none;"
-                "background-repeat: none;"
-                "background: none;"
-                "background-image:url(:/greenLay160x60.png);"
-                "font-size: 24px;"
-                "font-family: Comic Sans MS;"
-                "color: white;"
-            "}"
-            ":hover{"
-                "background-image:url(:/greenLay160x60Highlighted.png);"
-            "}";
-
-    QString comboBoxStyle = "QComboBox QAbstractItemView {"
-            "border: 2px solid darkgray;"
-            "selection-background-color: green;"
-        "}";
-
-    transfersSceneFiltersLay = new QGridLayout;
-
-    transfersSceneFederationsList = gameData->getFederationsList();
-    std::sort(transfersSceneFederationsList.begin(), transfersSceneFederationsList.end(), FEDERATION::CompTwoFedsByName);
-
-    transfersSceneCountryCompleter = new QCompleter();
-    transfersSceneCountryCompleter->setCaseSensitivity(Qt::CaseInsensitive);
-    transfersSceneCountryCompleter->setCompletionMode(QCompleter::UnfilteredPopupCompletion);
-
-    transfersSceneCountryFilter = new QComboBox();
-    //transfersSceneNameFilter->setEditable(true);
-    transfersSceneCountryFilter->setEditable(false);
-    transfersSceneCountryFilter->setFixedSize(200, 35);
-    transfersSceneCountryFilter->setStyleSheet(comboBoxStyle);
-    //transfersSceneNameFilter->setCompleter(transfersSceneNameCompleter);
-    transfersSceneCountryFilterCurrentContents = TransfersSceneGetCurContents();
-    transfersSceneCountryFilter->insertItem(0, "Select country", -1);
-    TransfersSceneFillCountryFilter(transfersSceneCountryFilterCurrentContents);
-    //transfersSceneNameFilter->setCurrentText("");
-    /*
-    connect(transfersSceneNameFilter, &QComboBox::editTextChanged, this, [this]{
-        if(transfersSceneNameFilter->currentText() == transferstScenePreInsertText){
-            qDebug() << "Same input";
-            return;
-        }
-        if(transferstSceneInsertSignal){
-            qDebug() << "Cutting signal";
-            transferstSceneInsertSignal = false;
-            transfersSceneNameFilter->setCurrentText(transferstScenePreInsertText);
-            return;
-        }
-        qDebug() << "Filtering contents";
-        transferstScenePreInsertText = transfersSceneNameFilter->currentText();
-        transfersSceneNameFilterCurrentContents = TransfersSceneGetCurContents();
-        transferstSceneInsertSignal = true;
-        transfersSceneNameFilter->clear();
-        transferstSceneInsertSignal = true;
-        transfersSceneNameFilter->insertItems(0, transfersSceneNameFilterCurrentContents);
-        //transfersSceneNameFilter->setCurrentText("");
-    });
-    */
-    transfersSceneFiltersLay->addWidget(transfersSceneCountryFilter, 0, 0);
-
-    transfersScenePosFilter = new QComboBox();
-    transfersScenePosFilter->setEditable(false);
-    transfersScenePosFilter->setFixedSize(60, 35);
-    transfersScenePosFilter->setStyleSheet(comboBoxStyle);
-    transfersScenePosFilter->insertItem(0, "Any", -1);
-    TransfersSceneFillPosFilter();
-    transfersSceneFiltersLay->addWidget(transfersScenePosFilter, 0, 1);
-
-    transfersSceneSearchButton = new QPushButton("Search");
-    transfersSceneSearchButton->setStyleSheet(buttonStyle);
-    transfersSceneSearchButton->setFixedSize(160, 60);
-    connect(transfersSceneSearchButton, &QPushButton::clicked, this, [this]{
-        TransfersSceneUpdatePlayersList();
-    });
-
-    transfersSceneFiltersLay->addWidget(transfersSceneSearchButton, 0, 2);
+    for(const auto &l : list){
+        transfersSceneSecondCountryFilter->insertItem
+        (
+            transfersSceneSecondCountryFilter->count(),
+            QIcon(*(l->getFlag())),
+            l->getName(),
+            l->getId()
+        );
+    }
 }
 
 void MainWindow::TransfersSceneSetupPlayers()
@@ -322,21 +244,195 @@ void MainWindow::TransfersSceneUpdatePlayersList()
 PLAYER_SEARCH_FILTER MainWindow::TransfersSceneGetCurrentFilter() const
 {
     PLAYER_SEARCH_FILTER filter;
+    QString name = transfersSceneNameFilter->text();
+    if(name != ""){
+        filter.setName(name);
+    }
     int fedId = transfersSceneCountryFilter->currentData().value<int>();
     if(fedId != -1){
         filter.setNations({gameData->getFederationById(fedId)});
     }
-    int curPos = transfersScenePosFilter->currentData().value<int>();
-    if(curPos != -1){
-        filter.setPos({curPos});
+    int secondFedId = transfersSceneSecondCountryFilter->currentData().value<int>();
+    if(secondFedId != -1){
+        filter.setSecondNations({gameData->getFederationById(secondFedId)});
+    }
+    int pos = transfersScenePosFilter->currentData().value<int>();
+    if(pos != -1){
+        filter.setPos({pos});
+    }
+    int secondPos = transfersSceneSecondPosFilter->currentData().value<int>();
+    if(secondPos != -1){
+        filter.setSecondPos({secondPos});
     }
     return filter;
 }
 
-void MainWindow::TransfersSceneFillPosFilter() const
+void MainWindow::TransfersSceneSetupFilters()
+{
+
+    QString buttonStyle = "QPushButton{ "
+                "background-color: transparent;"
+                "border: none;"
+                "background-repeat: none;"
+                "background: none;"
+                "background-image:url(:/greenLay160x60.png);"
+                "font-size: 24px;"
+                "font-family: Comic Sans MS;"
+                "color: white;"
+            "}"
+            ":hover{"
+                "background-image:url(:/greenLay160x60Highlighted.png);"
+            "}";
+
+    transfersSceneFiltersLay = new QGridLayout;
+
+    transfersSceneFederationsList = gameData->getFederationsList();
+    std::sort(transfersSceneFederationsList.begin(), transfersSceneFederationsList.end(), FEDERATION::CompTwoFedsByName);
+
+    TransfersSceneSetupNameFilter();
+    transfersSceneFiltersLay->addWidget(transfersSceneNameFilter, 0, 0);
+
+    TransfersSceneSetupCountryFilter();
+    transfersSceneFiltersLay->addWidget(transfersSceneCountryFilter, 0, 1);
+
+    TransfersSceneSetupSecondCountryFilter();
+    transfersSceneFiltersLay->addWidget(transfersSceneSecondCountryFilter, 0, 2);
+
+    TransfersSceneSetupPosFilter();
+    transfersSceneFiltersLay->addWidget(transfersScenePosFilter, 0, 3);
+
+    TransfersSceneSetupSecondPosFilter();
+    transfersSceneFiltersLay->addWidget(transfersSceneSecondPosFilter, 0, 4);
+
+    transfersSceneSearchButton = new QPushButton("Search");
+    transfersSceneSearchButton->setStyleSheet(buttonStyle);
+    transfersSceneSearchButton->setFixedSize(160, 60);
+    connect(transfersSceneSearchButton, &QPushButton::clicked, this, [this]{
+        TransfersSceneUpdatePlayersList();
+    });
+
+    transfersSceneFiltersLay->addWidget(transfersSceneSearchButton, 0, 5);
+}
+
+void MainWindow::TransfersSceneFillPosFilter()
 {
     QList<QPair<QString, int>> posList = GAME_DATA::getPositionsSimplifiedList();
     for(const auto &p : posList){
         transfersScenePosFilter->addItem(p.first, p.second);
     }
+}
+
+void MainWindow::TransfersSceneFillSecondPosFilter()
+{
+    QList<QPair<QString, int>> posList = GAME_DATA::getPositionsSimplifiedList();
+    for(const auto &p : posList){
+        transfersSceneSecondPosFilter->addItem(p.first, p.second);
+    }
+}
+
+void MainWindow::TransfersSceneFillBothPosFilters()
+{
+    TransfersSceneFillPosFilter();
+    TransfersSceneFillSecondPosFilter();
+}
+
+void MainWindow::TransfersSceneSetupNameFilter()
+{
+    transfersSceneNameFilter = new QLineEdit();
+    transfersSceneNameFilter->setFixedSize(140, 35);
+    transfersSceneNameFilter->setPlaceholderText("Name");
+}
+
+void MainWindow::TransfersSceneSetupCountryFilter()
+{
+
+    QString comboBoxStyle = "QComboBox QAbstractItemView {"
+            "border: 2px solid darkgray;"
+            "selection-background-color: green;"
+        "}";
+
+    /*
+    transfersSceneCountryCompleter = new QCompleter();
+    transfersSceneCountryCompleter->setCaseSensitivity(Qt::CaseInsensitive);
+    transfersSceneCountryCompleter->setCompletionMode(QCompleter::UnfilteredPopupCompletion);
+    */
+
+    transfersSceneCountryFilter = new QComboBox();
+    transfersSceneCountryFilter->setEditable(false);
+    transfersSceneCountryFilter->setFixedSize(200, 35);
+    transfersSceneCountryFilter->setStyleSheet(comboBoxStyle);
+    //transfersSceneNameFilter->setCompleter(transfersSceneNameCompleter);
+    //transfersSceneCountryFilterCurrentContents = TransfersSceneGetCurContents();
+    transfersSceneCountryFilter->insertItem(0, "Select nationality", -1);
+    TransfersSceneFillCountryFilter(transfersSceneFederationsList);
+    //transfersSceneNameFilter->setCurrentText("");
+    /*
+    connect(transfersSceneNameFilter, &QComboBox::editTextChanged, this, [this]{
+        if(transfersSceneNameFilter->currentText() == transferstScenePreInsertText){
+            qDebug() << "Same input";
+            return;
+        }
+        if(transferstSceneInsertSignal){
+            qDebug() << "Cutting signal";
+            transferstSceneInsertSignal = false;
+            transfersSceneNameFilter->setCurrentText(transferstScenePreInsertText);
+            return;
+        }
+        qDebug() << "Filtering contents";
+        transferstScenePreInsertText = transfersSceneNameFilter->currentText();
+        transfersSceneNameFilterCurrentContents = TransfersSceneGetCurContents();
+        transferstSceneInsertSignal = true;
+        transfersSceneNameFilter->clear();
+        transferstSceneInsertSignal = true;
+        transfersSceneNameFilter->insertItems(0, transfersSceneNameFilterCurrentContents);
+        //transfersSceneNameFilter->setCurrentText("");
+    });
+    */
+}
+
+void MainWindow::TransfersSceneSetupSecondCountryFilter()
+{
+    QString comboBoxStyle = "QComboBox QAbstractItemView {"
+            "border: 2px solid darkgray;"
+            "selection-background-color: green;"
+        "}";
+
+    transfersSceneSecondCountryFilter = new QComboBox();
+    transfersSceneSecondCountryFilter->setEditable(false);
+    transfersSceneSecondCountryFilter->setFixedSize(200, 35);
+    transfersSceneSecondCountryFilter->setStyleSheet(comboBoxStyle);
+    transfersSceneSecondCountryFilter->insertItem(0, "Select second nationality", -1);
+    TransfersSceneFillSecondCountryFilter(transfersSceneFederationsList);
+}
+
+void MainWindow::TransfersSceneSetupPosFilter()
+{
+
+    QString comboBoxStyle = "QComboBox QAbstractItemView {"
+            "border: 2px solid darkgray;"
+            "selection-background-color: green;"
+        "}";
+
+    transfersScenePosFilter = new QComboBox();
+    transfersScenePosFilter->setEditable(false);
+    transfersScenePosFilter->setFixedSize(100, 35);
+    transfersScenePosFilter->setStyleSheet(comboBoxStyle);
+    transfersScenePosFilter->insertItem(0, "Any main pos", -1);
+    TransfersSceneFillPosFilter();
+}
+
+void MainWindow::TransfersSceneSetupSecondPosFilter()
+{
+
+    QString comboBoxStyle = "QComboBox QAbstractItemView {"
+            "border: 2px solid darkgray;"
+            "selection-background-color: green;"
+        "}";
+
+    transfersSceneSecondPosFilter = new QComboBox();
+    transfersSceneSecondPosFilter->setEditable(false);
+    transfersSceneSecondPosFilter->setFixedSize(100, 35);
+    transfersSceneSecondPosFilter->setStyleSheet(comboBoxStyle);
+    transfersSceneSecondPosFilter->insertItem(0, "Any side pos", -1);
+    TransfersSceneFillSecondPosFilter();
 }

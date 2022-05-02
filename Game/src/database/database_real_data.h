@@ -2,6 +2,7 @@
 #define DATABASE_REAL_DATA_H
 
 #include "database/database.h"
+#include "network/request_buffer.h"
 
 class DATABASE_REAL_DATA : public DATABASE
 {

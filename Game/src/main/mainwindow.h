@@ -118,6 +118,7 @@ private:
     void TakeSpaceInLay(int h, int row, int col_amount);
     void ClearLay();
     void ClearLay(QLayout* lay);
+    static QLabel* NewTrashPtr();
 
     //Scene-dependent
 
@@ -204,6 +205,10 @@ private:
     QComboBox* transfersSceneSecondCountryFilter;
     QComboBox* transfersSceneSecondPosFilter;
     QLineEdit* transfersSceneNameFilter;
+    QLineEdit* transfersSceneMinAgeFilter;
+    QLineEdit* transfersSceneMaxAgeFilter;
+    QLineEdit* transfersSceneMinSkillFilter;
+    QLineEdit* transfersSceneMaxSkillFilter;
 
     void SetupTransfersScene();
     void TransfersSceneAddPlayersToLay();
@@ -222,6 +227,8 @@ private:
     void TransfersSceneSetupSecondCountryFilter();
     void TransfersSceneSetupPosFilter();
     void TransfersSceneSetupSecondPosFilter();
+    void TransfersSceneSetupAgeFilter();
+    void TransfersSceneSetupSkillFilter();
 
     //Settings scene
     void SetupSettingsScene();

@@ -264,6 +264,22 @@ PLAYER_SEARCH_FILTER MainWindow::TransfersSceneGetCurrentFilter() const
     if(secondPos != -1){
         filter.setSecondPos({secondPos});
     }
+    QString minAge = transfersSceneMinAgeFilter->text();
+    if(minAge != ""){
+        filter.setMinAge(minAge.toInt());
+    }
+    QString maxAge = transfersSceneMaxAgeFilter->text();
+    if(maxAge != ""){
+        filter.setMaxAge(maxAge.toInt());
+    }
+    QString minSkill = transfersSceneMinSkillFilter->text();
+    if(minSkill != ""){
+        filter.setMinSkill(minSkill.toInt());
+    }
+    QString maxSkill = transfersSceneMaxSkillFilter->text();
+    if(maxSkill != ""){
+        filter.setMaxSkill(maxSkill.toInt());
+    }
     return filter;
 }
 
@@ -290,19 +306,19 @@ void MainWindow::TransfersSceneSetupFilters()
     std::sort(transfersSceneFederationsList.begin(), transfersSceneFederationsList.end(), FEDERATION::CompTwoFedsByName);
 
     TransfersSceneSetupNameFilter();
-    transfersSceneFiltersLay->addWidget(transfersSceneNameFilter, 0, 0);
+    transfersSceneFiltersLay->addWidget(transfersSceneNameFilter, 0, 0, Qt::AlignCenter);
 
     TransfersSceneSetupCountryFilter();
-    transfersSceneFiltersLay->addWidget(transfersSceneCountryFilter, 0, 1);
+    transfersSceneFiltersLay->addWidget(transfersSceneCountryFilter, 0, 1, Qt::AlignCenter);
 
     TransfersSceneSetupSecondCountryFilter();
-    transfersSceneFiltersLay->addWidget(transfersSceneSecondCountryFilter, 0, 2);
+    transfersSceneFiltersLay->addWidget(transfersSceneSecondCountryFilter, 0, 2, Qt::AlignCenter);
 
     TransfersSceneSetupPosFilter();
-    transfersSceneFiltersLay->addWidget(transfersScenePosFilter, 0, 3);
+    transfersSceneFiltersLay->addWidget(transfersScenePosFilter, 0, 3, Qt::AlignCenter);
 
     TransfersSceneSetupSecondPosFilter();
-    transfersSceneFiltersLay->addWidget(transfersSceneSecondPosFilter, 0, 4);
+    transfersSceneFiltersLay->addWidget(transfersSceneSecondPosFilter, 0, 4, Qt::AlignCenter);
 
     transfersSceneSearchButton = new QPushButton("Search");
     transfersSceneSearchButton->setStyleSheet(buttonStyle);
@@ -311,7 +327,20 @@ void MainWindow::TransfersSceneSetupFilters()
         TransfersSceneUpdatePlayersList();
     });
 
-    transfersSceneFiltersLay->addWidget(transfersSceneSearchButton, 0, 5);
+    transfersSceneFiltersLay->addWidget(transfersSceneSearchButton, 0, 5, Qt::AlignCenter);
+
+    TransfersSceneSetupAgeFilter();
+
+    transfersSceneFiltersLay->addWidget(transfersSceneMinAgeFilter, 1, 0, Qt::AlignCenter);
+    transfersSceneFiltersLay->addWidget(transfersSceneMaxAgeFilter, 1, 1, Qt::AlignCenter);
+
+    TransfersSceneSetupSkillFilter();
+
+    transfersSceneFiltersLay->addWidget(transfersSceneMinSkillFilter, 1, 2, Qt::AlignCenter);
+    transfersSceneFiltersLay->addWidget(transfersSceneMaxSkillFilter, 1, 3, Qt::AlignCenter);
+
+    transfersSceneFiltersLay->addWidget(NewTrashPtr(), 1, 4, Qt::AlignCenter);
+    transfersSceneFiltersLay->addWidget(NewTrashPtr(), 1, 5, Qt::AlignCenter);
 }
 
 void MainWindow::TransfersSceneFillPosFilter()
@@ -341,6 +370,7 @@ void MainWindow::TransfersSceneSetupNameFilter()
     transfersSceneNameFilter = new QLineEdit();
     transfersSceneNameFilter->setFixedSize(140, 35);
     transfersSceneNameFilter->setPlaceholderText("Name");
+    transfersSceneNameFilter->setClearButtonEnabled(true);
 }
 
 void MainWindow::TransfersSceneSetupCountryFilter()
@@ -435,4 +465,38 @@ void MainWindow::TransfersSceneSetupSecondPosFilter()
     transfersSceneSecondPosFilter->setStyleSheet(comboBoxStyle);
     transfersSceneSecondPosFilter->insertItem(0, "Any side pos", -1);
     TransfersSceneFillSecondPosFilter();
+}
+
+void MainWindow::TransfersSceneSetupAgeFilter()
+{
+    QValidator* lineEditValidator = new QIntValidator(0, 100);
+
+    transfersSceneMinAgeFilter = new QLineEdit();
+    transfersSceneMinAgeFilter->setPlaceholderText("Min. age");
+    transfersSceneMinAgeFilter->setFixedSize(100, 35);
+    transfersSceneMinAgeFilter->setValidator(lineEditValidator);
+    transfersSceneMinAgeFilter->setClearButtonEnabled(true);
+
+    transfersSceneMaxAgeFilter = new QLineEdit();
+    transfersSceneMaxAgeFilter->setPlaceholderText("Max. age");
+    transfersSceneMaxAgeFilter->setFixedSize(100, 35);
+    transfersSceneMaxAgeFilter->setValidator(lineEditValidator);
+    transfersSceneMaxAgeFilter->setClearButtonEnabled(true);
+}
+
+void MainWindow::TransfersSceneSetupSkillFilter()
+{
+    QValidator* lineEditValidator = new QIntValidator(0, 100);
+
+    transfersSceneMinSkillFilter = new QLineEdit();
+    transfersSceneMinSkillFilter->setPlaceholderText("Min. skill");
+    transfersSceneMinSkillFilter->setFixedSize(100, 35);
+    transfersSceneMinSkillFilter->setValidator(lineEditValidator);
+    transfersSceneMinSkillFilter->setClearButtonEnabled(true);
+
+    transfersSceneMaxSkillFilter = new QLineEdit();
+    transfersSceneMaxSkillFilter->setPlaceholderText("Max. skill");
+    transfersSceneMaxSkillFilter->setFixedSize(100, 35);
+    transfersSceneMaxSkillFilter->setValidator(lineEditValidator);
+    transfersSceneMaxSkillFilter->setClearButtonEnabled(true);
 }

@@ -68,6 +68,11 @@ void MainWindow::ClearLay(QLayout *lay)
     //qDebug() << "ClearLay() finished working";
 }
 
+QLabel *MainWindow::NewTrashPtr()
+{
+    return new QLabel("");
+}
+
 void MainWindow::drawPlayerFlag(QPixmap &flag, FEDERATION *fed1, FEDERATION *fed2)
 {
     if(fed1->getFlag() == nullptr){

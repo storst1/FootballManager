@@ -115,9 +115,13 @@ void REQUEST_BUFFER::ReplaceAllNonEnglishSymbols(QString &s)
     s.replace("\\u00fc", "u");
     s.replace("\\u00f6", "o");
     s.replace("\\u00f3", "o");
-    s.replace("\u00fc", "u");
-    s.replace("\u00e3", "a");
-    s.replace("\u00e7", "c");
-    s.replace("\u00fa", "u");
-    s.replace("\u00e4", "a");
+    s.replace("\\u00fc", "u");
+    s.replace("\\u00e3", "a");
+    s.replace("\\u00e7", "c");
+    s.replace("\\u00fa", "u");
+    s.replace("\\u00e4", "a");
+    s.replace("\\u00e5", "a");
+    s.replace("\\u00c1", "A");
+    s.replace("\\u00da", "U");
+    s.replace("\\u0151", "o");
 }

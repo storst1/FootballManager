@@ -93,6 +93,18 @@ void MainWindow::drawPlayerFlag(QPixmap &flag, FEDERATION *fed1, FEDERATION *fed
     painter.end();
 }
 
+void MainWindow::drawLeagueHeaderFlag(QPixmap &flag, FEDERATION *fed)
+{
+    if(fed->getFlag() == nullptr){
+        qDebug() << "No flag of fed with id = " << fed->getId();
+        return;
+    }
+    flag.fill(Qt::transparent);
+    QPainter painter(&flag);
+    painter.drawPixmap(0, 5, 48, 30, *fed->getFlag());
+    painter.end();
+}
+
 void MainWindow::SetupNavigationLay(){
     navigationLay = new QGridLayout();
 

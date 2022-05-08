@@ -14,6 +14,7 @@
 #include "game/data/federation.h"
 #include "game/time/date.h"
 #include "game/data/player_search_filter.h"
+#include "game/events/event_array.h"
 
 #include <QMainWindow>
 #include <QGridLayout>
@@ -54,6 +55,7 @@ public:
     static QString EuroSym();
     static QString NaturalizeNum(int num);
     static void drawPlayerFlag(QPixmap& flag, FEDERATION* fed1, FEDERATION* fed2);
+    static void drawLeagueHeaderFlag(QPixmap& flag, FEDERATION* fed);
 private:
     //Window properties
     Ui::MainWindow *ui;
@@ -63,6 +65,7 @@ private:
     //Game info
     GAME_DATA* gameData;
     USER* user;
+    EVENT_ARRAY* eventHandeler;
 
     //Real data
     DATABASE_REAL_DATA* realDataDb;
@@ -88,6 +91,7 @@ private:
     static QString getDbFolderPath();
     void SetupNetworkManager();
     void SetupDb();
+    void SetupEventHandler();
     void CollectData();
     void FillAllLeagues();
     void FillAllLeaguesWithBaseInfo();

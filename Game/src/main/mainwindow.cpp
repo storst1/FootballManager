@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
     SetupNetworkManager();
     LoadGameData();
     SetupUser();
+    SetupEventHandler();
     SetupStartingScene();
 }
 

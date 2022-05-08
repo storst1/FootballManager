@@ -9,7 +9,7 @@ public:
     EVENT(DATE& date);
     virtual ~EVENT() = default;
 
-    virtual void Execute();
+    virtual void Execute() = 0;
 
     bool operator<(const EVENT& oth_event) const;
 protected:

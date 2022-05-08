@@ -93,6 +93,12 @@ void MainWindow::SetupNewGameScene()
     connect(leagueLeftButton, &QPushButton::clicked, this, [this]{NewGamePrevLeague();});
 
     leagueLabel = new QLabel(allLeaguesList[NewGameCurLeagueIdx]->getName());
+    /*
+    leagueLabel->setAlignment(Qt::AlignLeft);
+    QPixmap LeagueFlagPixmap(50, 50);
+    MainWindow::drawLeagueHeaderFlag(LeagueFlagPixmap, allLeaguesList[NewGameCurLeagueIdx]->getFederation());
+    leagueLabel->setPixmap(LeagueFlagPixmap);
+    */
     leagueLabel->setAlignment(Qt::AlignCenter);
     leagueLabel->setFixedWidth(1000);
     leagueLabel->setFixedHeight(120);

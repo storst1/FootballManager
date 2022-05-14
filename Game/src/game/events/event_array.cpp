@@ -14,3 +14,10 @@ void EVENT_ARRAY::addEvent(EVENT *event)
 {
     events.push_back(event);
 }
+
+void EVENT_ARRAY::Continue(DATE tillDate)
+{
+    while(!events.empty() && events.front()->getDate() < tillDate){
+        events.front()->Execute();
+    }
+}

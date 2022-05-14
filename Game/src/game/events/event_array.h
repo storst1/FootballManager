@@ -12,6 +12,7 @@ public:
     ~EVENT_ARRAY();
 
     void addEvent(EVENT* event);
+    void Continue(DATE tillDate);
 private:
     QList<EVENT*> events;
 };

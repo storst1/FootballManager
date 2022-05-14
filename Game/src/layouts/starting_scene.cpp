@@ -19,25 +19,25 @@ void MainWindow::SetupStartingScene(){
                 "background-image:url(:/greenLay280x100Highlighted.png);"
             "}";
 
-    startButton = new QPushButton("New Game");
-    startButton->setFixedWidth(280);
-    startButton->setFixedHeight(100);
-    startButton->setStyleSheet(style);
-    connect(startButton, &QPushButton::clicked, this, &MainWindow::SetupNewGameScene);
-    mainLay->addWidget(startButton);
+    startingSceneStartButton = new QPushButton("New Game");
+    startingSceneStartButton->setFixedWidth(280);
+    startingSceneStartButton->setFixedHeight(100);
+    startingSceneStartButton->setStyleSheet(style);
+    connect(startingSceneStartButton, &QPushButton::clicked, this, &MainWindow::SetupNewGameScene);
+    mainLay->addWidget(startingSceneStartButton);
 
-    loadButton = new QPushButton("Load Game");
-    loadButton->setFixedWidth(280);
-    loadButton->setFixedHeight(100);
-    loadButton->setStyleSheet(style);
-    mainLay->addWidget(loadButton);
+    startingSceneLoadButton = new QPushButton("Load Game");
+    startingSceneLoadButton->setFixedWidth(280);
+    startingSceneLoadButton->setFixedHeight(100);
+    startingSceneLoadButton->setStyleSheet(style);
+    mainLay->addWidget(startingSceneLoadButton);
 
-    settingsButton = new QPushButton("Settings");
-    settingsButton->setFixedWidth(280);
-    settingsButton->setFixedHeight(100);
-    settingsButton->setStyleSheet(style);
-    connect(settingsButton, &QPushButton::clicked, this, &MainWindow::SetupSettingsScene);
-    mainLay->addWidget(settingsButton);
+    startingSceneSettingsButton = new QPushButton("Settings");
+    startingSceneSettingsButton->setFixedWidth(280);
+    startingSceneSettingsButton->setFixedHeight(100);
+    startingSceneSettingsButton->setStyleSheet(style);
+    connect(startingSceneSettingsButton, &QPushButton::clicked, this, &MainWindow::SetupSettingsScene);
+    mainLay->addWidget(startingSceneSettingsButton);
 
     PushBackEmptyToLay(2);
 }

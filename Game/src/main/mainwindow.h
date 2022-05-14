@@ -136,37 +136,37 @@ private:
     void SetupNavigationLay();
 
     //STARTING SCENE
-    QPushButton* loadButton;
-    QPushButton *startButton;
-    QPushButton *settingsButton;
+    QPushButton* startingSceneLoadButton;
+    QPushButton *startingSceneStartButton;
+    QPushButton *startingSceneSettingsButton;
     void SetupStartingScene();
 
     //NEW GAME SCENE
     int NewGameCurClubIdx = 0;
     int NewGameCurLeagueIdx = 0;
 
-    QPushButton* leagueLeftButton;
-    QPushButton* leagueRightButton;
-    QLabel* leagueLabel;
+    QPushButton* newGameLeagueLeftButton;
+    QPushButton* newGameLeagueRightButton;
+    QLabel* newGameLeagueLabel;
 
-    QGridLayout* clubLay;
-    QPushButton* clubLeftButton;
-    QPushButton* clubRightButton;
-    QLabel* clubName;
-    QLabel* clubLogo;
-    QLabel* clubTV;
-    QLabel* clubBudget;
-    QLabel* clubPrestige;
-    QPushButton* startNewGameButton;
+    QGridLayout* newGameClubLay;
+    QPushButton* newGameClubLeftButton;
+    QPushButton* newGameClubRightButton;
+    QLabel* newGameClubName;
+    QLabel* newGameClubLogo;
+    QLabel* newGameClubTV;
+    QLabel* newGameClubBudget;
+    QLabel* newGameClubPrestige;
+    QPushButton* newGameStartNewGameButton;
 
-    QList<LEAGUE*> allLeaguesList;
+    QList<LEAGUE*> newGameAllLeaguesList;
 
     void SetupNewGameScene();
     void NewGameNextLeague();
     void NewGamePrevLeague();
-    void ChangeLeagueLabel(LEAGUE* _league);
-    void ChangeClubLay(CLUB* curClub);
-    QMap<QString, LEAGUE*>::iterator GetNextLeagueIter(const QMap<QString, LEAGUE*>::iterator curIter,
+    void NewGameChangeLeagueLabel(LEAGUE* _league);
+    void NewGameChangeClubLay(CLUB* curClub);
+    QMap<QString, LEAGUE*>::iterator NewGameGetNextLeagueIter(const QMap<QString, LEAGUE*>::iterator curIter,
                                                        const QMap<QString, LEAGUE*>::iterator beginIter,
                                                        const QMap<QString, LEAGUE*>::iterator endIter);
     void NewGameNextClub();
@@ -179,6 +179,8 @@ private:
     QGridLayout* homeScenePlayersLay;
     QList<PLAYER*> homeScenePlayers;
     PlayerSortType homeSceneLastSortClicked = Pos;
+    QPushButton* homeSceneContinueButton;
+    QLabel* homeSceneCalendarBar;
 
     void SetupHomeScene();
     void HomeSceneAddPlayersToLay();
@@ -187,7 +189,9 @@ private:
     void HomeSceneSortPlayersByAge();
     void HomeSceneSortPlayersByTV();
     void HomeSceneSortPlayersBySkill();
-    void ReverseHomeScenePlayers();
+    void HomeSceneReversePlayers();
+    void HomeSceneSetupCalendarBar(DATE curDate);
+    void HomeSceneUpdateCalendarBar(DATE curDate);
 
     //TRANSFERS SCENE
     bool transfersSceneLoaded = false;

@@ -11,8 +11,10 @@ public:
 
     virtual void Execute() = 0;
 
+    DATE getDate() const;
+
     bool operator<(const EVENT& oth_event) const;
-protected:
+
     enum Order{ Morning, Day, Evening };
 private:
     DATE date;

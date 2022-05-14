@@ -82,7 +82,7 @@ void MainWindow::SetupHomeScene(){
     nameHeader->setStyleSheet(headerButtonStyle);
     nameHeader->setFixedSize(390, headerLabelHeight);
     connect(nameHeader, &QPushButton::clicked, this, [this]{
-        homeSceneLastSortClicked == Name ? ReverseHomeScenePlayers() :   HomeSceneSortPlayersByName();
+        homeSceneLastSortClicked == Name ? HomeSceneReversePlayers() :   HomeSceneSortPlayersByName();
         ClearLay(homeScenePlayersLay);
         HomeSceneAddPlayersToLay();
         homeSceneLastSortClicked = Name;
@@ -92,7 +92,7 @@ void MainWindow::SetupHomeScene(){
     posHeader->setStyleSheet(headerButtonStyle);
     posHeader->setFixedSize(90, headerLabelHeight);
     connect(posHeader, &QPushButton::clicked, this, [this]{
-        homeSceneLastSortClicked == Pos ? ReverseHomeScenePlayers() : HomeSceneSortPlayersByPos();
+        homeSceneLastSortClicked == Pos ? HomeSceneReversePlayers() : HomeSceneSortPlayersByPos();
         ClearLay(homeScenePlayersLay);
         HomeSceneAddPlayersToLay();
         homeSceneLastSortClicked = Pos;
@@ -102,7 +102,7 @@ void MainWindow::SetupHomeScene(){
     ageHeader->setStyleSheet(headerButtonStyle);
     ageHeader->setFixedSize(60, headerLabelHeight);
     connect(ageHeader, &QPushButton::clicked, this, [this]{
-        homeSceneLastSortClicked == Age ? ReverseHomeScenePlayers() : HomeSceneSortPlayersByAge();
+        homeSceneLastSortClicked == Age ? HomeSceneReversePlayers() : HomeSceneSortPlayersByAge();
         ClearLay(homeScenePlayersLay);
         HomeSceneAddPlayersToLay();
         homeSceneLastSortClicked = Age;
@@ -112,7 +112,7 @@ void MainWindow::SetupHomeScene(){
     skillHeader->setStyleSheet(headerButtonStyle);
     skillHeader->setFixedSize(110, headerLabelHeight);
     connect(skillHeader, &QPushButton::clicked, this, [this]{
-        homeSceneLastSortClicked == Skill ? ReverseHomeScenePlayers() : HomeSceneSortPlayersBySkill();
+        homeSceneLastSortClicked == Skill ? HomeSceneReversePlayers() : HomeSceneSortPlayersBySkill();
         ClearLay(homeScenePlayersLay);
         HomeSceneAddPlayersToLay();
         homeSceneLastSortClicked = Skill;
@@ -122,7 +122,7 @@ void MainWindow::SetupHomeScene(){
     TVHeader->setStyleSheet(headerButtonStyle);
     TVHeader->setFixedSize(170, headerLabelHeight);
     connect(TVHeader, &QPushButton::clicked, this, [this]{
-        homeSceneLastSortClicked == TV ? ReverseHomeScenePlayers() : HomeSceneSortPlayersByTV();
+        homeSceneLastSortClicked == TV ? HomeSceneReversePlayers() : HomeSceneSortPlayersByTV();
         ClearLay(homeScenePlayersLay);
         HomeSceneAddPlayersToLay();
         homeSceneLastSortClicked = TV;
@@ -248,7 +248,18 @@ void MainWindow::HomeSceneSortPlayersBySkill()
     std::sort(homeScenePlayers.begin(), homeScenePlayers.end(), PLAYER::CompTwoPlayersBySkill);
 }
 
-void MainWindow::ReverseHomeScenePlayers()
+void MainWindow::HomeSceneReversePlayers()
 {
     std::reverse(homeScenePlayers.begin(), homeScenePlayers.end());
+}
+
+void MainWindow::HomeSceneSetupCalendarBar(DATE curDate)
+{
+    homeSceneCalendarBar = new QLabel();
+    homeSceneContinueButton = new QPushButton("Continue");
+}
+
+void MainWindow::HomeSceneUpdateCalendarBar(DATE curDate)
+{
+
 }

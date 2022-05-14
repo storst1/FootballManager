@@ -80,98 +80,98 @@ void MainWindow::SetupNewGameScene()
     ClearLay();
 
     dynDataDb->FillGameData(gameData);
-    allLeaguesList = gameData->getLeaguesList();
+    newGameAllLeaguesList = gameData->getLeaguesList();
 
     TakeSpaceInLay(20, 0, 3);
 
-    leagueLeftButton = new QPushButton();
-    leagueLeftButton->setFixedWidth(120);
-    leagueLeftButton->setFixedHeight(120);
-    leagueLeftButton->setStyleSheet(leftArrowButtonStyle);
-    mainLay->addWidget(leagueLeftButton, 1, 0);
-    mainLay->setAlignment(leagueLeftButton, Qt::AlignRight);
-    connect(leagueLeftButton, &QPushButton::clicked, this, [this]{NewGamePrevLeague();});
+    newGameLeagueLeftButton = new QPushButton();
+    newGameLeagueLeftButton->setFixedWidth(120);
+    newGameLeagueLeftButton->setFixedHeight(120);
+    newGameLeagueLeftButton->setStyleSheet(leftArrowButtonStyle);
+    mainLay->addWidget(newGameLeagueLeftButton, 1, 0);
+    mainLay->setAlignment(newGameLeagueLeftButton, Qt::AlignRight);
+    connect(newGameLeagueLeftButton, &QPushButton::clicked, this, [this]{NewGamePrevLeague();});
 
-    leagueLabel = new QLabel(allLeaguesList[NewGameCurLeagueIdx]->getName());
+    newGameLeagueLabel = new QLabel(newGameAllLeaguesList[NewGameCurLeagueIdx]->getName());
     /*
     leagueLabel->setAlignment(Qt::AlignLeft);
     QPixmap LeagueFlagPixmap(50, 50);
     MainWindow::drawLeagueHeaderFlag(LeagueFlagPixmap, allLeaguesList[NewGameCurLeagueIdx]->getFederation());
     leagueLabel->setPixmap(LeagueFlagPixmap);
     */
-    leagueLabel->setAlignment(Qt::AlignCenter);
-    leagueLabel->setFixedWidth(1000);
-    leagueLabel->setFixedHeight(120);
-    leagueLabel->setStyleSheet(leagueLabelStyle);
-    mainLay->addWidget(leagueLabel, 1, 1);
+    newGameLeagueLabel->setAlignment(Qt::AlignCenter);
+    newGameLeagueLabel->setFixedWidth(1000);
+    newGameLeagueLabel->setFixedHeight(120);
+    newGameLeagueLabel->setStyleSheet(leagueLabelStyle);
+    mainLay->addWidget(newGameLeagueLabel, 1, 1);
 
-    leagueRightButton = new QPushButton();
-    leagueRightButton->setFixedWidth(120);
-    leagueRightButton->setFixedHeight(120);
-    leagueRightButton->setStyleSheet(rightArrowButtonStyle);
-    mainLay->addWidget(leagueRightButton, 1, 2);
-    mainLay->setAlignment(leagueRightButton, Qt::AlignLeft);
-    connect(leagueRightButton, &QPushButton::clicked, this, [this]{NewGameNextLeague();});
+    newGameLeagueRightButton = new QPushButton();
+    newGameLeagueRightButton->setFixedWidth(120);
+    newGameLeagueRightButton->setFixedHeight(120);
+    newGameLeagueRightButton->setStyleSheet(rightArrowButtonStyle);
+    mainLay->addWidget(newGameLeagueRightButton, 1, 2);
+    mainLay->setAlignment(newGameLeagueRightButton, Qt::AlignLeft);
+    connect(newGameLeagueRightButton, &QPushButton::clicked, this, [this]{NewGameNextLeague();});
 
-    clubLay = new QGridLayout();
+    newGameClubLay = new QGridLayout();
 
-    CLUB* curClub = (allLeaguesList[NewGameCurLeagueIdx]->getClubs())[NewGameCurClubIdx];
+    CLUB* curClub = (newGameAllLeaguesList[NewGameCurLeagueIdx]->getClubs())[NewGameCurClubIdx];
 
-    clubName = new QLabel(curClub->getName());
-    clubName->setStyleSheet(clubNameLabelStyle);
-    clubName->setFixedSize(1000, 100);
-    clubName->setAlignment(Qt::AlignCenter);
-    clubLay->addWidget(clubName);
+    newGameClubName = new QLabel(curClub->getName());
+    newGameClubName->setStyleSheet(clubNameLabelStyle);
+    newGameClubName->setFixedSize(1000, 100);
+    newGameClubName->setAlignment(Qt::AlignCenter);
+    newGameClubLay->addWidget(newGameClubName);
 
-    clubLogo = new QLabel();
-    clubLogo->setFixedSize(1000, 200);
+    newGameClubLogo = new QLabel();
+    newGameClubLogo->setFixedSize(1000, 200);
     QString clubLogoPath = GetClubLogoPath(curClub);
-    clubLogo->setPixmap(QPixmap(clubLogoPath));
-    clubLogo->setAlignment(Qt::AlignCenter);
-    clubLay->addWidget(clubLogo);
+    newGameClubLogo->setPixmap(QPixmap(clubLogoPath));
+    newGameClubLogo->setAlignment(Qt::AlignCenter);
+    newGameClubLay->addWidget(newGameClubLogo);
 
-    clubTV = new QLabel("Total transfer value of players: " + NaturalizeNum(curClub->getTV()) + EURO);
-    clubTV->setStyleSheet(clubInfoLabelStyle);
-    clubTV->setFixedSize(1000, 60);
-    clubTV->setAlignment(Qt::AlignCenter);
-    clubLay->addWidget(clubTV);
+    newGameClubTV = new QLabel("Total transfer value of players: " + NaturalizeNum(curClub->getTV()) + EURO);
+    newGameClubTV->setStyleSheet(clubInfoLabelStyle);
+    newGameClubTV->setFixedSize(1000, 60);
+    newGameClubTV->setAlignment(Qt::AlignCenter);
+    newGameClubLay->addWidget(newGameClubTV);
 
-    clubBudget = new QLabel("Club budget: " + NaturalizeNum(curClub->getBudget()) + EURO);
-    clubBudget->setStyleSheet(clubInfoLabelStyle);
-    clubBudget->setFixedSize(1000, 60);
-    clubBudget->setAlignment(Qt::AlignCenter);
-    clubLay->addWidget(clubBudget);
+    newGameClubBudget = new QLabel("Club budget: " + NaturalizeNum(curClub->getBudget()) + EURO);
+    newGameClubBudget->setStyleSheet(clubInfoLabelStyle);
+    newGameClubBudget->setFixedSize(1000, 60);
+    newGameClubBudget->setAlignment(Qt::AlignCenter);
+    newGameClubLay->addWidget(newGameClubBudget);
 
-    clubPrestige = new QLabel("Club prestige: " + NaturalizeNum(curClub->getPrestige()));
-    clubPrestige->setStyleSheet(clubInfoLabelStyle);
-    clubPrestige->setFixedSize(1000, 60);
-    clubPrestige->setAlignment(Qt::AlignCenter);
-    clubLay->addWidget(clubPrestige);
+    newGameClubPrestige = new QLabel("Club prestige: " + NaturalizeNum(curClub->getPrestige()));
+    newGameClubPrestige->setStyleSheet(clubInfoLabelStyle);
+    newGameClubPrestige->setFixedSize(1000, 60);
+    newGameClubPrestige->setAlignment(Qt::AlignCenter);
+    newGameClubLay->addWidget(newGameClubPrestige);
 
-    mainLay->addLayout(clubLay, 2, 1, Qt::AlignCenter);
+    mainLay->addLayout(newGameClubLay, 2, 1, Qt::AlignCenter);
 
-    clubLeftButton = new QPushButton();
-    clubLeftButton->setFixedWidth(120);
-    clubLeftButton->setFixedHeight(120);
-    clubLeftButton->setStyleSheet(leftArrowButtonStyle);
-    mainLay->addWidget(clubLeftButton, 2, 0);
-    mainLay->setAlignment(clubLeftButton, Qt::AlignRight);
-    connect(clubLeftButton, &QPushButton::clicked, this, [this]{NewGamePrevClub();});
+    newGameClubLeftButton = new QPushButton();
+    newGameClubLeftButton->setFixedWidth(120);
+    newGameClubLeftButton->setFixedHeight(120);
+    newGameClubLeftButton->setStyleSheet(leftArrowButtonStyle);
+    mainLay->addWidget(newGameClubLeftButton, 2, 0);
+    mainLay->setAlignment(newGameClubLeftButton, Qt::AlignRight);
+    connect(newGameClubLeftButton, &QPushButton::clicked, this, [this]{NewGamePrevClub();});
 
-    clubRightButton = new QPushButton();
-    clubRightButton->setFixedWidth(120);
-    clubRightButton->setFixedHeight(120);
-    clubRightButton->setStyleSheet(rightArrowButtonStyle);
-    mainLay->addWidget(clubRightButton, 2, 2);
-    mainLay->setAlignment(clubRightButton, Qt::AlignLeft);
-    connect(clubRightButton, &QPushButton::clicked, this, [this]{NewGameNextClub();});
+    newGameClubRightButton = new QPushButton();
+    newGameClubRightButton->setFixedWidth(120);
+    newGameClubRightButton->setFixedHeight(120);
+    newGameClubRightButton->setStyleSheet(rightArrowButtonStyle);
+    mainLay->addWidget(newGameClubRightButton, 2, 2);
+    mainLay->setAlignment(newGameClubRightButton, Qt::AlignLeft);
+    connect(newGameClubRightButton, &QPushButton::clicked, this, [this]{NewGameNextClub();});
 
-    startNewGameButton = new QPushButton("Start game!");
-    startNewGameButton->setFixedSize(400, 120);
-    startNewGameButton->setStyleSheet(startButtonStyle);
-    mainLay->addWidget(startNewGameButton, 3, 1, Qt::AlignCenter);
-    connect(startNewGameButton, &QPushButton::clicked, this, [this]{
-        user->setClub((allLeaguesList[NewGameCurLeagueIdx]->getClubs())[NewGameCurClubIdx]);
+    newGameStartNewGameButton = new QPushButton("Start game!");
+    newGameStartNewGameButton->setFixedSize(400, 120);
+    newGameStartNewGameButton->setStyleSheet(startButtonStyle);
+    mainLay->addWidget(newGameStartNewGameButton, 3, 1, Qt::AlignCenter);
+    connect(newGameStartNewGameButton, &QPushButton::clicked, this, [this]{
+        user->setClub((newGameAllLeaguesList[NewGameCurLeagueIdx]->getClubs())[NewGameCurClubIdx]);
         qDebug() << "User chose club: " << user->getClub()->getName();
         SetupHomeScene();
         //SetupTransfersScene();
@@ -182,72 +182,72 @@ void MainWindow::SetupNewGameScene()
 
 void MainWindow::NewGameNextLeague()
 {
-    if(allLeaguesList.size() == 1){
+    if(newGameAllLeaguesList.size() == 1){
         return;
     }
     NewGameCurLeagueIdx++;
-    if(NewGameCurLeagueIdx >= allLeaguesList.size()){
+    if(NewGameCurLeagueIdx >= newGameAllLeaguesList.size()){
         NewGameCurLeagueIdx = 0;
     }
     NewGameCurClubIdx = 0;
-    ChangeLeagueLabel(allLeaguesList[NewGameCurLeagueIdx]);
+    NewGameChangeLeagueLabel(newGameAllLeaguesList[NewGameCurLeagueIdx]);
 }
 
 void MainWindow::NewGamePrevLeague()
 {
-    if(allLeaguesList.size() == 1){
+    if(newGameAllLeaguesList.size() == 1){
         return;
     }
     NewGameCurLeagueIdx--;
     if(NewGameCurLeagueIdx < 0){
-        NewGameCurLeagueIdx = allLeaguesList.size() - 1;
+        NewGameCurLeagueIdx = newGameAllLeaguesList.size() - 1;
     }
     NewGameCurClubIdx = 0;
-    ChangeLeagueLabel(allLeaguesList[NewGameCurLeagueIdx]);
+    NewGameChangeLeagueLabel(newGameAllLeaguesList[NewGameCurLeagueIdx]);
 }
 
-void MainWindow::ChangeLeagueLabel(LEAGUE *_league)
+void MainWindow::NewGameChangeLeagueLabel(LEAGUE *_league)
 {
-    leagueLabel->setText(_league->getName());
+    newGameLeagueLabel->setText(_league->getName());
     QList<CLUB*> clubs = _league->getClubs();
-    ChangeClubLay(clubs[0]);
+    NewGameChangeClubLay(clubs[0]);
 }
 
-void MainWindow::ChangeClubLay(CLUB *curClub)
+void MainWindow::NewGameChangeClubLay(CLUB *curClub)
 {
-    clubName->setText(curClub->getName());
+    newGameClubName->setText(curClub->getName());
 
     QString clubLogoPath = GetClubLogoPath(curClub);
-    clubLogo->setPixmap(QPixmap(clubLogoPath));
+    newGameClubLogo->setPixmap(QPixmap(clubLogoPath));
 
-    clubTV->setText("Total transfer value of players: " + NaturalizeNum(curClub->getTV()) + EURO);
+    newGameClubTV->setText("Total transfer value of players: " + NaturalizeNum(curClub->getTV()) + EURO);
 
-    clubBudget->setText("Club budget: " + NaturalizeNum(curClub->getBudget()) + EURO);
+    newGameClubBudget->setText("Club budget: " + NaturalizeNum(curClub->getBudget()) + EURO);
 
-    clubPrestige->setText("Club prestige: " + NaturalizeNum(curClub->getPrestige()));
+    newGameClubPrestige->setText("Club prestige: " + NaturalizeNum(curClub->getPrestige()));
 }
 
 void MainWindow::NewGameNextClub()
 {
-    QList<CLUB*> clubs = allLeaguesList[NewGameCurLeagueIdx]->getClubs();
+    QList<CLUB*> clubs = newGameAllLeaguesList[NewGameCurLeagueIdx]->getClubs();
     ++NewGameCurClubIdx;
     if(NewGameCurClubIdx >= clubs.size()){
         NewGameCurClubIdx = 0;
     }
-    ChangeClubLay(clubs[NewGameCurClubIdx]);
+    NewGameChangeClubLay(clubs[NewGameCurClubIdx]);
 }
 
 void MainWindow::NewGamePrevClub()
 {
-    QList<CLUB*> clubs = allLeaguesList[NewGameCurLeagueIdx]->getClubs();
+    QList<CLUB*> clubs = newGameAllLeaguesList[NewGameCurLeagueIdx]->getClubs();
     --NewGameCurClubIdx;
     if(NewGameCurClubIdx < 0){
         NewGameCurClubIdx = clubs.size() - 1;
     }
-    ChangeClubLay(clubs[NewGameCurClubIdx]);
+    NewGameChangeClubLay(clubs[NewGameCurClubIdx]);
 }
 
-QMap<QString, LEAGUE*>::iterator MainWindow::GetNextLeagueIter(const QMap<QString, LEAGUE*>::iterator curIter,
+QMap<QString, LEAGUE*>::iterator MainWindow::NewGameGetNextLeagueIter(const QMap<QString, LEAGUE*>::iterator curIter,
                                                                const QMap<QString, LEAGUE*>::iterator beginIter,
                                                                const QMap<QString, LEAGUE*>::iterator endIter)
 {

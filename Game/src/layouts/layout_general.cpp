@@ -124,7 +124,7 @@ void MainWindow::SetupNavigationLay(){
                 "color: orange;"
             "}";
 
-    const int navigationHeight = 120;
+    const int navigationHeight = 80;
 
     navigationHomeButton = new QPushButton("Home");
     navigationHomeButton->setStyleSheet(navigationButtonStyle);

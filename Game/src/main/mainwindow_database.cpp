@@ -12,11 +12,6 @@ void MainWindow::SetupDb()
     dynDataDb->CopyDataFromRealDb(dbFolPath + "realdata.db", countryMap);
 }
 
-void MainWindow::SetupEventHandler()
-{
-    eventHandeler = new EVENT_ARRAY();
-}
-
 void MainWindow::SaveAllData(QList<API_LEAGUE *> leagues, QList<API_CLUB *> clubs, QList<API_PLAYER *> players)
 {
     realDataDb->OverwriteLeaguesInfo(leagues);

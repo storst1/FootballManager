@@ -31,6 +31,7 @@ SOURCES += \
     game/events/event.cpp \
     game/events/event_array.cpp \
     game/events/event_birthday.cpp \
+    game/events/event_handler.cpp \
     game/time/date.cpp \
     game/user/user.cpp \
     json/json_parser.cpp \
@@ -78,6 +79,7 @@ HEADERS += \
     game/events/event.h \
     game/events/event_array.h \
     game/events/event_birthday.h \
+    game/events/event_handler.h \
     game/time/date.h \
     game/user/user.h \
     json/json_parser.h \

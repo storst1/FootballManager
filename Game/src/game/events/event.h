@@ -2,6 +2,7 @@
 #define EVENT_H
 
 #include "game/time/date.h"
+#include "game/data/team.h"
 
 class EVENT
 {
@@ -10,6 +11,7 @@ public:
     virtual ~EVENT() = default;
 
     virtual void Execute() = 0;
+    virtual bool IsLinkedToTeam(TEAM team) const;
 
     DATE getDate() const;
 

@@ -15,6 +15,54 @@ unsigned int DATE::getRawDate() const
     return rawDate;
 }
 
+int DATE::Day() const
+{
+    return date().day();
+}
+
+int DATE::Month() const
+{
+    return date().month();
+}
+
+QString DATE::MonthName() const
+{
+    int month = Month();
+    switch(month){
+        case 1:
+            return "January";
+        case 2:
+            return "Feburary";
+        case 3:
+            return "March";
+        case 4:
+            return "April";
+        case 5:
+            return "May";
+        case 6:
+            return "June";
+        case 7:
+            return "Jule";
+        case 8:
+            return "August";
+        case 9:
+            return "September";
+        case 10:
+            return "October";
+        case 11:
+            return "November";
+        case 12:
+            return "December";
+        default:
+            return "Wrong input";
+    }
+}
+
+int DATE::Year() const
+{
+    return date().year();
+}
+
 bool DATE::operator==(const DATE &oth_date) const
 {
     return rawDate == oth_date.rawDate;

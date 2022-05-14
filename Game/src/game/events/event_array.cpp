@@ -12,7 +12,15 @@ EVENT_ARRAY::~EVENT_ARRAY()
 
 void EVENT_ARRAY::addEvent(EVENT *event)
 {
-    events.push_back(event);
+    if(events.empty()){
+        events.push_back(event);
+        return;
+    }
+    int i = 0;
+    while(event > events[i]){
+        ++i;
+    }
+    events.insert(i, event);
 }
 
 void EVENT_ARRAY::Continue(DATE tillDate)
@@ -20,4 +28,37 @@ void EVENT_ARRAY::Continue(DATE tillDate)
     while(!events.empty() && events.front()->getDate() < tillDate){
         events.front()->Execute();
     }
+}
+
+EVENT_ARRAY EVENT_ARRAY::getAllEventsByDate(DATE date)
+{
+    EVENT_ARRAY arrayToRet;
+    for(int i = 0; i < events.size(); ++i){
+        if(events[i]->getDate() < date){
+            continue;
+        }
+        else if(events[i]->getDate() > date){
+            break;
+        }
+        arrayToRet.addEvent(events[i]);
+    }
+    return arrayToRet;
+}
+
+EVENT_ARRAY EVENT_ARRAY::getAllEventsByDateAndTeam(DATE date, TEAM linkedTeam)
+{
+    EVENT_ARRAY arrayToRet;
+    for(int i = 0; i < events.size(); ++i){
+        if(events[i]->getDate() < date){
+            continue;
+        }
+        else if(events[i]->getDate() > date){
+            break;
+        }
+
+        if(events[i]->IsLinkedToTeam(linkedTeam)){
+            arrayToRet.addEvent(events[i]);
+        }
+    }
+    return arrayToRet;
 }

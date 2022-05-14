@@ -2,6 +2,7 @@
 #define EVENT_ARRAY_H
 
 #include "game/events/event.h"
+#include "game/data/team.h"
 
 #include <QList>
 
@@ -13,6 +14,9 @@ public:
 
     void addEvent(EVENT* event);
     void Continue(DATE tillDate);
+
+    EVENT_ARRAY getAllEventsByDate(DATE date);
+    EVENT_ARRAY getAllEventsByDateAndTeam(DATE date, TEAM linkedTeam);
 private:
     QList<EVENT*> events;
 };

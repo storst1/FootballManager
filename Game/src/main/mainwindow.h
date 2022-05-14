@@ -14,7 +14,7 @@
 #include "game/data/federation.h"
 #include "game/time/date.h"
 #include "game/data/player_search_filter.h"
-#include "game/events/event_array.h"
+#include "game/events/event_handler.h"
 
 #include <QMainWindow>
 #include <QGridLayout>
@@ -32,6 +32,7 @@
 #include <QComboBox>
 #include <QVariant>
 #include <QScrollBar>
+#include <QDebug>
 
 #include <algorithm>
 
@@ -65,7 +66,7 @@ private:
     //Game info
     GAME_DATA* gameData;
     USER* user;
-    EVENT_ARRAY* eventHandeler;
+    EVENT_HANDLER* eventHandler;
 
     //Real data
     DATABASE_REAL_DATA* realDataDb;
@@ -180,7 +181,7 @@ private:
     QList<PLAYER*> homeScenePlayers;
     PlayerSortType homeSceneLastSortClicked = Pos;
     QPushButton* homeSceneContinueButton;
-    QLabel* homeSceneCalendarBar;
+    QLabel* homeSceneCalendarBar = nullptr;
 
     void SetupHomeScene();
     void HomeSceneAddPlayersToLay();
@@ -192,6 +193,7 @@ private:
     void HomeSceneReversePlayers();
     void HomeSceneSetupCalendarBar(DATE curDate);
     void HomeSceneUpdateCalendarBar(DATE curDate);
+    void HomeSceneDrawDayOnCalendarBar(DATE date, int row, QPainter &painter);
 
     //TRANSFERS SCENE
     bool transfersSceneLoaded = false;

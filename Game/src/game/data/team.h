@@ -8,6 +8,7 @@ class TEAM
 public:
     TEAM();
     TEAM(int id, QString name);
+    TEAM(int id, QString name, QList<PLAYER*> players, FEDERATION* fed);
     ~TEAM();
 
     int getId() const;
@@ -50,6 +51,8 @@ public:
     int getBudget() const;
     STADIUM *getStadium() const;
     int getPrestige() const;
+
+    TEAM getTeam();
 
 private:
     int TV;

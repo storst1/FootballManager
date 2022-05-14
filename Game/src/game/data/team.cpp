@@ -13,6 +13,12 @@ TEAM::TEAM(int id, QString name) : id(id), name(name)
 
 }
 
+TEAM::TEAM(int id, QString name, QList<PLAYER *> players, FEDERATION *fed)
+    : id(id), name(name), players(players), fed(fed)
+{
+
+}
+
 TEAM::~TEAM()
 {
     qDeleteAll(players);
@@ -77,4 +83,9 @@ STADIUM *CLUB::getStadium() const
 int CLUB::getPrestige() const
 {
     return prestige;
+}
+
+TEAM CLUB::getTeam()
+{
+    return TEAM(getId(), getName(), getPlayers(), getFederation());
 }

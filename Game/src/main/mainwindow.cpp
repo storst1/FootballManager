@@ -108,3 +108,8 @@ QString MainWindow::GetFlagPath(FEDERATION *fed, QString size)
 {
     return ":/flags/" + size + "/" + QString::number(fed->getId()) + ".png";
 }
+
+void MainWindow::SetupEventHandler()
+{
+    eventHandler = new EVENT_HANDLER(DATE(START_DATE));
+}

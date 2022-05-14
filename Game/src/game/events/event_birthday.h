@@ -11,6 +11,7 @@ public:
     ~EVENT_BIRTHDAY() override = default;
 
     void Execute() override;
+    bool IsLinkedToTeam(TEAM team) const override;
 private:
     PLAYER* player;
 };

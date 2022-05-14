@@ -152,6 +152,10 @@ void MainWindow::SetupHomeScene(){
 
     mainLay->addWidget(homeScenePlayersScrollArea, 2, 1, Qt::AlignCenter);
 
+    HomeSceneSetupCalendarBar(eventHandler->getCurDate());
+
+    mainLay->addWidget(homeSceneCalendarBar, 2, 2, Qt::AlignLeft);
+
     TakeSpaceInLay(150, 3, 3);
 }
 
@@ -223,6 +227,44 @@ void MainWindow::HomeSceneAddPlayersToLay(){
     }
 }
 
+void MainWindow::HomeSceneSetupCalendarBar(DATE curDate)
+{
+    HomeSceneUpdateCalendarBar(curDate);
+    homeSceneContinueButton = new QPushButton("Continue");
+}
+
+void MainWindow::HomeSceneUpdateCalendarBar(DATE curDate)
+{
+    if(homeSceneCalendarBar != nullptr){
+        delete homeSceneCalendarBar;
+    }
+    homeSceneCalendarBar = new QLabel();
+    homeSceneCalendarBar->setFixedSize(200, 600);
+    QPixmap calendarPixmap(200, 600);
+    QPainter painter(&calendarPixmap);
+    calendarPixmap.fill(Qt::transparent);
+    for(int i = 0; i < 6; ++i){
+        QDateTime QDateToDraw = curDate.addDays(i);
+        DATE DateToDraw(QDateToDraw);
+        HomeSceneDrawDayOnCalendarBar(DateToDraw, i, painter);
+    }
+    homeSceneCalendarBar->setPixmap(calendarPixmap);
+}
+
+void MainWindow::HomeSceneDrawDayOnCalendarBar(DATE date, int row, QPainter& painter)
+{
+    QPoint Point_0_0(0, row * 100);
+    row ? painter.fillRect(0, row * 100, 200, 98, Qt::blue) : painter.fillRect(0, row * 100, 200, 98, Qt::yellow);
+    QPen pen;
+    pen.setColor(Qt::white);
+    painter.setPen(pen);
+    QFont font("Comic Sans MS", 10, 550);
+    painter.setFont(font);
+    painter.drawText(10, row * 100 + 30, date.MonthName() + " " + QString::number(date.Day()));
+
+    EVENT_ARRAY dayEvents = eventHandler->getAllEventsByDateAndTeam(date, user->getClub()->getTeam());
+}
+
 void MainWindow::HomeSceneSortPlayersByName()
 {
     std::sort(homeScenePlayers.begin(), homeScenePlayers.end(), PLAYER::CompTwoPlayersByName);
@@ -251,15 +293,4 @@ void MainWindow::HomeSceneSortPlayersBySkill()
 void MainWindow::HomeSceneReversePlayers()
 {
     std::reverse(homeScenePlayers.begin(), homeScenePlayers.end());
-}
-
-void MainWindow::HomeSceneSetupCalendarBar(DATE curDate)
-{
-    homeSceneCalendarBar = new QLabel();
-    homeSceneContinueButton = new QPushButton("Continue");
-}
-
-void MainWindow::HomeSceneUpdateCalendarBar(DATE curDate)
-{
-
 }

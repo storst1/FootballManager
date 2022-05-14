@@ -23,6 +23,11 @@ public:
 
     unsigned int getRawDate() const;
 
+    int Day() const;
+    int Month() const;
+    QString MonthName() const;
+    int Year() const;
+
     bool operator==(const DATE& oth_date) const;
     bool operator!=(const DATE& oth_date) const;
     bool operator<(const DATE& oth_date) const;

@@ -15,6 +15,7 @@
 #include "game/time/date.h"
 #include "game/data/player_search_filter.h"
 #include "game/events/event_handler.h"
+#include "game/events/event_birthday.h"
 
 #include <QMainWindow>
 #include <QGridLayout>

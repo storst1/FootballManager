@@ -28,6 +28,8 @@ public:
     QString MonthName() const;
     int Year() const;
 
+    DATE NextDay();
+
     bool operator==(const DATE& oth_date) const;
     bool operator!=(const DATE& oth_date) const;
     bool operator<(const DATE& oth_date) const;

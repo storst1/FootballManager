@@ -17,6 +17,7 @@ public:
 
     EVENT_ARRAY getAllEventsByDate(DATE date);
     EVENT_ARRAY getAllEventsByDateAndTeam(DATE date, TEAM linkedTeam);
+    EVENT* getMostImportantEvent();
 private:
     QList<EVENT*> events;
 };

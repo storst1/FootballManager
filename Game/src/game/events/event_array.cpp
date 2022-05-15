@@ -7,7 +7,7 @@ EVENT_ARRAY::EVENT_ARRAY()
 
 EVENT_ARRAY::~EVENT_ARRAY()
 {
-    qDeleteAll(events);
+    //qDeleteAll(events);
 }
 
 void EVENT_ARRAY::addEvent(EVENT *event)
@@ -61,4 +61,18 @@ EVENT_ARRAY EVENT_ARRAY::getAllEventsByDateAndTeam(DATE date, TEAM linkedTeam)
         }
     }
     return arrayToRet;
+}
+
+EVENT *EVENT_ARRAY::getMostImportantEvent()
+{
+    if(events.empty()){
+        return nullptr;
+    }
+    EVENT* mostImpEvent = events[0];
+    for(int i = 1; i < (int)events.size(); ++i){
+        if(mostImpEvent->getEventType() < events[i]->getEventType()){
+            mostImpEvent = events[i];
+        }
+    }
+    return mostImpEvent;
 }

@@ -63,6 +63,12 @@ int DATE::Year() const
     return date().year();
 }
 
+DATE DATE::NextDay()
+{
+    QDateTime QNewDate = addDays(1);
+    return DATE(QNewDate);
+}
+
 bool DATE::operator==(const DATE &oth_date) const
 {
     return rawDate == oth_date.rawDate;

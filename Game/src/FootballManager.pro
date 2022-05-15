@@ -101,4 +101,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 RESOURCES += \
     ../../Resources/backgrounds.qrc \
     ../../Resources/flags.qrc \
+    ../../Resources/icons.qrc \
     ../../Resources/logos.qrc

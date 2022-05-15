@@ -154,6 +154,7 @@ void MainWindow::SetupHomeScene(){
 
     HomeSceneSetupCalendarBar(eventHandler->getCurDate());
 
+    mainLay->addWidget(homeSceneContinueButton, 1, 2, Qt::AlignLeft);
     mainLay->addWidget(homeSceneCalendarBar, 2, 2, Qt::AlignLeft);
 
     TakeSpaceInLay(150, 3, 3);
@@ -229,31 +230,34 @@ void MainWindow::HomeSceneAddPlayersToLay(){
 
 void MainWindow::HomeSceneSetupCalendarBar(DATE curDate)
 {
+    homeSceneCalendarBar = new QLabel();
+    homeSceneCalendarBar->setFixedSize(200, 600);
     HomeSceneUpdateCalendarBar(curDate);
+
     homeSceneContinueButton = new QPushButton("Continue");
+    homeSceneContinueButton->setFixedSize(200, 70);
+    connect(homeSceneContinueButton, &QPushButton::clicked, this, [this]{
+        eventHandler->NextDay();
+        HomeSceneUpdateCalendarBar(eventHandler->getCurDate());
+    });
 }
 
 void MainWindow::HomeSceneUpdateCalendarBar(DATE curDate)
 {
-    if(homeSceneCalendarBar != nullptr){
-        delete homeSceneCalendarBar;
-    }
-    homeSceneCalendarBar = new QLabel();
-    homeSceneCalendarBar->setFixedSize(200, 600);
     QPixmap calendarPixmap(200, 600);
-    QPainter painter(&calendarPixmap);
     calendarPixmap.fill(Qt::transparent);
+    QPainter painter(&calendarPixmap);
     for(int i = 0; i < 6; ++i){
         QDateTime QDateToDraw = curDate.addDays(i);
         DATE DateToDraw(QDateToDraw);
         HomeSceneDrawDayOnCalendarBar(DateToDraw, i, painter);
     }
+    painter.end();
     homeSceneCalendarBar->setPixmap(calendarPixmap);
 }
 
 void MainWindow::HomeSceneDrawDayOnCalendarBar(DATE date, int row, QPainter& painter)
 {
-    QPoint Point_0_0(0, row * 100);
     row ? painter.fillRect(0, row * 100, 200, 98, Qt::blue) : painter.fillRect(0, row * 100, 200, 98, Qt::yellow);
     QPen pen;
     pen.setColor(Qt::white);
@@ -263,6 +267,9 @@ void MainWindow::HomeSceneDrawDayOnCalendarBar(DATE date, int row, QPainter& pai
     painter.drawText(10, row * 100 + 30, date.MonthName() + " " + QString::number(date.Day()));
 
     EVENT_ARRAY dayEvents = eventHandler->getAllEventsByDateAndTeam(date, user->getClub()->getTeam());
+    dayEvents.addEvent(new EVENT_BIRTHDAY(DATE(START_DATE), user->getClub()->getPlayers()[0]));
+    EVENT* bestDayEvent = dayEvents.getMostImportantEvent();
+    bestDayEvent->paintEvent(painter, row);
 }
 
 void MainWindow::HomeSceneSortPlayersByName()

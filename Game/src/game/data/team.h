@@ -52,7 +52,7 @@ public:
     STADIUM *getStadium() const;
     int getPrestige() const;
 
-    TEAM getTeam();
+    TEAM getTeam(bool giveAccessToPlayersList = false);
 
 private:
     int TV;

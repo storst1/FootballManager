@@ -85,7 +85,7 @@ int CLUB::getPrestige() const
     return prestige;
 }
 
-TEAM CLUB::getTeam()
+TEAM CLUB::getTeam(bool giveAccessToPlayersList)
 {
-    return TEAM(getId(), getName(), getPlayers(), getFederation());
+    return TEAM(getId(), getName(), giveAccessToPlayersList ? getPlayers() : QList<PLAYER*>{}, getFederation());
 }

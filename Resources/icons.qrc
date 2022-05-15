@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>birthdayIcon100x133.png</file>
+    </qresource>
+</RCC>

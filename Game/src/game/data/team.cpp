@@ -43,6 +43,26 @@ FEDERATION *TEAM::getFederation() const
     return fed;
 }
 
+int TEAM::getTV() const
+{
+    return 0;
+}
+
+int TEAM::getBudget() const
+{
+    return 0;
+}
+
+STADIUM *TEAM::getStadium() const
+{
+    return nullptr;
+}
+
+int TEAM::getPrestige() const
+{
+    return 0;
+}
+
 void TEAM::setPlayerList(QList<PLAYER *> playerList)
 {
     players = playerList;

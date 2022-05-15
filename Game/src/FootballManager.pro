@@ -15,6 +15,7 @@ SOURCES += \
     database/database_real_data.cpp \
     database/database_skill_converter.cpp \
     game/data/coach.cpp \
+    game/data/competition.cpp \
     game/data/confederation.cpp \
     game/data/country_map.cpp \
     game/data/cup.cpp \
@@ -22,12 +23,16 @@ SOURCES += \
     game/data/fifa.cpp \
     game/data/game_data.cpp \
     game/data/league.cpp \
+    game/data/match.cpp \
+    game/data/match_lineup.cpp \
     game/data/player.cpp \
     game/data/player_position.cpp \
     game/data/player_search_filter.cpp \
+    game/data/scheduled_match.cpp \
     game/data/stadium.cpp \
     game/data/table.cpp \
     game/data/team.cpp \
+    game/data/team_in_game.cpp \
     game/events/event.cpp \
     game/events/event_array.cpp \
     game/events/event_birthday.cpp \
@@ -62,6 +67,7 @@ HEADERS += \
     database/database_real_data.h \
     database/database_skill_converter.h \
     game/data/coach.h \
+    game/data/competition.h \
     game/data/confederation.h \
     game/data/country_map.h \
     game/data/cup.h \
@@ -70,12 +76,16 @@ HEADERS += \
     game/data/fifa.h \
     game/data/game_data.h \
     game/data/league.h \
+    game/data/match.h \
+    game/data/match_lineup.h \
     game/data/player.h \
     game/data/player_position.h \
     game/data/player_search_filter.h \
+    game/data/scheduled_match.h \
     game/data/stadium.h \
     game/data/table.h \
     game/data/team.h \
+    game/data/team_in_game.h \
     game/events/event.h \
     game/events/event_array.h \
     game/events/event_birthday.h \

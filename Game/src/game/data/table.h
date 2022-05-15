@@ -8,7 +8,7 @@ public:
     POSITION();
     ~POSITION() = default;
 private:
-    int pos;
+    int pts;
 };
 
 class TABLE

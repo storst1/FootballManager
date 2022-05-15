@@ -1,6 +1,6 @@
 #include "game/data/cup.h"
 
-CUP::CUP()
+CUP::CUP() : COMPETITION()
 {
 
 }

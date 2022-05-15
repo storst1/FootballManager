@@ -9,12 +9,17 @@ public:
     TEAM();
     TEAM(int id, QString name);
     TEAM(int id, QString name, QList<PLAYER*> players, FEDERATION* fed);
-    ~TEAM();
+    virtual ~TEAM();
 
     int getId() const;
     QString getName() const;
     QList<PLAYER*> getPlayers();
     FEDERATION* getFederation() const;
+
+    virtual int getTV() const;
+    virtual int getBudget() const;
+    virtual STADIUM* getStadium() const;
+    virtual int getPrestige() const;
 
     void setPlayerList(QList<PLAYER*> playerList);
     void SortPlayersListByPos();
@@ -33,7 +38,7 @@ class NATIONAL_TEAM : public TEAM
 {
 public:
     NATIONAL_TEAM() = default;
-    ~NATIONAL_TEAM() = default;
+    virtual ~NATIONAL_TEAM() = default;
 private:
     QList<STADIUM*> stadiumList;
 };
@@ -45,12 +50,12 @@ class CLUB : public TEAM
 public:
     CLUB() = default;
     CLUB(int id, QString name, int TV, int budget, QString stadName, int stadCap, int prestige);
-    ~CLUB() = default;
+    virtual ~CLUB() = default;
 
-    int getTV() const;
-    int getBudget() const;
-    STADIUM *getStadium() const;
-    int getPrestige() const;
+    int getTV() const override;
+    int getBudget() const override;
+    STADIUM *getStadium() const override;
+    int getPrestige() const override;
 
     TEAM getTeam(bool giveAccessToPlayersList = false);
 

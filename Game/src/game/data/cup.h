@@ -2,8 +2,9 @@
 #define CUP_H
 
 #include "game/data/data_defs.h"
+#include "game/data/competition.h"
 
-class CUP
+class CUP : public COMPETITION
 {
 public:
     CUP();

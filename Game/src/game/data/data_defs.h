@@ -38,5 +38,6 @@ class TABLE;
 class POSITION;
 class STADIUM;
 class PLAYER_POSITION;
+class COMPETITION;
 
 #endif // DATA_DEFS_H

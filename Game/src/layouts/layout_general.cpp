@@ -43,9 +43,6 @@ void MainWindow::TakeSpaceInLay(int h, int row, int col_amount)
 void MainWindow::ClearLay()
 {
     ClearLay(mainLay);
-    delete mainLay;
-    mainLay = new QGridLayout();
-    ui->centralwidget->setLayout(mainLay);
 }
 
 void MainWindow::ClearLay(QLayout *lay)

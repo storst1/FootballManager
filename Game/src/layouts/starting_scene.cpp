@@ -2,8 +2,6 @@
 #include "ui_mainwindow.h"
 
 void MainWindow::SetupStartingScene(){
-    delete ui->centralwidget;
-    ui->centralwidget = new QWidget(this);
 
     PushBackEmptyToLay(2);
     QString style =

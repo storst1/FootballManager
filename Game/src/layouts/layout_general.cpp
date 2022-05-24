@@ -13,6 +13,8 @@ void MainWindow::SetupMainLay(){
 
     mainLay = new QGridLayout();
     ui->centralwidget->setLayout(mainLay);
+    //mainWidget = new QStackedWidget();
+    //mainLay->addWidget(mainWidget);
 }
 
 void MainWindow::PushBackEmptyToLay(int amount)
@@ -41,6 +43,9 @@ void MainWindow::TakeSpaceInLay(int h, int row, int col_amount)
 void MainWindow::ClearLay()
 {
     ClearLay(mainLay);
+    delete mainLay;
+    mainLay = new QGridLayout();
+    ui->centralwidget->setLayout(mainLay);
 }
 
 void MainWindow::ClearLay(QLayout *lay)
@@ -51,19 +56,20 @@ void MainWindow::ClearLay(QLayout *lay)
         //qDebug() << "Entered while, i = " << i;
         if(curItem->layout() != nullptr){
             ClearLay(curItem->layout());
-            //qDebug() << "Deleted lay: " << curItem->layout() << " i = " << i;
+            qDebug() << "Deleted lay: " << curItem->layout();
             //TO DO: Figure out if following line leads to memory leak or is it supposed to work like that
-            //delete curItem->layout();
+            curItem->layout()->deleteLater();
         }
         else if(curItem->widget() != nullptr){
             //qDebug() << "Deleted widget: " << curItem->widget() << " i = " << i;
             curItem->widget()->hide();
-            curItem->widget()->deleteLater();
+            //curItem->widget()->deleteLater();
+            delete curItem->widget();
         }
         //qDebug() << "Trying to delete item: " << curItem;
-        else {
-            delete curItem;
-        }
+        //else {
+        delete curItem;
+        //}
     }
     //qDebug() << "ClearLay() finished working";
 }

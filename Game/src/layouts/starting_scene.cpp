@@ -1,7 +1,9 @@
 #include "main/mainwindow.h"
+#include "ui_mainwindow.h"
 
 void MainWindow::SetupStartingScene(){
-    ClearLay();
+    delete ui->centralwidget;
+    ui->centralwidget = new QWidget(this);
 
     PushBackEmptyToLay(2);
     QString style =
@@ -40,4 +42,5 @@ void MainWindow::SetupStartingScene(){
     mainLay->addWidget(startingSceneSettingsButton);
 
     PushBackEmptyToLay(2);
+    ui->centralwidget->setLayout(mainLay);
 }

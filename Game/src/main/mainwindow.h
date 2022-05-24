@@ -34,6 +34,7 @@
 #include <QVariant>
 #include <QScrollBar>
 #include <QDebug>
+#include <QStackedWidget>
 
 #include <algorithm>
 
@@ -129,6 +130,7 @@ private:
     //Scene-dependent
 
     QGridLayout* mainLay;
+    QStackedWidget* mainWidget;
 
     QGridLayout* navigationLay;
     QPushButton* navigationHomeButton;

@@ -4,6 +4,10 @@
 
 void MainWindow::SetupNewGameScene()
 {
+
+    sceneSwitch->Switch(NEW_GAME_SCENE);
+    ClearLay(newGameSceneMainLayout);
+
     QString leagueLabelStyle =
             "QLabel{ "
                 "background-color: transparent;"
@@ -77,8 +81,6 @@ void MainWindow::SetupNewGameScene()
                 "background-image:url(:/greenLay400x120Highlighted.png);"
             "}";
 
-    ClearLay();
-
     dynDataDb->FillGameData(gameData);
     newGameAllLeaguesList = gameData->getLeaguesList();
 
@@ -88,8 +90,8 @@ void MainWindow::SetupNewGameScene()
     newGameLeagueLeftButton->setFixedWidth(120);
     newGameLeagueLeftButton->setFixedHeight(120);
     newGameLeagueLeftButton->setStyleSheet(leftArrowButtonStyle);
-    mainLay->addWidget(newGameLeagueLeftButton, 1, 0);
-    mainLay->setAlignment(newGameLeagueLeftButton, Qt::AlignRight);
+    newGameSceneMainLayout->addWidget(newGameLeagueLeftButton, 1, 0);
+    newGameSceneMainLayout->setAlignment(newGameLeagueLeftButton, Qt::AlignRight);
     connect(newGameLeagueLeftButton, &QPushButton::clicked, this, [this]{NewGamePrevLeague();});
 
     newGameLeagueLabel = new QLabel(newGameAllLeaguesList[NewGameCurLeagueIdx]->getName());
@@ -103,14 +105,14 @@ void MainWindow::SetupNewGameScene()
     newGameLeagueLabel->setFixedWidth(1000);
     newGameLeagueLabel->setFixedHeight(120);
     newGameLeagueLabel->setStyleSheet(leagueLabelStyle);
-    mainLay->addWidget(newGameLeagueLabel, 1, 1);
+    newGameSceneMainLayout->addWidget(newGameLeagueLabel, 1, 1);
 
     newGameLeagueRightButton = new QPushButton();
     newGameLeagueRightButton->setFixedWidth(120);
     newGameLeagueRightButton->setFixedHeight(120);
     newGameLeagueRightButton->setStyleSheet(rightArrowButtonStyle);
-    mainLay->addWidget(newGameLeagueRightButton, 1, 2);
-    mainLay->setAlignment(newGameLeagueRightButton, Qt::AlignLeft);
+    newGameSceneMainLayout->addWidget(newGameLeagueRightButton, 1, 2);
+    newGameSceneMainLayout->setAlignment(newGameLeagueRightButton, Qt::AlignLeft);
     connect(newGameLeagueRightButton, &QPushButton::clicked, this, [this]{NewGameNextLeague();});
 
     newGameClubLay = new QGridLayout();
@@ -148,28 +150,28 @@ void MainWindow::SetupNewGameScene()
     newGameClubPrestige->setAlignment(Qt::AlignCenter);
     newGameClubLay->addWidget(newGameClubPrestige);
 
-    mainLay->addLayout(newGameClubLay, 2, 1, Qt::AlignCenter);
+    newGameSceneMainLayout->addLayout(newGameClubLay, 2, 1, Qt::AlignCenter);
 
     newGameClubLeftButton = new QPushButton();
     newGameClubLeftButton->setFixedWidth(120);
     newGameClubLeftButton->setFixedHeight(120);
     newGameClubLeftButton->setStyleSheet(leftArrowButtonStyle);
-    mainLay->addWidget(newGameClubLeftButton, 2, 0);
-    mainLay->setAlignment(newGameClubLeftButton, Qt::AlignRight);
+    newGameSceneMainLayout->addWidget(newGameClubLeftButton, 2, 0);
+    newGameSceneMainLayout->setAlignment(newGameClubLeftButton, Qt::AlignRight);
     connect(newGameClubLeftButton, &QPushButton::clicked, this, [this]{NewGamePrevClub();});
 
     newGameClubRightButton = new QPushButton();
     newGameClubRightButton->setFixedWidth(120);
     newGameClubRightButton->setFixedHeight(120);
     newGameClubRightButton->setStyleSheet(rightArrowButtonStyle);
-    mainLay->addWidget(newGameClubRightButton, 2, 2);
-    mainLay->setAlignment(newGameClubRightButton, Qt::AlignLeft);
+    newGameSceneMainLayout->addWidget(newGameClubRightButton, 2, 2);
+    newGameSceneMainLayout->setAlignment(newGameClubRightButton, Qt::AlignLeft);
     connect(newGameClubRightButton, &QPushButton::clicked, this, [this]{NewGameNextClub();});
 
     newGameStartNewGameButton = new QPushButton("Start game!");
     newGameStartNewGameButton->setFixedSize(400, 120);
     newGameStartNewGameButton->setStyleSheet(startButtonStyle);
-    mainLay->addWidget(newGameStartNewGameButton, 3, 1, Qt::AlignCenter);
+    newGameSceneMainLayout->addWidget(newGameStartNewGameButton, 3, 1, Qt::AlignCenter);
     connect(newGameStartNewGameButton, &QPushButton::clicked, this, [this]{
         user->setClub((newGameAllLeaguesList[NewGameCurLeagueIdx]->getClubs())[NewGameCurClubIdx]);
         qDebug() << "User chose club: " << user->getClub()->getName();
@@ -177,7 +179,7 @@ void MainWindow::SetupNewGameScene()
         //SetupTransfersScene();
     });
 
-    TakeSpaceInLay(20, 4, 3);
+    TakeSpaceInLay(newGameSceneMainLayout, 20, 4, 3);
 }
 
 void MainWindow::NewGameNextLeague()

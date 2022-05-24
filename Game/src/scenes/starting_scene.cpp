@@ -3,7 +3,11 @@
 
 void MainWindow::SetupStartingScene(){
 
-    PushBackEmptyToLay(2);
+    sceneSwitch->Switch(STARTING_SCENE);
+
+    ClearLay(startingSceneMainLayout);
+
+    PushBackEmptyToLay(startingSceneMainLayout, 2);
     QString style =
             "QPushButton{ "
                 "background-color: transparent;"
@@ -24,21 +28,20 @@ void MainWindow::SetupStartingScene(){
     startingSceneStartButton->setFixedHeight(100);
     startingSceneStartButton->setStyleSheet(style);
     connect(startingSceneStartButton, &QPushButton::clicked, this, &MainWindow::SetupNewGameScene);
-    mainLay->addWidget(startingSceneStartButton);
+    startingSceneMainLayout->addWidget(startingSceneStartButton);
 
     startingSceneLoadButton = new QPushButton("Load Game");
     startingSceneLoadButton->setFixedWidth(280);
     startingSceneLoadButton->setFixedHeight(100);
     startingSceneLoadButton->setStyleSheet(style);
-    mainLay->addWidget(startingSceneLoadButton);
+    startingSceneMainLayout->addWidget(startingSceneLoadButton);
 
     startingSceneSettingsButton = new QPushButton("Settings");
     startingSceneSettingsButton->setFixedWidth(280);
     startingSceneSettingsButton->setFixedHeight(100);
     startingSceneSettingsButton->setStyleSheet(style);
     connect(startingSceneSettingsButton, &QPushButton::clicked, this, &MainWindow::SetupSettingsScene);
-    mainLay->addWidget(startingSceneSettingsButton);
+    startingSceneMainLayout->addWidget(startingSceneSettingsButton);
 
-    PushBackEmptyToLay(2);
-    ui->centralwidget->setLayout(mainLay);
+    PushBackEmptyToLay(startingSceneMainLayout, 2);
 }

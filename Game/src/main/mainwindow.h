@@ -3,6 +3,8 @@
 
 #define EURO "€"
 
+#include "scenes/operational/scenes_defs.h"
+
 #include "database/database_real_data.h"
 #include "database/database_skill_converter.h"
 #include "database/database_dynamic_data.h"
@@ -16,6 +18,7 @@
 #include "game/data/player_search_filter.h"
 #include "game/events/event_handler.h"
 #include "game/events/event_birthday.h"
+#include "scenes/operational/scene_switch.h"
 
 #include <QMainWindow>
 #include <QGridLayout>
@@ -121,31 +124,52 @@ private:
     //General layout methods
     void SetupMainLay();
     void PushBackEmptyToLay(int amount = 1);
+    void PushBackEmptyToLay(QGridLayout* lay, int amount = 1);
     void TakeSpaceInLay(int h);
+    void TakeSpaceInLay(QGridLayout* lay, int h);
     void TakeSpaceInLay(int h, int row, int col_amount);
+    void TakeSpaceInLay(QGridLayout* lay, int h, int row, int col_amount);
     void ClearLay();
-    void ClearLay(QLayout* lay);
+    void ClearLay(QGridLayout *lay);
     static QLabel* NewTrashPtr();
 
-    //Scene-dependent
+    //Scene-dependent stuff
+
+    QList<int> allScenes = {
+        STARTING_SCENE,
+        SETTINGS_SCENE,
+        NEW_GAME_SCENE,
+        HOME_SCENE,
+        TRANSFERS_SCENE
+    };
 
     QGridLayout* mainLay;
     QStackedWidget* mainWidget;
 
-    QGridLayout* navigationLay;
-    QPushButton* navigationHomeButton;
-    QPushButton* navigationTransfersButton;
-    QPushButton* navigationTournamentsButton;
+    SCENE_SWITCH* sceneSwitch;
+
+    QGridLayout* navigationLay = nullptr;
+    QPushButton* navigationHomeButton = nullptr;
+    QPushButton* navigationTransfersButton = nullptr;
+    QPushButton* navigationTournamentsButton = nullptr;
+
+    void InitAllScenes();
+    QWidget *InitScene(int scene);
 
     void SetupNavigationLay();
 
     //STARTING SCENE
+    QWidget* startingSceneMainWidget;
+    QGridLayout* startingSceneMainLayout;
     QPushButton* startingSceneLoadButton;
-    QPushButton *startingSceneStartButton;
-    QPushButton *startingSceneSettingsButton;
+    QPushButton* startingSceneStartButton;
+    QPushButton* startingSceneSettingsButton;
     void SetupStartingScene();
 
     //NEW GAME SCENE
+    QWidget* newGameSceneMainWidget;
+    QGridLayout* newGameSceneMainLayout;
+
     int NewGameCurClubIdx = 0;
     int NewGameCurLeagueIdx = 0;
 
@@ -177,6 +201,8 @@ private:
     void NewGamePrevClub();
 
     //HOME SCENE
+    QWidget* homeSceneMainWidget;
+    QGridLayout* homeSceneMainLayout;
     QGridLayout* homeScenePlayersHeaderLay;
     QScrollArea* homeScenePlayersScrollArea;
     QWidget* homeScenePlayersScrollAreaWidget;
@@ -199,6 +225,8 @@ private:
     void HomeSceneDrawDayOnCalendarBar(DATE date, int row, QPainter &painter);
 
     //TRANSFERS SCENE
+    QWidget* transfersSceneMainWidget;
+    QGridLayout* transfersSceneMainLayout;
     bool transfersSceneLoaded = false;
     bool transferstSceneInsertSignal = false;
     QString transferstScenePreInsertText = "";
@@ -243,7 +271,9 @@ private:
     void TransfersSceneSetupAgeFilter();
     void TransfersSceneSetupSkillFilter();
 
-    //Settings scene
+    //SETTINGS SCENE
+    QWidget* settingsSceneMainWidget;
+    QGridLayout* settingsSceneMainLayout;
     void SetupSettingsScene();
 };
 #endif // MAINWINDOW_H

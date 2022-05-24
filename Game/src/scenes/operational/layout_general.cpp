@@ -13,8 +13,11 @@ void MainWindow::SetupMainLay(){
 
     mainLay = new QGridLayout();
     ui->centralwidget->setLayout(mainLay);
-    //mainWidget = new QStackedWidget();
-    //mainLay->addWidget(mainWidget);
+    mainWidget = new QStackedWidget();
+    mainWidget->setFixedSize(w, h);
+    mainLay->addWidget(mainWidget);
+    sceneSwitch = new SCENE_SWITCH(mainWidget);
+    InitAllScenes();
 }
 
 void MainWindow::PushBackEmptyToLay(int amount)
@@ -24,11 +27,25 @@ void MainWindow::PushBackEmptyToLay(int amount)
     }
 }
 
+void MainWindow::PushBackEmptyToLay(QGridLayout* lay, int amount)
+{
+    while(amount--){
+        lay->addWidget(new QLabel(""));
+    }
+}
+
 void MainWindow::TakeSpaceInLay(int h)
 {
     QLabel* label = new QLabel("");
     label->setFixedHeight(h);
     mainLay->addWidget(label);
+}
+
+void MainWindow::TakeSpaceInLay(QGridLayout *lay, int h)
+{
+    QLabel* label = new QLabel("");
+    label->setFixedHeight(h);
+    lay->addWidget(label);
 }
 
 void MainWindow::TakeSpaceInLay(int h, int row, int col_amount)
@@ -40,22 +57,38 @@ void MainWindow::TakeSpaceInLay(int h, int row, int col_amount)
     }
 }
 
+void MainWindow::TakeSpaceInLay(QGridLayout *lay, int h, int row, int col_amount)
+{
+    for(int i = 0; i < col_amount; ++i){
+        QLabel* label = new QLabel("");
+        label->setFixedHeight(h);
+        lay->addWidget(label, row, i);
+    }
+}
+
 void MainWindow::ClearLay()
 {
     ClearLay(mainLay);
 }
 
-void MainWindow::ClearLay(QLayout *lay)
+void MainWindow::ClearLay(QGridLayout *lay)
 {
+    if(lay == nullptr){
+        return;
+    }
     QLayoutItem* curItem;
     //qDebug() << "Entered ClearLay() with lay consist of " << lay->count() << " items";
-    while((curItem = lay->takeAt(0)) != nullptr){
+    while(lay->count()){
+        curItem = lay->takeAt(0);
+        if(curItem == nullptr){
+            continue;
+        }
         //qDebug() << "Entered while, i = " << i;
         if(curItem->layout() != nullptr){
-            ClearLay(curItem->layout());
-            qDebug() << "Deleted lay: " << curItem->layout();
+            ClearLay(dynamic_cast<QGridLayout*>(curItem->layout()));
+            //qDebug() << "Deleted lay: " << curItem->layout();
             //TO DO: Figure out if following line leads to memory leak or is it supposed to work like that
-            curItem->layout()->deleteLater();
+            //delete curItem->layout();
         }
         else if(curItem->widget() != nullptr){
             //qDebug() << "Deleted widget: " << curItem->widget() << " i = " << i;
@@ -65,7 +98,8 @@ void MainWindow::ClearLay(QLayout *lay)
         }
         //qDebug() << "Trying to delete item: " << curItem;
         //else {
-        delete curItem;
+        //TO DO: Figure out if following line leads to memory leak or is it supposed to work like that
+        //delete curItem;
         //}
     }
     //qDebug() << "ClearLay() finished working";
@@ -109,6 +143,10 @@ void MainWindow::drawLeagueHeaderFlag(QPixmap &flag, FEDERATION *fed)
 }
 
 void MainWindow::SetupNavigationLay(){
+    if(navigationLay){
+        ClearLay(navigationLay);
+        delete navigationLay;
+    }
     navigationLay = new QGridLayout();
 
     QString navigationButtonStyle =

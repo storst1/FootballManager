@@ -8,21 +8,22 @@ void MainWindow::SetupTransfersScene()
 {
     transfersSceneLoaded = false;
 
-    ClearLay();
+    sceneSwitch->Switch(TRANSFERS_SCENE);
+    ClearLay(transfersSceneMainLayout);
 
     //Navigation lay
     SetupNavigationLay();
-    mainLay->addLayout(navigationLay, 0, 1);
+    transfersSceneMainLayout->addLayout(navigationLay, 0, 1);
 
     //Filters lay
     TransfersSceneSetupFilters();
-    mainLay->addLayout(transfersSceneFiltersLay, 1, 1, Qt::AlignCenter);
+    transfersSceneMainLayout->addLayout(transfersSceneFiltersLay, 1, 1, Qt::AlignCenter);
 
     //Players lay
     TransfersSceneSetupPlayers();
-    mainLay->addWidget(transfersScenePlayersScrollArea, 2, 1, Qt::AlignCenter);
+    transfersSceneMainLayout->addWidget(transfersScenePlayersScrollArea, 2, 1, Qt::AlignCenter);
 
-    TakeSpaceInLay(150, 3, 3);
+    TakeSpaceInLay(transfersSceneMainLayout, 150, 3, 3);
 }
 
 void MainWindow::TransfersSceneAddPlayersToLay(){

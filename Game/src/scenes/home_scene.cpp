@@ -4,6 +4,10 @@
 #include "game/data/player_position.h"
 
 void MainWindow::SetupHomeScene(){
+
+    sceneSwitch->Switch(HOME_SCENE);
+    ClearLay(homeSceneMainLayout);
+
     QString scrollAreaStyle =
             "QScrollArea{ "
                 "background-color: transparent;"
@@ -60,17 +64,15 @@ void MainWindow::SetupHomeScene(){
                 "color: blue;"
             "}";
 
-    ClearLay();
+    //TakeSpaceInLay(homeSceneMainLayout, 1, 0, 3);
 
     SetupNavigationLay();
-    mainLay->addLayout(navigationLay, 0, 1);
+    homeSceneMainLayout->addLayout(navigationLay, 0, 1);
 
     const int headerLabelHeight = 30;
     CLUB* club = user->getClub();
     homeScenePlayers = club->getPlayers();
     homeSceneLastSortClicked = Pos;
-
-    //TakeSpaceInLay(100, 0, 3);
 
     homeScenePlayersHeaderLay = new QGridLayout();
 
@@ -135,7 +137,7 @@ void MainWindow::SetupHomeScene(){
     homeScenePlayersHeaderLay->addWidget(TVHeader, 0, 4, Qt::AlignLeft);
     homeScenePlayersHeaderLay->addWidget(skillHeader, 0, 5, Qt::AlignLeft);
 
-    mainLay->addLayout(homeScenePlayersHeaderLay, 1, 1);
+    homeSceneMainLayout->addLayout(homeScenePlayersHeaderLay, 1, 1);
 
     homeScenePlayersScrollArea = new QScrollArea;
     homeScenePlayersScrollArea->setFixedSize(1000, 600);
@@ -150,14 +152,14 @@ void MainWindow::SetupHomeScene(){
     homeScenePlayersScrollArea->setWidget(homeScenePlayersScrollAreaWidget);
     homeScenePlayersScrollAreaWidget->setLayout(homeScenePlayersLay);
 
-    mainLay->addWidget(homeScenePlayersScrollArea, 2, 1, Qt::AlignCenter);
+    homeSceneMainLayout->addWidget(homeScenePlayersScrollArea, 2, 1, Qt::AlignCenter);
 
     HomeSceneSetupCalendarBar(eventHandler->getCurDate());
 
-    mainLay->addWidget(homeSceneContinueButton, 1, 2, Qt::AlignLeft);
-    mainLay->addWidget(homeSceneCalendarBar, 2, 2, Qt::AlignLeft);
+    homeSceneMainLayout->addWidget(homeSceneContinueButton, 1, 2, Qt::AlignLeft);
+    homeSceneMainLayout->addWidget(homeSceneCalendarBar, 2, 2, Qt::AlignLeft);
 
-    TakeSpaceInLay(150, 3, 3);
+    TakeSpaceInLay(homeSceneMainLayout, 150, 3, 3);
 }
 
 void MainWindow::HomeSceneAddPlayersToLay(){

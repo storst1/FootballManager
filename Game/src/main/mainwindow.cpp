@@ -9,13 +9,13 @@ MainWindow::MainWindow(QWidget *parent)
     width = size().width();
     height = size().height();
     qDebug() << width << " " << height;
-    SetupMainLay();
     SetupCountryMap();
     SetupDb();
     SetupNetworkManager();
     LoadGameData();
     SetupUser();
     SetupEventHandler();
+    SetupMainLay();
     SetupStartingScene();
 }
 

@@ -12,7 +12,7 @@ public:
     TEAM_IN_GAME();
     ~TEAM_IN_GAME();
 private:
-    TEAM team;
+    TEAM* team;
     MATCH_LINEUP lineup;
 };
 

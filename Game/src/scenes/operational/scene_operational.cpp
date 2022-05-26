@@ -5,7 +5,8 @@ void MainWindow::InitAllScenes()
 {
     for(const int& i : allScenes){
         if(QWidget* curw_ptr = InitScene(i)){
-            curw_ptr->setFixedSize(width, height);
+            curw_ptr->setFixedSize(_width, _height);
+            //qDebug() << _width << " " << _height;
             mainWidget->addWidget(curw_ptr);
         }
     }

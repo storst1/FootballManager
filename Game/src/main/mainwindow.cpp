@@ -6,9 +6,9 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    width = size().width();
-    height = size().height();
-    qDebug() << width << " " << height;
+    _width = size().width();
+    _height = size().height();
+    //qDebug() << _width << " " << _height;
     SetupCountryMap();
     SetupDb();
     SetupNetworkManager();

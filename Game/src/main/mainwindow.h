@@ -65,8 +65,8 @@ public:
 private:
     //Window properties
     Ui::MainWindow *ui;
-    int width;
-    int height;
+    int _width;
+    int _height;
 
     //Game info
     GAME_DATA* gameData;

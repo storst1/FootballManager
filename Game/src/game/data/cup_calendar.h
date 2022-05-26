@@ -6,7 +6,7 @@
 class CUP_CALENDAR : public CALENDAR
 {
 public:
-    CUP_CALENDAR();
+    //CUP_CALENDAR();
 };
 
 #endif // CUP_CALENDAR_H

@@ -3,10 +3,10 @@
 
 void MainWindow::SetupMainLay(){
     QPixmap background(":/backgroundCutSizeLessBright.jpg");
-    int w = QGuiApplication::primaryScreen()->geometry().width();
-    int h = QGuiApplication::primaryScreen()->geometry().height();
-    qDebug() << "QGuiApplication::primaryScreen->geometry() == {" << w << ", " << h << "}";
-    background = background.scaled(w, h, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+    _width = QGuiApplication::primaryScreen()->geometry().width();
+    _height = QGuiApplication::primaryScreen()->geometry().height();
+    qDebug() << "QGuiApplication::primaryScreen->geometry() == {" << _width << ", " << _height << "}";
+    background = background.scaled(_width, _height, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
     QPalette palette;
     palette.setBrush(QPalette::Window, background);
     setPalette(palette);
@@ -14,9 +14,10 @@ void MainWindow::SetupMainLay(){
     mainLay = new QGridLayout();
     ui->centralwidget->setLayout(mainLay);
     mainWidget = new QStackedWidget();
-    mainWidget->setFixedSize(w, h);
+    mainWidget->setFixedSize(_width, _height);
     mainLay->addWidget(mainWidget);
     sceneSwitch = new SCENE_SWITCH(mainWidget);
+    //qDebug() << _width << " " << _height;
     InitAllScenes();
 }
 
@@ -105,7 +106,7 @@ void MainWindow::ClearLay(QGridLayout *lay)
     //qDebug() << "ClearLay() finished working";
 }
 
-QLabel *MainWindow::NewTrashPtr()
+QLabel* MainWindow::NewTrashPtr()
 {
     return new QLabel("");
 }

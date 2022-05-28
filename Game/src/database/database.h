@@ -10,7 +10,7 @@
 #include <QSqlError>
 #include <QString>
 #include <QPair>
-#include <QList>
+#include <QVector>
 #include <QDebug>
 
 class DATABASE
@@ -19,7 +19,7 @@ public:
     DATABASE(const QString& dbPath, const QString& connectionName);
     ~DATABASE();
 
-    static QList<QString> ParseStringBy(QString& s, QChar c);
+    static QVector<QString> ParseStringBy(QString& s, QChar c);
     static void PrintSqlExecInfoIfErr(QSqlQuery& query);
     static void PrintSqlExecInfo(QSqlQuery& query);
 protected:

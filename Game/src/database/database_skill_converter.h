@@ -17,19 +17,19 @@ public:
     void MakeBackup(const QString& backupDbName);
 private:
     void ReadVariables(int config);
-    void AssignTWConv(QList<QString>& list);
-    void AssignAgeConv(QList<QString>& list, int AgeSP);
-    void AssignPosConv(QList<QString>& list);
+    void AssignTWConv(QVector<QString>& list);
+    void AssignAgeConv(QVector<QString>& list, int AgeSP);
+    void AssignPosConv(QVector<QString>& list);
     //skill counting related methods
     float GetBaseByTW(int TW) const;
     float GetAgeCoef(int age) const;
     float GetPosCoef(int pos) const;
 private:
-    QList<int> TWconv;
+    QVector<int> TWconv;
     int lastZeroInTWconv;
 
-    QList<float> AgeCoefMap;
-    QList<float> PosCoefMap;
+    QVector<float> AgeCoefMap;
+    QVector<float> PosCoefMap;
 };
 
 #endif // DATABASE_SKILL_CONVERTER_H

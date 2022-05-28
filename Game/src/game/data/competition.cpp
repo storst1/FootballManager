@@ -20,7 +20,7 @@ void COMPETITION::setId(QString &_id)
     id = _id;
 }
 
-void COMPETITION::setClubList(QList<CLUB *> clubList)
+void COMPETITION::setClubList(QVector<CLUB *> clubList)
 {
     clubs = clubList;
 }
@@ -40,7 +40,7 @@ QString COMPETITION::getName() const
     return name;
 }
 
-QList<CLUB *> COMPETITION::getClubs() const
+QVector<CLUB *> COMPETITION::getClubs() const
 {
     return clubs;
 }

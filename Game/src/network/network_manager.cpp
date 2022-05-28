@@ -39,7 +39,7 @@ void NETWORK_MANAGER::SetupRequestAuth(const QString &key)
     qDebug() << "API key is set to " << key;
 }
 
-QList<API_CLUB> NETWORK_MANAGER::GatherClubsListByComp(const QString &compId)
+QVector<API_CLUB> NETWORK_MANAGER::GatherClubsListByComp(const QString &compId)
 {
     request.setUrl(QUrl("https://transfermarket.p.rapidapi.com/clubs/list-by-competition?id=" + compId));
     qDebug() << request.url().toString();
@@ -57,11 +57,11 @@ QList<API_CLUB> NETWORK_MANAGER::GatherClubsListByComp(const QString &compId)
     }
     QString idJsonProperty = "\"id\":\"";
     QString nameJsonProperty = "\"name\":\"";
-    QList<API_CLUB> clubList;
-    QList<int> idxsOfId = RequestBuffer->indexOfAll(idJsonProperty);
-    QList<int> idxsOfNames = RequestBuffer->indexOfAll(nameJsonProperty);
-    QList<QString> idVals = RequestBuffer->GetAllValuesFromRequestBuffer(idxsOfId, idJsonProperty.length());
-    QList<QString> nameVals = RequestBuffer->GetAllValuesFromRequestBuffer(idxsOfNames, nameJsonProperty.length());
+    QVector<API_CLUB> clubList;
+    QVector<int> idxsOfId = RequestBuffer->indexOfAll(idJsonProperty);
+    QVector<int> idxsOfNames = RequestBuffer->indexOfAll(nameJsonProperty);
+    QVector<QString> idVals = RequestBuffer->GetAllValuesFromRequestBuffer(idxsOfId, idJsonProperty.length());
+    QVector<QString> nameVals = RequestBuffer->GetAllValuesFromRequestBuffer(idxsOfNames, nameJsonProperty.length());
     REQUEST_BUFFER::NormalizeValues(nameVals);
     REQUEST_BUFFER::NormalizeValues(idVals);
     //qDebug() << idVals;
@@ -72,7 +72,7 @@ QList<API_CLUB> NETWORK_MANAGER::GatherClubsListByComp(const QString &compId)
     return clubList;
 }
 
-QList<API_PLAYER *> NETWORK_MANAGER::GatherPlayersListByClub(const int clubId)
+QVector<API_PLAYER *> NETWORK_MANAGER::GatherPlayersListByClub(const int clubId)
 {
     request.setUrl(QUrl("https://transfermarket.p.rapidapi.com/clubs/get-squad?id=" + QString::number(clubId)));
     qDebug() << request.url().toString();
@@ -89,8 +89,8 @@ QList<API_PLAYER *> NETWORK_MANAGER::GatherPlayersListByClub(const int clubId)
         return GatherPlayersListByClub(clubId);
     }
     JSON_PARSER_SQUAD Squad(RequestBuffer->getBuffer());
-    QList<JSON_PARSER_PLAYER> playersInfo = Squad.getPlayersParsers();
-    QList<API_PLAYER*> players;
+    QVector<JSON_PARSER_PLAYER> playersInfo = Squad.getPlayersParsers();
+    QVector<API_PLAYER*> players;
     for(const auto &pI : playersInfo){
         players.push_back(new API_PLAYER(pI));
         //qDebug() << pI.getName();

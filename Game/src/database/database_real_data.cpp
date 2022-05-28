@@ -5,12 +5,12 @@ DATABASE_REAL_DATA::DATABASE_REAL_DATA(const QString &dbPath, const QString& con
 {
 }
 
-QList<QPair<QString, int> > DATABASE_REAL_DATA::getAllLeagues() const
+QVector<QPair<QString, int> > DATABASE_REAL_DATA::getAllLeagues() const
 {
     QSqlQuery query(*db);
     query.exec("SELECT id, league_first, league_second, league_third FROM federations;");
     DATABASE::PrintSqlExecInfoIfErr(query);
-    QList<QPair<QString, int>> allLeagues;
+    QVector<QPair<QString, int>> allLeagues;
     while(query.next()){
         int fed_id = query.value(0).toInt();
         QString fl = query.value(1).toString();
@@ -29,13 +29,13 @@ QList<QPair<QString, int> > DATABASE_REAL_DATA::getAllLeagues() const
     return allLeagues;
 }
 
-void DATABASE_REAL_DATA::OverwriteLeaguesInfo(QList<API_LEAGUE*>& leaguesList) const
+void DATABASE_REAL_DATA::OverwriteLeaguesInfo(QVector<API_LEAGUE*>& leaguesList) const
 {
     DeleteTableInfo("leagues");
     SaveLeaguesInfo(leaguesList);
 }
 
-void DATABASE_REAL_DATA::SaveLeaguesInfo(QList<API_LEAGUE *> &leaguesList) const
+void DATABASE_REAL_DATA::SaveLeaguesInfo(QVector<API_LEAGUE *> &leaguesList) const
 {
     QSqlQuery query(*db);
     QString queryStatement = "INSERT INTO leagues (id, name, federation) VALUES ";
@@ -53,19 +53,19 @@ void DATABASE_REAL_DATA::SaveLeaguesInfo(QList<API_LEAGUE *> &leaguesList) const
     DATABASE::PrintSqlExecInfoIfErr(query);
 }
 
-void DATABASE_REAL_DATA::OverwriteClubsInfo(QList<API_CLUB *>& clubsList) const
+void DATABASE_REAL_DATA::OverwriteClubsInfo(QVector<API_CLUB *>& clubsList) const
 {
     DeleteTableInfo("clubs");
     SaveClubsInfo(clubsList);
 }
 
-void DATABASE_REAL_DATA::OverwritePlayersInfo(QList<API_PLAYER *>& playersList) const
+void DATABASE_REAL_DATA::OverwritePlayersInfo(QVector<API_PLAYER *>& playersList) const
 {
     DeleteTableInfo("players");
     SavePlayersInfo(playersList);
 }
 
-void DATABASE_REAL_DATA::OverwritePlayersSkill(QList<API_PLAYER *>& playersList) const
+void DATABASE_REAL_DATA::OverwritePlayersSkill(QVector<API_PLAYER *>& playersList) const
 {
     QSqlQuery query(*db);
     for(auto p : playersList){
@@ -80,7 +80,7 @@ void DATABASE_REAL_DATA::OverwritePlayersSkill(QList<API_PLAYER *>& playersList)
     }
 }
 
-void DATABASE_REAL_DATA::OverwriteClubsBudget(QList<API_CLUB *>& clubsList) const
+void DATABASE_REAL_DATA::OverwriteClubsBudget(QVector<API_CLUB *>& clubsList) const
 {
     QSqlQuery query(*db);
     for(auto c : clubsList){
@@ -95,7 +95,7 @@ void DATABASE_REAL_DATA::OverwriteClubsBudget(QList<API_CLUB *>& clubsList) cons
     }
 }
 
-void DATABASE_REAL_DATA::OverwriteClubsPrestige(QList<API_CLUB *> &clubsList) const
+void DATABASE_REAL_DATA::OverwriteClubsPrestige(QVector<API_CLUB *> &clubsList) const
 {
     QSqlQuery query(*db);
     for(auto c : clubsList){
@@ -110,7 +110,7 @@ void DATABASE_REAL_DATA::OverwriteClubsPrestige(QList<API_CLUB *> &clubsList) co
     }
 }
 
-void DATABASE_REAL_DATA::OverwritePlayersFmBirthdates(QList<API_PLAYER *> &playersList) const
+void DATABASE_REAL_DATA::OverwritePlayersFmBirthdates(QVector<API_PLAYER *> &playersList) const
 {
     QSqlQuery query(*db);
     for(auto p : playersList){
@@ -125,7 +125,7 @@ void DATABASE_REAL_DATA::OverwritePlayersFmBirthdates(QList<API_PLAYER *> &playe
     }
 }
 
-void DATABASE_REAL_DATA::OverwritePlayersFmContractExpDates(QList<API_PLAYER *> &playersList) const
+void DATABASE_REAL_DATA::OverwritePlayersFmContractExpDates(QVector<API_PLAYER *> &playersList) const
 {
     QSqlQuery query(*db);
     for(auto p : playersList){
@@ -140,7 +140,7 @@ void DATABASE_REAL_DATA::OverwritePlayersFmContractExpDates(QList<API_PLAYER *> 
     }
 }
 
-void DATABASE_REAL_DATA::SaveClubsInfo(QList<API_CLUB *>& clubsList) const
+void DATABASE_REAL_DATA::SaveClubsInfo(QVector<API_CLUB *>& clubsList) const
 {
     QSqlQuery query(*db);
     QString queryStatement = "INSERT INTO clubs (id, league, name, stadiumName, stadiumCapacity, playersTV, budget) VALUES ";
@@ -175,7 +175,7 @@ QString DATABASE_REAL_DATA::SqlGetStringReady(QString str)
     return str;
 }
 
-void DATABASE_REAL_DATA::SelectAllLeagues(QList<API_LEAGUE*>& leagues) const
+void DATABASE_REAL_DATA::SelectAllLeagues(QVector<API_LEAGUE*>& leagues) const
 {
     QSqlQuery query(*db);
     query.exec("SELECT id, name, federation FROM leagues;");
@@ -188,7 +188,7 @@ void DATABASE_REAL_DATA::SelectAllLeagues(QList<API_LEAGUE*>& leagues) const
     }
 }
 
-void DATABASE_REAL_DATA::SelectAllClubs(QList<API_CLUB *> &clubs) const
+void DATABASE_REAL_DATA::SelectAllClubs(QVector<API_CLUB *> &clubs) const
 {
     QSqlQuery query(*db);
     query.exec("SELECT id, league, name, stadiumName, stadiumCapacity, playersTV FROM clubs;");
@@ -204,7 +204,7 @@ void DATABASE_REAL_DATA::SelectAllClubs(QList<API_CLUB *> &clubs) const
     }
 }
 
-void DATABASE_REAL_DATA::SelectAllPlayers(QList<API_PLAYER *> &players) const
+void DATABASE_REAL_DATA::SelectAllPlayers(QVector<API_PLAYER *> &players) const
 {
     QSqlQuery query(*db);
     query.exec("SELECT id, name, club, TW, FN, SN, age, height, FP, SP, birthday_TM, contract_TM FROM players;");
@@ -287,12 +287,12 @@ void DATABASE_REAL_DATA::MakeBackup(const QString &backupDbPath) const
     DATABASE::PrintSqlExecInfoIfErr(query);
 }
 
-QList<QPair<int, QString> > DATABASE_REAL_DATA::GetAllCountries() const
+QVector<QPair<int, QString> > DATABASE_REAL_DATA::GetAllCountries() const
 {
     QSqlQuery query(*db);
     query.exec("SELECT id, name FROM countries");
     DATABASE::PrintSqlExecInfoIfErr(query);
-    QList<QPair<int, QString>> list;
+    QVector<QPair<int, QString>> list;
     while(query.next()){
         int curId = query.value(0).toInt();
         QString curName = query.value(1).toString();
@@ -301,7 +301,7 @@ QList<QPair<int, QString> > DATABASE_REAL_DATA::GetAllCountries() const
     return list;
 }
 
-void DATABASE_REAL_DATA::SavePlayersInfo(QList<API_PLAYER *>& playersList) const
+void DATABASE_REAL_DATA::SavePlayersInfo(QVector<API_PLAYER *>& playersList) const
 {
     QSqlQuery query(*db);
     QString queryStatement = "INSERT INTO players (id, name, club, TW, FN, SN, age, height, "

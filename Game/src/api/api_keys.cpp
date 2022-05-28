@@ -7,7 +7,7 @@ API_KEYS::API_KEYS(const QString &ApiDbPath)
     curKey = 0;
 }
 
-API_KEYS::API_KEYS(QList<QString> keys) : keys(keys)
+API_KEYS::API_KEYS(QVector<QString> keys) : keys(keys)
 {
     curKey = 0;
 }

@@ -62,15 +62,15 @@ void DATABASE_SKILL_CONVERTER::ReadVariables(int config){
     QString AgeConvStr = query.value(1).toString();
     QString PosConvStr = query.value(2).toString();
     int AgeSP = query.value(3).toInt();
-    QList<QString> TWParsed = ParseStringBy(TWConvStr, '\n');
+    QVector<QString> TWParsed = ParseStringBy(TWConvStr, '\n');
     AssignTWConv(TWParsed);
-    QList<QString> AgeParsed = ParseStringBy(AgeConvStr, '\n');
+    QVector<QString> AgeParsed = ParseStringBy(AgeConvStr, '\n');
     AssignAgeConv(AgeParsed, AgeSP);
-    QList<QString> PosParsed = ParseStringBy(PosConvStr, '\n');
+    QVector<QString> PosParsed = ParseStringBy(PosConvStr, '\n');
     AssignPosConv(PosParsed);
 }
 
-void DATABASE_SKILL_CONVERTER::AssignTWConv(QList<QString> &list)
+void DATABASE_SKILL_CONVERTER::AssignTWConv(QVector<QString> &list)
 {
     int i = 0;
     for(; i < list.size(); ++i){
@@ -80,7 +80,7 @@ void DATABASE_SKILL_CONVERTER::AssignTWConv(QList<QString> &list)
     lastZeroInTWconv = 99 - i;
 }
 
-void DATABASE_SKILL_CONVERTER::AssignAgeConv(QList<QString> &list, int AgeSP)
+void DATABASE_SKILL_CONVERTER::AssignAgeConv(QVector<QString> &list, int AgeSP)
 {
     std::reverse(list.begin(), list.end());
     int i = AgeSP;
@@ -101,7 +101,7 @@ void DATABASE_SKILL_CONVERTER::AssignAgeConv(QList<QString> &list, int AgeSP)
     }
 }
 
-void DATABASE_SKILL_CONVERTER::AssignPosConv(QList<QString> &list)
+void DATABASE_SKILL_CONVERTER::AssignPosConv(QVector<QString> &list)
 {
     for(int i = 0; i < std::min(list.size(), PosCoefMap.size()); ++i){
         list[i].replace(",", ".");

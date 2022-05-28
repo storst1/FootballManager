@@ -31,7 +31,7 @@ void API_LEAGUE::setName(QString league_name)
 }
 
 /*
-void LEAGUE::setClubs(QList<CLUB *> &clubs_list)
+void LEAGUE::setClubs(QVector<CLUB *> &clubs_list)
 {
     clubs = clubs_list;
 }

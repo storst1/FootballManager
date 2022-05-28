@@ -4,7 +4,7 @@
 #include "json/json_parser_club.h"
 
 #include <QString>
-#include <QList>
+#include <QVector>
 
 class API_CLUB
 {

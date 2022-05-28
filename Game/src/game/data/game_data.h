@@ -20,12 +20,12 @@ public:
     ~GAME_DATA();
 
     QMap<int, FEDERATION*> getFederations() const;
-    QList<FEDERATION*> getFederationsList() const;
+    QVector<FEDERATION*> getFederationsList() const;
     QMap<QString, LEAGUE*> getLeagues() const;
-    QList<LEAGUE*> getLeaguesList() const;
+    QVector<LEAGUE*> getLeaguesList() const;
     QMap<int, CLUB*> getClubs() const;
     QMap<int, PLAYER*> getPlayers() const;
-    QList<PLAYER*> getPlayersList() const;
+    QVector<PLAYER*> getPlayersList() const;
     COUNTRY_MAP* getCountryMap() const;
     QMap<QPair<int, int>, PLAYER_POSITION*> getPositions() const;
 
@@ -34,44 +34,44 @@ public:
     FEDERATION *implicitlyGetFederation(int id, QString &name);
 
     void addFederation(FEDERATION* fed);
-    void addFederations(QList<FEDERATION*>& listFed);
+    void addFederations(QVector<FEDERATION*>& listFed);
     void addLeague(LEAGUE* league);
-    void addLeagues(QList<LEAGUE*>& listLeague);
+    void addLeagues(QVector<LEAGUE*>& listLeague);
     void addClub(CLUB* club);
-    void addClubs(QList<CLUB*>& listClubs);
+    void addClubs(QVector<CLUB*>& listClubs);
     void addPlayer(PLAYER* player);
-    void addPlayers(QList<PLAYER*>& listPlayers);
+    void addPlayers(QVector<PLAYER*>& listPlayers);
     void addPos(PLAYER_POSITION* pos);
 
     void InitPositions();
 
-    QList<PLAYER*> getPlayersListConditional(int maxSize = -1,
-                                             QList<FEDERATION*> nations = {},
-                                             QList<FEDERATION*> secondNations = {},
+    QVector<PLAYER*> getPlayersListConditional(int maxSize = -1,
+                                             QVector<FEDERATION*> nations = {},
+                                             QVector<FEDERATION*> secondNations = {},
                                              QString name = "",
                                              QString team = "",
-                                             QList<LEAGUE*> leagues = {},
+                                             QVector<LEAGUE*> leagues = {},
                                              int minAge = 0,
                                              int maxAge = MAX_PLAYER_AGE,
-                                             QList<int> positions = {},
-                                             QList<int> secondPositions = {},
+                                             QVector<int> positions = {},
+                                             QVector<int> secondPositions = {},
                                              int minTV = 0,
                                              int maxTV = MAX_PLAYER_TV,
                                              int minSkill = 0,
                                              int maxSkill = MAX_PLAYER_SKILL
                                              ) const;
-    QList<PLAYER*> getPlayersListConditionalByFilter(int maxSize = -1, PLAYER_SEARCH_FILTER filter = PLAYER_SEARCH_FILTER()) const;
+    QVector<PLAYER*> getPlayersListConditionalByFilter(int maxSize = -1, PLAYER_SEARCH_FILTER filter = PLAYER_SEARCH_FILTER()) const;
 
-    static QList<QPair<QString, int>> getPositionsSimplifiedList();
+    static QVector<QPair<QString, int>> getPositionsSimplifiedList();
 private:
-    bool PlayerFirstNationConditionCheck(PLAYER* player, QList<FEDERATION*>& nations) const;
-    bool PlayerSecondNationConditionCheck(PLAYER* player, QList<FEDERATION*>& nations) const;
+    bool PlayerFirstNationConditionCheck(PLAYER* player, QVector<FEDERATION*>& nations) const;
+    bool PlayerSecondNationConditionCheck(PLAYER* player, QVector<FEDERATION*>& nations) const;
     bool PlayerNameConditionCheck(PLAYER* player, QString& name) const;
     bool PlayerTeamConditionCheck(PLAYER* player, QString& team) const;
-    bool PlayerLeagueConditionCheck(PLAYER* player, QList<LEAGUE*> leagues) const;
+    bool PlayerLeagueConditionCheck(PLAYER* player, QVector<LEAGUE*> leagues) const;
     bool PlayerAgeConditionCheck(PLAYER* player, int minAge, int maxAge) const;
-    bool PlayerFirstPosConditionCheck(PLAYER* player, QList<int>& posList) const;
-    bool PlayerSecondPosConditionCheck(PLAYER* player, QList<int>& posList) const;
+    bool PlayerFirstPosConditionCheck(PLAYER* player, QVector<int>& posList) const;
+    bool PlayerSecondPosConditionCheck(PLAYER* player, QVector<int>& posList) const;
     bool PlayerTVConditionCheck(PLAYER* player, int minTV, int maxTV) const;
     bool PlayerSkillConditionCheck(PLAYER* player, int minSkill, int maxSkill) const;
 private:

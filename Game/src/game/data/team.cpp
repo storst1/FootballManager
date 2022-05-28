@@ -13,7 +13,7 @@ TEAM::TEAM(int id, QString name) : id(id), name(name)
 
 }
 
-TEAM::TEAM(int id, QString name, QList<PLAYER *> players, FEDERATION *fed)
+TEAM::TEAM(int id, QString name, QVector<PLAYER *> players, FEDERATION *fed)
     : id(id), name(name), players(players), fed(fed)
 {
 
@@ -34,7 +34,7 @@ QString TEAM::getName() const{
     return name;
 }
 
-QList<PLAYER*> TEAM::getPlayers(){
+QVector<PLAYER*> TEAM::getPlayers(){
     return players;
 }
 
@@ -63,7 +63,7 @@ int TEAM::getPrestige() const
     return 0;
 }
 
-void TEAM::setPlayerList(QList<PLAYER *> playerList)
+void TEAM::setPlayerList(QVector<PLAYER *> playerList)
 {
     players = playerList;
     SortPlayersListByPos();
@@ -107,5 +107,5 @@ int CLUB::getPrestige() const
 
 TEAM CLUB::getTeam(bool giveAccessToPlayersList)
 {
-    return TEAM(getId(), getName(), giveAccessToPlayersList ? getPlayers() : QList<PLAYER*>{}, getFederation());
+    return TEAM(getId(), getName(), giveAccessToPlayersList ? getPlayers() : QVector<PLAYER*>{}, getFederation());
 }

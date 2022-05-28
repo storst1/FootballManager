@@ -81,9 +81,9 @@ private:
 
     NETWORK_MANAGER* netManager;
 
-    QList<API_LEAGUE*> allLeagues;
-    QList<API_CLUB*> allClubs;
-    QList<API_PLAYER*> allPlayers;
+    QVector<API_LEAGUE*> allLeagues;
+    QVector<API_CLUB*> allClubs;
+    QVector<API_PLAYER*> allPlayers;
 
     //Dynamic data
     std::map<int, QString> CountryIdToName;
@@ -103,8 +103,8 @@ private:
     void FillAllLeaguesWithBaseInfo();
     void FillAllPlayers();
     void FillAllClubsInfo();
-    QList<API_CLUB*> InitClubs(QList<API_CLUB> clubList);
-    void SaveAllData(QList<API_LEAGUE*> leagues, QList<API_CLUB*> clubs, QList<API_PLAYER*> players);
+    QVector<API_CLUB*> InitClubs(QVector<API_CLUB> clubList);
+    void SaveAllData(QVector<API_LEAGUE*> leagues, QVector<API_CLUB*> clubs, QVector<API_PLAYER*> players);
     void SaveAllDataDefault();
     void LoadAllDataFromAPI();
     void LoadAllDataFromDB();
@@ -135,7 +135,7 @@ private:
 
     //Scene-dependent stuff
 
-    QList<int> allScenes = {
+    QVector<int> allScenes = {
         STARTING_SCENE,
         SETTINGS_SCENE,
         NEW_GAME_SCENE,
@@ -187,7 +187,7 @@ private:
     QLabel* newGameClubPrestige;
     QPushButton* newGameStartNewGameButton;
 
-    QList<LEAGUE*> newGameAllLeaguesList;
+    QVector<LEAGUE*> newGameAllLeaguesList;
 
     void SetupNewGameScene();
     void NewGameNextLeague();
@@ -207,7 +207,7 @@ private:
     QScrollArea* homeScenePlayersScrollArea;
     QWidget* homeScenePlayersScrollAreaWidget;
     QGridLayout* homeScenePlayersLay;
-    QList<PLAYER*> homeScenePlayers;
+    QVector<PLAYER*> homeScenePlayers;
     PlayerSortType homeSceneLastSortClicked = Pos;
     QPushButton* homeSceneContinueButton;
     QLabel* homeSceneCalendarBar = nullptr;
@@ -230,14 +230,14 @@ private:
     bool transfersSceneLoaded = false;
     bool transferstSceneInsertSignal = false;
     QString transferstScenePreInsertText = "";
-    QList<FEDERATION*> transfersSceneFederationsList;
-    QList<FEDERATION*> transfersSceneCountryFilterCurrentContents;
+    QVector<FEDERATION*> transfersSceneFederationsList;
+    QVector<FEDERATION*> transfersSceneCountryFilterCurrentContents;
     QGridLayout* transfersSceneFiltersLay;
     QGridLayout* transfersScenePlayersHeaderLay;
     QScrollArea* transfersScenePlayersScrollArea;
     QWidget* transfersScenePlayersScrollAreaWidget;
     QGridLayout* transfersScenePlayersLay;
-    QList<PLAYER*> transfersScenePlayers;
+    QVector<PLAYER*> transfersScenePlayers;
     PlayerSortType transfersSceneLastSortClicked = None;
     QCompleter* transfersSceneCountryCompleter;
     QPushButton* transfersSceneSearchButton;
@@ -253,9 +253,9 @@ private:
 
     void SetupTransfersScene();
     void TransfersSceneAddPlayersToLay();
-    QList<FEDERATION*> TransfersSceneGetCurContents();
-    void TransfersSceneFillCountryFilter(QList<FEDERATION*>& list);
-    void TransfersSceneFillSecondCountryFilter(QList<FEDERATION*>& list);
+    QVector<FEDERATION*> TransfersSceneGetCurContents();
+    void TransfersSceneFillCountryFilter(QVector<FEDERATION*>& list);
+    void TransfersSceneFillSecondCountryFilter(QVector<FEDERATION*>& list);
     void TransfersSceneSetupFilters();
     void TransfersSceneSetupPlayers();
     void TransfersSceneUpdatePlayersList();

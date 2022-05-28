@@ -3,7 +3,7 @@
 
 #include "api/api_club.h"
 
-#include <QList>
+#include <QVector>
 
 class API_LEAGUE
 {
@@ -15,7 +15,7 @@ public:
 
     void setName(QString& league_name);
     void setName(QString league_name);
-    //void setClubs(QList<CLUB*>& clubs_list);
+    //void setClubs(QVector<CLUB*>& clubs_list);
     QString getId() const;
     QString getName() const;
     int getFed() const;
@@ -24,7 +24,7 @@ private:
     QString id;
     QString name;
     int federation;
-    //QList<CLUB*> clubs;
+    //QVector<CLUB*> clubs;
 };
 
 #endif // API_LEAGUE_H

@@ -10,12 +10,12 @@ public:
 
     QString getId() const;
     QString getName() const;
-    QList<CLUB*> getClubs() const;
+    QVector<CLUB*> getClubs() const;
     int getTier() const;
     FEDERATION* getFederation() const;
 
     void setId(QString& _id);
-    void setClubList(QList<CLUB*> clubList);
+    void setClubList(QVector<CLUB*> clubList);
     void setFederation(FEDERATION* _fed);
     void setName(QString& _name);
 private:
@@ -24,7 +24,7 @@ private:
     int tier;
     FEDERATION* fed;
 
-    QList<CLUB*> clubs;
+    QVector<CLUB*> clubs;
 };
 
 #endif // COMPETITION_H

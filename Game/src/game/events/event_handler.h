@@ -4,7 +4,7 @@
 #include "game/events/event_array.h"
 #include "game/time/date.h"
 
-#include <QList>
+#include <QVector>
 
 class EVENT_HANDLER
 {

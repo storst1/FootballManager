@@ -5,12 +5,12 @@ COUNTRY_MAP::COUNTRY_MAP()
 
 }
 
-COUNTRY_MAP::COUNTRY_MAP(QList<QPair<int, QString> > &list)
+COUNTRY_MAP::COUNTRY_MAP(QVector<QPair<int, QString> > &list)
 {
     fillMaps(list);
 }
 
-void COUNTRY_MAP::fillMaps(QList<QPair<int, QString> > &list)
+void COUNTRY_MAP::fillMaps(QVector<QPair<int, QString> > &list)
 {
     for(const auto &p : list){
         intToStr.insert(p.first, p.second);

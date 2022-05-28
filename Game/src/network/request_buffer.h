@@ -2,7 +2,7 @@
 #define REQUEST_BUFFER_H
 
 #include <QString>
-#include <QList>
+#include <QVector>
 #include <QtDebug>
 
 class REQUEST_BUFFER
@@ -15,9 +15,9 @@ public:
     QString &getBufferRef();
     void setBuffer(const QString& str);
     QString GetValueFromRequestBuffer(const int beginingIdx);
-    QList<QString> GetAllValuesFromRequestBuffer(const QList<int>& idxs, const int strLength);
+    QVector<QString> GetAllValuesFromRequestBuffer(const QVector<int>& idxs, const int strLength);
     int indexOf(const QString& str);
-    QList<int> indexOfAll(const QString& str);
+    QVector<int> indexOfAll(const QString& str);
     bool isErrorMsg();
 
     void operator=(const QString& str);
@@ -25,7 +25,7 @@ public:
 
     static void NormalizeValue(QString& str);
     static QString NormalizeAndCopyValue(QString str);
-    static void NormalizeValues(QList<QString>& str_list);
+    static void NormalizeValues(QVector<QString>& str_list);
     static void ReplaceAllNonEnglishSymbols(QString& s);
 private:
     QString buffer;

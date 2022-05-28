@@ -10,9 +10,9 @@ DATABASE::~DATABASE()
     delete db;
 }
 
-QList<QString> DATABASE::ParseStringBy(QString& s, QChar c)
+QVector<QString> DATABASE::ParseStringBy(QString& s, QChar c)
 {
-    QList<QString> slist;
+    QVector<QString> slist;
     QString cur = "";
     for(int i = 0; i < s.size(); ++i){
         if(s[i] == c){

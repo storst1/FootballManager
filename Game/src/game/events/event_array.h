@@ -4,7 +4,7 @@
 #include "game/events/event.h"
 #include "game/data/team.h"
 
-#include <QList>
+#include <QVector>
 
 class EVENT_ARRAY
 {
@@ -19,7 +19,7 @@ public:
     EVENT_ARRAY getAllEventsByDateAndTeam(DATE date, TEAM linkedTeam);
     EVENT* getMostImportantEvent();
 private:
-    QList<EVENT*> events;
+    QVector<EVENT*> events;
 };
 
 #endif // EVENT_ARRAY_H

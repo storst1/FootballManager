@@ -26,10 +26,10 @@ QMap<int, FEDERATION *> GAME_DATA::getFederations() const
     return federations;
 }
 
-QList<FEDERATION *> GAME_DATA::getFederationsList() const
+QVector<FEDERATION *> GAME_DATA::getFederationsList() const
 {
     //Iterates through the map and returns all the existing pointers to FEDERATION
-    QList<FEDERATION*> list;
+    QVector<FEDERATION*> list;
     for(const auto& f : federations){
         list.push_back(f);
     }
@@ -41,10 +41,10 @@ QMap<QString, LEAGUE *> GAME_DATA::getLeagues() const
     return leagues;
 }
 
-QList<LEAGUE *> GAME_DATA::getLeaguesList() const
+QVector<LEAGUE *> GAME_DATA::getLeaguesList() const
 {
     //Iterates through the map and returns all the existing pointers to LEAGUE
-    QList<LEAGUE*> list;
+    QVector<LEAGUE*> list;
     for(const auto& l : leagues){
         list.push_back(l);
     }
@@ -61,10 +61,10 @@ QMap<int, PLAYER *> GAME_DATA::getPlayers() const
     return players;
 }
 
-QList<PLAYER *> GAME_DATA::getPlayersList() const
+QVector<PLAYER *> GAME_DATA::getPlayersList() const
 {
     //Iterates through the map and returns all the existing pointers to PLAYER
-    QList<PLAYER*> list;
+    QVector<PLAYER*> list;
     for(const auto& p : players){
         list.push_back(p);
     }
@@ -90,7 +90,7 @@ FEDERATION *GAME_DATA::implicitlyGetFederation(int id, QString& name)
 {
     //Tries to find a pointer to federation with specified id, if such does not exist it creates a new federation
     if(federations.find(id) == federations.end()){
-        FEDERATION* newFed = new FEDERATION(id, name, id, QList<LEAGUE*> {});
+        FEDERATION* newFed = new FEDERATION(id, name, id, QVector<LEAGUE*> {});
         newFed->setFlag(new QPixmap(MainWindow::GetFlagPath(newFed, "48x30")));
         federations.insert(id, newFed);
         return newFed;
@@ -103,7 +103,7 @@ void GAME_DATA::addFederation(FEDERATION *fed)
     federations[fed->getId()] = fed;
 }
 
-void GAME_DATA::addFederations(QList<FEDERATION *> &listFed)
+void GAME_DATA::addFederations(QVector<FEDERATION *> &listFed)
 {
     for(const auto f : listFed){
         addFederation(f);
@@ -115,7 +115,7 @@ void GAME_DATA::addLeague(LEAGUE *league)
     leagues[league->getId()] = league;
 }
 
-void GAME_DATA::addLeagues(QList<LEAGUE *> &listLeague)
+void GAME_DATA::addLeagues(QVector<LEAGUE *> &listLeague)
 {
     for(const auto l : listLeague){
         addLeague(l);
@@ -127,7 +127,7 @@ void GAME_DATA::addClub(CLUB *club)
     clubs[club->getId()] = club;
 }
 
-void GAME_DATA::addClubs(QList<CLUB *> &listClubs)
+void GAME_DATA::addClubs(QVector<CLUB *> &listClubs)
 {
     for(const auto c : listClubs){
         addClub(c);
@@ -139,7 +139,7 @@ void GAME_DATA::addPlayer(PLAYER *player)
     players[player->getId()] = player;
 }
 
-void GAME_DATA::addPlayers(QList<PLAYER *> &listPlayers)
+void GAME_DATA::addPlayers(QVector<PLAYER *> &listPlayers)
 {
     for(const auto p : listPlayers){
         addPlayer(p);
@@ -172,25 +172,25 @@ void GAME_DATA::InitPositions()
     }
 }
 
-QList<PLAYER *> GAME_DATA::getPlayersListConditional(int maxSize,
-                                                     QList<FEDERATION *> nations,
-                                                     QList<FEDERATION *> secondNations,
+QVector<PLAYER *> GAME_DATA::getPlayersListConditional(int maxSize,
+                                                     QVector<FEDERATION *> nations,
+                                                     QVector<FEDERATION *> secondNations,
                                                      QString name,
                                                      QString team,
-                                                     QList<LEAGUE *> leagues,
+                                                     QVector<LEAGUE *> leagues,
                                                      int minAge,
                                                      int maxAge,
-                                                     QList<int> positions,
-                                                     QList<int> secondPositions,
+                                                     QVector<int> positions,
+                                                     QVector<int> secondPositions,
                                                      int minTV,
                                                      int maxTV,
                                                      int minSkill,
                                                      int maxSkill
                                                      ) const
 {
-    QList<PLAYER*> list = getPlayersList();
+    QVector<PLAYER*> list = getPlayersList();
     std::sort(list.begin(), list.end(), PLAYER::CompTwoPlayersBySkillReversed);
-    QList<PLAYER*> listToReturn;
+    QVector<PLAYER*> listToReturn;
     for(int i = 0; i < list.size(); ++i){
         if(!PlayerFirstNationConditionCheck(list[i], nations)){
             continue;
@@ -231,7 +231,7 @@ QList<PLAYER *> GAME_DATA::getPlayersListConditional(int maxSize,
     return listToReturn;
 }
 
-QList<PLAYER *> GAME_DATA::getPlayersListConditionalByFilter(int maxSize, PLAYER_SEARCH_FILTER filter) const
+QVector<PLAYER *> GAME_DATA::getPlayersListConditionalByFilter(int maxSize, PLAYER_SEARCH_FILTER filter) const
 {
     return getPlayersListConditional(maxSize,
                                      filter.getNations(),
@@ -250,9 +250,9 @@ QList<PLAYER *> GAME_DATA::getPlayersListConditionalByFilter(int maxSize, PLAYER
                                      );
 }
 
-QList<QPair<QString, int> > GAME_DATA::getPositionsSimplifiedList()
+QVector<QPair<QString, int> > GAME_DATA::getPositionsSimplifiedList()
 {
-    QList<QPair<QString, int>> list;
+    QVector<QPair<QString, int>> list;
     list.push_back({"GK", 1});
     list.push_back({"CB", 3});
     list.push_back({"LB", 4});
@@ -269,7 +269,7 @@ QList<QPair<QString, int> > GAME_DATA::getPositionsSimplifiedList()
     return list;
 }
 
-bool GAME_DATA::PlayerFirstNationConditionCheck(PLAYER *player, QList<FEDERATION *> &nations) const
+bool GAME_DATA::PlayerFirstNationConditionCheck(PLAYER *player, QVector<FEDERATION *> &nations) const
 {
     if(nations.empty()){
         return true;
@@ -282,7 +282,7 @@ bool GAME_DATA::PlayerFirstNationConditionCheck(PLAYER *player, QList<FEDERATION
     return false;
 }
 
-bool GAME_DATA::PlayerSecondNationConditionCheck(PLAYER *player, QList<FEDERATION *> &nations) const
+bool GAME_DATA::PlayerSecondNationConditionCheck(PLAYER *player, QVector<FEDERATION *> &nations) const
 {
     if(nations.empty()){
         return true;
@@ -311,7 +311,7 @@ bool GAME_DATA::PlayerTeamConditionCheck(PLAYER *player, QString &team) const
     return player->getClub()->getName().contains(team, Qt::CaseInsensitive);
 }
 
-bool GAME_DATA::PlayerLeagueConditionCheck(PLAYER *player, QList<LEAGUE *> leagues) const
+bool GAME_DATA::PlayerLeagueConditionCheck(PLAYER *player, QVector<LEAGUE *> leagues) const
 {
     //TO DO: Implement this method
 
@@ -331,7 +331,7 @@ bool GAME_DATA::PlayerAgeConditionCheck(PLAYER *player, int minAge, int maxAge) 
     return (player->getAge() >= minAge && player->getAge() <= maxAge);
 }
 
-bool GAME_DATA::PlayerFirstPosConditionCheck(PLAYER *player, QList<int> &posList) const
+bool GAME_DATA::PlayerFirstPosConditionCheck(PLAYER *player, QVector<int> &posList) const
 {
     if(posList.empty()){
         return true;
@@ -344,7 +344,7 @@ bool GAME_DATA::PlayerFirstPosConditionCheck(PLAYER *player, QList<int> &posList
     return false;
 }
 
-bool GAME_DATA::PlayerSecondPosConditionCheck(PLAYER *player, QList<int> &posList) const
+bool GAME_DATA::PlayerSecondPosConditionCheck(PLAYER *player, QVector<int> &posList) const
 {
     if(posList.empty()){
         return true;

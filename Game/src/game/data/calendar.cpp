@@ -1,16 +1,16 @@
 #include "calendar.h"
 
-CALENDAR::CALENDAR(QList<TEAM *> &allTeams) : allTeams(allTeams)
+CALENDAR::CALENDAR(QVector<TEAM *> &allTeams) : allTeams(allTeams)
 {
 
 }
 
-CALENDAR::CALENDAR(QList<TEAM *> &allTeams, QList<int> &startingStage) : allTeams(allTeams), teamStartingStage(startingStage)
+CALENDAR::CALENDAR(QVector<TEAM *> &allTeams, QVector<int> &startingStage) : allTeams(allTeams), teamStartingStage(startingStage)
 {
 
 }
 
-CALENDAR::CALENDAR(QList<QPair<TEAM *, int> > &infoList)
+CALENDAR::CALENDAR(QVector<QPair<TEAM *, int> > &infoList)
 {
     for(const auto &l : infoList){
         allTeams.push_back(l.first);
@@ -24,7 +24,7 @@ void CALENDAR::ClearTeams()
     teamStartingStage.clear();
 }
 
-void CALENDAR::SetTeams(QList<TEAM *> &teams, QList<int> &&startingStage)
+void CALENDAR::SetTeams(QVector<TEAM *> &teams, QVector<int> &&startingStage)
 {
     allTeams = teams;
     teamStartingStage = startingStage;

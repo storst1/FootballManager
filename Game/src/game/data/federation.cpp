@@ -8,7 +8,7 @@ FEDERATION::FEDERATION()
 
 }
 
-FEDERATION::FEDERATION(int _id, QString _name, int _countryId, QList<LEAGUE *> leaguesList)
+FEDERATION::FEDERATION(int _id, QString _name, int _countryId, QVector<LEAGUE *> leaguesList)
     : fedId(_id), countryId(_countryId), name(_name), leagues(leaguesList)
 {
 
@@ -36,7 +36,7 @@ QString FEDERATION::getName() const
     return name;
 }
 
-QList<LEAGUE *> FEDERATION::getLeagues()
+QVector<LEAGUE *> FEDERATION::getLeagues()
 {
     return leagues;
 }
@@ -46,7 +46,7 @@ QPixmap *FEDERATION::getFlag() const
     return flagPixmap;
 }
 
-void FEDERATION::setLeagues(QList<LEAGUE *> leaguesList)
+void FEDERATION::setLeagues(QVector<LEAGUE *> leaguesList)
 {
     leagues = leaguesList;
 }

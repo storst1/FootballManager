@@ -25,18 +25,18 @@ public:
     void CopyPlayersTable(QSqlQuery &query) const;
 
     void FillGameData(GAME_DATA* gameData) const;
-    QList<QPair<FEDERATION *, QList<QString> > > FillFederationsGameData(GAME_DATA* gameData) const;
-    void AttachLeaguesToFeds(QList<QPair<FEDERATION*, QList<QString>>> fedsList, GAME_DATA *gameData) const;
+    QVector<QPair<FEDERATION *, QVector<QString> > > FillFederationsGameData(GAME_DATA* gameData) const;
+    void AttachLeaguesToFeds(QVector<QPair<FEDERATION*, QVector<QString>>> fedsList, GAME_DATA *gameData) const;
 
-    QList<LEAGUE*> InitLeagueList(QList<QString> &leagueIdsList, FEDERATION *curFed, GAME_DATA *gameData) const;
-    QList<CLUB*> InitClubsByLeague(LEAGUE* league, GAME_DATA *gameData) const;
-    QList<PLAYER*> InitPlayersByClub(CLUB *curClub, GAME_DATA *gameData) const;
+    QVector<LEAGUE*> InitLeagueList(QVector<QString> &leagueIdsList, FEDERATION *curFed, GAME_DATA *gameData) const;
+    QVector<CLUB*> InitClubsByLeague(LEAGUE* league, GAME_DATA *gameData) const;
+    QVector<PLAYER*> InitPlayersByClub(CLUB *curClub, GAME_DATA *gameData) const;
     bool FedIsPreLoaded(QString fedName) const;
 private:
     void FillPreLoadedFedList();
 private:
     DATABASE_SKILL_CONVERTER* skillConvDb;
-    QList<QString> preLoadedFedList;
+    QVector<QString> preLoadedFedList;
 };
 
 #endif // DATABASE_DYNAMIC_DATA_H

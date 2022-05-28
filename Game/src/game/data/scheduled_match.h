@@ -9,13 +9,19 @@
 class SCHEDULED_MATCH
 {
 public:
-    SCHEDULED_MATCH();
+    SCHEDULED_MATCH(int id, DATE& gameDate, COMPETITION* comp);
+    SCHEDULED_MATCH(int id, DATE& gameDate, COMPETITION* comp, TEAM* HT, TEAM* AT);
     ~SCHEDULED_MATCH();
+
+    bool IsDetermined() const noexcept;
+    void Determine(TEAM* HT, TEAM* AT);
 private:
-    COMPETITION* competition;
-    TEAM* homeTeam;
-    TEAM* awayTeam;
+    int matchId; //has to be unique inside competition
     DATE gameDate;
+    COMPETITION* competition;
+    TEAM* homeTeam = nullptr;
+    TEAM* awayTeam = nullptr;
+    bool determined = true;
 };
 
 #endif // SCHEDULED_MATCH_H

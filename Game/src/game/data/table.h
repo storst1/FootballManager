@@ -17,9 +17,9 @@ public:
     TABLE();
     ~TABLE();
 
-    QList<POSITION*> getTable();
+    QVector<POSITION*> getTable();
 private:
-    QList<POSITION*> standings;
+    QVector<POSITION*> standings;
 };
 
 #endif // TABLE_H

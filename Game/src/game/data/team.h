@@ -8,12 +8,12 @@ class TEAM
 public:
     TEAM();
     TEAM(int id, QString name);
-    TEAM(int id, QString name, QList<PLAYER*> players, FEDERATION* fed);
+    TEAM(int id, QString name, QVector<PLAYER*> players, FEDERATION* fed);
     virtual ~TEAM();
 
     int getId() const;
     QString getName() const;
-    QList<PLAYER*> getPlayers();
+    QVector<PLAYER*> getPlayers();
     FEDERATION* getFederation() const;
 
     virtual int getTV() const;
@@ -21,13 +21,13 @@ public:
     virtual STADIUM* getStadium() const;
     virtual int getPrestige() const;
 
-    void setPlayerList(QList<PLAYER*> playerList);
+    void setPlayerList(QVector<PLAYER*> playerList);
     void SortPlayersListByPos();
     void setFederation(FEDERATION* _fed);
 protected:
     int id;
     QString name;
-    QList<PLAYER*> players;
+    QVector<PLAYER*> players;
     FEDERATION* fed;
     //COACH* coach;
 };
@@ -40,7 +40,7 @@ public:
     NATIONAL_TEAM() = default;
     virtual ~NATIONAL_TEAM() = default;
 private:
-    QList<STADIUM*> stadiumList;
+    QVector<STADIUM*> stadiumList;
 };
 
 

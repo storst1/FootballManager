@@ -12,7 +12,7 @@ void MainWindow::SetupDb()
     dynDataDb->CopyDataFromRealDb(dbFolPath + "realdata.db", countryMap);
 }
 
-void MainWindow::SaveAllData(QList<API_LEAGUE *> leagues, QList<API_CLUB *> clubs, QList<API_PLAYER *> players)
+void MainWindow::SaveAllData(QVector<API_LEAGUE *> leagues, QVector<API_CLUB *> clubs, QVector<API_PLAYER *> players)
 {
     realDataDb->OverwriteLeaguesInfo(leagues);
     realDataDb->OverwriteClubsInfo(clubs);

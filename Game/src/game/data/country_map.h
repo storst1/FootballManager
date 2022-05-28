@@ -3,17 +3,17 @@
 
 #include <QMap>
 #include <QString>
-#include <QList>
+#include <QVector>
 #include <QPair>
 
 class COUNTRY_MAP
 {
 public:
     COUNTRY_MAP();
-    COUNTRY_MAP(QList<QPair<int, QString>>& list);
+    COUNTRY_MAP(QVector<QPair<int, QString>>& list);
     ~COUNTRY_MAP() = default;
 
-    void fillMaps(QList<QPair<int, QString>>& list);
+    void fillMaps(QVector<QPair<int, QString>>& list);
     QString getById(const int id) const;
     int getByName(const QString name) const;
     bool isEmpty() const;

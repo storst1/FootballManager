@@ -64,7 +64,7 @@ void MainWindow::SetupNetworkManager()
 
 void MainWindow::FillCountryMap()
 {
-    QList<QPair<int, QString>> countryList = realDataDb->GetAllCountries();
+    QVector<QPair<int, QString>> countryList = realDataDb->GetAllCountries();
     countryMap->fillMaps(countryList);
 }
 

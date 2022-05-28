@@ -31,9 +31,9 @@ QString REQUEST_BUFFER::GetValueFromRequestBuffer(const int beginingIdx)
     return value;
 }
 
-QList<QString> REQUEST_BUFFER::GetAllValuesFromRequestBuffer(const QList<int> &idxs, const int strLength)
+QVector<QString> REQUEST_BUFFER::GetAllValuesFromRequestBuffer(const QVector<int> &idxs, const int strLength)
 {
-    QList<QString> retList;
+    QVector<QString> retList;
     for(auto aidx : idxs){
         retList.push_back(GetValueFromRequestBuffer(aidx + strLength));
     }
@@ -45,9 +45,9 @@ int REQUEST_BUFFER::indexOf(const QString &str)
     return buffer.indexOf(str);
 }
 
-QList<int> REQUEST_BUFFER::indexOfAll(const QString &str)
+QVector<int> REQUEST_BUFFER::indexOfAll(const QString &str)
 {
-    QList<int> idxs;
+    QVector<int> idxs;
     int startingElem = 0;
     while(int cur = buffer.indexOf(str, startingElem)){
         if(cur < 0){
@@ -97,7 +97,7 @@ QString REQUEST_BUFFER::NormalizeAndCopyValue(QString str)
     return str;
 }
 
-void REQUEST_BUFFER::NormalizeValues(QList<QString> &str_list)
+void REQUEST_BUFFER::NormalizeValues(QVector<QString> &str_list)
 {
     for(int i = 0; i < str_list.size(); ++i){
         str_list[i] = NormalizeAndCopyValue(str_list[i]);

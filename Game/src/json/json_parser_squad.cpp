@@ -15,7 +15,7 @@ JSON_PARSER_SQUAD::JSON_PARSER_SQUAD(QString str)
     InitPlayersInfoWithVals();
 }
 
-QList<JSON_PARSER_PLAYER> JSON_PARSER_SQUAD::getPlayersParsers() const
+QVector<JSON_PARSER_PLAYER> JSON_PARSER_SQUAD::getPlayersParsers() const
 {
     return playersInfo;
 }

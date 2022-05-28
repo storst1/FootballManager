@@ -2,7 +2,7 @@
 #define DATA_DEFS_H
 
 #include <QString>
-#include <QList>
+#include <QVector>
 #include <QtAlgorithms>
 #include <QPixmap>
 #include <QRandomGenerator>

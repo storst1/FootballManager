@@ -5,12 +5,12 @@ PLAYER_SEARCH_FILTER::PLAYER_SEARCH_FILTER()
 
 }
 
-void PLAYER_SEARCH_FILTER::setNations(QList<FEDERATION *> nationsList)
+void PLAYER_SEARCH_FILTER::setNations(QVector<FEDERATION *> nationsList)
 {
     nations = nationsList;
 }
 
-void PLAYER_SEARCH_FILTER::setSecondNations(QList<FEDERATION *> secondNationsList)
+void PLAYER_SEARCH_FILTER::setSecondNations(QVector<FEDERATION *> secondNationsList)
 {
     secondNations = secondNationsList;
 }
@@ -25,7 +25,7 @@ void PLAYER_SEARCH_FILTER::setTeam(QString _team)
     team = _team;
 }
 
-void PLAYER_SEARCH_FILTER::setLeagues(QList<LEAGUE *> _leagues)
+void PLAYER_SEARCH_FILTER::setLeagues(QVector<LEAGUE *> _leagues)
 {
     leagues = _leagues;
 }
@@ -46,12 +46,12 @@ void PLAYER_SEARCH_FILTER::setAgeBorders(int min, int max)
     setMaxAge(max);
 }
 
-void PLAYER_SEARCH_FILTER::setPos(QList<int> _positions)
+void PLAYER_SEARCH_FILTER::setPos(QVector<int> _positions)
 {
     positions = _positions;
 }
 
-void PLAYER_SEARCH_FILTER::setSecondPos(QList<int> _positions)
+void PLAYER_SEARCH_FILTER::setSecondPos(QVector<int> _positions)
 {
     secondPositions = _positions;
 }
@@ -88,12 +88,12 @@ void PLAYER_SEARCH_FILTER::setSkillBorders(int min, int max)
     setMaxSkill(max);
 }
 
-QList<FEDERATION *> &PLAYER_SEARCH_FILTER::getNations()
+QVector<FEDERATION *> &PLAYER_SEARCH_FILTER::getNations()
 {
     return nations;
 }
 
-QList<FEDERATION *> &PLAYER_SEARCH_FILTER::getSecondNations()
+QVector<FEDERATION *> &PLAYER_SEARCH_FILTER::getSecondNations()
 {
     return secondNations;
 }
@@ -108,7 +108,7 @@ QString &PLAYER_SEARCH_FILTER::getTeam()
     return team;
 }
 
-QList<LEAGUE *> &PLAYER_SEARCH_FILTER::getLeagues()
+QVector<LEAGUE *> &PLAYER_SEARCH_FILTER::getLeagues()
 {
     return leagues;
 }
@@ -123,12 +123,12 @@ int PLAYER_SEARCH_FILTER::getMaxAge() const
     return maxAge;
 }
 
-QList<int> &PLAYER_SEARCH_FILTER::getPositions()
+QVector<int> &PLAYER_SEARCH_FILTER::getPositions()
 {
     return positions;
 }
 
-QList<int> &PLAYER_SEARCH_FILTER::getSecondPositions()
+QVector<int> &PLAYER_SEARCH_FILTER::getSecondPositions()
 {
     return secondPositions;
 }

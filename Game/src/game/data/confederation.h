@@ -12,7 +12,7 @@ public:
     ~CONFEDERATION();
 private:
     QString name;
-    QList<FEDERATION*> fedList;
+    QVector<FEDERATION*> fedList;
 };
 
 #endif // CONFEDERATION_H

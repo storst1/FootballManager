@@ -7,16 +7,16 @@ class FEDERATION
 {
 public:
     FEDERATION();
-    FEDERATION(int _id, QString _name, int _countryId, QList<LEAGUE*> leaguesList);
+    FEDERATION(int _id, QString _name, int _countryId, QVector<LEAGUE*> leaguesList);
     FEDERATION(int _id, QString _name, int _countryId);
     ~FEDERATION();
 
     int getId() const;
     QString getName() const;
-    QList<LEAGUE*> getLeagues();
+    QVector<LEAGUE*> getLeagues();
     QPixmap* getFlag() const;
 
-    void setLeagues(QList<LEAGUE*> leaguesList);
+    void setLeagues(QVector<LEAGUE*> leaguesList);
     void setFlag(QPixmap* flag);
 
     static bool CompTwoFedsByName(const FEDERATION* f1, const FEDERATION* f2);
@@ -26,7 +26,7 @@ private:
     QString name;
     QPixmap* flagPixmap = nullptr;
 
-    QList<LEAGUE*> leagues;
+    QVector<LEAGUE*> leagues;
     CUP* natCup;
 
     NATIONAL_TEAM* nationalTeam;

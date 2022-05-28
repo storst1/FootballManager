@@ -4,18 +4,18 @@
 #include "database/database_api_keys.h"
 
 #include <QString>
-#include <QList>
+#include <QVector>
 
 class API_KEYS
 {
 public:
     API_KEYS(const QString& ApiDbPath);
-    API_KEYS(QList<QString> keys);
+    API_KEYS(QVector<QString> keys);
 
     const QString cur() const;
     QString next();
 private:
-    QList<QString> keys;
+    QVector<QString> keys;
     int curKey = -1;
 };
 

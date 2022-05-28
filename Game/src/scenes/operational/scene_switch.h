@@ -1,7 +1,7 @@
 #ifndef SCENE_SWITCH_H
 #define SCENE_SWITCH_H
 
-#include <QList>
+#include <QVector>
 #include <QWidget>
 #include <QStackedWidget>
 #include <QGridLayout>
@@ -16,7 +16,7 @@ public:
     void Back();
 private:
     QStackedWidget* widget;
-    QList<int> history = {};
+    QVector<int> history = {};
 };
 
 #endif // SCENE_SWITCH_H

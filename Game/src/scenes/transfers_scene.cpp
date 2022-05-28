@@ -142,9 +142,9 @@ void MainWindow::TransfersSceneAddPlayersToLay(){
         ++totalPlayers;
     }
 }
-QList<FEDERATION *> MainWindow::TransfersSceneGetCurContents()
+QVector<FEDERATION *> MainWindow::TransfersSceneGetCurContents()
 {
-    QList<FEDERATION *> curContents;
+    QVector<FEDERATION *> curContents;
     QString strFilter = transfersSceneCountryFilter->currentText();
     if(strFilter.length() < 3){
         for(int i = 0; i < transfersSceneFederationsList.size(); ++i){
@@ -161,7 +161,7 @@ QList<FEDERATION *> MainWindow::TransfersSceneGetCurContents()
     return curContents;
 }
 
-void MainWindow::TransfersSceneFillCountryFilter(QList<FEDERATION *> &list)
+void MainWindow::TransfersSceneFillCountryFilter(QVector<FEDERATION *> &list)
 {
     for(const auto &l : list){
         transfersSceneCountryFilter->insertItem
@@ -174,7 +174,7 @@ void MainWindow::TransfersSceneFillCountryFilter(QList<FEDERATION *> &list)
     }
 }
 
-void MainWindow::TransfersSceneFillSecondCountryFilter(QList<FEDERATION *> &list)
+void MainWindow::TransfersSceneFillSecondCountryFilter(QVector<FEDERATION *> &list)
 {
     for(const auto &l : list){
         transfersSceneSecondCountryFilter->insertItem
@@ -346,7 +346,7 @@ void MainWindow::TransfersSceneSetupFilters()
 
 void MainWindow::TransfersSceneFillPosFilter()
 {
-    QList<QPair<QString, int>> posList = GAME_DATA::getPositionsSimplifiedList();
+    QVector<QPair<QString, int>> posList = GAME_DATA::getPositionsSimplifiedList();
     for(const auto &p : posList){
         transfersScenePosFilter->addItem(p.first, p.second);
     }
@@ -354,7 +354,7 @@ void MainWindow::TransfersSceneFillPosFilter()
 
 void MainWindow::TransfersSceneFillSecondPosFilter()
 {
-    QList<QPair<QString, int>> posList = GAME_DATA::getPositionsSimplifiedList();
+    QVector<QPair<QString, int>> posList = GAME_DATA::getPositionsSimplifiedList();
     for(const auto &p : posList){
         transfersSceneSecondPosFilter->addItem(p.first, p.second);
     }

@@ -7,7 +7,7 @@
 #include <QJsonValue>
 #include <QJsonArray>
 #include <QString>
-#include <QList>
+#include <QVector>
 
 class JSON_PARSER
 {

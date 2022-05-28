@@ -211,7 +211,7 @@ void MainWindow::NewGamePrevLeague()
 void MainWindow::NewGameChangeLeagueLabel(LEAGUE *_league)
 {
     newGameLeagueLabel->setText(_league->getName());
-    QList<CLUB*> clubs = _league->getClubs();
+    QVector<CLUB*> clubs = _league->getClubs();
     NewGameChangeClubLay(clubs[0]);
 }
 
@@ -231,7 +231,7 @@ void MainWindow::NewGameChangeClubLay(CLUB *curClub)
 
 void MainWindow::NewGameNextClub()
 {
-    QList<CLUB*> clubs = newGameAllLeaguesList[NewGameCurLeagueIdx]->getClubs();
+    QVector<CLUB*> clubs = newGameAllLeaguesList[NewGameCurLeagueIdx]->getClubs();
     ++NewGameCurClubIdx;
     if(NewGameCurClubIdx >= clubs.size()){
         NewGameCurClubIdx = 0;
@@ -241,7 +241,7 @@ void MainWindow::NewGameNextClub()
 
 void MainWindow::NewGamePrevClub()
 {
-    QList<CLUB*> clubs = newGameAllLeaguesList[NewGameCurLeagueIdx]->getClubs();
+    QVector<CLUB*> clubs = newGameAllLeaguesList[NewGameCurLeagueIdx]->getClubs();
     --NewGameCurClubIdx;
     if(NewGameCurClubIdx < 0){
         NewGameCurClubIdx = clubs.size() - 1;

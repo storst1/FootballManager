@@ -16,7 +16,7 @@ private:
     CONFEDERATION* OFC;
     CONFEDERATION* CONMEBOL;
 
-    QList<FEDERATION*> fifaRating;
+    QVector<FEDERATION*> fifaRating;
 };
 
 #endif // FIFA_H

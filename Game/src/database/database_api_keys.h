@@ -9,7 +9,7 @@ public:
     DATABASE_API_KEYS(const QString& dbPath, const QString& dbConnectionName);
     ~DATABASE_API_KEYS() = default;
 
-    QList<QString> GetAllKeys();
+    QVector<QString> GetAllKeys();
 };
 
 #endif // DATABASE_API_KEYS_H

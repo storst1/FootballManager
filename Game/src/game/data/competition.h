@@ -18,11 +18,15 @@ public:
     void setClubList(QVector<CLUB*> clubList);
     void setFederation(FEDERATION* _fed);
     void setName(QString& _name);
-private:
+
+    virtual void generateCalendar(int year) = 0;
+protected:
     QString id;
     QString name;
     int tier;
     FEDERATION* fed;
+
+    CALENDAR* calendar = nullptr;
 
     QVector<CLUB*> clubs;
 };

@@ -1,4 +1,5 @@
 #include "game/data/competition.h"
+#include "game/data/calendar.h"
 
 COMPETITION::COMPETITION()
 {

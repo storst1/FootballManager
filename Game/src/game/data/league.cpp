@@ -2,6 +2,7 @@
 #include "game/data/cup.h"
 #include "game/data/team.h"
 #include "game/data/table.h"
+#include "game/data/calendar.h"
 
 LEAGUE::LEAGUE() : COMPETITION()
 {
@@ -22,4 +23,11 @@ int LEAGUE::getTier() const
 
 void LEAGUE::setTier(int t){
     tier = t;
+}
+
+void LEAGUE::generateCalendar(int year)
+{
+    calendar->Clear();
+    calendar->ClearTeams();
+    //calendar->SetTeams(clubs);
 }

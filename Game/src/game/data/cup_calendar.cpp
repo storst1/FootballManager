@@ -1,17 +1,20 @@
 #include "cup_calendar.h"
 
 
-CUP_CALENDAR::CUP_CALENDAR(QVector<TEAM *> &allTeams, COMPETITION* comp) : CALENDAR(allTeams, comp)
+CUP_CALENDAR::CUP_CALENDAR(QVector<TEAM *> &allTeams, COMPETITION* comp) :
+    CALENDAR(allTeams, comp)
 {
 
 }
 
-CUP_CALENDAR::CUP_CALENDAR(QVector<TEAM *> &allTeams, QVector<int> &startingStage, COMPETITION* comp) : CALENDAR(allTeams, comp)
+CUP_CALENDAR::CUP_CALENDAR(QVector<TEAM *> &allTeams, QVector<int> &startingStage, COMPETITION* comp) :
+    CALENDAR(allTeams, startingStage, comp)
 {
 
 }
 
-CUP_CALENDAR::CUP_CALENDAR(QVector<QPair<TEAM *, int> > &infoList, COMPETITION* comp) : CALENDAR(allTeams, comp)
+CUP_CALENDAR::CUP_CALENDAR(QVector<QPair<TEAM *, int> > &infoList, COMPETITION* comp) :
+    CALENDAR(infoList, comp)
 {
 
 }
@@ -43,5 +46,5 @@ QString CUP_CALENDAR::GetTourName(int id) const
 
 void CUP_CALENDAR::BindToursNames(QVector<QString> names)
 {
-
+    toursNames = names;
 }

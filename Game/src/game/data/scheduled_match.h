@@ -24,6 +24,8 @@ public:
     COMPETITION* getComp();
     TEAM* getHT();
     TEAM* getAT();
+
+    static bool compTwoSMByDate(const SCHEDULED_MATCH* SM1, const SCHEDULED_MATCH* SM2) noexcept;
 private:
     int matchId; //has to be unique inside competition
     DATE gameDate;

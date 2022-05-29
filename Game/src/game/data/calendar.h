@@ -30,9 +30,9 @@ public:
     void SetTeams(QVector<TEAM*>& teams, QVector<int>&& startingStage = QVector<int>{});
     int GetNextIdAndIncr();
 protected:
-    COMPETITION* comp;
     QVector<TEAM*> allTeams;
     QVector<int> teamStartingStage;
+    COMPETITION* comp;
     int nextUniqueGameId = 0;
 };
 

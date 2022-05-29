@@ -10,6 +10,7 @@
 #include <QString>
 #include <QDateTime>
 #include <QRandomGenerator>
+#include <QDate>
 
 #include <chrono>
 
@@ -29,6 +30,7 @@ public:
     int Year() const;
 
     DATE NextDay();
+    DATE addDaysFM(int days);
 
     bool operator==(const DATE& oth_date) const;
     bool operator!=(const DATE& oth_date) const;
@@ -43,6 +45,7 @@ public:
     static const QDate qtDateFromRawDate(unsigned int rawDate);
     static int generateRandomRawDate(int from = 19820101, int to = 20061231);
     static int agesPassedSince(int rawDate);
+    static DATE getBestLeagueStartingDate(int starting_year, int tours);
 private:
     unsigned int rawDate = 0;
 };

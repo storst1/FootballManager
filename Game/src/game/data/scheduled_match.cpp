@@ -68,3 +68,8 @@ TEAM *SCHEDULED_MATCH::getAT()
 {
     return awayTeam;
 }
+
+bool SCHEDULED_MATCH::compTwoSMByDate(const SCHEDULED_MATCH *SM1, const SCHEDULED_MATCH *SM2) noexcept
+{
+    return SM1->getDate() < SM2->getDate();
+}

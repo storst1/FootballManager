@@ -69,6 +69,12 @@ DATE DATE::NextDay()
     return DATE(QNewDate);
 }
 
+DATE DATE::addDaysFM(int days)
+{
+    QDateTime QNewDate = addDays(days);
+    return DATE(QNewDate);
+}
+
 bool DATE::operator==(const DATE &oth_date) const
 {
     return rawDate == oth_date.rawDate;
@@ -136,4 +142,16 @@ int DATE::generateRandomRawDate(int from, int to)
 int DATE::agesPassedSince(int rawDate)
 {
     return (START_DATE - rawDate) / FM_DATE_YEAR_MULT;
+}
+
+DATE DATE::getBestLeagueStartingDate(int starting_year, int tours)
+{
+    QDate lastDay(starting_year, 12, 27);
+    while(lastDay.dayOfWeek() != 5){
+        lastDay = lastDay.addDays(-1);
+    }
+    lastDay = lastDay.addDays(-7 * (tours / 2 - 1));
+    QTime t;
+    QDateTime qt(lastDay, t);
+    return DATE(qt);
 }

@@ -39,5 +39,8 @@ class POSITION;
 class STADIUM;
 class PLAYER_POSITION;
 class COMPETITION;
+class CALENDAR;
+class LEAGUE_CALENDAR;
+class CUP_CALENDAR;
 
 #endif // DATA_DEFS_H

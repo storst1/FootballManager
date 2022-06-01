@@ -29,7 +29,7 @@ public:
     void AttachLeaguesToFeds(QVector<QPair<FEDERATION*, QVector<QString>>> fedsList, GAME_DATA *gameData) const;
 
     QVector<LEAGUE*> InitLeagueList(QVector<QString> &leagueIdsList, FEDERATION *curFed, GAME_DATA *gameData) const;
-    QVector<CLUB*> InitClubsByLeague(LEAGUE* league, GAME_DATA *gameData) const;
+    QVector<TEAM*> InitClubsByLeague(LEAGUE* league, GAME_DATA *gameData) const;
     QVector<PLAYER*> InitPlayersByClub(CLUB *curClub, GAME_DATA *gameData) const;
     bool FedIsPreLoaded(QString fedName) const;
 private:

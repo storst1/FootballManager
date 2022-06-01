@@ -109,3 +109,12 @@ TEAM CLUB::getTeam(bool giveAccessToPlayersList)
 {
     return TEAM(getId(), getName(), giveAccessToPlayersList ? getPlayers() : QVector<PLAYER*>{}, getFederation());
 }
+
+QVector<CLUB *> CLUB::CastToClub(QVector<TEAM *> &list) noexcept
+{
+    QVector<CLUB*> clubs;
+    for(auto c : list){
+        clubs.push_back(static_cast<CLUB*>(c));
+    }
+    return clubs;
+}

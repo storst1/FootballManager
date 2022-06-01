@@ -3,6 +3,8 @@
 
 #include "game/data/scheduled_match.h"
 #include "game/time/date.h"
+#include "game/events/event_handler.h"
+#include "game/events/event_match.h"
 
 #include <QVector>
 #include <QPair>
@@ -25,6 +27,7 @@ public:
     virtual QVector<SCHEDULED_MATCH*> GetTour(const QString& id) const = 0;
     virtual QString GetTourName(int id) const = 0;
     virtual void BindToursNames(QVector<QString> names = QVector<QString>{}) = 0;
+    virtual void PassAllGamesToEventSystem(EVENT_HANDLER* eventHandler) = 0;
 
     void ClearTeams();
     void SetTeams(QVector<TEAM*>& teams, QVector<int>&& startingStage = QVector<int>{});

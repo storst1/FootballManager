@@ -11,7 +11,7 @@ public:
     ~EVENT_BIRTHDAY() override = default;
 
     void Execute() override;
-    bool IsLinkedToTeam(TEAM team) const override;
+    bool IsLinkedToTeam(TEAM* team) const override;
     void paintEvent(QPainter& painter, int row) override;
 
 private:

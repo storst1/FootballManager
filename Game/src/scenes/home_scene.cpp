@@ -268,10 +268,12 @@ void MainWindow::HomeSceneDrawDayOnCalendarBar(DATE date, int row, QPainter& pai
     painter.setFont(font);
     painter.drawText(10, row * 100 + 30, date.MonthName() + " " + QString::number(date.Day()));
 
-    EVENT_ARRAY dayEvents = eventHandler->getAllEventsByDateAndTeam(date, user->getClub()->getTeam());
-    dayEvents.addEvent(new EVENT_BIRTHDAY(DATE(START_DATE), user->getClub()->getPlayers()[0]));
+    EVENT_ARRAY dayEvents = eventHandler->getAllEventsByDateAndTeam(date, user->getClub());
+    //dayEvents.addEvent(new EVENT_BIRTHDAY(DATE(START_DATE), user->getClub()->getPlayers()[0]));
     EVENT* bestDayEvent = dayEvents.getMostImportantEvent();
-    bestDayEvent->paintEvent(painter, row);
+    if(bestDayEvent){
+        bestDayEvent->paintEvent(painter, row);
+    }
 }
 
 void MainWindow::HomeSceneSortPlayersByName()

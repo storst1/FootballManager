@@ -1,7 +1,7 @@
 #include "game/events/event_birthday.h"
 
 EVENT_BIRTHDAY::EVENT_BIRTHDAY(DATE date, PLAYER* birthdayPlayer) :
-    EVENT(date), player(birthdayPlayer)
+    EVENT(date, EventType::Birthday), player(birthdayPlayer)
 {
     EVENT::order = EVENT::Morning;
     EVENT::eventType = EVENT::Birthday;
@@ -13,9 +13,9 @@ void EVENT_BIRTHDAY::Execute()
     //TO DO: perhaps add morale boost here or smth similar
 }
 
-bool EVENT_BIRTHDAY::IsLinkedToTeam(TEAM team) const
+bool EVENT_BIRTHDAY::IsLinkedToTeam(TEAM *team) const
 {
-    if(player->getClub()->getId() == team.getId()){
+    if(player->getClub()->getId() == team->getId()){
         return true;
     }
     return false;

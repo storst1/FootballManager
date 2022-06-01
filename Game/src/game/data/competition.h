@@ -10,15 +10,17 @@ public:
 
     QString getId() const;
     QString getName() const;
-    QVector<CLUB*> getClubs() const;
+    QVector<TEAM*> getTeams() const;
     int getTier() const;
     FEDERATION* getFederation() const;
+    CALENDAR* getCalendar();
 
     void setId(QString& _id);
-    void setClubList(QVector<CLUB*> clubList);
+    void setTeamList(QVector<TEAM*> clubList);
     void setFederation(FEDERATION* _fed);
     void setName(QString& _name);
 
+    virtual void setupCalendar() = 0;
     virtual void generateCalendar(int year) = 0;
 protected:
     QString id;
@@ -28,7 +30,7 @@ protected:
 
     CALENDAR* calendar = nullptr;
 
-    QVector<CLUB*> clubs;
+    QVector<TEAM*> clubs;
 };
 
 #endif // COMPETITION_H

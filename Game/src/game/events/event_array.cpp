@@ -17,7 +17,7 @@ void EVENT_ARRAY::addEvent(EVENT *event)
         return;
     }
     int i = 0;
-    while(event > events[i]){
+    while(i < events.size() && event > events[i]){
         ++i;
     }
     events.insert(i, event);
@@ -45,7 +45,7 @@ EVENT_ARRAY EVENT_ARRAY::getAllEventsByDate(DATE date)
     return arrayToRet;
 }
 
-EVENT_ARRAY EVENT_ARRAY::getAllEventsByDateAndTeam(DATE date, TEAM linkedTeam)
+EVENT_ARRAY EVENT_ARRAY::getAllEventsByDateAndTeam(DATE date, TEAM* linkedTeam)
 {
     EVENT_ARRAY arrayToRet;
     for(int i = 0; i < events.size(); ++i){

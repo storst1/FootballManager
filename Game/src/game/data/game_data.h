@@ -23,7 +23,7 @@ public:
     QVector<FEDERATION*> getFederationsList() const;
     QMap<QString, LEAGUE*> getLeagues() const;
     QVector<LEAGUE*> getLeaguesList() const;
-    QMap<int, CLUB*> getClubs() const;
+    QMap<int, TEAM*> getClubs() const;
     QMap<int, PLAYER*> getPlayers() const;
     QVector<PLAYER*> getPlayersList() const;
     COUNTRY_MAP* getCountryMap() const;
@@ -37,8 +37,8 @@ public:
     void addFederations(QVector<FEDERATION*>& listFed);
     void addLeague(LEAGUE* league);
     void addLeagues(QVector<LEAGUE*>& listLeague);
-    void addClub(CLUB* club);
-    void addClubs(QVector<CLUB*>& listClubs);
+    void addClub(TEAM* club);
+    void addClubs(QVector<TEAM*>& listClubs);
     void addPlayer(PLAYER* player);
     void addPlayers(QVector<PLAYER*>& listPlayers);
     void addPos(PLAYER_POSITION* pos);
@@ -78,7 +78,7 @@ private:
     FIFA* fifa;
     QMap<int, FEDERATION*> federations;
     QMap<QString, LEAGUE*> leagues;
-    QMap<int, CLUB*> clubs;
+    QMap<int, TEAM*> clubs;
     QMap<int, PLAYER*> players;
     COUNTRY_MAP* countryMap;
     QMap<QPair<int, int>, PLAYER_POSITION*> positions;

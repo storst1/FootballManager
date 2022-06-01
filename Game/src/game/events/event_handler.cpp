@@ -25,7 +25,7 @@ EVENT_ARRAY EVENT_HANDLER::getAllEventsByDate(DATE date)
     return eventArray->getAllEventsByDate(date);
 }
 
-EVENT_ARRAY EVENT_HANDLER::getAllEventsByDateAndTeam(DATE date, TEAM linkedTeam)
+EVENT_ARRAY EVENT_HANDLER::getAllEventsByDateAndTeam(DATE date, TEAM* linkedTeam)
 {
     return eventArray->getAllEventsByDateAndTeam(date, linkedTeam);
 }
@@ -33,6 +33,11 @@ EVENT_ARRAY EVENT_HANDLER::getAllEventsByDateAndTeam(DATE date, TEAM linkedTeam)
 void EVENT_HANDLER::NextDay()
 {
     currentDate = currentDate.NextDay();
+}
+
+void EVENT_HANDLER::AddEvent(EVENT *event)
+{
+    eventArray->addEvent(event);
 }
 
 EVENT *EVENT_HANDLER::getMostImportantEvent(EVENT_ARRAY &eventArr)

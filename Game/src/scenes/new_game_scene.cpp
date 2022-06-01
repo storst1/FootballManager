@@ -117,7 +117,7 @@ void MainWindow::SetupNewGameScene()
 
     newGameClubLay = new QGridLayout();
 
-    CLUB* curClub = (newGameAllLeaguesList[NewGameCurLeagueIdx]->getClubs())[NewGameCurClubIdx];
+    CLUB* curClub = static_cast<CLUB*>((newGameAllLeaguesList[NewGameCurLeagueIdx]->getTeams())[NewGameCurClubIdx]);
 
     newGameClubName = new QLabel(curClub->getName());
     newGameClubName->setStyleSheet(clubNameLabelStyle);
@@ -173,8 +173,9 @@ void MainWindow::SetupNewGameScene()
     newGameStartNewGameButton->setStyleSheet(startButtonStyle);
     newGameSceneMainLayout->addWidget(newGameStartNewGameButton, 3, 1, Qt::AlignCenter);
     connect(newGameStartNewGameButton, &QPushButton::clicked, this, [this]{
-        user->setClub((newGameAllLeaguesList[NewGameCurLeagueIdx]->getClubs())[NewGameCurClubIdx]);
-        qDebug() << "User chose club: " << user->getClub()->getName();
+        user->setClub(static_cast<CLUB*>((newGameAllLeaguesList[NewGameCurLeagueIdx]->getTeams())[NewGameCurClubIdx]));
+        qDebug() << "User has chosen club: " << user->getClub()->getName();
+        gameHandler->StartNewSeason(START_DATE / FM_DATE_YEAR_MULT);
         SetupHomeScene();
         //SetupTransfersScene();
     });
@@ -211,7 +212,8 @@ void MainWindow::NewGamePrevLeague()
 void MainWindow::NewGameChangeLeagueLabel(LEAGUE *_league)
 {
     newGameLeagueLabel->setText(_league->getName());
-    QVector<CLUB*> clubs = _league->getClubs();
+    QVector<TEAM*> team_list = _league->getTeams();
+    QVector<CLUB*> clubs = CLUB::CastToClub(team_list);
     NewGameChangeClubLay(clubs[0]);
 }
 
@@ -231,7 +233,8 @@ void MainWindow::NewGameChangeClubLay(CLUB *curClub)
 
 void MainWindow::NewGameNextClub()
 {
-    QVector<CLUB*> clubs = newGameAllLeaguesList[NewGameCurLeagueIdx]->getClubs();
+    QVector<TEAM*> team_list = newGameAllLeaguesList[NewGameCurLeagueIdx]->getTeams();
+    QVector<CLUB*> clubs = CLUB::CastToClub(team_list);
     ++NewGameCurClubIdx;
     if(NewGameCurClubIdx >= clubs.size()){
         NewGameCurClubIdx = 0;
@@ -241,7 +244,8 @@ void MainWindow::NewGameNextClub()
 
 void MainWindow::NewGamePrevClub()
 {
-    QVector<CLUB*> clubs = newGameAllLeaguesList[NewGameCurLeagueIdx]->getClubs();
+    QVector<TEAM*> team_list = newGameAllLeaguesList[NewGameCurLeagueIdx]->getTeams();
+    QVector<CLUB*> clubs = CLUB::CastToClub(team_list);
     --NewGameCurClubIdx;
     if(NewGameCurClubIdx < 0){
         NewGameCurClubIdx = clubs.size() - 1;

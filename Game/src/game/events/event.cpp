@@ -1,6 +1,6 @@
 #include "game/events/event.h"
 
-EVENT::EVENT(DATE& date) : date(date)
+EVENT::EVENT(DATE date, EventType eventType) : date(date), eventType(eventType)
 {
 
 }

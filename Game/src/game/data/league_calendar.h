@@ -1,6 +1,7 @@
 #ifndef LEAGUE_CALENDAR_H
 #define LEAGUE_CALENDAR_H
 
+#include "game/data/data_defs.h"
 #include "game/data/calendar.h"
 
 class LEAGUE_CALENDAR : public CALENDAR
@@ -17,6 +18,7 @@ public:
     QVector<SCHEDULED_MATCH*> GetTour(const QString& id) const override;
     QString GetTourName(int id) const override;
     void BindToursNames(QVector<QString> names = QVector<QString>{}) override;
+    void PassAllGamesToEventSystem(EVENT_HANDLER* eventHandler) override;
 
     void BindToursNamesDefault();
 private:

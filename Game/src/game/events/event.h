@@ -10,13 +10,13 @@ class EVENT
 {
 public:
     enum Order{ Unordered, Morning, Day, Evening };
-    enum EventType { Birthday, Game };
+    enum EventType { Birthday, Match };
 
-    EVENT(DATE& date);
+    EVENT(DATE date, EventType eventType);
     virtual ~EVENT();
 
     virtual void Execute() = 0;
-    virtual bool IsLinkedToTeam(TEAM team) const = 0;
+    virtual bool IsLinkedToTeam(TEAM* team) const = 0;
     virtual void paintEvent(QPainter& painter, int row) = 0;
 
     DATE getDate() const;

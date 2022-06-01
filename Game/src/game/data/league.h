@@ -13,6 +13,7 @@ public:
     int getTier() const;
     void setTier(int t);
 
+    void setupCalendar() override;
     void generateCalendar(int year) override;
 private:
     int tier;

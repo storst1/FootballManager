@@ -1,5 +1,6 @@
 #include "game/data/competition.h"
 #include "game/data/calendar.h"
+#include "game/data/league_calendar.h"
 
 COMPETITION::COMPETITION()
 {
@@ -9,6 +10,11 @@ COMPETITION::COMPETITION()
 FEDERATION *COMPETITION::getFederation() const
 {
     return fed;
+}
+
+CALENDAR *COMPETITION::getCalendar()
+{
+    return calendar;
 }
 
 void COMPETITION::setName(QString &_name)
@@ -21,7 +27,7 @@ void COMPETITION::setId(QString &_id)
     id = _id;
 }
 
-void COMPETITION::setClubList(QVector<CLUB *> clubList)
+void COMPETITION::setTeamList(QVector<TEAM *> clubList)
 {
     clubs = clubList;
 }
@@ -41,7 +47,7 @@ QString COMPETITION::getName() const
     return name;
 }
 
-QVector<CLUB *> COMPETITION::getClubs() const
+QVector<TEAM *> COMPETITION::getTeams() const
 {
     return clubs;
 }

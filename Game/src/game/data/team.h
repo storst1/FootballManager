@@ -59,6 +59,7 @@ public:
 
     TEAM getTeam(bool giveAccessToPlayersList = false);
 
+    static QVector<CLUB*> CastToClub(QVector<TEAM*>& list) noexcept;
 private:
     int TV;
     int budget;

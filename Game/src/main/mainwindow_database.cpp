@@ -112,3 +112,8 @@ void MainWindow::LoadGameData()
 {
     gameData = new GAME_DATA(countryMap);
 }
+
+void MainWindow::SetupGameHandler()
+{
+    gameHandler = new GAME(gameData, eventHandler);
+}

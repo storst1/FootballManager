@@ -20,6 +20,7 @@ public:
     DATE() = default;
     DATE(unsigned int rawDate);
     DATE(QDateTime& qt_date);
+    //DATE(DATE& oth);
     ~DATE() = default;
 
     unsigned int getRawDate() const;

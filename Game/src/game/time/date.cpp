@@ -10,6 +10,13 @@ DATE::DATE(QDateTime &qt_date) : QDateTime(qt_date)
 
 }
 
+/*
+DATE::DATE(DATE &oth)
+{
+    rawDate = oth.rawDate;
+}
+*/
+
 unsigned int DATE::getRawDate() const
 {
     return rawDate;

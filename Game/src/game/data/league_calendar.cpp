@@ -30,7 +30,7 @@ void LEAGUE_CALENDAR::Generate(int start_year)
     std::fill(idxs.begin(), idxs.end(), 0);
 
     calendar.resize(tours);
-    for(int i = 0; i < tours; ++i){
+    for(int i = 0; i < tours / 2; ++i){
         QVector<SCHEDULED_MATCH*> curMatchday;
         QVector<SCHEDULED_MATCH*> reversedCurMatchday;
         for(int game = 0; game < allTeams.size() / 2; ++game){
@@ -42,7 +42,7 @@ void LEAGUE_CALENDAR::Generate(int start_year)
         //std::shuffle(curMatchday.begin(), curMatchday.end(), g_engine);
         //std::shuffle(reversedCurMatchday.begin(), reversedCurMatchday.end(), g_engine);
         calendar[i] = curMatchday;
-        calendar[tours + i] = reversedCurMatchday;
+        calendar[tours / 2 + i] = reversedCurMatchday;
         int lastIdx = idxs.back();
         idxs.pop_back();
         idxs.push_front(lastIdx);
@@ -96,6 +96,15 @@ void LEAGUE_CALENDAR::BindToursNames(QVector<QString> names)
         return;
     }
     toursNames = names;
+}
+
+void LEAGUE_CALENDAR::PassAllGamesToEventSystem(EVENT_HANDLER *eventHandler)
+{
+    for(int i = 0; i < calendar.size(); ++i){
+        for(int j = 0; j < calendar[i].size(); ++j){
+            eventHandler->AddEvent(new EVENT_MATCH(calendar[i][j]));
+        }
+    }
 }
 
 void LEAGUE_CALENDAR::BindToursNamesDefault()

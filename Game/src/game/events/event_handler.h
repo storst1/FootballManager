@@ -15,9 +15,10 @@ public:
 
     DATE getCurDate() const;
     EVENT_ARRAY getAllEventsByDate(DATE date);
-    EVENT_ARRAY getAllEventsByDateAndTeam(DATE date, TEAM linkedTeam);
+    EVENT_ARRAY getAllEventsByDateAndTeam(DATE date, TEAM *linkedTeam);
 
     void NextDay();
+    void AddEvent(EVENT* event);
 
     static EVENT *getMostImportantEvent(EVENT_ARRAY& eventArr);
 private:

@@ -18,6 +18,7 @@
 #include "game/data/player_search_filter.h"
 #include "game/events/event_handler.h"
 #include "game/events/event_birthday.h"
+#include "game/game.h"
 #include "scenes/operational/scene_switch.h"
 
 #include <QMainWindow>
@@ -72,6 +73,7 @@ private:
     GAME_DATA* gameData;
     USER* user;
     EVENT_HANDLER* eventHandler;
+    GAME* gameHandler;
 
     //Real data
     DATABASE_REAL_DATA* realDataDb;
@@ -118,6 +120,7 @@ private:
     void SetupCountryMap();
     void FillCountryMap();
     void LoadGameData();
+    void SetupGameHandler();
     void SetupUser();
     void ChangeUserClub(CLUB* club);
 

@@ -166,17 +166,18 @@ QVector<LEAGUE *> DATABASE_DYNAMIC_DATA::InitLeagueList(QVector<QString> &league
         leagueList.push_back(curLeague);
     }
     for(const auto &l : leagueList){
-        QVector<CLUB*> clubsList = InitClubsByLeague(l, gameData);
-        l->setClubList(clubsList);
+        QVector<TEAM*> clubsList = InitClubsByLeague(l, gameData);
+        l->setTeamList(clubsList);
         gameData->addClubs(clubsList);
+        l->setupCalendar();
     }
     return leagueList;
 }
 
-QVector<CLUB *> DATABASE_DYNAMIC_DATA::InitClubsByLeague(LEAGUE* league, GAME_DATA *gameData) const
+QVector<TEAM *> DATABASE_DYNAMIC_DATA::InitClubsByLeague(LEAGUE* league, GAME_DATA *gameData) const
 {
     QSqlQuery query(*db);
-    QVector<CLUB*> clubList;
+    QVector<TEAM*> clubList;
     query.exec("SELECT "
                "id, name, stadiumName, stadiumCapacity, playersTV, transferBudget, prestige "
                "FROM clubs "

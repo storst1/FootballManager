@@ -51,7 +51,7 @@ QVector<LEAGUE *> GAME_DATA::getLeaguesList() const
     return list;
 }
 
-QMap<int, CLUB *> GAME_DATA::getClubs() const
+QMap<int, TEAM *> GAME_DATA::getClubs() const
 {
     return clubs;
 }
@@ -122,12 +122,12 @@ void GAME_DATA::addLeagues(QVector<LEAGUE *> &listLeague)
     }
 }
 
-void GAME_DATA::addClub(CLUB *club)
+void GAME_DATA::addClub(TEAM *club)
 {
     clubs[club->getId()] = club;
 }
 
-void GAME_DATA::addClubs(QVector<CLUB *> &listClubs)
+void GAME_DATA::addClubs(QVector<TEAM *> &listClubs)
 {
     for(const auto c : listClubs){
         addClub(c);

@@ -16,7 +16,7 @@ public:
     void Continue(DATE tillDate);
 
     EVENT_ARRAY getAllEventsByDate(DATE date);
-    EVENT_ARRAY getAllEventsByDateAndTeam(DATE date, TEAM linkedTeam);
+    EVENT_ARRAY getAllEventsByDateAndTeam(DATE date, TEAM *linkedTeam);
     EVENT* getMostImportantEvent();
 private:
     QVector<EVENT*> events;

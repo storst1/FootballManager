@@ -12,6 +12,9 @@ public:
     EVENT_ARRAY();
     ~EVENT_ARRAY();
 
+    bool Empty() const;
+    size_t Size() const;
+
     void addEvent(EVENT* event);
     void Continue(DATE tillDate);
 

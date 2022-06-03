@@ -7,7 +7,7 @@ DATE::DATE(unsigned int rawDate) : QDateTime(), rawDate(rawDate)
 
 DATE::DATE(QDateTime &qt_date) : QDateTime(qt_date)
 {
-
+    rawDate = DATE::rawDateFromQDateTime(qt_date);
 }
 
 /*
@@ -72,14 +72,15 @@ int DATE::Year() const
 
 DATE DATE::NextDay()
 {
-    QDateTime QNewDate = addDays(1);
-    return DATE(QNewDate);
+    return addDaysFM(1);
 }
 
 DATE DATE::addDaysFM(int days)
 {
     QDateTime QNewDate = addDays(days);
-    return DATE(QNewDate);
+    DATE newDate(QNewDate);
+    newDate.rawDate = rawDate + days;
+    return newDate;
 }
 
 bool DATE::operator==(const DATE &oth_date) const
@@ -100,6 +101,11 @@ bool DATE::operator<(const DATE &oth_date) const
 bool DATE::operator>(const DATE &oth_date) const
 {
     return rawDate > oth_date.rawDate;
+}
+
+DATE::operator QString() const
+{
+    return QString::number(Day()) + "-" + QString::number(Month()) + "-" + QString::number(Year());
 }
 
 QString DATE::toStringView() const

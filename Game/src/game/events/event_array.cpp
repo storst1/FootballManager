@@ -10,17 +10,39 @@ EVENT_ARRAY::~EVENT_ARRAY()
     //qDeleteAll(events);
 }
 
+bool EVENT_ARRAY::Empty() const
+{
+    return Size() == 0;
+}
+
+size_t EVENT_ARRAY::Size() const
+{
+    return events.size();
+}
+
 void EVENT_ARRAY::addEvent(EVENT *event)
 {
+    /*
+    qDebug() << "AddEvent() called with event of date: " << QString(event->getDate());
     if(events.empty()){
+        qDebug() << "Array was empty, so new_event added to the back";
         events.push_back(event);
         return;
     }
     int i = 0;
-    while(i < events.size() && event > events[i]){
+    while(i < events.size()){
+        if(event > events[i]){
+            break;
+        }
+        qDebug() << QString(event->getDate()) << " < " << QString(events[i]->getDate()) << " , continuening";
         ++i;
     }
+    qDebug() << "Inserting at idx = " << i << " of " << events.size();
     events.insert(i, event);
+    */
+
+    auto placeIter = std::lower_bound(events.cbegin(), events.cend(), event);
+    events.insert(placeIter, event);
 }
 
 void EVENT_ARRAY::Continue(DATE tillDate)
@@ -47,14 +69,24 @@ EVENT_ARRAY EVENT_ARRAY::getAllEventsByDate(DATE date)
 
 EVENT_ARRAY EVENT_ARRAY::getAllEventsByDateAndTeam(DATE date, TEAM* linkedTeam)
 {
+    /*
+    for(int i = 0; i < events.size(); ++i){
+        qDebug() << QString(events[i]->getDate());
+    }
+    */
+
     EVENT_ARRAY arrayToRet;
     for(int i = 0; i < events.size(); ++i){
         if(events[i]->getDate() < date){
+            qDebug() << QString(date) << " > " << QString(events[i]->getDate());
             continue;
         }
         else if(events[i]->getDate() > date){
+            qDebug() << QString(date) << " < " << QString(events[i]->getDate());
             break;
         }
+
+        qDebug() << QString(date) << " == " << QString(events[i]->getDate());
 
         if(events[i]->IsLinkedToTeam(linkedTeam)){
             arrayToRet.addEvent(events[i]);

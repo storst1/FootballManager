@@ -12,6 +12,7 @@
 #include <random>
 #include <algorithm>
 #include <deque>
+#include <numeric>
 
 class CALENDAR
 {

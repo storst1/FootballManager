@@ -38,6 +38,8 @@ public:
     bool operator<(const DATE& oth_date) const;
     bool operator>(const DATE& oth_date) const;
 
+    operator QString() const;
+
     QString toStringView() const;
     int agesPassedSince() const;
 

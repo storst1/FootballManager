@@ -6,6 +6,8 @@
 
 #include <QPainter>
 
+#include <algorithm>
+
 class EVENT
 {
 public:
@@ -24,6 +26,9 @@ public:
     EventType getEventType() const;
 
     bool operator<(const EVENT& oth_event) const;
+    bool operator>(const EVENT& oth_event) const;
+    bool operator==(const EVENT& oth_event) const;
+    bool operator!=(const EVENT& oth_event) const;
 protected:
     DATE date;
     Order order = Unordered;

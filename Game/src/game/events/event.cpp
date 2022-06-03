@@ -32,3 +32,21 @@ bool EVENT::operator<(const EVENT &oth_event) const
     }
     return date < oth_event.date;
 }
+
+bool EVENT::operator>(const EVENT &oth_event) const
+{
+    if(date == oth_event.date){
+        return order > oth_event.order;
+    }
+    return date > oth_event.date;
+}
+
+bool EVENT::operator==(const EVENT &oth_event) const
+{
+    return date == oth_event.date;
+}
+
+bool EVENT::operator!=(const EVENT &oth_event) const
+{
+    return !(oth_event == (*this));
+}

@@ -20,6 +20,7 @@ LEAGUE_CALENDAR::LEAGUE_CALENDAR(QVector<QPair<TEAM *, int> > &infoList, COMPETI
 
 void LEAGUE_CALENDAR::Generate(int start_year)
 {
+    qDebug() << "Generating calendar for " << comp->getName();
     int tours = (allTeams.size() - 1) * 2;
     //Shuffle teamList
     std::random_device rd;
@@ -27,17 +28,18 @@ void LEAGUE_CALENDAR::Generate(int start_year)
     std::shuffle(allTeams.begin(), allTeams.end(), g_engine);
     //Generate matchdays
     std::deque<int> idxs(allTeams.size());
-    std::fill(idxs.begin(), idxs.end(), 0);
+    std::iota(idxs.begin(), idxs.end(), 0);
 
     calendar.resize(tours);
     for(int i = 0; i < tours / 2; ++i){
+        //qDebug() << "Tour " << i + 1 << ":";
         QVector<SCHEDULED_MATCH*> curMatchday;
         QVector<SCHEDULED_MATCH*> reversedCurMatchday;
         for(int game = 0; game < allTeams.size() / 2; ++game){
             int ht = idxs[game * 2];
             int at = idxs[game * 2 + 1];
             curMatchday.push_back(new SCHEDULED_MATCH(GetNextIdAndIncr(), comp, allTeams[ht], allTeams[at]));
-            curMatchday.push_back(new SCHEDULED_MATCH(GetNextIdAndIncr(), comp, allTeams[at], allTeams[ht]));
+            reversedCurMatchday.push_back(new SCHEDULED_MATCH(GetNextIdAndIncr(), comp, allTeams[at], allTeams[ht]));
         }
         //std::shuffle(curMatchday.begin(), curMatchday.end(), g_engine);
         //std::shuffle(reversedCurMatchday.begin(), reversedCurMatchday.end(), g_engine);
@@ -53,8 +55,11 @@ void LEAGUE_CALENDAR::Generate(int start_year)
     DATE curDate = DATE::getBestLeagueStartingDate(start_year, tours); //Always points to Friday
     std::discrete_distribution dayDistr({10, 40, 40, 10}); //Friday, Saturday, Sunday, Monday
     for(int i = 0; i < calendar.size(); ++i){
+        qDebug() << "Tour: " << i + 1 << ":";
         for(int j = 0; j < calendar[i].size(); ++j){
-            calendar[i][j]->SetDate(curDate.addDaysFM(dayDistr(g_engine)));
+            DATE game_date = curDate.addDaysFM(dayDistr(g_engine));
+            calendar[i][j]->SetDate(game_date);
+            qDebug() << QString(game_date) << " " << calendar[i][j]->getHT()->getName() << " vs " << calendar[i][j]->getAT()->getName();
         }
         std::sort(calendar[i].begin(), calendar[i].end(), SCHEDULED_MATCH::compTwoSMByDate);
         curDate = curDate.addDaysFM(7);

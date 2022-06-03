@@ -3,7 +3,7 @@
 
 EVENT_MATCH::EVENT_MATCH(SCHEDULED_MATCH *scheduledMatch) : EVENT(scheduledMatch->getDate(), EventType::Match), match(scheduledMatch)
 {
-
+    EVENT::order = EVENT::Order::Evening;
 }
 
 void EVENT_MATCH::Execute()

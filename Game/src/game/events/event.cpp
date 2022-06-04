@@ -50,3 +50,8 @@ bool EVENT::operator!=(const EVENT &oth_event) const
 {
     return !(oth_event == (*this));
 }
+
+bool EVENT::CompEvents(const EVENT *first, const EVENT *second)
+{
+    return (*first) < (*second);
+}

@@ -79,7 +79,7 @@ DATE DATE::addDaysFM(int days)
 {
     QDateTime QNewDate = addDays(days);
     DATE newDate(QNewDate);
-    newDate.rawDate = rawDate + days;
+    newDate.rawDate = DATE::rawDateFromQDateTime(QNewDate);
     return newDate;
 }
 

@@ -64,6 +64,15 @@ void LEAGUE_CALENDAR::Generate(int start_year)
         std::sort(calendar[i].begin(), calendar[i].end(), SCHEDULED_MATCH::compTwoSMByDate);
         curDate = curDate.addDaysFM(7);
     }
+
+    for(int i = 0; i < calendar.size(); ++i){
+        for(int j = 0; j < calendar[i].size(); ++j){
+            qDebug().nospace() << calendar[i][j]->getDate().getRawDate() << " ";
+        }
+        qDebug().nospace() << "\n";
+    }
+
+    qDebug() << "Calendar after gen: \n" << calendar;
 }
 
 void LEAGUE_CALENDAR::Clear()
@@ -105,8 +114,11 @@ void LEAGUE_CALENDAR::BindToursNames(QVector<QString> names)
 
 void LEAGUE_CALENDAR::PassAllGamesToEventSystem(EVENT_HANDLER *eventHandler)
 {
+    //qDebug() << calendar << " " << calendar.size() << " " << 1;
     for(int i = 0; i < calendar.size(); ++i){
+        //qDebug() << calendar << " " << calendar.size() << " " << 2;
         for(int j = 0; j < calendar[i].size(); ++j){
+            //qDebug() << calendar << " " << calendar.size() << " " << 3;
             eventHandler->AddEvent(new EVENT_MATCH(calendar[i][j]));
         }
     }

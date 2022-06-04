@@ -41,8 +41,22 @@ void EVENT_ARRAY::addEvent(EVENT *event)
     events.insert(i, event);
     */
 
-    auto placeIter = std::lower_bound(events.cbegin(), events.cend(), event);
-    events.insert(placeIter, event);
+    auto placeIter = std::lower_bound(events.begin(), events.end(), event, EVENT::CompEvents);
+    //qDebug() << "Before insert: " << events.cbegin() << " " << events.cend();
+    events.insert(placeIter - events.begin(), event);
+    //qDebug() << "After insert: " << events.cbegin() << " " << events.cend() << " , placeIter = " << placeIter;
+    /*
+    Needs changes to use
+    if(events.size() > 2 && placeIter != events.end() - 1 && placeIter != events.begin()){
+        qDebug() << QString((*(placeIter - 1))->getDate())
+                 << " < " << QString((*placeIter)->getDate())
+                 << " < " << QString((*(placeIter + 1))->getDate());
+
+        qDebug() << (*(placeIter - 1))->getDate().getRawDate()
+                 << " < " << (*placeIter)->getDate().getRawDate()
+                 << " < " << (*(placeIter + 1))->getDate().getRawDate();
+    }
+    */
 }
 
 void EVENT_ARRAY::Continue(DATE tillDate)
@@ -75,18 +89,19 @@ EVENT_ARRAY EVENT_ARRAY::getAllEventsByDateAndTeam(DATE date, TEAM* linkedTeam)
     }
     */
 
+
     EVENT_ARRAY arrayToRet;
     for(int i = 0; i < events.size(); ++i){
         if(events[i]->getDate() < date){
-            qDebug() << QString(date) << " > " << QString(events[i]->getDate());
+            //qDebug() << QString(date) << " > " << QString(events[i]->getDate());
             continue;
         }
         else if(events[i]->getDate() > date){
-            qDebug() << QString(date) << " < " << QString(events[i]->getDate());
+            //qDebug() << QString(date) << " < " << QString(events[i]->getDate());
             break;
         }
 
-        qDebug() << QString(date) << " == " << QString(events[i]->getDate());
+        //qDebug() << QString(date) << " == " << QString(events[i]->getDate());
 
         if(events[i]->IsLinkedToTeam(linkedTeam)){
             arrayToRet.addEvent(events[i]);

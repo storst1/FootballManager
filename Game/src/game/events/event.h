@@ -29,6 +29,8 @@ public:
     bool operator>(const EVENT& oth_event) const;
     bool operator==(const EVENT& oth_event) const;
     bool operator!=(const EVENT& oth_event) const;
+
+    static bool CompEvents(const EVENT* first, const EVENT* second);
 protected:
     DATE date;
     Order order = Unordered;

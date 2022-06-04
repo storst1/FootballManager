@@ -19,14 +19,22 @@ bool EVENT_MATCH::IsLinkedToTeam(TEAM* team) const
     return false;
 }
 
-void EVENT_MATCH::paintEvent(QPainter &painter, int row)
+void EVENT_MATCH::paintEvent(QPainter &painter, int row, TEAM* team)
 {
-    QPixmap teamIcon(MainWindow::GetClubLogoPath(static_cast<CLUB*>(match->getHT())));
+    TEAM* opponentTeam = match->getHT();
+    bool homeGame = false;
+    if(opponentTeam == team){
+        opponentTeam = match->getAT();
+        homeGame = true;
+    }
+    QPixmap teamIcon(MainWindow::GetClubLogoPath(static_cast<CLUB*>(opponentTeam)));
     painter.drawPixmap(100, row * 100 + 10, 50, 50, teamIcon);
     QPen pen;
     pen.setColor(Qt::white);
     painter.setPen(pen);
     QFont font("Comic Sans MS", 10, 550);
     painter.setFont(font);
-    painter.drawText(80, row * 100 + 75, match->getHT()->getName());
+    QString mainText = opponentTeam->getName() + (homeGame ? " (H)" : " (A)");
+    painter.drawText(70, row * 100 + 80, mainText);
+    painter.drawText(70, row * 100 + 95, match->getComp()->getName());
 }

@@ -21,7 +21,7 @@ bool EVENT_BIRTHDAY::IsLinkedToTeam(TEAM *team) const
     return false;
 }
 
-void EVENT_BIRTHDAY::paintEvent(QPainter &painter, int row)
+void EVENT_BIRTHDAY::paintEvent(QPainter &painter, int row, TEAM *team)
 {
     QPixmap birthdayIcon(":/birthdayIcon100x133.png");
     painter.drawPixmap(100, row * 100 + 10, 50, 50, birthdayIcon);

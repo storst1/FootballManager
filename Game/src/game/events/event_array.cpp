@@ -89,7 +89,6 @@ EVENT_ARRAY EVENT_ARRAY::getAllEventsByDateAndTeam(DATE date, TEAM* linkedTeam)
     }
     */
 
-
     EVENT_ARRAY arrayToRet;
     for(int i = 0; i < events.size(); ++i){
         if(events[i]->getDate() < date){

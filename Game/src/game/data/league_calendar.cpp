@@ -20,11 +20,20 @@ LEAGUE_CALENDAR::LEAGUE_CALENDAR(QVector<QPair<TEAM *, int> > &infoList, COMPETI
 
 void LEAGUE_CALENDAR::Generate(int start_year)
 {
-    qDebug() << "Generating calendar for " << comp->getName();
+    //qDebug() << "Generating calendar for " << comp->getName();
     int tours = (allTeams.size() - 1) * 2;
     //Shuffle teamList
-    std::random_device rd;
-    std::mt19937 g_engine(rd());
+    //std::random_device rd;
+    int rand_seed = QRandomGenerator::global()->bounded(INT32_MAX);
+
+    /*qDebug() << "Seed test";
+    for(int i = 0; i < 10; ++i){
+        qDebug() << rand_seed;
+        rand_seed = QRandomGenerator::global()->bounded(INT32_MAX);
+    }
+    */
+
+    std::mt19937 g_engine(rand_seed);
     std::shuffle(allTeams.begin(), allTeams.end(), g_engine);
     //Generate matchdays
     std::deque<int> idxs(allTeams.size());
@@ -36,8 +45,8 @@ void LEAGUE_CALENDAR::Generate(int start_year)
         QVector<SCHEDULED_MATCH*> curMatchday;
         QVector<SCHEDULED_MATCH*> reversedCurMatchday;
         for(int game = 0; game < allTeams.size() / 2; ++game){
-            int ht = idxs[game * 2];
-            int at = idxs[game * 2 + 1];
+            int ht = idxs[game];
+            int at = idxs[allTeams.size() - game - 1];
             curMatchday.push_back(new SCHEDULED_MATCH(GetNextIdAndIncr(), comp, allTeams[ht], allTeams[at]));
             reversedCurMatchday.push_back(new SCHEDULED_MATCH(GetNextIdAndIncr(), comp, allTeams[at], allTeams[ht]));
         }
@@ -47,7 +56,7 @@ void LEAGUE_CALENDAR::Generate(int start_year)
         calendar[tours / 2 + i] = reversedCurMatchday;
         int lastIdx = idxs.back();
         idxs.pop_back();
-        idxs.push_front(lastIdx);
+        idxs.insert(idxs.cbegin() + 1, lastIdx);
     }
 
     std::shuffle(calendar.begin(), std::next(calendar.begin(), allTeams.size() - 1), g_engine);
@@ -55,24 +64,15 @@ void LEAGUE_CALENDAR::Generate(int start_year)
     DATE curDate = DATE::getBestLeagueStartingDate(start_year, tours); //Always points to Friday
     std::discrete_distribution dayDistr({10, 40, 40, 10}); //Friday, Saturday, Sunday, Monday
     for(int i = 0; i < calendar.size(); ++i){
-        qDebug() << "Tour: " << i + 1 << ":";
+        //qDebug() << "Tour: " << i + 1 << ":";
         for(int j = 0; j < calendar[i].size(); ++j){
             DATE game_date = curDate.addDaysFM(dayDistr(g_engine));
             calendar[i][j]->SetDate(game_date);
-            qDebug() << QString(game_date) << " " << calendar[i][j]->getHT()->getName() << " vs " << calendar[i][j]->getAT()->getName();
+            //qDebug() << QString(game_date) << " " << calendar[i][j]->getHT()->getName() << " vs " << calendar[i][j]->getAT()->getName();
         }
         std::sort(calendar[i].begin(), calendar[i].end(), SCHEDULED_MATCH::compTwoSMByDate);
         curDate = curDate.addDaysFM(7);
     }
-
-    for(int i = 0; i < calendar.size(); ++i){
-        for(int j = 0; j < calendar[i].size(); ++j){
-            qDebug().nospace() << calendar[i][j]->getDate().getRawDate() << " ";
-        }
-        qDebug().nospace() << "\n";
-    }
-
-    qDebug() << "Calendar after gen: \n" << calendar;
 }
 
 void LEAGUE_CALENDAR::Clear()

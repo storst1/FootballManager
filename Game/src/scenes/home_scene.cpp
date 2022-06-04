@@ -267,17 +267,10 @@ void MainWindow::HomeSceneDrawDayOnCalendarBar(DATE date, int row, QPainter& pai
     painter.setFont(font);
     painter.drawText(10, row * 100 + 30, date.MonthName() + " " + QString::number(date.Day()));
 
-    if(date == DATE(20210819)){
-        int d = 0;
-    }
     EVENT_ARRAY dayEvents = eventHandler->getAllEventsByDateAndTeam(date, user->getClub());
-    if(!dayEvents.Empty()){
-        int d = 0;
-    }
-    //dayEvents.addEvent(new EVENT_BIRTHDAY(DATE(START_DATE), user->getClub()->getPlayers()[0]));
     EVENT* bestDayEvent = dayEvents.getMostImportantEvent();
     if(bestDayEvent){
-        bestDayEvent->paintEvent(painter, row);
+        bestDayEvent->paintEvent(painter, row, user->getClub());
     }
 }
 

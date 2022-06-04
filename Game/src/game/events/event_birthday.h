@@ -12,7 +12,7 @@ public:
 
     void Execute() override;
     bool IsLinkedToTeam(TEAM* team) const override;
-    void paintEvent(QPainter& painter, int row) override;
+    void paintEvent(QPainter& painter, int row, TEAM* team) override;
 
 private:
     PLAYER* player;

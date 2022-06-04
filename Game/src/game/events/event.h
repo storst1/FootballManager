@@ -19,7 +19,7 @@ public:
 
     virtual void Execute() = 0;
     virtual bool IsLinkedToTeam(TEAM* team) const = 0;
-    virtual void paintEvent(QPainter& painter, int row) = 0;
+    virtual void paintEvent(QPainter& painter, int row, TEAM* team) = 0;
 
     DATE getDate() const;
     Order getOrder() const;

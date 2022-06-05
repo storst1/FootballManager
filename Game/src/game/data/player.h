@@ -31,6 +31,8 @@ public:
     PLAYER_POSITION* getPos() const;
     CLUB* getClub() const;
     int getTV() const;
+    DATE getBirthday() const;
+    DATE getContractExp() const;
 
     void setClub(CLUB* clubPtr);
     static bool CompTwoPlayersByPos(const PLAYER* p1, const PLAYER* p2);

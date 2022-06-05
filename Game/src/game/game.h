@@ -12,6 +12,7 @@ public:
     ~GAME();
 
     void StartNewSeason(int year) noexcept;
+    void InitBirthdaysEventsForTheFirstTime() noexcept;
 private:
     void GenerateCalendars(int year) noexcept;
 private:

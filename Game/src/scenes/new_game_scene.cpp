@@ -176,6 +176,7 @@ void MainWindow::SetupNewGameScene()
         user->setClub(static_cast<CLUB*>((newGameAllLeaguesList[NewGameCurLeagueIdx]->getTeams())[NewGameCurClubIdx]));
         qDebug() << "User has chosen club: " << user->getClub()->getName();
         gameHandler->StartNewSeason(START_DATE / FM_DATE_YEAR_MULT);
+        gameHandler->InitBirthdaysEventsForTheFirstTime();
         SetupHomeScene();
         //SetupTransfersScene();
     });

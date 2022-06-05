@@ -58,6 +58,16 @@ int PLAYER::getTV() const
     return TV;
 }
 
+DATE PLAYER::getBirthday() const
+{
+    return birthday;
+}
+
+DATE PLAYER::getContractExp() const
+{
+    return contractExp;
+}
+
 void PLAYER::setClub(CLUB *clubPtr)
 {
     club = clubPtr;

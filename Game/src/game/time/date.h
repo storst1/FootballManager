@@ -30,8 +30,12 @@ public:
     QString MonthName() const;
     int Year() const;
 
-    DATE NextDay();
-    DATE addDaysFM(int days);
+    DATE NextDay() const;
+    DATE addDaysFM(int days) const;
+    DATE addMonthsFM(int months) const;
+    DATE addYearsFM(int years) const;
+
+    DATE findNextBirthday(DATE &currentDate, bool includeCurrentDate = false) const;
 
     bool operator==(const DATE& oth_date) const;
     bool operator!=(const DATE& oth_date) const;

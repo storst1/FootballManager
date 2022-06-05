@@ -70,17 +70,53 @@ int DATE::Year() const
     return date().year();
 }
 
-DATE DATE::NextDay()
+DATE DATE::NextDay() const
 {
     return addDaysFM(1);
 }
 
-DATE DATE::addDaysFM(int days)
+DATE DATE::addDaysFM(int days) const
 {
     QDateTime QNewDate = addDays(days);
     DATE newDate(QNewDate);
     newDate.rawDate = DATE::rawDateFromQDateTime(QNewDate);
     return newDate;
+}
+
+DATE DATE::addMonthsFM(int months) const
+{
+    QDateTime QNewDate = addMonths(months);
+    DATE newDate(QNewDate);
+    newDate.rawDate = DATE::rawDateFromQDateTime(QNewDate);
+    return newDate;
+}
+
+DATE DATE::addYearsFM(int years) const
+{
+    QDateTime QNewDate = addYears(years);
+    DATE newDate(QNewDate);
+    newDate.rawDate = DATE::rawDateFromQDateTime(QNewDate);
+    return newDate;
+}
+
+//This function treats current DATE object as it is birth date and finds next birthday
+DATE DATE::findNextBirthday(DATE& currentDate, bool includeCurrentDate) const
+{
+    DATE birthdate(rawDate);
+    //qDebug().nospace() << "Initial bd: " << QString(birthdate);
+    birthdate = birthdate.addYearsFM(currentDate.Year() - birthdate.Year());
+    if(includeCurrentDate){
+        if(birthdate < currentDate){
+            birthdate = birthdate.addYearsFM(1);
+        }
+    }
+    else{
+        if(birthdate <= currentDate){
+            birthdate = birthdate.addYearsFM(1);
+        }
+    }
+    //qDebug().nospace() << " ==> Next bd: " << QString(birthdate);
+    return birthdate;
 }
 
 bool DATE::operator==(const DATE &oth_date) const

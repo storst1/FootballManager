@@ -60,6 +60,7 @@ SOURCES += \
     scenes/operational/scene_operational.cpp \
     scenes/operational/scene_switch.cpp \
     scenes/settings_scene.cpp \
+    scenes/squad_scene.cpp \
     scenes/starting_scene.cpp \
     scenes/transfers_scene.cpp
 

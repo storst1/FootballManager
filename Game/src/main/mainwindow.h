@@ -39,6 +39,7 @@
 #include <QScrollBar>
 #include <QDebug>
 #include <QStackedWidget>
+#include <QGraphicsView>
 
 #include <algorithm>
 
@@ -143,7 +144,8 @@ private:
         SETTINGS_SCENE,
         NEW_GAME_SCENE,
         HOME_SCENE,
-        TRANSFERS_SCENE
+        TRANSFERS_SCENE,
+        SQUAD_SCENE
     };
 
     QGridLayout* mainLay;
@@ -157,7 +159,7 @@ private:
     QPushButton* navigationTournamentsButton = nullptr;
 
     void InitAllScenes();
-    QWidget *InitScene(int scene);
+    QWidget* InitScene(int scene);
 
     void SetupNavigationLay();
 
@@ -214,6 +216,7 @@ private:
     PlayerSortType homeSceneLastSortClicked = Pos;
     QPushButton* homeSceneContinueButton;
     QLabel* homeSceneCalendarBar = nullptr;
+    QPushButton* homeSceneSquadButton;
 
     void SetupHomeScene();
     void HomeSceneAddPlayersToLay();
@@ -273,6 +276,9 @@ private:
     void TransfersSceneSetupSecondPosFilter();
     void TransfersSceneSetupAgeFilter();
     void TransfersSceneSetupSkillFilter();
+
+    //SQUAD SCENE
+    void SetupSquadScene();
 
     //SETTINGS SCENE
     QWidget* settingsSceneMainWidget;

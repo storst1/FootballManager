@@ -8,6 +8,12 @@ void MainWindow::SetupHomeScene(){
     sceneSwitch->Switch(HOME_SCENE);
     ClearLay(homeSceneMainLayout);
 
+    QGraphicsScene scene;
+    scene.addText("Hello, world!");
+
+    QGraphicsView view(&scene);
+    view.show();
+
     QString scrollAreaStyle =
             "QScrollArea{ "
                 "background-color: transparent;"
@@ -158,6 +164,14 @@ void MainWindow::SetupHomeScene(){
 
     homeSceneMainLayout->addWidget(homeSceneContinueButton, 1, 2, Qt::AlignLeft);
     homeSceneMainLayout->addWidget(homeSceneCalendarBar, 2, 2, Qt::AlignLeft);
+
+    homeSceneSquadButton = new QPushButton("Starting 11");
+    homeSceneSquadButton->setFixedSize(200, 70);
+    connect(homeSceneSquadButton, &QPushButton::clicked, this, [this]{
+
+    });
+
+    homeSceneMainLayout->addWidget(homeSceneSquadButton, 1, 0, Qt::AlignRight);
 
     TakeSpaceInLay(homeSceneMainLayout, 150, 3, 3);
 }

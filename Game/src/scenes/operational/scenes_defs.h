@@ -7,5 +7,6 @@
 #define NEW_GAME_SCENE  2
 #define HOME_SCENE      3
 #define TRANSFERS_SCENE 4
+#define SQUAD_SCENE 5
 
 #endif // SCENES_DEFS_H

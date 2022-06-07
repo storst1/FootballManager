@@ -8,12 +8,6 @@ void MainWindow::SetupHomeScene(){
     sceneSwitch->Switch(HOME_SCENE);
     ClearLay(homeSceneMainLayout);
 
-    QGraphicsScene scene;
-    scene.addText("Hello, world!");
-
-    QGraphicsView view(&scene);
-    view.show();
-
     QString scrollAreaStyle =
             "QScrollArea{ "
                 "background-color: transparent;"

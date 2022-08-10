@@ -6,6 +6,7 @@ DATABASE_API_KEYS::DATABASE_API_KEYS(const QString &dbPath, const QString &dbCon
 
 }
 
+//Load all keys from the @db connection into class data
 QVector<QString> DATABASE_API_KEYS::GetAllKeys()
 {
     QSqlQuery query(*db);

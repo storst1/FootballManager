@@ -12,6 +12,7 @@ API_KEYS::API_KEYS(QVector<QString> keys) : keys(keys)
     curKey = 0;
 }
 
+//Returs current key if collection isn/t empty
 const QString API_KEYS::cur() const
 {
     if(keys.empty()){
@@ -20,11 +21,11 @@ const QString API_KEYS::cur() const
     return keys[curKey];
 }
 
+//Returns the next key in the list
+//If list is empty returns an empty string
+//If current key was the last one in the list, returns first element of the list
 QString API_KEYS::next()
 {
-    //Returns the next key in the list
-    //If list is empty returns an empty string
-    //If current key was the last one in the list, returns first element of the list
     if(keys.empty()){
         return "";
     }

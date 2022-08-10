@@ -1,6 +1,8 @@
 #ifndef API_KEYS_H
 #define API_KEYS_H
 
+/* Class to hold & easily operate with the collection of API keys */
+
 #include "database/database_api_keys.h"
 
 #include <QString>

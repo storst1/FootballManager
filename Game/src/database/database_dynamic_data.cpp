@@ -104,6 +104,7 @@ void DATABASE_DYNAMIC_DATA::CopyPlayersTable(QSqlQuery& query) const
     qDebug() << "Copying players data into dynamic database finished. Last error: " + query.lastError().text();
 }
 
+//Passes and binds all the gathered data into provided @gameData object
 void DATABASE_DYNAMIC_DATA::FillGameData(GAME_DATA *gameData) const
 {
     QVector<QPair<FEDERATION*, QVector<QString>>> fedsList = FillFederationsGameData(gameData);

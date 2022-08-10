@@ -1,6 +1,8 @@
 #ifndef DATABASE_H
 #define DATABASE_H
 
+/* Base calss for database connection */
+
 #include "api/api_league.h"
 #include "api/api_player.h"
 

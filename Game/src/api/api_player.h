@@ -1,6 +1,10 @@
 #ifndef API_PLAYER_H
 #define API_PLAYER_H
 
+/* This class is meant to hold and operate information about player
+ * that was gathered from requests to transfermarket API
+*/
+
 #include "json/json_parser_player.h"
 #include "game/time/date.h"
 

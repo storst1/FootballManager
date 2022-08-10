@@ -1,6 +1,11 @@
 #ifndef API_LEAGUE_H
 #define API_LEAGUE_H
 
+/* This class is meant to hold and operate information about league
+ * or (perhaps) some other type of competition (not used for anything except for leagues as of right now)
+ * that was gathered from requests to transfermarket API
+*/
+
 #include "api/api_club.h"
 
 #include <QVector>

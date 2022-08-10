@@ -69,6 +69,7 @@ QVector<API_CLUB> NETWORK_MANAGER::GatherClubsListByComp(const QString &compId)
     for(int i = 0; i < (int)idVals.size(); ++i){
         clubList.push_back(API_CLUB(idVals[i].toInt(), nameVals[i]));
     }
+    delete errOccured;
     delete reply;
     return clubList;
 }
@@ -106,20 +107,21 @@ void NETWORK_MANAGER::FillAdditionalClubInfo(API_CLUB *club)
     qDebug() << request.url().toString();
     QNetworkReply* reply = manager->get(request);
     QEventLoop loop;
-    bool errOccured = false;
-    connect(reply, &QNetworkReply::errorOccurred, this, [&, this]{
+    bool* errOccured = new bool(false);
+    connect(reply, &QNetworkReply::errorOccurred, this, [this, errOccured]{
         HandleRequestError();
-        errOccured = true;
+        *errOccured = true;
     });
     connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
     loop.exec();
-    if(errOccured){
+    if(*errOccured){
         FillAdditionalClubInfo(club);
         return;
     }
     JSON_PARSER_CLUB ClubProfile(RequestBuffer->getBuffer());
     club->setStadName(ClubProfile.getStadName());
     club->setStadCap(ClubProfile.getStadCapacity());
+    delete errOccured;
 }
 
 QString NETWORK_MANAGER::GatherLeagueName(const QString &leagueId)
@@ -129,14 +131,14 @@ QString NETWORK_MANAGER::GatherLeagueName(const QString &leagueId)
     qDebug() << "Cur key: " << request.rawHeader("x-rapidapi-key");
     QNetworkReply* reply = manager->get(request);
     QEventLoop loop;
-    bool errOccured = false;
-    connect(reply, &QNetworkReply::errorOccurred, this, [&, this]{
+    bool* errOccured = new bool(false);
+    connect(reply, &QNetworkReply::errorOccurred, this, [this, errOccured]{
         HandleRequestError();
-        errOccured = true;
+        *errOccured = true;
     });
     connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
     loop.exec();
-    if(errOccured){
+    if(*errOccured){
         return GatherLeagueName(leagueId);
     }
     QString nameJsonProperty = "\"competitionName\":\"";
@@ -144,6 +146,7 @@ QString NETWORK_MANAGER::GatherLeagueName(const QString &leagueId)
     QString name = RequestBuffer->GetValueFromRequestBuffer(idxOfName + nameJsonProperty.length());
     REQUEST_BUFFER::NormalizeValue(name);
     qDebug() << name;
+    delete errOccured;
     return name;
 }
 

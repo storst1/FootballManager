@@ -12,7 +12,8 @@ NETWORK_MANAGER::NETWORK_MANAGER(const QString& ApiDbPath)
             return;
          }
          //char* data = (reply->readAll()).data();
-         RequestBuffer->setBuffer(reply->readAll().data());
+         QByteArray ReplyDataRaw = reply->readAll();
+         RequestBuffer->setBuffer(ReplyDataRaw.data());
          //qDebug() << RequestBuffer->getBufferRef();
         }
     );
@@ -45,14 +46,14 @@ QVector<API_CLUB> NETWORK_MANAGER::GatherClubsListByComp(const QString &compId)
     qDebug() << request.url().toString();
     QNetworkReply* reply = manager->get(request);
     QEventLoop loop;
-    bool errOccured = false;
-    connect(reply, &QNetworkReply::errorOccurred, this, [&, this]{
+    bool* errOccured = new bool(false);
+    connect(reply, &QNetworkReply::errorOccurred, this, [this, errOccured]{
         HandleRequestError();
-        errOccured = true;
+        *errOccured = true;
     });
     connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
     loop.exec();
-    if(errOccured){
+    if(*errOccured){
         return GatherClubsListByComp(compId);
     }
     QString idJsonProperty = "\"id\":\"";
@@ -78,14 +79,14 @@ QVector<API_PLAYER *> NETWORK_MANAGER::GatherPlayersListByClub(const int clubId)
     qDebug() << request.url().toString();
     QNetworkReply* reply = manager->get(request);
     QEventLoop loop;
-    bool errOccured = false;
-    connect(reply, &QNetworkReply::errorOccurred, this, [&, this]{
+    bool* errOccured = new bool(false);
+    connect(reply, &QNetworkReply::errorOccurred, this, [this, errOccured]{
         HandleRequestError();
-        errOccured = true;
+        *errOccured = true;
     });
     connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
     loop.exec();
-    if(errOccured){
+    if(*errOccured){
         return GatherPlayersListByClub(clubId);
     }
     JSON_PARSER_SQUAD Squad(RequestBuffer->getBuffer());
@@ -95,6 +96,7 @@ QVector<API_PLAYER *> NETWORK_MANAGER::GatherPlayersListByClub(const int clubId)
         players.push_back(new API_PLAYER(pI));
         //qDebug() << pI.getName();
     }
+    delete errOccured;
     return players;
 }
 

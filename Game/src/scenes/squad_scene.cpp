@@ -2,5 +2,8 @@
 
 void MainWindow::SetupSquadScene()
 {
+    sceneSwitch->Switch(SQUAD_SCENE);
+    ClearLay();
+
 
 }

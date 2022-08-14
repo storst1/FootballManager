@@ -112,25 +112,24 @@
        <widget class="QComboBox" name="NewGameSceneLeaguesComboBox">
         <property name="geometry">
          <rect>
-          <x>710</x>
-          <y>120</y>
-          <width>500</width>
-          <height>70</height>
+          <x>490</x>
+          <y>30</y>
+          <width>1000</width>
+          <height>100</height>
          </rect>
         </property>
        </widget>
        <widget class="QLabel" name="NewGameSceneClubName">
         <property name="geometry">
          <rect>
-          <x>465</x>
-          <y>280</y>
+          <x>490</x>
+          <y>160</y>
           <width>1000</width>
           <height>100</height>
          </rect>
         </property>
         <property name="styleSheet">
-         <string notr="true">QString clubNameLabelStyle =
-            QLabel{
+         <string notr="true">QLabel{
                 background-color: transparent;
                 border: none;
                 background-repeat: none;
@@ -138,11 +137,81 @@
                 font-size: 35px;
                 font-family: Comic Sans MS;
                 color: white;
+				text-align: center;
             };
 </string>
         </property>
         <property name="text">
+         <string>CLUB NAME </string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="NewGameSceneClubLogo">
+        <property name="geometry">
+         <rect>
+          <x>480</x>
+          <y>270</y>
+          <width>1000</width>
+          <height>200</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="NewGameSceneClubInfoLabel">
+        <property name="geometry">
+         <rect>
+          <x>480</x>
+          <y>480</y>
+          <width>1000</width>
+          <height>180</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel{
+                background-color: transparent;
+                border: none;
+                background-repeat: none;
+                background: none;
+                font-size: 25px;
+                font-family: Comic Sans MS;
+                color: white;
+            };</string>
+        </property>
+        <property name="text">
          <string>TextLabel</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="NewGameSceneStartButton">
+        <property name="geometry">
+         <rect>
+          <x>790</x>
+          <y>670</y>
+          <width>400</width>
+          <height>120</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton{ 
+            background-color: transparent;
+            border: none;
+            background-repeat: none;
+            background: none;
+            background-image:url(:/greenLay400x120.png);
+            font-size: 40px;
+            font-family: Comic Sans MS;
+            color: white;
+        }
+        :hover{
+            background-image:url(:/greenLay400x120Highlighted.png);
+        };
+</string>
+        </property>
+        <property name="text">
+         <string>Start game!</string>
         </property>
        </widget>
       </widget>

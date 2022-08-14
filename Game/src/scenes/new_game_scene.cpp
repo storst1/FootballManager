@@ -9,14 +9,28 @@ void MainWindow::SetupNewGameScene()
 {
     ui->stackedWidget->setCurrentIndex(SW_NEW_GAME_SCENE);
 
+    MoveMultipleWidgetsToFitRes({
+        ui->NewGameSceneClubInfoLabel,
+        ui->NewGameSceneClubLogo,
+        ui->NewGameSceneClubName,
+        ui->NewGameSceneLeaguesComboBox,
+        ui->NewGameSceneStartButton
+    });
+
     //Set the game up by loading all the needed data from db
     dynDataDb->FillGameData(gameData);
+
+    //Assign related to the scene properties
     newGameAllLeaguesList = gameData->getLeaguesList();
+    CLUB* curClub = static_cast<CLUB*>((newGameAllLeaguesList[NewGameCurLeagueIdx]->getTeams())[NewGameCurClubIdx]);
+
     //Filling up comboBox with all the retrieved leagues data
     for(const LEAGUE* league : newGameAllLeaguesList){
         QIcon flag(*league->getFederation()->getFlag());
         ui->NewGameSceneLeaguesComboBox->addItem(flag, league->getName());
     }
+
+    NewGameSceneChangeClub(curClub);
 
     /*
     sceneSwitch->Switch(NEW_GAME_SCENE);
@@ -92,6 +106,17 @@ void MainWindow::SetupNewGameScene()
                 "color: white;"
             "}";
 
+    QString clubInfoLabelStyle =
+            QLabel{
+                background-color: transparent;
+                border: none;
+                background-repeat: none;
+                background: none;
+                font-size: 25px;
+                font-family: Comic Sans MS;
+                color: white;
+            };
+
     QString startButtonStyle =
             "QPushButton{ "
                 "background-color: transparent;"
@@ -106,6 +131,20 @@ void MainWindow::SetupNewGameScene()
             ":hover{"
                 "background-image:url(:/greenLay400x120Highlighted.png);"
             "}";
+
+        QPushButton{
+            background-color: transparent;
+            border: none;
+            background-repeat: none;
+            background: none;
+            background-image:url(:/greenLay400x120.png);
+            font-size: 40px;
+            font-family: Comic Sans MS;
+            color: white;
+        }
+        :hover{
+            background-image:url(:/greenLay400x120Highlighted.png);
+        };
 
     dynDataDb->FillGameData(gameData);
     newGameAllLeaguesList = gameData->getLeaguesList();
@@ -212,8 +251,9 @@ void MainWindow::SetupNewGameScene()
 
 void MainWindow::on_NewGameSceneLeaguesComboBox_currentIndexChanged(int index)
 {
+    NewGameCurLeagueIdx = index;
     LEAGUE* newLeague = newGameAllLeaguesList[index];
-
+    NewGameSceneChangeClub(static_cast<CLUB*>(newLeague->getTeams()[0]));
 }
 
 void MainWindow::NewGameNextLeague()
@@ -226,7 +266,7 @@ void MainWindow::NewGameNextLeague()
         NewGameCurLeagueIdx = 0;
     }
     NewGameCurClubIdx = 0;
-    NewGameChangeLeagueLabel(newGameAllLeaguesList[NewGameCurLeagueIdx]);
+    NewGameChangeLeagueLabel_OLD(newGameAllLeaguesList[NewGameCurLeagueIdx]);
 }
 
 void MainWindow::NewGamePrevLeague()
@@ -239,18 +279,18 @@ void MainWindow::NewGamePrevLeague()
         NewGameCurLeagueIdx = newGameAllLeaguesList.size() - 1;
     }
     NewGameCurClubIdx = 0;
-    NewGameChangeLeagueLabel(newGameAllLeaguesList[NewGameCurLeagueIdx]);
+    NewGameChangeLeagueLabel_OLD(newGameAllLeaguesList[NewGameCurLeagueIdx]);
 }
 
-void MainWindow::NewGameChangeLeagueLabel(LEAGUE *_league)
+void MainWindow::NewGameChangeLeagueLabel_OLD(LEAGUE *_league)
 {
     newGameLeagueLabel->setText(_league->getName());
     QVector<TEAM*> team_list = _league->getTeams();
     QVector<CLUB*> clubs = CLUB::CastToClub(team_list);
-    NewGameChangeClubLay(clubs[0]);
+    NewGameChangeClubLay_OLD(clubs[0]);
 }
 
-void MainWindow::NewGameChangeClubLay(CLUB *curClub)
+void MainWindow::NewGameChangeClubLay_OLD(CLUB *curClub)
 {
     newGameClubName->setText(curClub->getName());
 
@@ -272,7 +312,7 @@ void MainWindow::NewGameNextClub()
     if(NewGameCurClubIdx >= clubs.size()){
         NewGameCurClubIdx = 0;
     }
-    NewGameChangeClubLay(clubs[NewGameCurClubIdx]);
+    NewGameChangeClubLay_OLD(clubs[NewGameCurClubIdx]);
 }
 
 void MainWindow::NewGamePrevClub()
@@ -283,7 +323,23 @@ void MainWindow::NewGamePrevClub()
     if(NewGameCurClubIdx < 0){
         NewGameCurClubIdx = clubs.size() - 1;
     }
-    NewGameChangeClubLay(clubs[NewGameCurClubIdx]);
+    NewGameChangeClubLay_OLD(clubs[NewGameCurClubIdx]);
+}
+
+void MainWindow::NewGameSceneChangeClub(CLUB *newClub)
+{
+    ui->NewGameSceneClubName->setText(newClub->getName());
+
+    QString clubLogoPath = GetClubLogoPath(newClub);
+    ui->NewGameSceneClubLogo->setPixmap(QPixmap(clubLogoPath));
+    ui->NewGameSceneClubLogo->setAlignment(Qt::AlignCenter);
+
+    QString ClubInfoString =
+            "Total transfer value of players: " + NaturalizeNum(newClub->getTV()) + EURO + "\n" +
+            "Club budget: " + NaturalizeNum(newClub->getBudget()) + EURO + "\n" +
+            "Club prestige: " + NaturalizeNum(newClub->getPrestige());
+    ui->NewGameSceneClubInfoLabel->setText(ClubInfoString);
+    ui->NewGameSceneClubInfoLabel->setAlignment(Qt::AlignCenter);
 }
 
 QMap<QString, LEAGUE*>::iterator MainWindow::NewGameGetNextLeagueIter(const QMap<QString, LEAGUE*>::iterator curIter,

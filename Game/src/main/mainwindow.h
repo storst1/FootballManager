@@ -206,13 +206,14 @@ private:
     void SetupNewGameScene();
     void NewGameNextLeague();
     void NewGamePrevLeague();
-    void NewGameChangeLeagueLabel(LEAGUE* _league);
-    void NewGameChangeClubLay(CLUB* curClub);
+    void NewGameChangeLeagueLabel_OLD(LEAGUE* _league);
+    void NewGameChangeClubLay_OLD(CLUB* curClub);
     QMap<QString, LEAGUE*>::iterator NewGameGetNextLeagueIter(const QMap<QString, LEAGUE*>::iterator curIter,
                                                        const QMap<QString, LEAGUE*>::iterator beginIter,
                                                        const QMap<QString, LEAGUE*>::iterator endIter);
     void NewGameNextClub();
     void NewGamePrevClub();
+    void NewGameSceneChangeClub(CLUB* newClub);
 
     //HOME SCENE
     QWidget* homeSceneMainWidget;

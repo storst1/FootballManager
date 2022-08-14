@@ -64,6 +64,10 @@ public:
     static QString NaturalizeNum(int num);
     static void drawPlayerFlag(QPixmap& flag, FEDERATION* fed1, FEDERATION* fed2);
     static void drawLeagueHeaderFlag(QPixmap& flag, FEDERATION* fed);
+
+private slots:
+    void on_StartingSceneNewGame_clicked();
+
 private:
     //Window properties
     Ui::MainWindow *ui;

@@ -47,7 +47,7 @@ private:
     QString league_id;
     QString stadName;
     int stadCapacity;
-    int totalTV = 0;
+    int totalTV = 0; //Total transfer value
     int prestige;
     int budget;
 };

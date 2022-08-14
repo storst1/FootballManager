@@ -1,10 +1,17 @@
 #include "main/mainwindow.h"
 #include "game/data/league.h"
 #include "game/data/team.h"
+#include "ui_mainwindow.h"
 
 void MainWindow::SetupNewGameScene()
 {
 
+    ui->stackedWidget->setCurrentIndex(NEW_GAME_SCENE);
+
+    dynDataDb->FillGameData(gameData);
+    newGameAllLeaguesList = gameData->getLeaguesList();
+
+    /*
     sceneSwitch->Switch(NEW_GAME_SCENE);
     ClearLay(newGameSceneMainLayout);
 
@@ -95,12 +102,11 @@ void MainWindow::SetupNewGameScene()
     connect(newGameLeagueLeftButton, &QPushButton::clicked, this, [this]{NewGamePrevLeague();});
 
     newGameLeagueLabel = new QLabel(newGameAllLeaguesList[NewGameCurLeagueIdx]->getName());
-    /*
     leagueLabel->setAlignment(Qt::AlignLeft);
     QPixmap LeagueFlagPixmap(50, 50);
     MainWindow::drawLeagueHeaderFlag(LeagueFlagPixmap, allLeaguesList[NewGameCurLeagueIdx]->getFederation());
     leagueLabel->setPixmap(LeagueFlagPixmap);
-    */
+
     newGameLeagueLabel->setAlignment(Qt::AlignCenter);
     newGameLeagueLabel->setFixedWidth(1000);
     newGameLeagueLabel->setFixedHeight(120);
@@ -182,6 +188,7 @@ void MainWindow::SetupNewGameScene()
     });
 
     TakeSpaceInLay(newGameSceneMainLayout, 20, 4, 3);
+    */
 }
 
 void MainWindow::NewGameNextLeague()

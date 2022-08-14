@@ -12,7 +12,7 @@ void MainWindow::SetupMainLay(){
     setPalette(palette);
 
     mainLay = new QGridLayout();
-    ui->centralwidget->setLayout(mainLay);
+    //ui->centralwidget->setLayout(mainLay);
     mainWidget = new QStackedWidget();
     mainWidget->setFixedSize(_width, _height);
     mainLay->addWidget(mainWidget);

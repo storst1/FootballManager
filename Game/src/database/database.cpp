@@ -28,6 +28,8 @@ QVector<QString> DATABASE::ParseStringBy(QString& s, QChar c)
     return slist;
 }
 
+//This function prints error string in qDebug() for given @query if error
+//has occured in it, otherwise does nothing
 void DATABASE::PrintSqlExecInfoIfErr(QSqlQuery &query)
 {
     if(query.lastError().isValid()){
@@ -35,6 +37,8 @@ void DATABASE::PrintSqlExecInfoIfErr(QSqlQuery &query)
     }
 }
 
+//This function prints error string in qDebug() for given @query
+//without checking if error has actualy occured
 void DATABASE::PrintSqlExecInfo(QSqlQuery &query)
 {
     qDebug() << query.executedQuery() << " . Error: " << query.lastError().text();
@@ -52,6 +56,8 @@ void DATABASE::SetupConnection(const QString& dbPath, const QString& connectionN
     }
 }
 
+//Deletes table with given @table_name from the database that is tied to @db connection
+//If operation wasn't performed successfully, will print an error string into qDebug()
 void DATABASE::DeleteTableInfo(QString table_name) const
 {
     QSqlQuery query(*db);

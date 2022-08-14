@@ -1,6 +1,8 @@
 #ifndef GAME_DATA_H
 #define GAME_DATA_H
 
+/* This class is used to store all the data in the game */
+
 #define MAX_PLAYER_AGE 100
 #define MAX_PLAYER_TV 1000000000
 #define MAX_PLAYER_SKILL 101

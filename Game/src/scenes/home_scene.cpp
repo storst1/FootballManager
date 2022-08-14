@@ -162,7 +162,7 @@ void MainWindow::SetupHomeScene(){
     homeSceneSquadButton = new QPushButton("Starting 11");
     homeSceneSquadButton->setFixedSize(200, 70);
     connect(homeSceneSquadButton, &QPushButton::clicked, this, [this]{
-
+        SetupSquadScene();
     });
 
     homeSceneMainLayout->addWidget(homeSceneSquadButton, 1, 0, Qt::AlignRight);

@@ -192,3 +192,22 @@ void MainWindow::SetupNavigationLay(){
     navigationLay->addWidget(navigationTransfersButton, 0, 1);
     navigationLay->addWidget(navigationTournamentsButton, 0, 2);
 }
+
+void MainWindow::MoveWidgetToFitRes(QWidget *widget) noexcept
+{
+    const float orig_x = widget->pos().x();
+    const float orig_y = widget->pos().y();
+    float res_diff_x = (float)_width / 1980.f;
+    float res_diff_y = (float)_height / 1024.f;
+    float new_x = orig_x * res_diff_x;
+    float new_y = orig_y * res_diff_y;
+    widget->move(new_x, new_y);
+}
+
+void MainWindow::MoveAllChildWidgetsToFitRes(QWidget *widget) noexcept
+{
+    QList<QObject*> list = widget->findChildren<QObject*>();
+    foreach(auto children_widget, list){
+        //Find a way to iterate
+    }
+}

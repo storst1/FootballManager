@@ -39,7 +39,7 @@
 #include <QScrollBar>
 #include <QDebug>
 #include <QStackedWidget>
-#include <QGraphicsView>
+#include <QVariant>
 
 #include <algorithm>
 
@@ -67,6 +67,8 @@ public:
 
 private slots:
     void on_StartingSceneNewGame_clicked();
+
+    void on_NewGameSceneLeaguesComboBox_currentIndexChanged(int index);
 
 private:
     //Window properties
@@ -164,6 +166,8 @@ private:
 
     void InitAllScenes();
     QWidget* InitScene(int scene);
+    void MoveWidgetToFitRes(QWidget* widget) noexcept;
+    void MoveAllChildWidgetsToFitRes(QWidget* widget) noexcept;
 
     void SetupNavigationLay();
 

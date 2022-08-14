@@ -1,15 +1,23 @@
 #include "main/mainwindow.h"
 #include "game/data/league.h"
 #include "game/data/team.h"
+#include "game/data/federation.h"
 #include "ui_mainwindow.h"
+
 
 void MainWindow::SetupNewGameScene()
 {
 
-    ui->stackedWidget->setCurrentIndex(NEW_GAME_SCENE);
+    ui->stackedWidget->setCurrentIndex(SW_NEW_GAME_SCENE);
 
+    //Set the game up by loading all the needed data from db
     dynDataDb->FillGameData(gameData);
     newGameAllLeaguesList = gameData->getLeaguesList();
+    //Filling up comboBox with all the retrieved leagues data
+    for(const LEAGUE* league : newGameAllLeaguesList){
+        QIcon flag(*league->getFederation()->getFlag());
+        ui->NewGameSceneLeaguesComboBox->addItem(flag, league->getName());
+    }
 
     /*
     sceneSwitch->Switch(NEW_GAME_SCENE);
@@ -61,6 +69,18 @@ void MainWindow::SetupNewGameScene()
                 "font-family: Comic Sans MS;"
                 "color: white;"
             "}";
+
+    //Pure QSS
+    QString clubNameLabelStyle =
+            QLabel{
+                background-color: transparent;
+                border: none;
+                background-repeat: none;
+                background: none;
+                font-size: 35px;
+                font-family: Comic Sans MS;
+                color: white;
+            };
 
     QString clubInfoLabelStyle =
             "QLabel{ "
@@ -189,6 +209,12 @@ void MainWindow::SetupNewGameScene()
 
     TakeSpaceInLay(newGameSceneMainLayout, 20, 4, 3);
     */
+}
+
+void MainWindow::on_NewGameSceneLeaguesComboBox_currentIndexChanged(int index)
+{
+    LEAGUE* newLeague = newGameAllLeaguesList[index];
+
 }
 
 void MainWindow::NewGameNextLeague()

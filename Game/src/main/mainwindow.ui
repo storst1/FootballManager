@@ -14,27 +14,24 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QStackedWidget" name="stackedWidget">
-    <property name="geometry">
-     <rect>
-      <x>-170</x>
-      <y>-100</y>
-      <width>1920</width>
-      <height>1024</height>
-     </rect>
-    </property>
-    <widget class="QWidget" name="StartingScene">
-     <widget class="QPushButton" name="StartingSceneNewGame">
-      <property name="geometry">
-       <rect>
-        <x>820</x>
-        <y>342</y>
-        <width>280</width>
-        <height>100</height>
-       </rect>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QStackedWidget" name="stackedWidget">
+      <property name="enabled">
+       <bool>true</bool>
       </property>
-      <property name="styleSheet">
-       <string notr="true">QPushButton{ 
+      <widget class="QWidget" name="StartingScene">
+       <widget class="QPushButton" name="StartingSceneNewGame">
+        <property name="geometry">
+         <rect>
+          <x>820</x>
+          <y>342</y>
+          <width>280</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton{ 
         background-color: transparent;
         border: none;
         background-repeat: none;
@@ -47,22 +44,22 @@
    	QPushButton:hover{
         background-image:url(:/greenLay280x100Highlighted.png);
     };</string>
-      </property>
-      <property name="text">
-       <string>New game</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="StartingSceneLoadGame">
-      <property name="geometry">
-       <rect>
-        <x>820</x>
-        <y>462</y>
-        <width>280</width>
-        <height>100</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QPushButton{ 
+        </property>
+        <property name="text">
+         <string>New game</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="StartingSceneLoadGame">
+        <property name="geometry">
+         <rect>
+          <x>820</x>
+          <y>462</y>
+          <width>280</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton{ 
         background-color: transparent;
         border: none;
         background-repeat: none;
@@ -75,22 +72,22 @@
     :hover{
         background-image:url(:/greenLay280x100Highlighted.png);
     };</string>
-      </property>
-      <property name="text">
-       <string>Load game</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="StartingScenStartingSceneSettingsButton">
-      <property name="geometry">
-       <rect>
-        <x>820</x>
-        <y>582</y>
-        <width>280</width>
-        <height>100</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QPushButton{ 
+        </property>
+        <property name="text">
+         <string>Load game</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="StartingSceneSettingsButton">
+        <property name="geometry">
+         <rect>
+          <x>820</x>
+          <y>582</y>
+          <width>280</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton{ 
         background-color: transparent;
         border: none;
         background-repeat: none;
@@ -103,29 +100,55 @@
     :hover{
         background-image:url(:/greenLay280x100Highlighted.png);
     };
+
 </string>
-      </property>
-      <property name="text">
-       <string>Settings</string>
-      </property>
+        </property>
+        <property name="text">
+         <string>Settings</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="NewGameScene">
+       <widget class="QComboBox" name="NewGameSceneLeaguesComboBox">
+        <property name="geometry">
+         <rect>
+          <x>710</x>
+          <y>120</y>
+          <width>500</width>
+          <height>70</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLabel" name="NewGameSceneClubName">
+        <property name="geometry">
+         <rect>
+          <x>465</x>
+          <y>280</y>
+          <width>1000</width>
+          <height>100</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QString clubNameLabelStyle =
+            QLabel{
+                background-color: transparent;
+                border: none;
+                background-repeat: none;
+                background: none;
+                font-size: 35px;
+                font-family: Comic Sans MS;
+                color: white;
+            };
+</string>
+        </property>
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+       </widget>
+      </widget>
      </widget>
-    </widget>
-    <widget class="QWidget" name="NewGameScene">
-     <widget class="QPushButton" name="pushButton">
-      <property name="geometry">
-       <rect>
-        <x>620</x>
-        <y>270</y>
-        <width>83</width>
-        <height>29</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>PushButton</string>
-      </property>
-     </widget>
-    </widget>
-   </widget>
+    </item>
+   </layout>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>

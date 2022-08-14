@@ -7,7 +7,6 @@
 
 void MainWindow::SetupNewGameScene()
 {
-
     ui->stackedWidget->setCurrentIndex(SW_NEW_GAME_SCENE);
 
     //Set the game up by loading all the needed data from db

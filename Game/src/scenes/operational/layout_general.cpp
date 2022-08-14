@@ -204,10 +204,29 @@ void MainWindow::MoveWidgetToFitRes(QWidget *widget) noexcept
     widget->move(new_x, new_y);
 }
 
+
+//Adjusts positions of all the children of provided @widget
 void MainWindow::MoveAllChildWidgetsToFitRes(QWidget *widget) noexcept
 {
     QList<QObject*> list = widget->findChildren<QObject*>();
-    foreach(auto children_widget, list){
-        //Find a way to iterate
+    foreach(QObject* children_obj, list){
+        //Assuming all the children objects are widgets
+        QWidget* children_widget = dynamic_cast<QWidget*>(children_obj);
+        MoveAllChildWidgetsToFitRes(children_widget);
     }
 }
+
+void MainWindow::MoveMultipleWidgetsToFitRes(std::initializer_list<QWidget *> widgets)
+{
+    for(QWidget* widget : widgets){
+        MoveWidgetToFitRes(widget);
+    }
+}
+
+/*
+template<class... Args>
+void MainWindow::MoveMultipleWidgetsToFitRes(Args... args)
+{
+
+}
+*/

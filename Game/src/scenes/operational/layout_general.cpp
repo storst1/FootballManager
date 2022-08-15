@@ -253,6 +253,9 @@ void MainWindow::ResizeLabel(QLabel *label, float x_mult, float y_mult)
     ResizeGeneralWidget(label, x_mult, y_mult);
 
     QPixmap pixmap = label->pixmap();
+    if(pixmap.isNull()){
+        return;
+    }
     QPixmap new_pixmap = pixmap.scaled(pixmap.width() * x_mult, pixmap.height() * y_mult, Qt::IgnoreAspectRatio);
     label->setPixmap(new_pixmap);
 }
@@ -263,9 +266,9 @@ void MainWindow::ResizeGeneralWidget(QWidget *widget, float x_mult, float y_mult
 
     //Resize font
     QFont cur_font = widget->font();
-    float font_size = cur_font.pointSizeF();
+    float font_size = cur_font.pixelSize();
     float new_font_size = font_size * min_mult;
-    cur_font.setPointSizeF(new_font_size);
+    cur_font.setPixelSize(new_font_size);
     widget->setFont(cur_font);
 
     //Adjust geometry

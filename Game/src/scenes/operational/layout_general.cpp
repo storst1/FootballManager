@@ -267,7 +267,7 @@ void MainWindow::ResizeGeneralWidget(QWidget *widget, float x_mult, float y_mult
     //Resize font
     QFont cur_font = widget->font();
     float font_size = cur_font.pixelSize();
-    if(font_size != 0.f){
+    if(font_size > 0.1f){
         float new_font_size = font_size * min_mult;
         cur_font.setPixelSize(new_font_size);
         widget->setFont(cur_font);

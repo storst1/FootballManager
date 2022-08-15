@@ -19,6 +19,16 @@ void MainWindow::SetupNewGameScene()
         ui->NewGameSceneNextClubButton
     });
 
+    ResizeMultWidgetsToFitRes({
+        ui->NewGameSceneClubInfoLabel,
+        ui->NewGameSceneClubLogo,
+        ui->NewGameSceneClubName,
+        ui->NewGameSceneLeaguesComboBox,
+        ui->NewGameSceneStartButton,
+        ui->NewGameScenePrevClubButton,
+        ui->NewGameSceneNextClubButton
+    });
+
     //Set the game up by loading all the needed data from db
     dynDataDb->FillGameData(gameData);
 

@@ -146,6 +146,19 @@ private:
     void ClearLay(QGridLayout *lay);
     static QLabel* NewTrashPtr();
 
+    void MoveWidgetToFitRes(QWidget* widget) noexcept;
+    void MoveAllChildWidgetsToFitRes(QWidget* widget) noexcept;
+    //void MoveMultipleWidgetsToFitRes(QWidget* widgets...);
+    void MoveMultipleWidgetsToFitRes(std::initializer_list<QWidget*> widgets);
+    void ResizeWidgetToFitRes(QWidget* widget);
+    void ResizePB(QPushButton* PB, float x_mult, float y_mult);
+    void ResizeComboBox(QComboBox* CB, float x_mult, float y_mult);
+    void ResizeLabel(QLabel* label, float x_mult, float y_mult);
+    void ResizeGeneralWidget(QWidget* widget, float x_mult, float y_mult);
+    void ResizeMultWidgetsToFitRes(std::initializer_list<QWidget*> widgets);
+
+    QString BackgroundResource(const QString& styleSheet) const noexcept;
+
     //Scene-dependent stuff
 
     QVector<int> allScenes = {
@@ -169,10 +182,6 @@ private:
 
     void InitAllScenes();
     QWidget* InitScene(int scene);
-    void MoveWidgetToFitRes(QWidget* widget) noexcept;
-    void MoveAllChildWidgetsToFitRes(QWidget* widget) noexcept;
-    //void MoveMultipleWidgetsToFitRes(QWidget* widgets...);
-    void MoveMultipleWidgetsToFitRes(std::initializer_list<QWidget*> widgets);
 
     void SetupNavigationLay();
 

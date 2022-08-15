@@ -114,3 +114,16 @@ void MainWindow::SetupEventHandler()
 {
     eventHandler = new EVENT_HANDLER(DATE(START_DATE));
 }
+
+QString MainWindow::BackgroundResource(const QString &styleSheet) const noexcept
+{
+    int idx = styleSheet.indexOf("background: ");
+    QString path;
+    for(int i = idx + 12; ; ++i){
+        if(styleSheet[i] == ';'){
+            break;
+        }
+        path += styleSheet[i];
+    }
+    return path;
+}

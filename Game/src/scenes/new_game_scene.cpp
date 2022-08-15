@@ -14,7 +14,9 @@ void MainWindow::SetupNewGameScene()
         ui->NewGameSceneClubLogo,
         ui->NewGameSceneClubName,
         ui->NewGameSceneLeaguesComboBox,
-        ui->NewGameSceneStartButton
+        ui->NewGameSceneStartButton,
+        ui->NewGameScenePrevClubButton,
+        ui->NewGameSceneNextClubButton
     });
 
     //Set the game up by loading all the needed data from db
@@ -244,4 +246,29 @@ connect(newGameStartNewGameButton, &QPushButton::clicked, this, [this]{
 });
 
 TakeSpaceInLay(newGameSceneMainLayout, 20, 4, 3);
+
+QString leftArrowButtonStyle =
+            QPushButton{
+                background-color: transparent;
+                border: none;
+                background-repeat: none;
+                background: none;
+                background-image:url(:/leftArrow120x120.png);
+            }
+            :hover{
+                background-image:url(:/leftArrowHighlighted120x120.png);
+            };
+
+    QString rightArrowButtonStyle =
+            QPushButton{
+                background-color: transparent;
+                border: none;
+                background-repeat: none;
+                background: none;
+                background-image:url(:/rightArrow120x120.png);
+            }
+            :hover{
+                background-image:url(:/rightArrowHighlighted120x120.png);
+            };
+
 */

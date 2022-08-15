@@ -118,6 +118,29 @@
           <height>100</height>
          </rect>
         </property>
+        <property name="styleSheet">
+         <string notr="true">QComboBox{
+				background-color: transparent;
+                border: none;
+                background-repeat: none;
+                background: none;
+                font-size: 35px;
+                font-family: Comic Sans MS;
+                color: black;
+				text-align: center;
+}
+
+QComboBox:!editable:on, QComboBox::drop-down:editable:on {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #D3D3D3, stop: 0.4 #D8D8D8,
+                                stop: 0.5 #DDDDDD, stop: 1.0 #E1E1E1);
+}
+
+QComboBox QAbstractItemView {
+    border: 2px solid darkgray;
+    selection-background-color: lightgray;
+}</string>
+        </property>
        </widget>
        <widget class="QLabel" name="NewGameSceneClubName">
         <property name="geometry">
@@ -212,6 +235,58 @@
         </property>
         <property name="text">
          <string>Start game!</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="NewGameScenePrevClubButton">
+        <property name="geometry">
+         <rect>
+          <x>300</x>
+          <y>160</y>
+          <width>120</width>
+          <height>120</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton{
+                background-color: transparent;
+                border: none;
+                background-repeat: none;
+                background: none;
+                background-image:url(:/leftArrow120x120.png);
+            }
+            :hover{
+                background-image:url(:/leftArrowHighlighted120x120.png);
+            };
+</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="NewGameSceneNextClubButton">
+        <property name="geometry">
+         <rect>
+          <x>1560</x>
+          <y>160</y>
+          <width>120</width>
+          <height>120</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton{
+                background-color: transparent;
+                border: none;
+                background-repeat: none;
+                background: none;
+                background-image:url(:/rightArrow120x120.png);
+            }
+            :hover{
+                background-image:url(:/rightArrowHighlighted120x120.png);
+            };
+</string>
+        </property>
+        <property name="text">
+         <string/>
         </property>
        </widget>
       </widget>

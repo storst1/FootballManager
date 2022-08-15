@@ -19,7 +19,7 @@ void MainWindow::SetupNewGameScene()
         ui->NewGameSceneNextClubButton
     });
 
-    ResizeMultWidgetsToFitRes({
+    ResizeMultipleWidgetsToFitRes({
         ui->NewGameSceneClubInfoLabel,
         ui->NewGameSceneClubLogo,
         ui->NewGameSceneClubName,

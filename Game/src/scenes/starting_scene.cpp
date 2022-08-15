@@ -10,6 +10,12 @@ void MainWindow::SetupStartingScene(){
         ui->StartingSceneNewGame,
         ui->StartingSceneSettingsButton
     });
+
+    ResizeMultipleWidgetsToFitRes({
+        ui->StartingSceneLoadGame,
+        ui->StartingSceneNewGame,
+        ui->StartingSceneSettingsButton
+    });
 }
 
 void MainWindow::on_StartingSceneNewGame_clicked()

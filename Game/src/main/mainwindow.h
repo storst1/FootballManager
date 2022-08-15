@@ -155,7 +155,7 @@ private:
     void ResizeComboBox(QComboBox* CB, float x_mult, float y_mult);
     void ResizeLabel(QLabel* label, float x_mult, float y_mult);
     void ResizeGeneralWidget(QWidget* widget, float x_mult, float y_mult);
-    void ResizeMultWidgetsToFitRes(std::initializer_list<QWidget*> widgets);
+    void ResizeMultipleWidgetsToFitRes(std::initializer_list<QWidget*> widgets);
 
     QString BackgroundResource(const QString& styleSheet) const noexcept;
 

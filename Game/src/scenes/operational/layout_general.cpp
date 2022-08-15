@@ -267,9 +267,11 @@ void MainWindow::ResizeGeneralWidget(QWidget *widget, float x_mult, float y_mult
     //Resize font
     QFont cur_font = widget->font();
     float font_size = cur_font.pixelSize();
-    float new_font_size = font_size * min_mult;
-    cur_font.setPixelSize(new_font_size);
-    widget->setFont(cur_font);
+    if(font_size != 0.f){
+        float new_font_size = font_size * min_mult;
+        cur_font.setPixelSize(new_font_size);
+        widget->setFont(cur_font);
+    }
 
     //Adjust geometry
     float width = widget->width();
@@ -279,7 +281,7 @@ void MainWindow::ResizeGeneralWidget(QWidget *widget, float x_mult, float y_mult
     widget->setGeometry(widget->x(), widget->y(), new_width, new_height);
 }
 
-void MainWindow::ResizeMultWidgetsToFitRes(std::initializer_list<QWidget *> widgets)
+void MainWindow::ResizeMultipleWidgetsToFitRes(std::initializer_list<QWidget *> widgets)
 {
     for(QWidget* widget : widgets){
         ResizeWidgetToFitRes(widget);

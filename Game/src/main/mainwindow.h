@@ -69,6 +69,10 @@ private slots:
     void on_StartingSceneNewGame_clicked();
     void on_NewGameSceneLeaguesComboBox_currentIndexChanged(int index);
 
+    void on_NewGameScenePrevClubButton_clicked();
+
+    void on_NewGameSceneNextClubButton_clicked();
+
 private:
     //Window properties
     Ui::MainWindow *ui;
@@ -211,9 +215,11 @@ private:
     QMap<QString, LEAGUE*>::iterator NewGameGetNextLeagueIter(const QMap<QString, LEAGUE*>::iterator curIter,
                                                        const QMap<QString, LEAGUE*>::iterator beginIter,
                                                        const QMap<QString, LEAGUE*>::iterator endIter);
-    void NewGameNextClub();
-    void NewGamePrevClub();
+    void NewGameNextClub_OLD();
+    void NewGamePrevClub_OLD();
     void NewGameSceneChangeClub(CLUB* newClub);
+    void NewGameSceneNextClub() noexcept;
+    void NewGameScenePrevClub() noexcept;
 
     //HOME SCENE
     QWidget* homeSceneMainWidget;

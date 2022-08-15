@@ -39,7 +39,9 @@ void MainWindow::on_NewGameSceneLeaguesComboBox_currentIndexChanged(int index)
 {
     NewGameCurLeagueIdx = index;
     LEAGUE* newLeague = newGameAllLeaguesList[index];
-    NewGameSceneChangeClub(static_cast<CLUB*>(newLeague->getTeams()[0]));
+    QList<TEAM*> allTeams = newLeague->getTeams();
+    NewGameSceneChangeClub(static_cast<CLUB*>(allTeams[0]));
+    NewGameCurClubIdx = 0;
 }
 
 void MainWindow::NewGameNextLeague()
@@ -90,7 +92,7 @@ void MainWindow::NewGameChangeClubLay_OLD(CLUB *curClub)
     newGameClubPrestige->setText("Club prestige: " + NaturalizeNum(curClub->getPrestige()));
 }
 
-void MainWindow::NewGameNextClub()
+void MainWindow::NewGameNextClub_OLD()
 {
     QVector<TEAM*> team_list = newGameAllLeaguesList[NewGameCurLeagueIdx]->getTeams();
     QVector<CLUB*> clubs = CLUB::CastToClub(team_list);
@@ -101,7 +103,7 @@ void MainWindow::NewGameNextClub()
     NewGameChangeClubLay_OLD(clubs[NewGameCurClubIdx]);
 }
 
-void MainWindow::NewGamePrevClub()
+void MainWindow::NewGamePrevClub_OLD()
 {
     QVector<TEAM*> team_list = newGameAllLeaguesList[NewGameCurLeagueIdx]->getTeams();
     QVector<CLUB*> clubs = CLUB::CastToClub(team_list);
@@ -127,6 +129,38 @@ void MainWindow::NewGameSceneChangeClub(CLUB *newClub)
             "Club prestige: " + NaturalizeNum(newClub->getPrestige());
     ui->NewGameSceneClubInfoLabel->setText(ClubInfoString);
     ui->NewGameSceneClubInfoLabel->setAlignment(Qt::AlignCenter);
+}
+
+void MainWindow::NewGameSceneNextClub() noexcept
+{
+    QVector<TEAM*> team_list = newGameAllLeaguesList[NewGameCurLeagueIdx]->getTeams();
+    QVector<CLUB*> clubs = CLUB::CastToClub(team_list);
+    ++NewGameCurClubIdx;
+    if(NewGameCurClubIdx >= clubs.size()){
+        NewGameCurClubIdx = 0;
+    }
+    NewGameSceneChangeClub(clubs[NewGameCurClubIdx]);
+}
+
+void MainWindow::NewGameScenePrevClub() noexcept
+{
+    QVector<TEAM*> team_list = newGameAllLeaguesList[NewGameCurLeagueIdx]->getTeams();
+    QVector<CLUB*> clubs = CLUB::CastToClub(team_list);
+    --NewGameCurClubIdx;
+    if(NewGameCurClubIdx < 0){
+        NewGameCurClubIdx = clubs.size() - 1;
+    }
+    NewGameSceneChangeClub(clubs[NewGameCurClubIdx]);
+}
+
+void MainWindow::on_NewGameScenePrevClubButton_clicked()
+{
+    NewGameScenePrevClub();
+}
+
+void MainWindow::on_NewGameSceneNextClubButton_clicked()
+{
+    NewGameSceneNextClub();
 }
 
 QMap<QString, LEAGUE*>::iterator MainWindow::NewGameGetNextLeagueIter(const QMap<QString, LEAGUE*>::iterator curIter,

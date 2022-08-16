@@ -38,6 +38,9 @@ QString WIDGET_QSS_IMAGE_RESIZE::ResizeAllAndBindToQss(const int new_w, const in
         }
         new_qss.erase(std::next(new_qss.cbegin(), idx), std::next(new_qss.cbegin(), idx + cnt));
         new_qss.insert(idx, new_file_path);
+
+        //Save new file path to stack of temporary files
+        tmp_files_stack->Add(new_file_path);
     }
 
     return new_qss;

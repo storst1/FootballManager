@@ -61,7 +61,9 @@ SOURCES += \
     ui/scenes/settings_scene.cpp \
     ui/scenes/squad_scene.cpp \
     ui/scenes/starting_scene.cpp \
-    ui/scenes/transfers_scene.cpp
+    ui/scenes/transfers_scene.cpp \
+    ui/widgets/layout_general.cpp \
+    ui/widgets/widget_general.cpp
 
 HEADERS += \
     api/api_club.h \

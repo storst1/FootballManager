@@ -3,8 +3,6 @@
 
 #define EURO "€"
 
-#include "scenes/operational/scenes_defs.h"
-
 #include "database/database_real_data.h"
 #include "database/database_skill_converter.h"
 #include "database/database_dynamic_data.h"
@@ -19,7 +17,8 @@
 #include "game/events/event_handler.h"
 #include "game/events/event_birthday.h"
 #include "game/game.h"
-#include "scenes/operational/scene_switch.h"
+#include "ui/scenes/operational/scene_switch.h"
+#include "ui/scenes/operational/scenes_defs.h"
 
 #include <QMainWindow>
 #include <QGridLayout>

@@ -59,6 +59,7 @@ SOURCES += \
     scenes/operational/layout_general.cpp \
     scenes/operational/scene_operational.cpp \
     scenes/operational/scene_switch.cpp \
+    scenes/operational/widget_general.cpp \
     scenes/settings_scene.cpp \
     scenes/squad_scene.cpp \
     scenes/starting_scene.cpp \

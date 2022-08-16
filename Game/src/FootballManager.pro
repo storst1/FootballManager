@@ -54,16 +54,14 @@ SOURCES += \
     main/mainwindow_database.cpp \
     network/network_manager.cpp \
     network/request_buffer.cpp \
-    scenes/home_scene.cpp \
-    scenes/new_game_scene.cpp \
-    scenes/operational/layout_general.cpp \
-    scenes/operational/scene_operational.cpp \
-    scenes/operational/scene_switch.cpp \
-    scenes/operational/widget_general.cpp \
-    scenes/settings_scene.cpp \
-    scenes/squad_scene.cpp \
-    scenes/starting_scene.cpp \
-    scenes/transfers_scene.cpp
+    ui/scenes/home_scene.cpp \
+    ui/scenes/new_game_scene.cpp \
+    ui/scenes/operational/scene_operational.cpp \
+    ui/scenes/operational/scene_switch.cpp \
+    ui/scenes/settings_scene.cpp \
+    ui/scenes/squad_scene.cpp \
+    ui/scenes/starting_scene.cpp \
+    ui/scenes/transfers_scene.cpp
 
 HEADERS += \
     api/api_club.h \
@@ -113,11 +111,11 @@ HEADERS += \
     main/mainwindow.h \
     network/network_manager.h \
     network/request_buffer.h \
-    scenes/operational/scene_switch.h \
-    scenes/operational/scenes_defs.h
+    ui/scenes/operational/scene_switch.h \
+    ui/scenes/operational/scenes_defs.h
 
 FORMS += \
-    main/mainwindow.ui \
+    ui/mainwindow.ui \
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

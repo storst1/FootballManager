@@ -36,7 +36,7 @@
         border: none;
         background-repeat: none;
         background: none;
-        background-image:url(:/greenLay280x100.png);
+        background-image: url(:/greenLay280x100.png);
         font-size: 22px;
         font-family: Comic Sans MS;
         color: white;

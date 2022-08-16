@@ -14,6 +14,7 @@ SOURCES += \
     database/database_dynamic_data.cpp \
     database/database_real_data.cpp \
     database/database_skill_converter.cpp \
+    files/tmp_files.cpp \
     game/data/calendar.cpp \
     game/data/coach.cpp \
     game/data/competition.cpp \
@@ -63,7 +64,8 @@ SOURCES += \
     ui/scenes/starting_scene.cpp \
     ui/scenes/transfers_scene.cpp \
     ui/widgets/layout_general.cpp \
-    ui/widgets/widget_general.cpp
+    ui/widgets/widget_general.cpp \
+    ui/widgets/widget_qss_image_resize.cpp
 
 HEADERS += \
     api/api_club.h \
@@ -75,6 +77,7 @@ HEADERS += \
     database/database_dynamic_data.h \
     database/database_real_data.h \
     database/database_skill_converter.h \
+    files/tmp_files.h \
     game/data/calendar.h \
     game/data/coach.h \
     game/data/competition.h \
@@ -114,7 +117,8 @@ HEADERS += \
     network/network_manager.h \
     network/request_buffer.h \
     ui/scenes/operational/scene_switch.h \
-    ui/scenes/operational/scenes_defs.h
+    ui/scenes/operational/scenes_defs.h \
+    ui/widgets/widget_qss_image_resize.h
 
 FORMS += \
     ui/mainwindow.ui \

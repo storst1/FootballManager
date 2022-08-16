@@ -127,3 +127,17 @@ QString MainWindow::BackgroundResource(const QString &styleSheet) const noexcept
     }
     return path;
 }
+
+
+QString MainWindow::ProjectDir() noexcept
+{
+    QString path = QFileInfo(".").absolutePath();
+    QDir dir(path);
+    dir.cdUp();
+    return dir.path();
+}
+
+QString MainWindow::GeneralResDir() noexcept
+{
+    return MainWindow::ProjectDir() + "/Resources";
+}

@@ -19,6 +19,8 @@
 #include "game/game.h"
 #include "ui/scenes/operational/scene_switch.h"
 #include "ui/scenes/operational/scenes_defs.h"
+#include "ui/widgets/widget_qss_image_resize.h"
+#include "files/tmp_files.h"
 
 #include <QMainWindow>
 #include <QGridLayout>
@@ -39,6 +41,7 @@
 #include <QDebug>
 #include <QStackedWidget>
 #include <QVariant>
+#include <QDir>
 
 #include <algorithm>
 
@@ -63,6 +66,8 @@ public:
     static QString NaturalizeNum(int num);
     static void drawPlayerFlag(QPixmap& flag, FEDERATION* fed1, FEDERATION* fed2);
     static void drawLeagueHeaderFlag(QPixmap& flag, FEDERATION* fed);
+    static QString ProjectDir() noexcept;
+    static QString GeneralResDir() noexcept;
 
 private slots:
     void on_StartingSceneNewGame_clicked();
@@ -102,6 +107,7 @@ private:
 
     //Other data
     enum PlayerSortType {None, Nation, Name, Pos, Age, TV, Skill};
+    TMP_FILES* tmpFilesStack = new TMP_FILES();
 
     //Database & API methods
     QString getRealDataDbPath();

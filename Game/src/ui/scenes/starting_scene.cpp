@@ -17,9 +17,9 @@ void MainWindow::SetupStartingScene(){
         ui->StartingSceneSettingsButton
     });
 
-    QString s = ui->StartingSceneLoadGame->styleSheet();
-    WIDGET_QSS_IMAGE_RESIZE resize_engine(s, tmpFilesStack);
-    ui->StartingSceneLoadGame->setStyleSheet(resize_engine.ResizeAllAndBindToQss(100, 100));
+    //QString s = ui->StartingSceneLoadGame->styleSheet();
+    //WIDGET_QSS_IMAGE_RESIZE resize_engine(s, tmpFilesStack);
+    //ui->StartingSceneLoadGame->setStyleSheet(resize_engine.ResizeAllAndBindToQss(100, 100));
 }
 
 void MainWindow::on_StartingSceneNewGame_clicked()

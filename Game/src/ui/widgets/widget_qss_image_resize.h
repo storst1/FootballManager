@@ -24,6 +24,7 @@ private:
     QString CreatePathForFile(const QString& orig_file_name, int new_h, int new_y) const noexcept;
     QString ExtractNameFromQtUrl(QString str) const;
     QString GetFullPathToResFromQtUrl(QString str) const;
+    QString PackPathIntoQtUrl(QString str) const;
 private:
     QString qss;
     TMP_FILES* tmp_files_stack;

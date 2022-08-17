@@ -88,6 +88,13 @@ void MainWindow::ResizeGeneralWidget(QWidget *widget, float x_mult, float y_mult
     float new_width = width * x_mult;
     float new_height = height * y_mult;
     widget->setGeometry(widget->x(), widget->y(), new_width, new_height);
+
+    //Resize QSS-binded background images
+    QString widgets_qss = widget->styleSheet();
+    WIDGET_QSS_IMAGE_RESIZE qss_resize_engine(widgets_qss, tmpFilesStack);
+    QString new_qss = qss_resize_engine.ResizeAllAndBindToQss(new_width, new_height);
+    qDebug() << new_qss;
+    widget->setStyleSheet(new_qss);
 }
 
 void MainWindow::ResizeMultipleWidgetsToFitRes(std::initializer_list<QWidget *> widgets)

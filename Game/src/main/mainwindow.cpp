@@ -32,6 +32,7 @@ MainWindow::~MainWindow()
     qDeleteAll(allPlayers);
     //delete gameData;
     delete ui;
+    delete tmpFilesStack;
 }
 
 QString MainWindow::getRealDataDbPath()

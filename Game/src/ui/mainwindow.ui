@@ -528,8 +528,8 @@ QComboBox QAbstractItemView {
          <rect>
           <x>300</x>
           <y>210</y>
-          <width>1021</width>
-          <height>641</height>
+          <width>1020</width>
+          <height>600</height>
          </rect>
         </property>
         <property name="styleSheet">
@@ -560,8 +560,8 @@ QComboBox QAbstractItemView {
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>1021</width>
-           <height>641</height>
+           <width>1020</width>
+           <height>600</height>
           </rect>
          </property>
          <property name="styleSheet">
@@ -601,6 +601,19 @@ QComboBox QAbstractItemView {
         </property>
         <property name="text">
          <string>Name</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="HomeSceneCalendarLabel">
+        <property name="geometry">
+         <rect>
+          <x>1580</x>
+          <y>210</y>
+          <width>200</width>
+          <height>600</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
         </property>
        </widget>
       </widget>

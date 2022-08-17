@@ -71,6 +71,7 @@ public:
 
 private slots:
     void on_StartingSceneNewGame_clicked();
+
     void on_NewGameSceneLeaguesComboBox_currentIndexChanged(int index);
 
     void on_NewGameScenePrevClubButton_clicked();
@@ -78,6 +79,18 @@ private slots:
     void on_NewGameSceneNextClubButton_clicked();
 
     void on_NewGameSceneStartButton_clicked();
+
+    void on_HomeSceneSSANation_clicked();
+
+    void on_HomeSceneSSAName_clicked();
+
+    void on_HomeSceneSSAPos_clicked();
+
+    void on_HomeSceneSSAAge_clicked();
+
+    void on_HomeSceneSSARating_clicked();
+
+    void on_HomeSceneSSAValue_clicked();
 
 private:
     //Window properties
@@ -260,6 +273,7 @@ private:
     void HomeSceneSortPlayersByAge();
     void HomeSceneSortPlayersByTV();
     void HomeSceneSortPlayersBySkill();
+    void HomeSceneSortPlayersByNation();
     void HomeSceneReversePlayers();
     void HomeSceneSetupCalendarBar(DATE curDate);
     void HomeSceneUpdateCalendarBar(DATE curDate);

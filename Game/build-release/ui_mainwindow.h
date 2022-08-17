@@ -53,6 +53,7 @@ public:
     QScrollArea *HomeSceneSSA;
     QWidget *HomeSceneSSAWidget;
     QPushButton *HomeSceneSSAName;
+    QLabel *HomeSceneCalendarLabel;
     QStatusBar *statusbar;
 
     void setupUi(QMainWindow *MainWindow)
@@ -362,7 +363,7 @@ public:
 "         } ;"));
         HomeSceneSSA = new QScrollArea(HomeScene);
         HomeSceneSSA->setObjectName(QString::fromUtf8("HomeSceneSSA"));
-        HomeSceneSSA->setGeometry(QRect(300, 210, 1021, 641));
+        HomeSceneSSA->setGeometry(QRect(300, 210, 1020, 600));
         HomeSceneSSA->setStyleSheet(QString::fromUtf8("QScrollArea{\n"
 "                 background-color: transparent;\n"
 "                 border: none;\n"
@@ -384,7 +385,7 @@ public:
         HomeSceneSSA->setWidgetResizable(true);
         HomeSceneSSAWidget = new QWidget();
         HomeSceneSSAWidget->setObjectName(QString::fromUtf8("HomeSceneSSAWidget"));
-        HomeSceneSSAWidget->setGeometry(QRect(0, 0, 1021, 641));
+        HomeSceneSSAWidget->setGeometry(QRect(0, 0, 1020, 600));
         HomeSceneSSAWidget->setStyleSheet(QString::fromUtf8("QScrollArea > QWidget > QWidget{\n"
 "                  background-color: transparent;\n"
 "                  border: none;\n"
@@ -409,6 +410,9 @@ public:
 "         :hover{\n"
 "             color: blue;\n"
 "         } ;"));
+        HomeSceneCalendarLabel = new QLabel(HomeScene);
+        HomeSceneCalendarLabel->setObjectName(QString::fromUtf8("HomeSceneCalendarLabel"));
+        HomeSceneCalendarLabel->setGeometry(QRect(1580, 210, 200, 600));
         stackedWidget->addWidget(HomeScene);
 
         gridLayout->addWidget(stackedWidget, 0, 0, 1, 1);
@@ -444,6 +448,7 @@ public:
         HomeSceneSSARating->setText(QCoreApplication::translate("MainWindow", "Value", nullptr));
         HomeSceneSSAValue->setText(QCoreApplication::translate("MainWindow", "Rating", nullptr));
         HomeSceneSSAName->setText(QCoreApplication::translate("MainWindow", "Name", nullptr));
+        HomeSceneCalendarLabel->setText(QString());
     } // retranslateUi
 
 };

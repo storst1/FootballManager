@@ -113,6 +113,17 @@ bool PLAYER::CompTwoPlayersBySkill(const PLAYER *p1, const PLAYER *p2)
     return p1->getSkill() < p2->getSkill();
 }
 
+bool PLAYER::CompTwoPlayersByNation(const PLAYER *p1, const PLAYER *p2)
+{
+    if(p1->getFF()->getName() == p2->getFF()->getName()){
+        if((p1->getSF() == nullptr || p2->getSF() == nullptr) || p1->getSF()->getName() == p2->getSF()->getName()){
+            return CompTwoPlayersByPos(p1, p2);
+        }
+        return p1->getSF()->getName() < p2->getSF()->getName();
+    }
+    return p1->getFF()->getName() < p2->getFF()->getName();
+}
+
 bool PLAYER::NormalizeTV(int& TV)
 {
     if(TV == 0){
@@ -200,4 +211,15 @@ bool PLAYER::CompTwoPlayersBySkillReversed(const PLAYER *p1, const PLAYER *p2)
         return CompTwoPlayersByPos(p1, p2);
     }
     return p1->getSkill() > p2->getSkill();
+}
+
+bool PLAYER::CompTwoPlayersByNationReversed(const PLAYER *p1, const PLAYER *p2)
+{
+    if(p1->getFF()->getName() == p2->getFF()->getName()){
+        if((p1->getSF() == nullptr || p2->getSF() == nullptr) || p1->getSF()->getName() == p2->getSF()->getName()){
+            return CompTwoPlayersByPos(p1, p2);
+        }
+        return p1->getSF()->getName() > p2->getSF()->getName();
+    }
+    return p1->getFF()->getName() > p2->getFF()->getName();
 }

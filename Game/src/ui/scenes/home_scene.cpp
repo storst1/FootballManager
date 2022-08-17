@@ -50,217 +50,12 @@ void MainWindow::SetupHomeScene(){
         ResizeWidgetToFitRes(wid);
     }
 
-    /*
-    sceneSwitch->Switch(HOME_SCENE);
-    ClearLay(homeSceneMainLayout);
-
-    QString scrollAreaStyle =
-            "QScrollArea{ "
-                "background-color: transparent;"
-                "border: none;"
-                "background-repeat: none;"
-                "background: transparent;"
-            "}"
-            "QScrollArea > QWidget > QScrollBar:vertical {"
-                "background: palette(base)"
-            "}"
-            "QScrollArea > QWidget > QScrollBar:handle:vertical {"
-                "background: rgb(141,232,123);"
-            "}"
-            "QScrollArea > QWidget > QScrollBar:add-page:vertical {"
-                "background: rgb(225,252,220);"
-            "}"
-            "QScrollArea > QWidget > QScrollBar:sub-page:vertical {"
-                "background: rgb(225,252,220);"
-            "}";
-
-             QScrollArea{
-                 background-color: transparent;
-                 border: none;
-                 background-repeat: none;
-                 background: transparent;
-             }
-             QScrollArea > QWidget > QScrollBar:vertical {
-                 background: palette(base)
-             }
-             QScrollArea > QWidget > QScrollBar:handle:vertical {
-                 background: rgb(141,232,123);
-             }
-             QScrollArea > QWidget > QScrollBar:add-page:vertical {
-                 background: rgb(225,252,220);
-             }
-             QScrollArea > QWidget > QScrollBar:sub-page:vertical {
-                 background: rgb(225,252,220);
-             }
-
-    QString scrollAreaWidgetStyle =
-            "QScrollArea > QWidget > QWidget{"
-                "background-color: transparent;"
-                "border: none;"
-                "background-repeat: none;"
-                "background: transparent;"
-            "}";
-
-              QScrollArea > QWidget > QWidget{
-                  background-color: transparent;
-                  border: none;
-                  background-repeat: none;
-                  background: transparent;
-              }  ;
-
-    QString headerLabelStyle =
-            "QLabel{ "
-                "background-color: transparent;"
-                "border: none;"
-                "background-repeat: none;"
-                "background: transparent;"
-                "font-size: 23px;"
-                "font-weight: bold;"
-                "font-family: Comic Sans MS;"
-                "color: rgb(211, 242, 254);"
-            "}";
-
-    QString headerButtonStyle =
-            "QPushButton{ "
-                "background-color: transparent;"
-                "border: none;"
-                "background-repeat: none;"
-                "background: transparent;"
-                "font-size: 23px;"
-                "font-weight: bold;"
-                "font-family: Comic Sans MS;"
-                "color: rgb(211, 242, 254);"
-                "text-align: left;"
-            "}"
-            ":hover{"
-                "color: blue;"
-            "}";
-
-        //Pure QSS
-         QPushButton{
-             background-color: transparent;
-             border: none;
-             background-repeat: none;
-             background: transparent;
-             font-size: 23px;
-             font-weight: bold;
-             font-family: Comic Sans MS;
-             color: rgb(211, 242, 254);
-             text-align: left;
-         }
-         :hover{
-             color: blue;
-         } ;
-
-    //TakeSpaceInLay(homeSceneMainLayout, 1, 0, 3);
-
-    SetupNavigationLay();
-    homeSceneMainLayout->addLayout(navigationLay, 0, 1);
-
-    const int headerLabelHeight = 30;
-    CLUB* club = user->getClub();
-    homeScenePlayers = club->getPlayers();
-    homeSceneLastSortClicked = Pos;
-
-    homeScenePlayersHeaderLay = new QGridLayout();
-
-    QLabel* nationHeader = new QLabel("Nation");
-    nationHeader->setFixedSize(120, headerLabelHeight);
-    nationHeader->setStyleSheet(headerLabelStyle);
-
-    QPushButton* nameHeader = new QPushButton("Name");
-    nameHeader->setStyleSheet(headerButtonStyle);
-    nameHeader->setFixedSize(390, headerLabelHeight);
-    connect(nameHeader, &QPushButton::clicked, this, [this]{
-        homeSceneLastSortClicked == Name ? HomeSceneReversePlayers() :   HomeSceneSortPlayersByName();
-        ClearLay(homeScenePlayersLay);
-        HomeSceneAddPlayersToLay();
-        homeSceneLastSortClicked = Name;
-    });
-
-    QPushButton* posHeader = new QPushButton("Position");
-    posHeader->setStyleSheet(headerButtonStyle);
-    posHeader->setFixedSize(90, headerLabelHeight);
-    connect(posHeader, &QPushButton::clicked, this, [this]{
-        homeSceneLastSortClicked == Pos ? HomeSceneReversePlayers() : HomeSceneSortPlayersByPos();
-        ClearLay(homeScenePlayersLay);
-        HomeSceneAddPlayersToLay();
-        homeSceneLastSortClicked = Pos;
-    });
-
-    QPushButton* ageHeader = new QPushButton(" Age");
-    ageHeader->setStyleSheet(headerButtonStyle);
-    ageHeader->setFixedSize(60, headerLabelHeight);
-    connect(ageHeader, &QPushButton::clicked, this, [this]{
-        homeSceneLastSortClicked == Age ? HomeSceneReversePlayers() : HomeSceneSortPlayersByAge();
-        ClearLay(homeScenePlayersLay);
-        HomeSceneAddPlayersToLay();
-        homeSceneLastSortClicked = Age;
-    });
-
-    QPushButton* skillHeader = new QPushButton("Rating");
-    skillHeader->setStyleSheet(headerButtonStyle);
-    skillHeader->setFixedSize(110, headerLabelHeight);
-    connect(skillHeader, &QPushButton::clicked, this, [this]{
-        homeSceneLastSortClicked == Skill ? HomeSceneReversePlayers() : HomeSceneSortPlayersBySkill();
-        ClearLay(homeScenePlayersLay);
-        HomeSceneAddPlayersToLay();
-        homeSceneLastSortClicked = Skill;
-    });
-
-    QPushButton* TVHeader = new QPushButton("Value");
-    TVHeader->setStyleSheet(headerButtonStyle);
-    TVHeader->setFixedSize(170, headerLabelHeight);
-    connect(TVHeader, &QPushButton::clicked, this, [this]{
-        homeSceneLastSortClicked == TV ? HomeSceneReversePlayers() : HomeSceneSortPlayersByTV();
-        ClearLay(homeScenePlayersLay);
-        HomeSceneAddPlayersToLay();
-        homeSceneLastSortClicked = TV;
-    });
-
-    homeScenePlayersHeaderLay->addWidget(nationHeader, 0, 0, Qt::AlignLeft);
-    homeScenePlayersHeaderLay->addWidget(nameHeader, 0, 1, Qt::AlignLeft);
-    homeScenePlayersHeaderLay->addWidget(posHeader, 0, 2, Qt::AlignLeft);
-    homeScenePlayersHeaderLay->addWidget(ageHeader, 0, 3, Qt::AlignLeft);
-    homeScenePlayersHeaderLay->addWidget(TVHeader, 0, 4, Qt::AlignLeft);
-    homeScenePlayersHeaderLay->addWidget(skillHeader, 0, 5, Qt::AlignLeft);
-
-    homeSceneMainLayout->addLayout(homeScenePlayersHeaderLay, 1, 1);
-
-    homeScenePlayersScrollArea = new QScrollArea;
-    homeScenePlayersScrollArea->setFixedSize(1000, 600);
-    homeScenePlayersScrollArea->setStyleSheet(scrollAreaStyle);
-    homeScenePlayersScrollArea->scrollBarWidgets(Qt::AlignHorizontal_Mask);
-    homeScenePlayersScrollAreaWidget = new QWidget(homeScenePlayersScrollArea);
-    homeScenePlayersScrollAreaWidget->setStyleSheet(scrollAreaWidgetStyle);
-    homeScenePlayersLay = new QGridLayout(homeScenePlayersScrollAreaWidget);
-
-    HomeSceneAddPlayersToLay();
-
-    homeScenePlayersScrollArea->setWidget(homeScenePlayersScrollAreaWidget);
-    homeScenePlayersScrollAreaWidget->setLayout(homeScenePlayersLay);
-
-    homeSceneMainLayout->addWidget(homeScenePlayersScrollArea, 2, 1, Qt::AlignCenter);
-
-    HomeSceneSetupCalendarBar(eventHandler->getCurDate());
-
-    homeSceneMainLayout->addWidget(homeSceneContinueButton, 1, 2, Qt::AlignLeft);
-    homeSceneMainLayout->addWidget(homeSceneCalendarBar, 2, 2, Qt::AlignLeft);
-
-    homeSceneSquadButton = new QPushButton("Starting 11");
-    homeSceneSquadButton->setFixedSize(200, 70);
-    connect(homeSceneSquadButton, &QPushButton::clicked, this, [this]{
-        SetupSquadScene();
-    });
-
-    homeSceneMainLayout->addWidget(homeSceneSquadButton, 1, 0, Qt::AlignRight);
-
-    TakeSpaceInLay(homeSceneMainLayout, 150, 3, 3);
-    */
+    //Setup calendar
+    HomeSceneUpdateCalendarBar(eventHandler->getCurDate());
 }
 
 void MainWindow::HomeSceneAddPlayersToLay(){
-    QString playerButtonStyle =
+    const QString playerButtonStyle =
             "QPushButton{ "
                 "background-color: transparent;"
                 "border: none;"
@@ -276,7 +71,7 @@ void MainWindow::HomeSceneAddPlayersToLay(){
                 "color: orange;"
             "}";
 
-    QString infoLabelStyle =
+    const QString infoLabelStyle =
             "QLabel{ "
                 "background-color: transparent;"
                 "border: none;"
@@ -361,7 +156,7 @@ void MainWindow::HomeSceneUpdateCalendarBar(DATE curDate)
         HomeSceneDrawDayOnCalendarBar(DateToDraw, i, painter);
     }
     painter.end();
-    homeSceneCalendarBar->setPixmap(calendarPixmap);
+    ui->HomeSceneCalendarLabel->setPixmap(calendarPixmap);
 }
 
 void MainWindow::HomeSceneDrawDayOnCalendarBar(DATE date, int row, QPainter& painter)
@@ -386,6 +181,59 @@ void MainWindow::HomeSceneSetupSSALay()
     ClearLay(HomeSceneSSALay_UI);
     delete HomeSceneSSALay_UI;
     HomeSceneSSALay_UI = new QGridLayout(ui->HomeSceneSSAWidget);
+}
+
+void MainWindow::on_HomeSceneSSANation_clicked()
+{
+    homeSceneLastSortClicked == Nation ? HomeSceneReversePlayers() : HomeSceneSortPlayersByNation();
+    ClearLay(HomeSceneSSALay_UI);
+    HomeSceneAddPlayersToLay();
+    homeSceneLastSortClicked = Nation;
+}
+
+
+void MainWindow::on_HomeSceneSSAName_clicked()
+{
+    homeSceneLastSortClicked == Name ? HomeSceneReversePlayers() :   HomeSceneSortPlayersByName();
+    ClearLay(HomeSceneSSALay_UI);
+    HomeSceneAddPlayersToLay();
+    homeSceneLastSortClicked = Name;
+}
+
+
+void MainWindow::on_HomeSceneSSAPos_clicked()
+{
+    homeSceneLastSortClicked == Pos ? HomeSceneReversePlayers() : HomeSceneSortPlayersByPos();
+    ClearLay(HomeSceneSSALay_UI);
+    HomeSceneAddPlayersToLay();
+    homeSceneLastSortClicked = Pos;
+}
+
+
+void MainWindow::on_HomeSceneSSAAge_clicked()
+{
+    homeSceneLastSortClicked == Age ? HomeSceneReversePlayers() : HomeSceneSortPlayersByAge();
+    ClearLay(HomeSceneSSALay_UI);
+    HomeSceneAddPlayersToLay();
+    homeSceneLastSortClicked = Age;
+}
+
+
+void MainWindow::on_HomeSceneSSARating_clicked()
+{
+    homeSceneLastSortClicked == Skill ? HomeSceneReversePlayers() : HomeSceneSortPlayersBySkill();
+    ClearLay(HomeSceneSSALay_UI);
+    HomeSceneAddPlayersToLay();
+    homeSceneLastSortClicked = Skill;
+}
+
+
+void MainWindow::on_HomeSceneSSAValue_clicked()
+{
+    homeSceneLastSortClicked == TV ? HomeSceneReversePlayers() : HomeSceneSortPlayersByTV();
+    ClearLay(HomeSceneSSALay_UI);
+    HomeSceneAddPlayersToLay();
+    homeSceneLastSortClicked = TV;
 }
 
 void MainWindow::HomeSceneSortPlayersByName()
@@ -413,7 +261,221 @@ void MainWindow::HomeSceneSortPlayersBySkill()
     std::sort(homeScenePlayers.begin(), homeScenePlayers.end(), PLAYER::CompTwoPlayersBySkill);
 }
 
+void MainWindow::HomeSceneSortPlayersByNation()
+{
+    std::sort(homeScenePlayers.begin(), homeScenePlayers.end(), PLAYER::CompTwoPlayersByNation);
+}
+
 void MainWindow::HomeSceneReversePlayers()
 {
     std::reverse(homeScenePlayers.begin(), homeScenePlayers.end());
 }
+
+//Old UI code
+/*
+sceneSwitch->Switch(HOME_SCENE);
+ClearLay(homeSceneMainLayout);
+
+QString scrollAreaStyle =
+        "QScrollArea{ "
+            "background-color: transparent;"
+            "border: none;"
+            "background-repeat: none;"
+            "background: transparent;"
+        "}"
+        "QScrollArea > QWidget > QScrollBar:vertical {"
+            "background: palette(base)"
+        "}"
+        "QScrollArea > QWidget > QScrollBar:handle:vertical {"
+            "background: rgb(141,232,123);"
+        "}"
+        "QScrollArea > QWidget > QScrollBar:add-page:vertical {"
+            "background: rgb(225,252,220);"
+        "}"
+        "QScrollArea > QWidget > QScrollBar:sub-page:vertical {"
+            "background: rgb(225,252,220);"
+        "}";
+
+         QScrollArea{
+             background-color: transparent;
+             border: none;
+             background-repeat: none;
+             background: transparent;
+         }
+         QScrollArea > QWidget > QScrollBar:vertical {
+             background: palette(base)
+         }
+         QScrollArea > QWidget > QScrollBar:handle:vertical {
+             background: rgb(141,232,123);
+         }
+         QScrollArea > QWidget > QScrollBar:add-page:vertical {
+             background: rgb(225,252,220);
+         }
+         QScrollArea > QWidget > QScrollBar:sub-page:vertical {
+             background: rgb(225,252,220);
+         }
+
+QString scrollAreaWidgetStyle =
+        "QScrollArea > QWidget > QWidget{"
+            "background-color: transparent;"
+            "border: none;"
+            "background-repeat: none;"
+            "background: transparent;"
+        "}";
+
+          QScrollArea > QWidget > QWidget{
+              background-color: transparent;
+              border: none;
+              background-repeat: none;
+              background: transparent;
+          }  ;
+
+QString headerLabelStyle =
+        "QLabel{ "
+            "background-color: transparent;"
+            "border: none;"
+            "background-repeat: none;"
+            "background: transparent;"
+            "font-size: 23px;"
+            "font-weight: bold;"
+            "font-family: Comic Sans MS;"
+            "color: rgb(211, 242, 254);"
+        "}";
+
+QString headerButtonStyle =
+        "QPushButton{ "
+            "background-color: transparent;"
+            "border: none;"
+            "background-repeat: none;"
+            "background: transparent;"
+            "font-size: 23px;"
+            "font-weight: bold;"
+            "font-family: Comic Sans MS;"
+            "color: rgb(211, 242, 254);"
+            "text-align: left;"
+        "}"
+        ":hover{"
+            "color: blue;"
+        "}";
+
+    //Pure QSS
+     QPushButton{
+         background-color: transparent;
+         border: none;
+         background-repeat: none;
+         background: transparent;
+         font-size: 23px;
+         font-weight: bold;
+         font-family: Comic Sans MS;
+         color: rgb(211, 242, 254);
+         text-align: left;
+     }
+     :hover{
+         color: blue;
+     } ;
+
+//TakeSpaceInLay(homeSceneMainLayout, 1, 0, 3);
+
+SetupNavigationLay();
+homeSceneMainLayout->addLayout(navigationLay, 0, 1);
+
+const int headerLabelHeight = 30;
+CLUB* club = user->getClub();
+homeScenePlayers = club->getPlayers();
+homeSceneLastSortClicked = Pos;
+
+homeScenePlayersHeaderLay = new QGridLayout();
+
+QLabel* nationHeader = new QLabel("Nation");
+nationHeader->setFixedSize(120, headerLabelHeight);
+nationHeader->setStyleSheet(headerLabelStyle);
+
+QPushButton* nameHeader = new QPushButton("Name");
+nameHeader->setStyleSheet(headerButtonStyle);
+nameHeader->setFixedSize(390, headerLabelHeight);
+connect(nameHeader, &QPushButton::clicked, this, [this]{
+    homeSceneLastSortClicked == Name ? HomeSceneReversePlayers() :   HomeSceneSortPlayersByName();
+    ClearLay(homeScenePlayersLay);
+    HomeSceneAddPlayersToLay();
+    homeSceneLastSortClicked = Name;
+});
+
+QPushButton* posHeader = new QPushButton("Position");
+posHeader->setStyleSheet(headerButtonStyle);
+posHeader->setFixedSize(90, headerLabelHeight);
+connect(posHeader, &QPushButton::clicked, this, [this]{
+    homeSceneLastSortClicked == Pos ? HomeSceneReversePlayers() : HomeSceneSortPlayersByPos();
+    ClearLay(homeScenePlayersLay);
+    HomeSceneAddPlayersToLay();
+    homeSceneLastSortClicked = Pos;
+});
+
+QPushButton* ageHeader = new QPushButton(" Age");
+ageHeader->setStyleSheet(headerButtonStyle);
+ageHeader->setFixedSize(60, headerLabelHeight);
+connect(ageHeader, &QPushButton::clicked, this, [this]{
+    homeSceneLastSortClicked == Age ? HomeSceneReversePlayers() : HomeSceneSortPlayersByAge();
+    ClearLay(homeScenePlayersLay);
+    HomeSceneAddPlayersToLay();
+    homeSceneLastSortClicked = Age;
+});
+
+QPushButton* skillHeader = new QPushButton("Rating");
+skillHeader->setStyleSheet(headerButtonStyle);
+skillHeader->setFixedSize(110, headerLabelHeight);
+connect(skillHeader, &QPushButton::clicked, this, [this]{
+    homeSceneLastSortClicked == Skill ? HomeSceneReversePlayers() : HomeSceneSortPlayersBySkill();
+    ClearLay(homeScenePlayersLay);
+    HomeSceneAddPlayersToLay();
+    homeSceneLastSortClicked = Skill;
+});
+
+QPushButton* TVHeader = new QPushButton("Value");
+TVHeader->setStyleSheet(headerButtonStyle);
+TVHeader->setFixedSize(170, headerLabelHeight);
+connect(TVHeader, &QPushButton::clicked, this, [this]{
+    homeSceneLastSortClicked == TV ? HomeSceneReversePlayers() : HomeSceneSortPlayersByTV();
+    ClearLay(homeScenePlayersLay);
+    HomeSceneAddPlayersToLay();
+    homeSceneLastSortClicked = TV;
+});
+
+homeScenePlayersHeaderLay->addWidget(nationHeader, 0, 0, Qt::AlignLeft);
+homeScenePlayersHeaderLay->addWidget(nameHeader, 0, 1, Qt::AlignLeft);
+homeScenePlayersHeaderLay->addWidget(posHeader, 0, 2, Qt::AlignLeft);
+homeScenePlayersHeaderLay->addWidget(ageHeader, 0, 3, Qt::AlignLeft);
+homeScenePlayersHeaderLay->addWidget(TVHeader, 0, 4, Qt::AlignLeft);
+homeScenePlayersHeaderLay->addWidget(skillHeader, 0, 5, Qt::AlignLeft);
+
+homeSceneMainLayout->addLayout(homeScenePlayersHeaderLay, 1, 1);
+
+homeScenePlayersScrollArea = new QScrollArea;
+homeScenePlayersScrollArea->setFixedSize(1000, 600);
+homeScenePlayersScrollArea->setStyleSheet(scrollAreaStyle);
+homeScenePlayersScrollArea->scrollBarWidgets(Qt::AlignHorizontal_Mask);
+homeScenePlayersScrollAreaWidget = new QWidget(homeScenePlayersScrollArea);
+homeScenePlayersScrollAreaWidget->setStyleSheet(scrollAreaWidgetStyle);
+homeScenePlayersLay = new QGridLayout(homeScenePlayersScrollAreaWidget);
+
+HomeSceneAddPlayersToLay();
+
+homeScenePlayersScrollArea->setWidget(homeScenePlayersScrollAreaWidget);
+homeScenePlayersScrollAreaWidget->setLayout(homeScenePlayersLay);
+
+homeSceneMainLayout->addWidget(homeScenePlayersScrollArea, 2, 1, Qt::AlignCenter);
+
+HomeSceneSetupCalendarBar(eventHandler->getCurDate());
+
+homeSceneMainLayout->addWidget(homeSceneContinueButton, 1, 2, Qt::AlignLeft);
+homeSceneMainLayout->addWidget(homeSceneCalendarBar, 2, 2, Qt::AlignLeft);
+
+homeSceneSquadButton = new QPushButton("Starting 11");
+homeSceneSquadButton->setFixedSize(200, 70);
+connect(homeSceneSquadButton, &QPushButton::clicked, this, [this]{
+    SetupSquadScene();
+});
+
+homeSceneMainLayout->addWidget(homeSceneSquadButton, 1, 0, Qt::AlignRight);
+
+TakeSpaceInLay(homeSceneMainLayout, 150, 3, 3);
+*/

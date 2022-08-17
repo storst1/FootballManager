@@ -165,7 +165,7 @@ public:
 "            };"));
         NewGameSceneStartButton = new QPushButton(NewGameScene);
         NewGameSceneStartButton->setObjectName(QString::fromUtf8("NewGameSceneStartButton"));
-        NewGameSceneStartButton->setGeometry(QRect(790, 700, 400, 120));
+        NewGameSceneStartButton->setGeometry(QRect(790, 740, 400, 120));
         NewGameSceneStartButton->setStyleSheet(QString::fromUtf8("QPushButton{ \n"
 "            background-color: transparent;\n"
 "            border: none;\n"

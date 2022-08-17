@@ -465,7 +465,7 @@ QComboBox QAbstractItemView {
          <string>Age</string>
         </property>
        </widget>
-       <widget class="QPushButton" name="HomeSceneSSARating">
+       <widget class="QPushButton" name="HomeSceneSSAValue">
         <property name="geometry">
          <rect>
           <x>1030</x>
@@ -494,7 +494,7 @@ QComboBox QAbstractItemView {
          <string>Value</string>
         </property>
        </widget>
-       <widget class="QPushButton" name="HomeSceneSSAValue">
+       <widget class="QPushButton" name="HomeSceneSSARating">
         <property name="geometry">
          <rect>
           <x>1200</x>

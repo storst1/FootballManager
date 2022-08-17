@@ -48,8 +48,8 @@ public:
     QPushButton *HomeSceneSSANation;
     QPushButton *HomeSceneSSAPos;
     QPushButton *HomeSceneSSAAge;
-    QPushButton *HomeSceneSSARating;
     QPushButton *HomeSceneSSAValue;
+    QPushButton *HomeSceneSSARating;
     QScrollArea *HomeSceneSSA;
     QWidget *HomeSceneSSAWidget;
     QPushButton *HomeSceneSSAName;
@@ -327,10 +327,10 @@ public:
 "         :hover{\n"
 "             color: blue;\n"
 "         } ;"));
-        HomeSceneSSARating = new QPushButton(HomeScene);
-        HomeSceneSSARating->setObjectName(QString::fromUtf8("HomeSceneSSARating"));
-        HomeSceneSSARating->setGeometry(QRect(1030, 170, 161, 30));
-        HomeSceneSSARating->setStyleSheet(QString::fromUtf8("QPushButton{\n"
+        HomeSceneSSAValue = new QPushButton(HomeScene);
+        HomeSceneSSAValue->setObjectName(QString::fromUtf8("HomeSceneSSAValue"));
+        HomeSceneSSAValue->setGeometry(QRect(1030, 170, 161, 30));
+        HomeSceneSSAValue->setStyleSheet(QString::fromUtf8("QPushButton{\n"
 "             background-color: transparent;\n"
 "             border: none;\n"
 "             background-repeat: none;\n"
@@ -344,10 +344,10 @@ public:
 "         :hover{\n"
 "             color: blue;\n"
 "         } ;"));
-        HomeSceneSSAValue = new QPushButton(HomeScene);
-        HomeSceneSSAValue->setObjectName(QString::fromUtf8("HomeSceneSSAValue"));
-        HomeSceneSSAValue->setGeometry(QRect(1200, 170, 121, 30));
-        HomeSceneSSAValue->setStyleSheet(QString::fromUtf8("QPushButton{\n"
+        HomeSceneSSARating = new QPushButton(HomeScene);
+        HomeSceneSSARating->setObjectName(QString::fromUtf8("HomeSceneSSARating"));
+        HomeSceneSSARating->setGeometry(QRect(1200, 170, 121, 30));
+        HomeSceneSSARating->setStyleSheet(QString::fromUtf8("QPushButton{\n"
 "             background-color: transparent;\n"
 "             border: none;\n"
 "             background-repeat: none;\n"
@@ -445,8 +445,8 @@ public:
         HomeSceneSSANation->setText(QCoreApplication::translate("MainWindow", "Nation", nullptr));
         HomeSceneSSAPos->setText(QCoreApplication::translate("MainWindow", "Position", nullptr));
         HomeSceneSSAAge->setText(QCoreApplication::translate("MainWindow", "Age", nullptr));
-        HomeSceneSSARating->setText(QCoreApplication::translate("MainWindow", "Value", nullptr));
-        HomeSceneSSAValue->setText(QCoreApplication::translate("MainWindow", "Rating", nullptr));
+        HomeSceneSSAValue->setText(QCoreApplication::translate("MainWindow", "Value", nullptr));
+        HomeSceneSSARating->setText(QCoreApplication::translate("MainWindow", "Rating", nullptr));
         HomeSceneSSAName->setText(QCoreApplication::translate("MainWindow", "Name", nullptr));
         HomeSceneCalendarLabel->setText(QString());
     } // retranslateUi

@@ -2,6 +2,7 @@
 #define WIDGET_QSS_IMAGE_RESIZE_H
 
 #include "files/tmp_files.h"
+#include "ui/qss_operational/qss_operational.h"
 
 #include <QString>
 #include <QStringList>
@@ -22,9 +23,7 @@ private:
     QString ExtractResPathFromIdx(int idx) const noexcept;
     QString NormalizePathString(QString str) const noexcept;
     QString CreatePathForFile(const QString& orig_file_name, int new_h, int new_y) const noexcept;
-    QString ExtractNameFromQtUrl(QString str) const;
-    QString GetFullPathToResFromQtUrl(QString str) const;
-    QString PackPathIntoQtUrl(QString str) const;
+
 private:
     QString qss;
     TMP_FILES* tmp_files_stack;

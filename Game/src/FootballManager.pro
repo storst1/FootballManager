@@ -55,6 +55,7 @@ SOURCES += \
     main/mainwindow_database.cpp \
     network/network_manager.cpp \
     network/request_buffer.cpp \
+    ui/qss_operational/qss_operational.cpp \
     ui/scenes/home_scene.cpp \
     ui/scenes/new_game_scene.cpp \
     ui/scenes/operational/scene_operational.cpp \
@@ -116,6 +117,7 @@ HEADERS += \
     main/mainwindow.h \
     network/network_manager.h \
     network/request_buffer.h \
+    ui/qss_operational/qss_operational.h \
     ui/scenes/operational/scene_switch.h \
     ui/scenes/operational/scenes_defs.h \
     ui/widgets/widget_qss_image_resize.h

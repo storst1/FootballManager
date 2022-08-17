@@ -14,10 +14,10 @@ QString WIDGET_QSS_IMAGE_RESIZE::ResizeAllAndBindToQss(const int new_w, const in
         //TO DO: Check if such image already exists here
 
         //Create new file with scaled pixmap
-        QString full_path_to_orig = GetFullPathToResFromQtUrl(brg_path) + ".png";
+        QString full_path_to_orig = QSS_OPERATIONAL::GetFullPathToResFromQtUrl(brg_path) + ".png";
         QPixmap orig_pixmap(full_path_to_orig);
         QPixmap new_pixmap = orig_pixmap.scaled(new_w, new_h);
-        QString orig_file_name = ExtractNameFromQtUrl(brg_path);
+        QString orig_file_name = QSS_OPERATIONAL::ExtractNameFromQtUrl(brg_path);
         QString new_file_path = CreatePathForFile(orig_file_name, new_w, new_h);
 
         QFile new_file(new_file_path);
@@ -39,7 +39,7 @@ QString WIDGET_QSS_IMAGE_RESIZE::ResizeAllAndBindToQss(const int new_w, const in
             ++cur_url_length;
         }
         new_qss.erase(std::next(new_qss.cbegin(), correct_idx), std::next(new_qss.cbegin(), correct_idx + cur_url_length));
-        QString string_to_insert_into_qss = " " + PackPathIntoQtUrl(new_file_path);
+        QString string_to_insert_into_qss = " " + QSS_OPERATIONAL::PackPathIntoQtUrl(new_file_path);
         new_qss.insert(correct_idx, string_to_insert_into_qss);
         idx_extra_diff += (string_to_insert_into_qss.size() - cur_url_length);
 
@@ -93,35 +93,4 @@ QString WIDGET_QSS_IMAGE_RESIZE::CreatePathForFile(const QString &orig_file_name
     //qDebug() << "path:; " << core_dir;
     new_path += "/Resources/tmp_images/" + orig_file_name + "_" + QString::number(new_h) + "x" + QString::number(new_y) + ".png";
     return new_path;
-}
-
-//Assumes that provided string is in fact qt url
-//ex: url(:/greenLay280x100.png)
-QString WIDGET_QSS_IMAGE_RESIZE::ExtractNameFromQtUrl(QString str) const
-{
-    //Erase "url(:/" from front
-    str.erase(str.cbegin(), std::next(str.cbegin(), 6));
-
-    //Remove extra closing brace and file format from the string
-    int cnt = 0;
-    for(int i = str.size() - 1; ; --i){
-        if(str[i] == '.'){
-            break;
-        }
-        ++cnt;
-    }
-    str.erase(std::prev(str.cend(), cnt + 1), str.cend());
-    return str;
-}
-
-QString WIDGET_QSS_IMAGE_RESIZE::GetFullPathToResFromQtUrl(QString str) const
-{
-    return MainWindow::GeneralResDir() + "/" + ExtractNameFromQtUrl(str);
-}
-
-QString WIDGET_QSS_IMAGE_RESIZE::PackPathIntoQtUrl(QString str) const
-{
-    str.insert(0, "url(");
-    str.push_back(")");
-    return str;
 }

@@ -11,6 +11,7 @@ public:
     ~TMP_FILES();
 
     void Add(QString& path) noexcept;
+    void DeleteAllFiles() noexcept;
 private:
     QStringList files;
 };

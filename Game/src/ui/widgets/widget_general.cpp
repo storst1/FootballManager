@@ -93,7 +93,7 @@ void MainWindow::ResizeGeneralWidget(QWidget *widget, float x_mult, float y_mult
     QString widgets_qss = widget->styleSheet();
     WIDGET_QSS_IMAGE_RESIZE qss_resize_engine(widgets_qss, tmpFilesStack);
     QString new_qss = qss_resize_engine.ResizeAllAndBindToQss(new_width, new_height);
-    qDebug() << new_qss;
+    //qDebug() << new_qss;
     widget->setStyleSheet(new_qss);
 }
 

@@ -8,7 +8,7 @@ WIDGET_QSS_IMAGE_RESIZE::WIDGET_QSS_IMAGE_RESIZE(QString &qss, TMP_FILES *tmp_fi
 
 QString WIDGET_QSS_IMAGE_RESIZE::ResizeAllAndBindToQss(const int new_w, const int new_h) noexcept
 {
-    QString new_qss = qss;
+     QString new_qss = qss;
     for(const auto& [idx, brg_path]: backgrounds){
         //TO DO: Check if such image already exists here
 
@@ -23,15 +23,15 @@ QString WIDGET_QSS_IMAGE_RESIZE::ResizeAllAndBindToQss(const int new_w, const in
         if(!new_file.open(QIODevice::WriteOnly)){
             qDebug() << "File wasn't open in WIDGET_QSS_IMAGE_RESIZE::ResizeAllAndBindToQss, path: " << new_file.fileName() << ", error: " << new_file.errorString();
         }
-        QDataStream out(&new_file);
-        out << new_pixmap;
+        //QDataStream out(&new_file);
+        //out << new_pixmap;
+        new_pixmap.save(&new_file, "PNG");
         new_file.close();
-        //new_pixmap.save(&new_file, "PNG");
 
         //Adjust qss
         int cnt = 0;
         for(int i = idx; ; ++i){
-            if(new_qss[idx] == ';'){
+            if(new_qss[i] == ';'){
                 break;
             }
             ++cnt;
@@ -87,7 +87,7 @@ QString WIDGET_QSS_IMAGE_RESIZE::CreatePathForFile(const QString &orig_file_name
 {
     QString new_path = MainWindow::ProjectDir();
     //qDebug() << "path:; " << core_dir;
-    new_path += "/Resourses/tmp_images/" + orig_file_name + "_" + QString::number(new_h) + "x" + QString::number(new_y) + ".png";
+    new_path += "/Resources/tmp_images/" + orig_file_name + "_" + QString::number(new_h) + "x" + QString::number(new_y) + ".png";
     return new_path;
 }
 

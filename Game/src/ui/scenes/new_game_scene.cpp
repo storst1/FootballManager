@@ -185,6 +185,16 @@ QMap<QString, LEAGUE*>::iterator MainWindow::NewGameGetNextLeagueIter(const QMap
     return newIter;
 }
 
+void MainWindow::on_NewGameSceneStartButton_clicked()
+{
+    user->setClub(static_cast<CLUB*>((newGameAllLeaguesList[NewGameCurLeagueIdx]->getTeams())[NewGameCurClubIdx]));
+    qDebug() << "User has chosen club: " << user->getClub()->getName();
+    gameHandler->StartNewSeason(START_DATE / FM_DATE_YEAR_MULT);
+    gameHandler->InitBirthdaysEventsForTheFirstTime();
+    SetupHomeScene();
+    //SetupTransfersScene();
+}
+
 //Old UI system for new game scene
 /*
 sceneSwitch->Switch(NEW_GAME_SCENE);

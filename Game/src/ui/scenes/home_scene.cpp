@@ -2,9 +2,55 @@
 #include "game/data/team.h"
 #include "game/data/player.h"
 #include "game/data/player_position.h"
+#include "ui_mainwindow.h"
 
 void MainWindow::SetupHomeScene(){
 
+    ui->stackedWidget->setCurrentIndex(SW_HOME_SCENE);
+
+    //Setup layout of squad scroll area (SSA)
+    HomeSceneSetupSSALay();
+
+    //Load players data & assign other vars
+    CLUB* club = user->getClub();
+    homeScenePlayers = club->getPlayers();
+    homeSceneLastSortClicked = Pos;
+
+    //Add players to layout
+    HomeSceneAddPlayersToLay();
+
+    //Perform resolution adjustments
+    MoveMultipleWidgetsToFitRes({
+        ui->HomeSceneNLCompetitions,
+        ui->HomeSceneNLHome,
+        ui->HomeSceneNLTransfers,
+        ui->HomeSceneSSAAge,
+        ui->HomeSceneSSAName,
+        ui->HomeSceneSSANation,
+        ui->HomeSceneSSAPos,
+        ui->HomeSceneSSARating,
+        ui->HomeSceneSSAValue,
+        ui->HomeSceneSSA
+    });
+
+    ResizeMultipleWidgetsToFitRes({
+        ui->HomeSceneNLCompetitions,
+        ui->HomeSceneNLHome,
+        ui->HomeSceneNLTransfers,
+        ui->HomeSceneSSAAge,
+        ui->HomeSceneSSAName,
+        ui->HomeSceneSSANation,
+        ui->HomeSceneSSAPos,
+        ui->HomeSceneSSARating,
+        ui->HomeSceneSSAValue,
+        ui->HomeSceneSSA
+    });
+
+    for(QWidget* wid : HomeSceneDynamicWidgetsList){
+        ResizeWidgetToFitRes(wid);
+    }
+
+    /*
     sceneSwitch->Switch(HOME_SCENE);
     ClearLay(homeSceneMainLayout);
 
@@ -28,6 +74,25 @@ void MainWindow::SetupHomeScene(){
                 "background: rgb(225,252,220);"
             "}";
 
+             QScrollArea{
+                 background-color: transparent;
+                 border: none;
+                 background-repeat: none;
+                 background: transparent;
+             }
+             QScrollArea > QWidget > QScrollBar:vertical {
+                 background: palette(base)
+             }
+             QScrollArea > QWidget > QScrollBar:handle:vertical {
+                 background: rgb(141,232,123);
+             }
+             QScrollArea > QWidget > QScrollBar:add-page:vertical {
+                 background: rgb(225,252,220);
+             }
+             QScrollArea > QWidget > QScrollBar:sub-page:vertical {
+                 background: rgb(225,252,220);
+             }
+
     QString scrollAreaWidgetStyle =
             "QScrollArea > QWidget > QWidget{"
                 "background-color: transparent;"
@@ -35,6 +100,13 @@ void MainWindow::SetupHomeScene(){
                 "background-repeat: none;"
                 "background: transparent;"
             "}";
+
+              QScrollArea > QWidget > QWidget{
+                  background-color: transparent;
+                  border: none;
+                  background-repeat: none;
+                  background: transparent;
+              }  ;
 
     QString headerLabelStyle =
             "QLabel{ "
@@ -63,6 +135,22 @@ void MainWindow::SetupHomeScene(){
             ":hover{"
                 "color: blue;"
             "}";
+
+        //Pure QSS
+         QPushButton{
+             background-color: transparent;
+             border: none;
+             background-repeat: none;
+             background: transparent;
+             font-size: 23px;
+             font-weight: bold;
+             font-family: Comic Sans MS;
+             color: rgb(211, 242, 254);
+             text-align: left;
+         }
+         :hover{
+             color: blue;
+         } ;
 
     //TakeSpaceInLay(homeSceneMainLayout, 1, 0, 3);
 
@@ -168,6 +256,7 @@ void MainWindow::SetupHomeScene(){
     homeSceneMainLayout->addWidget(homeSceneSquadButton, 1, 0, Qt::AlignRight);
 
     TakeSpaceInLay(homeSceneMainLayout, 150, 3, 3);
+    */
 }
 
 void MainWindow::HomeSceneAddPlayersToLay(){
@@ -228,12 +317,22 @@ void MainWindow::HomeSceneAddPlayersToLay(){
         TV->setStyleSheet(infoLabelStyle);
         TV->setFixedSize(180, playerLabelHeight);
 
-        homeScenePlayersLay->addWidget(flag, curRow, 0, Qt::AlignCenter);
-        homeScenePlayersLay->addWidget(name, curRow, 1, Qt::AlignCenter);
-        homeScenePlayersLay->addWidget(pos, curRow, 2, Qt::AlignCenter);
-        homeScenePlayersLay->addWidget(age, curRow, 3, Qt::AlignCenter);
-        homeScenePlayersLay->addWidget(TV, curRow, 4, Qt::AlignCenter);
-        homeScenePlayersLay->addWidget(skill, curRow, 5, Qt::AlignCenter);
+        HomeSceneSSALay_UI->addWidget(flag, curRow, 0, Qt::AlignCenter);
+        HomeSceneSSALay_UI->addWidget(name, curRow, 1, Qt::AlignCenter);
+        HomeSceneSSALay_UI->addWidget(pos, curRow, 2, Qt::AlignCenter);
+        HomeSceneSSALay_UI->addWidget(age, curRow, 3, Qt::AlignCenter);
+        HomeSceneSSALay_UI->addWidget(TV, curRow, 4, Qt::AlignCenter);
+        HomeSceneSSALay_UI->addWidget(skill, curRow, 5, Qt::AlignCenter);
+
+        HomeSceneDynamicWidgetsList.append({
+            flag,
+            name,
+            pos,
+            age,
+            TV,
+            skill
+        });
+
         ++curRow;
     }
 }
@@ -280,6 +379,13 @@ void MainWindow::HomeSceneDrawDayOnCalendarBar(DATE date, int row, QPainter& pai
     if(bestDayEvent){
         bestDayEvent->paintEvent(painter, row, user->getClub());
     }
+}
+
+void MainWindow::HomeSceneSetupSSALay()
+{
+    ClearLay(HomeSceneSSALay_UI);
+    delete HomeSceneSSALay_UI;
+    HomeSceneSSALay_UI = new QGridLayout(ui->HomeSceneSSAWidget);
 }
 
 void MainWindow::HomeSceneSortPlayersByName()

@@ -16,6 +16,7 @@
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QScrollArea>
 #include <QtWidgets/QStackedWidget>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QWidget>
@@ -40,6 +41,18 @@ public:
     QPushButton *NewGameSceneStartButton;
     QPushButton *NewGameScenePrevClubButton;
     QPushButton *NewGameSceneNextClubButton;
+    QWidget *HomeScene;
+    QPushButton *HomeSceneNLTransfers;
+    QPushButton *HomeSceneNLHome;
+    QPushButton *HomeSceneNLCompetitions;
+    QPushButton *HomeSceneSSANation;
+    QPushButton *HomeSceneSSAPos;
+    QPushButton *HomeSceneSSAAge;
+    QPushButton *HomeSceneSSARating;
+    QPushButton *HomeSceneSSAValue;
+    QScrollArea *HomeSceneSSA;
+    QWidget *HomeSceneSSAWidget;
+    QPushButton *HomeSceneSSAName;
     QStatusBar *statusbar;
 
     void setupUi(QMainWindow *MainWindow)
@@ -165,7 +178,7 @@ public:
 "            };"));
         NewGameSceneStartButton = new QPushButton(NewGameScene);
         NewGameSceneStartButton->setObjectName(QString::fromUtf8("NewGameSceneStartButton"));
-        NewGameSceneStartButton->setGeometry(QRect(790, 700, 400, 120));
+        NewGameSceneStartButton->setGeometry(QRect(790, 740, 400, 120));
         NewGameSceneStartButton->setStyleSheet(QString::fromUtf8("QPushButton{ \n"
 "            background-color: transparent;\n"
 "            border: none;\n"
@@ -209,6 +222,194 @@ public:
 "            };\n"
 ""));
         stackedWidget->addWidget(NewGameScene);
+        HomeScene = new QWidget();
+        HomeScene->setObjectName(QString::fromUtf8("HomeScene"));
+        HomeSceneNLTransfers = new QPushButton(HomeScene);
+        HomeSceneNLTransfers->setObjectName(QString::fromUtf8("HomeSceneNLTransfers"));
+        HomeSceneNLTransfers->setGeometry(QRect(300, 40, 161, 40));
+        HomeSceneNLTransfers->setStyleSheet(QString::fromUtf8("QPushButton{  \n"
+"         background-color: transparent; \n"
+"         border: none; \n"
+"         background-repeat: none; \n"
+"         background: transparent; \n"
+"         font-size: 30px; \n"
+"         font-weight: bold; \n"
+"         font-family: Comic Sans MS; \n"
+"         color: rgb(211, 242, 254); \n"
+"         text-align: left; \n"
+"     } \n"
+"     :hover{ \n"
+"         color: orange; \n"
+"     } ;"));
+        HomeSceneNLHome = new QPushButton(HomeScene);
+        HomeSceneNLHome->setObjectName(QString::fromUtf8("HomeSceneNLHome"));
+        HomeSceneNLHome->setGeometry(QRect(900, 40, 91, 40));
+        HomeSceneNLHome->setStyleSheet(QString::fromUtf8("QPushButton{  \n"
+"         background-color: transparent; \n"
+"         border: none; \n"
+"         background-repeat: none; \n"
+"         background: transparent; \n"
+"         font-size: 30px; \n"
+"         font-weight: bold; \n"
+"         font-family: Comic Sans MS; \n"
+"         color: rgb(211, 242, 254); \n"
+"         text-align: left; \n"
+"     } \n"
+"     :hover{ \n"
+"         color: orange; \n"
+"     } ;"));
+        HomeSceneNLCompetitions = new QPushButton(HomeScene);
+        HomeSceneNLCompetitions->setObjectName(QString::fromUtf8("HomeSceneNLCompetitions"));
+        HomeSceneNLCompetitions->setGeometry(QRect(1400, 40, 191, 40));
+        HomeSceneNLCompetitions->setStyleSheet(QString::fromUtf8("QPushButton{  \n"
+"         background-color: transparent; \n"
+"         border: none; \n"
+"         background-repeat: none; \n"
+"         background: transparent; \n"
+"         font-size: 30px; \n"
+"         font-weight: bold; \n"
+"         font-family: Comic Sans MS; \n"
+"         color: rgb(211, 242, 254); \n"
+"         text-align: left; \n"
+"     } \n"
+"     :hover{ \n"
+"         color: orange; \n"
+"     } ;"));
+        HomeSceneSSANation = new QPushButton(HomeScene);
+        HomeSceneSSANation->setObjectName(QString::fromUtf8("HomeSceneSSANation"));
+        HomeSceneSSANation->setGeometry(QRect(300, 170, 120, 30));
+        HomeSceneSSANation->setStyleSheet(QString::fromUtf8("QPushButton{\n"
+"             background-color: transparent;\n"
+"             border: none;\n"
+"             background-repeat: none;\n"
+"             background: transparent;\n"
+"             font-size: 23px;\n"
+"             font-weight: bold;\n"
+"             font-family: Comic Sans MS;\n"
+"             color: rgb(211, 242, 254);\n"
+"             text-align: center;\n"
+"         }\n"
+"         :hover{\n"
+"             color: blue;\n"
+"         } ;"));
+        HomeSceneSSAPos = new QPushButton(HomeScene);
+        HomeSceneSSAPos->setObjectName(QString::fromUtf8("HomeSceneSSAPos"));
+        HomeSceneSSAPos->setGeometry(QRect(830, 170, 90, 30));
+        HomeSceneSSAPos->setStyleSheet(QString::fromUtf8("QPushButton{\n"
+"             background-color: transparent;\n"
+"             border: none;\n"
+"             background-repeat: none;\n"
+"             background: transparent;\n"
+"             font-size: 23px;\n"
+"             font-weight: bold;\n"
+"             font-family: Comic Sans MS;\n"
+"             color: rgb(211, 242, 254);\n"
+"             text-align: central;\n"
+"         }\n"
+"         :hover{\n"
+"             color: blue;\n"
+"         } ;"));
+        HomeSceneSSAAge = new QPushButton(HomeScene);
+        HomeSceneSSAAge->setObjectName(QString::fromUtf8("HomeSceneSSAAge"));
+        HomeSceneSSAAge->setGeometry(QRect(930, 170, 81, 30));
+        HomeSceneSSAAge->setStyleSheet(QString::fromUtf8("QPushButton{\n"
+"             background-color: transparent;\n"
+"             border: none;\n"
+"             background-repeat: none;\n"
+"             background: transparent;\n"
+"             font-size: 23px;\n"
+"             font-weight: bold;\n"
+"             font-family: Comic Sans MS;\n"
+"             color: rgb(211, 242, 254);\n"
+"             text-align: central;\n"
+"         }\n"
+"         :hover{\n"
+"             color: blue;\n"
+"         } ;"));
+        HomeSceneSSARating = new QPushButton(HomeScene);
+        HomeSceneSSARating->setObjectName(QString::fromUtf8("HomeSceneSSARating"));
+        HomeSceneSSARating->setGeometry(QRect(1030, 170, 161, 30));
+        HomeSceneSSARating->setStyleSheet(QString::fromUtf8("QPushButton{\n"
+"             background-color: transparent;\n"
+"             border: none;\n"
+"             background-repeat: none;\n"
+"             background: transparent;\n"
+"             font-size: 23px;\n"
+"             font-weight: bold;\n"
+"             font-family: Comic Sans MS;\n"
+"             color: rgb(211, 242, 254);\n"
+"             text-align: central;\n"
+"         }\n"
+"         :hover{\n"
+"             color: blue;\n"
+"         } ;"));
+        HomeSceneSSAValue = new QPushButton(HomeScene);
+        HomeSceneSSAValue->setObjectName(QString::fromUtf8("HomeSceneSSAValue"));
+        HomeSceneSSAValue->setGeometry(QRect(1200, 170, 121, 30));
+        HomeSceneSSAValue->setStyleSheet(QString::fromUtf8("QPushButton{\n"
+"             background-color: transparent;\n"
+"             border: none;\n"
+"             background-repeat: none;\n"
+"             background: transparent;\n"
+"             font-size: 23px;\n"
+"             font-weight: bold;\n"
+"             font-family: Comic Sans MS;\n"
+"             color: rgb(211, 242, 254);\n"
+"             text-align: central;\n"
+"         }\n"
+"         :hover{\n"
+"             color: blue;\n"
+"         } ;"));
+        HomeSceneSSA = new QScrollArea(HomeScene);
+        HomeSceneSSA->setObjectName(QString::fromUtf8("HomeSceneSSA"));
+        HomeSceneSSA->setGeometry(QRect(300, 210, 1021, 641));
+        HomeSceneSSA->setStyleSheet(QString::fromUtf8("QScrollArea{\n"
+"                 background-color: transparent;\n"
+"                 border: none;\n"
+"                 background-repeat: none;\n"
+"                 background: transparent;\n"
+"             }\n"
+"             QScrollArea > QWidget > QScrollBar:vertical {\n"
+"                 background: palette(base)\n"
+"             }\n"
+"             QScrollArea > QWidget > QScrollBar:handle:vertical {\n"
+"                 background: rgb(141,232,123);\n"
+"             }\n"
+"             QScrollArea > QWidget > QScrollBar:add-page:vertical {\n"
+"                 background: rgb(225,252,220);\n"
+"             }\n"
+"             QScrollArea > QWidget > QScrollBar:sub-page:vertical {\n"
+"                 background: rgb(225,252,220);\n"
+"             }"));
+        HomeSceneSSA->setWidgetResizable(true);
+        HomeSceneSSAWidget = new QWidget();
+        HomeSceneSSAWidget->setObjectName(QString::fromUtf8("HomeSceneSSAWidget"));
+        HomeSceneSSAWidget->setGeometry(QRect(0, 0, 1021, 641));
+        HomeSceneSSAWidget->setStyleSheet(QString::fromUtf8("QScrollArea > QWidget > QWidget{\n"
+"                  background-color: transparent;\n"
+"                  border: none;\n"
+"                  background-repeat: none;\n"
+"                  background: transparent;\n"
+"              }  ;"));
+        HomeSceneSSA->setWidget(HomeSceneSSAWidget);
+        HomeSceneSSAName = new QPushButton(HomeScene);
+        HomeSceneSSAName->setObjectName(QString::fromUtf8("HomeSceneSSAName"));
+        HomeSceneSSAName->setGeometry(QRect(430, 170, 391, 30));
+        HomeSceneSSAName->setStyleSheet(QString::fromUtf8("QPushButton{\n"
+"             background-color: transparent;\n"
+"             border: none;\n"
+"             background-repeat: none;\n"
+"             background: transparent;\n"
+"             font-size: 23px;\n"
+"             font-weight: bold;\n"
+"             font-family: Comic Sans MS;\n"
+"             color: rgb(211, 242, 254);\n"
+"             text-align: central;\n"
+"         }\n"
+"         :hover{\n"
+"             color: blue;\n"
+"         } ;"));
+        stackedWidget->addWidget(HomeScene);
 
         gridLayout->addWidget(stackedWidget, 0, 0, 1, 1);
 
@@ -234,6 +435,15 @@ public:
         NewGameSceneStartButton->setText(QCoreApplication::translate("MainWindow", "Start game!", nullptr));
         NewGameScenePrevClubButton->setText(QString());
         NewGameSceneNextClubButton->setText(QString());
+        HomeSceneNLTransfers->setText(QCoreApplication::translate("MainWindow", "Transfers", nullptr));
+        HomeSceneNLHome->setText(QCoreApplication::translate("MainWindow", "Home", nullptr));
+        HomeSceneNLCompetitions->setText(QCoreApplication::translate("MainWindow", "Competitions", nullptr));
+        HomeSceneSSANation->setText(QCoreApplication::translate("MainWindow", "Nation", nullptr));
+        HomeSceneSSAPos->setText(QCoreApplication::translate("MainWindow", "Position", nullptr));
+        HomeSceneSSAAge->setText(QCoreApplication::translate("MainWindow", "Age", nullptr));
+        HomeSceneSSARating->setText(QCoreApplication::translate("MainWindow", "Value", nullptr));
+        HomeSceneSSAValue->setText(QCoreApplication::translate("MainWindow", "Rating", nullptr));
+        HomeSceneSSAName->setText(QCoreApplication::translate("MainWindow", "Name", nullptr));
     } // retranslateUi
 
 };

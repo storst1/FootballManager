@@ -77,6 +77,8 @@ private slots:
 
     void on_NewGameSceneNextClubButton_clicked();
 
+    void on_NewGameSceneStartButton_clicked();
+
 private:
     //Window properties
     Ui::MainWindow *ui;
@@ -248,6 +250,9 @@ private:
     QLabel* homeSceneCalendarBar = nullptr;
     QPushButton* homeSceneSquadButton;
 
+    QGridLayout* HomeSceneSSALay_UI = nullptr;
+    QVector<QWidget*> HomeSceneDynamicWidgetsList;
+
     void SetupHomeScene();
     void HomeSceneAddPlayersToLay();
     void HomeSceneSortPlayersByName();
@@ -259,6 +264,8 @@ private:
     void HomeSceneSetupCalendarBar(DATE curDate);
     void HomeSceneUpdateCalendarBar(DATE curDate);
     void HomeSceneDrawDayOnCalendarBar(DATE date, int row, QPainter &painter);
+
+    void HomeSceneSetupSSALay();
 
     //TRANSFERS SCENE
     QWidget* transfersSceneMainWidget;

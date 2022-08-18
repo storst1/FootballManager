@@ -13,6 +13,7 @@ void MainWindow::SetupHomeScene(){
 
     //Load players data & assign other vars
     CLUB* club = user->getClub();
+    HomeSceneDeleteDynamicWidgetsList();
     homeScenePlayers = club->getPlayers();
     homeSceneLastSortClicked = Pos;
 
@@ -181,6 +182,17 @@ void MainWindow::HomeSceneSetupSSALay()
     ClearLay(HomeSceneSSALay_UI);
     delete HomeSceneSSALay_UI;
     HomeSceneSSALay_UI = new QGridLayout(ui->HomeSceneSSAWidget);
+}
+
+void MainWindow::HomeSceneDeleteDynamicWidgetsList()
+{
+    /*
+    for(QWidget* wid : HomeSceneDynamicWidgetsList){
+        delete wid;
+        wid = nullptr;
+    }
+    */
+    HomeSceneDynamicWidgetsList.clear();
 }
 
 void MainWindow::on_HomeSceneSSANation_clicked()

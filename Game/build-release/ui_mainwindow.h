@@ -14,6 +14,7 @@
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QScrollArea>
@@ -48,12 +49,48 @@ public:
     QPushButton *HomeSceneSSANation;
     QPushButton *HomeSceneSSAPos;
     QPushButton *HomeSceneSSAAge;
-    QPushButton *HomeSceneSSARating;
     QPushButton *HomeSceneSSAValue;
+    QPushButton *HomeSceneSSARating;
     QScrollArea *HomeSceneSSA;
     QWidget *HomeSceneSSAWidget;
     QPushButton *HomeSceneSSAName;
     QLabel *HomeSceneCalendarLabel;
+    QWidget *TransfersScene;
+    QPushButton *TransfersSceneNLTransfers;
+    QPushButton *TransfersSceneNLHome;
+    QPushButton *TransfersSceneNLCompetitions;
+    QPushButton *TransfersSceneSSANation;
+    QPushButton *TransfersSceneSSAName;
+    QPushButton *TransfersSceneSSAPos;
+    QPushButton *TransfersSceneSSAAge;
+    QPushButton *TransfersSceneSSAValue;
+    QPushButton *TransfersSceneSSARating;
+    QPushButton *TransfersSceneSSATeam;
+    QScrollArea *TransfersSceneSSA;
+    QWidget *TransfersSceneSSAWidget;
+    QPushButton *TransfersSceneSearch;
+    QComboBox *TransfersSceneFilterFN;
+    QComboBox *TransfersSceneFilterSN;
+    QComboBox *TransfersSceneFilterLeague;
+    QLabel *TransfersSceneFNLabel;
+    QLabel *TransfersSceneSNLabel;
+    QLabel *TransfersSceneLeagueLabel;
+    QComboBox *TransfersSceneFilterTeam;
+    QLabel *TransfersSceneTeamLabel;
+    QComboBox *TransfersSceneFilterMainPos;
+    QLabel *TransfersSceneMainPosLabel;
+    QComboBox *TransfersSceneFilterSecondPos;
+    QLabel *TransfersSceneSecondPosLabel;
+    QLineEdit *TransfersSceneFilterMinAge;
+    QLabel *TransfersSceneMinAgeLabel;
+    QLineEdit *TransfersSceneFilterMaxAge;
+    QLabel *TransfersSceneMaxAgeLabel;
+    QLineEdit *TransfersSceneFilterMinSkill;
+    QLabel *TransfersSceneMinSkillLabel;
+    QLineEdit *TransfersSceneFilterMaxSkill;
+    QLabel *TransfersSceneMaxSkillLabel;
+    QLineEdit *TransfersSceneFilterSearchName;
+    QLabel *TransfersSceneSearchNameLabel;
     QStatusBar *statusbar;
 
     void setupUi(QMainWindow *MainWindow)
@@ -227,7 +264,7 @@ public:
         HomeScene->setObjectName(QString::fromUtf8("HomeScene"));
         HomeSceneNLTransfers = new QPushButton(HomeScene);
         HomeSceneNLTransfers->setObjectName(QString::fromUtf8("HomeSceneNLTransfers"));
-        HomeSceneNLTransfers->setGeometry(QRect(300, 40, 161, 40));
+        HomeSceneNLTransfers->setGeometry(QRect(300, 40, 160, 40));
         HomeSceneNLTransfers->setStyleSheet(QString::fromUtf8("QPushButton{  \n"
 "         background-color: transparent; \n"
 "         border: none; \n"
@@ -244,7 +281,7 @@ public:
 "     } ;"));
         HomeSceneNLHome = new QPushButton(HomeScene);
         HomeSceneNLHome->setObjectName(QString::fromUtf8("HomeSceneNLHome"));
-        HomeSceneNLHome->setGeometry(QRect(900, 40, 91, 40));
+        HomeSceneNLHome->setGeometry(QRect(900, 40, 90, 40));
         HomeSceneNLHome->setStyleSheet(QString::fromUtf8("QPushButton{  \n"
 "         background-color: transparent; \n"
 "         border: none; \n"
@@ -261,7 +298,7 @@ public:
 "     } ;"));
         HomeSceneNLCompetitions = new QPushButton(HomeScene);
         HomeSceneNLCompetitions->setObjectName(QString::fromUtf8("HomeSceneNLCompetitions"));
-        HomeSceneNLCompetitions->setGeometry(QRect(1400, 40, 191, 40));
+        HomeSceneNLCompetitions->setGeometry(QRect(1400, 40, 190, 40));
         HomeSceneNLCompetitions->setStyleSheet(QString::fromUtf8("QPushButton{  \n"
 "         background-color: transparent; \n"
 "         border: none; \n"
@@ -327,10 +364,10 @@ public:
 "         :hover{\n"
 "             color: blue;\n"
 "         } ;"));
-        HomeSceneSSARating = new QPushButton(HomeScene);
-        HomeSceneSSARating->setObjectName(QString::fromUtf8("HomeSceneSSARating"));
-        HomeSceneSSARating->setGeometry(QRect(1030, 170, 161, 30));
-        HomeSceneSSARating->setStyleSheet(QString::fromUtf8("QPushButton{\n"
+        HomeSceneSSAValue = new QPushButton(HomeScene);
+        HomeSceneSSAValue->setObjectName(QString::fromUtf8("HomeSceneSSAValue"));
+        HomeSceneSSAValue->setGeometry(QRect(1030, 170, 161, 30));
+        HomeSceneSSAValue->setStyleSheet(QString::fromUtf8("QPushButton{\n"
 "             background-color: transparent;\n"
 "             border: none;\n"
 "             background-repeat: none;\n"
@@ -344,10 +381,10 @@ public:
 "         :hover{\n"
 "             color: blue;\n"
 "         } ;"));
-        HomeSceneSSAValue = new QPushButton(HomeScene);
-        HomeSceneSSAValue->setObjectName(QString::fromUtf8("HomeSceneSSAValue"));
-        HomeSceneSSAValue->setGeometry(QRect(1200, 170, 121, 30));
-        HomeSceneSSAValue->setStyleSheet(QString::fromUtf8("QPushButton{\n"
+        HomeSceneSSARating = new QPushButton(HomeScene);
+        HomeSceneSSARating->setObjectName(QString::fromUtf8("HomeSceneSSARating"));
+        HomeSceneSSARating->setGeometry(QRect(1200, 170, 121, 30));
+        HomeSceneSSARating->setStyleSheet(QString::fromUtf8("QPushButton{\n"
 "             background-color: transparent;\n"
 "             border: none;\n"
 "             background-repeat: none;\n"
@@ -414,6 +451,414 @@ public:
         HomeSceneCalendarLabel->setObjectName(QString::fromUtf8("HomeSceneCalendarLabel"));
         HomeSceneCalendarLabel->setGeometry(QRect(1580, 210, 200, 600));
         stackedWidget->addWidget(HomeScene);
+        TransfersScene = new QWidget();
+        TransfersScene->setObjectName(QString::fromUtf8("TransfersScene"));
+        TransfersSceneNLTransfers = new QPushButton(TransfersScene);
+        TransfersSceneNLTransfers->setObjectName(QString::fromUtf8("TransfersSceneNLTransfers"));
+        TransfersSceneNLTransfers->setGeometry(QRect(300, 40, 160, 40));
+        TransfersSceneNLTransfers->setStyleSheet(QString::fromUtf8("QPushButton{  \n"
+"         background-color: transparent; \n"
+"         border: none; \n"
+"         background-repeat: none; \n"
+"         background: transparent; \n"
+"         font-size: 30px; \n"
+"         font-weight: bold; \n"
+"         font-family: Comic Sans MS; \n"
+"         color: rgb(211, 242, 254); \n"
+"         text-align: left; \n"
+"     } \n"
+"     :hover{ \n"
+"         color: orange; \n"
+"     } ;"));
+        TransfersSceneNLHome = new QPushButton(TransfersScene);
+        TransfersSceneNLHome->setObjectName(QString::fromUtf8("TransfersSceneNLHome"));
+        TransfersSceneNLHome->setGeometry(QRect(900, 40, 90, 40));
+        TransfersSceneNLHome->setStyleSheet(QString::fromUtf8("QPushButton{  \n"
+"         background-color: transparent; \n"
+"         border: none; \n"
+"         background-repeat: none; \n"
+"         background: transparent; \n"
+"         font-size: 30px; \n"
+"         font-weight: bold; \n"
+"         font-family: Comic Sans MS; \n"
+"         color: rgb(211, 242, 254); \n"
+"         text-align: left; \n"
+"     } \n"
+"     :hover{ \n"
+"         color: orange; \n"
+"     } ;"));
+        TransfersSceneNLCompetitions = new QPushButton(TransfersScene);
+        TransfersSceneNLCompetitions->setObjectName(QString::fromUtf8("TransfersSceneNLCompetitions"));
+        TransfersSceneNLCompetitions->setGeometry(QRect(1400, 40, 190, 40));
+        TransfersSceneNLCompetitions->setStyleSheet(QString::fromUtf8("QPushButton{  \n"
+"         background-color: transparent; \n"
+"         border: none; \n"
+"         background-repeat: none; \n"
+"         background: transparent; \n"
+"         font-size: 30px; \n"
+"         font-weight: bold; \n"
+"         font-family: Comic Sans MS; \n"
+"         color: rgb(211, 242, 254); \n"
+"         text-align: left; \n"
+"     } \n"
+"     :hover{ \n"
+"         color: orange; \n"
+"     } ;"));
+        TransfersSceneSSANation = new QPushButton(TransfersScene);
+        TransfersSceneSSANation->setObjectName(QString::fromUtf8("TransfersSceneSSANation"));
+        TransfersSceneSSANation->setGeometry(QRect(300, 280, 120, 30));
+        TransfersSceneSSANation->setStyleSheet(QString::fromUtf8("QPushButton{\n"
+"             background-color: transparent;\n"
+"             border: none;\n"
+"             background-repeat: none;\n"
+"             background: transparent;\n"
+"             font-size: 23px;\n"
+"             font-weight: bold;\n"
+"             font-family: Comic Sans MS;\n"
+"             color: rgb(211, 242, 254);\n"
+"             text-align: center;\n"
+"         }\n"
+"         :hover{\n"
+"             color: blue;\n"
+"         } ;"));
+        TransfersSceneSSAName = new QPushButton(TransfersScene);
+        TransfersSceneSSAName->setObjectName(QString::fromUtf8("TransfersSceneSSAName"));
+        TransfersSceneSSAName->setGeometry(QRect(430, 280, 391, 30));
+        TransfersSceneSSAName->setStyleSheet(QString::fromUtf8("QPushButton{\n"
+"             background-color: transparent;\n"
+"             border: none;\n"
+"             background-repeat: none;\n"
+"             background: transparent;\n"
+"             font-size: 23px;\n"
+"             font-weight: bold;\n"
+"             font-family: Comic Sans MS;\n"
+"             color: rgb(211, 242, 254);\n"
+"             text-align: central;\n"
+"         }\n"
+"         :hover{\n"
+"             color: blue;\n"
+"         } ;"));
+        TransfersSceneSSAPos = new QPushButton(TransfersScene);
+        TransfersSceneSSAPos->setObjectName(QString::fromUtf8("TransfersSceneSSAPos"));
+        TransfersSceneSSAPos->setGeometry(QRect(1040, 280, 90, 30));
+        TransfersSceneSSAPos->setStyleSheet(QString::fromUtf8("QPushButton{\n"
+"             background-color: transparent;\n"
+"             border: none;\n"
+"             background-repeat: none;\n"
+"             background: transparent;\n"
+"             font-size: 23px;\n"
+"             font-weight: bold;\n"
+"             font-family: Comic Sans MS;\n"
+"             color: rgb(211, 242, 254);\n"
+"             text-align: central;\n"
+"         }\n"
+"         :hover{\n"
+"             color: blue;\n"
+"         } ;"));
+        TransfersSceneSSAAge = new QPushButton(TransfersScene);
+        TransfersSceneSSAAge->setObjectName(QString::fromUtf8("TransfersSceneSSAAge"));
+        TransfersSceneSSAAge->setGeometry(QRect(1140, 280, 81, 30));
+        TransfersSceneSSAAge->setStyleSheet(QString::fromUtf8("QPushButton{\n"
+"             background-color: transparent;\n"
+"             border: none;\n"
+"             background-repeat: none;\n"
+"             background: transparent;\n"
+"             font-size: 23px;\n"
+"             font-weight: bold;\n"
+"             font-family: Comic Sans MS;\n"
+"             color: rgb(211, 242, 254);\n"
+"             text-align: central;\n"
+"         }\n"
+"         :hover{\n"
+"             color: blue;\n"
+"         } ;"));
+        TransfersSceneSSAValue = new QPushButton(TransfersScene);
+        TransfersSceneSSAValue->setObjectName(QString::fromUtf8("TransfersSceneSSAValue"));
+        TransfersSceneSSAValue->setGeometry(QRect(1240, 280, 161, 30));
+        TransfersSceneSSAValue->setStyleSheet(QString::fromUtf8("QPushButton{\n"
+"             background-color: transparent;\n"
+"             border: none;\n"
+"             background-repeat: none;\n"
+"             background: transparent;\n"
+"             font-size: 23px;\n"
+"             font-weight: bold;\n"
+"             font-family: Comic Sans MS;\n"
+"             color: rgb(211, 242, 254);\n"
+"             text-align: central;\n"
+"         }\n"
+"         :hover{\n"
+"             color: blue;\n"
+"         } ;"));
+        TransfersSceneSSARating = new QPushButton(TransfersScene);
+        TransfersSceneSSARating->setObjectName(QString::fromUtf8("TransfersSceneSSARating"));
+        TransfersSceneSSARating->setGeometry(QRect(1410, 280, 121, 30));
+        TransfersSceneSSARating->setStyleSheet(QString::fromUtf8("QPushButton{\n"
+"             background-color: transparent;\n"
+"             border: none;\n"
+"             background-repeat: none;\n"
+"             background: transparent;\n"
+"             font-size: 23px;\n"
+"             font-weight: bold;\n"
+"             font-family: Comic Sans MS;\n"
+"             color: rgb(211, 242, 254);\n"
+"             text-align: central;\n"
+"         }\n"
+"         :hover{\n"
+"             color: blue;\n"
+"         } ;"));
+        TransfersSceneSSATeam = new QPushButton(TransfersScene);
+        TransfersSceneSSATeam->setObjectName(QString::fromUtf8("TransfersSceneSSATeam"));
+        TransfersSceneSSATeam->setGeometry(QRect(830, 280, 200, 30));
+        TransfersSceneSSATeam->setStyleSheet(QString::fromUtf8("QPushButton{\n"
+"             background-color: transparent;\n"
+"             border: none;\n"
+"             background-repeat: none;\n"
+"             background: transparent;\n"
+"             font-size: 23px;\n"
+"             font-weight: bold;\n"
+"             font-family: Comic Sans MS;\n"
+"             color: rgb(211, 242, 254);\n"
+"             text-align: central;\n"
+"         }\n"
+"         :hover{\n"
+"             color: blue;\n"
+"         } ;"));
+        TransfersSceneSSA = new QScrollArea(TransfersScene);
+        TransfersSceneSSA->setObjectName(QString::fromUtf8("TransfersSceneSSA"));
+        TransfersSceneSSA->setGeometry(QRect(300, 320, 1230, 600));
+        TransfersSceneSSA->setStyleSheet(QString::fromUtf8("QScrollArea{\n"
+"                 background-color: transparent;\n"
+"                 border: none;\n"
+"                 background-repeat: none;\n"
+"                 background: transparent;\n"
+"             }\n"
+"             QScrollArea > QWidget > QScrollBar:vertical {\n"
+"                 background: palette(base)\n"
+"             }\n"
+"             QScrollArea > QWidget > QScrollBar:handle:vertical {\n"
+"                 background: rgb(141,232,123);\n"
+"             }\n"
+"             QScrollArea > QWidget > QScrollBar:add-page:vertical {\n"
+"                 background: rgb(225,252,220);\n"
+"             }\n"
+"             QScrollArea > QWidget > QScrollBar:sub-page:vertical {\n"
+"                 background: rgb(225,252,220);\n"
+"             }"));
+        TransfersSceneSSA->setWidgetResizable(true);
+        TransfersSceneSSAWidget = new QWidget();
+        TransfersSceneSSAWidget->setObjectName(QString::fromUtf8("TransfersSceneSSAWidget"));
+        TransfersSceneSSAWidget->setGeometry(QRect(0, 0, 1230, 600));
+        TransfersSceneSSAWidget->setStyleSheet(QString::fromUtf8("QScrollArea > QWidget > QWidget{\n"
+"                  background-color: transparent;\n"
+"                  border: none;\n"
+"                  background-repeat: none;\n"
+"                  background: transparent;\n"
+"              }  ;"));
+        TransfersSceneSSA->setWidget(TransfersSceneSSAWidget);
+        TransfersSceneSearch = new QPushButton(TransfersScene);
+        TransfersSceneSearch->setObjectName(QString::fromUtf8("TransfersSceneSearch"));
+        TransfersSceneSearch->setGeometry(QRect(1630, 170, 160, 60));
+        TransfersSceneSearch->setStyleSheet(QString::fromUtf8("QPushButton{\n"
+"                 background-color: transparent;\n"
+"                 border: none;\n"
+"                 background-repeat: none;\n"
+"                 background: none;\n"
+"                 background-image:url(:/greenLay160x60.png);\n"
+"                 font-size: 24px;\n"
+"                 font-family: Comic Sans MS;\n"
+"                 color: white;\n"
+"             }\n"
+"             :hover{\n"
+"                 background-image:url(:/greenLay160x60Highlighted.png);\n"
+"             };"));
+        TransfersSceneFilterFN = new QComboBox(TransfersScene);
+        TransfersSceneFilterFN->setObjectName(QString::fromUtf8("TransfersSceneFilterFN"));
+        TransfersSceneFilterFN->setGeometry(QRect(300, 130, 171, 30));
+        TransfersSceneFilterSN = new QComboBox(TransfersScene);
+        TransfersSceneFilterSN->setObjectName(QString::fromUtf8("TransfersSceneFilterSN"));
+        TransfersSceneFilterSN->setGeometry(QRect(480, 130, 171, 30));
+        TransfersSceneFilterLeague = new QComboBox(TransfersScene);
+        TransfersSceneFilterLeague->setObjectName(QString::fromUtf8("TransfersSceneFilterLeague"));
+        TransfersSceneFilterLeague->setGeometry(QRect(660, 130, 191, 30));
+        TransfersSceneFNLabel = new QLabel(TransfersScene);
+        TransfersSceneFNLabel->setObjectName(QString::fromUtf8("TransfersSceneFNLabel"));
+        TransfersSceneFNLabel->setGeometry(QRect(300, 110, 171, 20));
+        TransfersSceneFNLabel->setStyleSheet(QString::fromUtf8("QLabel{  \n"
+"         background-color: transparent; \n"
+"         border: none; \n"
+"         background-repeat: none; \n"
+"         background: transparent; \n"
+"         font-size: 14px; \n"
+"         font-weight: bold; \n"
+"         font-family: Comic Sans MS; \n"
+"         color: rgb(211, 242, 254); \n"
+"         text-align: center; \n"
+"     } "));
+        TransfersSceneSNLabel = new QLabel(TransfersScene);
+        TransfersSceneSNLabel->setObjectName(QString::fromUtf8("TransfersSceneSNLabel"));
+        TransfersSceneSNLabel->setGeometry(QRect(480, 110, 170, 20));
+        TransfersSceneSNLabel->setStyleSheet(QString::fromUtf8("QLabel{  \n"
+"         background-color: transparent; \n"
+"         border: none; \n"
+"         background-repeat: none; \n"
+"         background: transparent; \n"
+"         font-size: 14px; \n"
+"         font-weight: bold; \n"
+"         font-family: Comic Sans MS; \n"
+"         color: rgb(211, 242, 254); \n"
+"         text-align: center; \n"
+"     } "));
+        TransfersSceneLeagueLabel = new QLabel(TransfersScene);
+        TransfersSceneLeagueLabel->setObjectName(QString::fromUtf8("TransfersSceneLeagueLabel"));
+        TransfersSceneLeagueLabel->setGeometry(QRect(660, 110, 191, 20));
+        TransfersSceneLeagueLabel->setStyleSheet(QString::fromUtf8("QLabel{  \n"
+"         background-color: transparent; \n"
+"         border: none; \n"
+"         background-repeat: none; \n"
+"         background: transparent; \n"
+"         font-size: 14px; \n"
+"         font-weight: bold; \n"
+"         font-family: Comic Sans MS; \n"
+"         color: rgb(211, 242, 254); \n"
+"         text-align: center; \n"
+"     } "));
+        TransfersSceneFilterTeam = new QComboBox(TransfersScene);
+        TransfersSceneFilterTeam->setObjectName(QString::fromUtf8("TransfersSceneFilterTeam"));
+        TransfersSceneFilterTeam->setGeometry(QRect(860, 130, 191, 30));
+        TransfersSceneTeamLabel = new QLabel(TransfersScene);
+        TransfersSceneTeamLabel->setObjectName(QString::fromUtf8("TransfersSceneTeamLabel"));
+        TransfersSceneTeamLabel->setGeometry(QRect(860, 110, 191, 20));
+        TransfersSceneTeamLabel->setStyleSheet(QString::fromUtf8("QLabel{  \n"
+"         background-color: transparent; \n"
+"         border: none; \n"
+"         background-repeat: none; \n"
+"         background: transparent; \n"
+"         font-size: 14px; \n"
+"         font-weight: bold; \n"
+"         font-family: Comic Sans MS; \n"
+"         color: rgb(211, 242, 254); \n"
+"         text-align: center; \n"
+"     } "));
+        TransfersSceneFilterMainPos = new QComboBox(TransfersScene);
+        TransfersSceneFilterMainPos->setObjectName(QString::fromUtf8("TransfersSceneFilterMainPos"));
+        TransfersSceneFilterMainPos->setGeometry(QRect(1060, 130, 71, 30));
+        TransfersSceneMainPosLabel = new QLabel(TransfersScene);
+        TransfersSceneMainPosLabel->setObjectName(QString::fromUtf8("TransfersSceneMainPosLabel"));
+        TransfersSceneMainPosLabel->setGeometry(QRect(1060, 89, 71, 41));
+        TransfersSceneMainPosLabel->setStyleSheet(QString::fromUtf8("QLabel{  \n"
+"         background-color: transparent; \n"
+"         border: none; \n"
+"         background-repeat: none; \n"
+"         background: transparent; \n"
+"         font-size: 14px; \n"
+"         font-weight: bold; \n"
+"         font-family: Comic Sans MS; \n"
+"         color: rgb(211, 242, 254); \n"
+"         text-align: center; \n"
+"     } "));
+        TransfersSceneFilterSecondPos = new QComboBox(TransfersScene);
+        TransfersSceneFilterSecondPos->setObjectName(QString::fromUtf8("TransfersSceneFilterSecondPos"));
+        TransfersSceneFilterSecondPos->setGeometry(QRect(1140, 130, 71, 30));
+        TransfersSceneSecondPosLabel = new QLabel(TransfersScene);
+        TransfersSceneSecondPosLabel->setObjectName(QString::fromUtf8("TransfersSceneSecondPosLabel"));
+        TransfersSceneSecondPosLabel->setGeometry(QRect(1140, 90, 71, 41));
+        TransfersSceneSecondPosLabel->setStyleSheet(QString::fromUtf8("QLabel{  \n"
+"         background-color: transparent; \n"
+"         border: none; \n"
+"         background-repeat: none; \n"
+"         background: transparent; \n"
+"         font-size: 14px; \n"
+"         font-weight: bold; \n"
+"         font-family: Comic Sans MS; \n"
+"         color: rgb(211, 242, 254); \n"
+"         text-align: center; \n"
+"     } "));
+        TransfersSceneFilterMinAge = new QLineEdit(TransfersScene);
+        TransfersSceneFilterMinAge->setObjectName(QString::fromUtf8("TransfersSceneFilterMinAge"));
+        TransfersSceneFilterMinAge->setGeometry(QRect(1220, 130, 41, 30));
+        TransfersSceneMinAgeLabel = new QLabel(TransfersScene);
+        TransfersSceneMinAgeLabel->setObjectName(QString::fromUtf8("TransfersSceneMinAgeLabel"));
+        TransfersSceneMinAgeLabel->setGeometry(QRect(1220, 90, 41, 41));
+        TransfersSceneMinAgeLabel->setStyleSheet(QString::fromUtf8("QLabel{  \n"
+"         background-color: transparent; \n"
+"         border: none; \n"
+"         background-repeat: none; \n"
+"         background: transparent; \n"
+"         font-size: 14px; \n"
+"         font-weight: bold; \n"
+"         font-family: Comic Sans MS; \n"
+"         color: rgb(211, 242, 254); \n"
+"         text-align: center; \n"
+"     } "));
+        TransfersSceneFilterMaxAge = new QLineEdit(TransfersScene);
+        TransfersSceneFilterMaxAge->setObjectName(QString::fromUtf8("TransfersSceneFilterMaxAge"));
+        TransfersSceneFilterMaxAge->setGeometry(QRect(1270, 130, 41, 30));
+        TransfersSceneMaxAgeLabel = new QLabel(TransfersScene);
+        TransfersSceneMaxAgeLabel->setObjectName(QString::fromUtf8("TransfersSceneMaxAgeLabel"));
+        TransfersSceneMaxAgeLabel->setGeometry(QRect(1270, 90, 41, 41));
+        TransfersSceneMaxAgeLabel->setStyleSheet(QString::fromUtf8("QLabel{  \n"
+"         background-color: transparent; \n"
+"         border: none; \n"
+"         background-repeat: none; \n"
+"         background: transparent; \n"
+"         font-size: 14px; \n"
+"         font-weight: bold; \n"
+"         font-family: Comic Sans MS; \n"
+"         color: rgb(211, 242, 254); \n"
+"         text-align: center; \n"
+"     } "));
+        TransfersSceneFilterMinSkill = new QLineEdit(TransfersScene);
+        TransfersSceneFilterMinSkill->setObjectName(QString::fromUtf8("TransfersSceneFilterMinSkill"));
+        TransfersSceneFilterMinSkill->setGeometry(QRect(1320, 130, 41, 30));
+        TransfersSceneMinSkillLabel = new QLabel(TransfersScene);
+        TransfersSceneMinSkillLabel->setObjectName(QString::fromUtf8("TransfersSceneMinSkillLabel"));
+        TransfersSceneMinSkillLabel->setGeometry(QRect(1320, 90, 41, 41));
+        TransfersSceneMinSkillLabel->setStyleSheet(QString::fromUtf8("QLabel{  \n"
+"         background-color: transparent; \n"
+"         border: none; \n"
+"         background-repeat: none; \n"
+"         background: transparent; \n"
+"         font-size: 14px; \n"
+"         font-weight: bold; \n"
+"         font-family: Comic Sans MS; \n"
+"         color: rgb(211, 242, 254); \n"
+"         text-align: center; \n"
+"     } "));
+        TransfersSceneFilterMaxSkill = new QLineEdit(TransfersScene);
+        TransfersSceneFilterMaxSkill->setObjectName(QString::fromUtf8("TransfersSceneFilterMaxSkill"));
+        TransfersSceneFilterMaxSkill->setGeometry(QRect(1370, 130, 41, 30));
+        TransfersSceneMaxSkillLabel = new QLabel(TransfersScene);
+        TransfersSceneMaxSkillLabel->setObjectName(QString::fromUtf8("TransfersSceneMaxSkillLabel"));
+        TransfersSceneMaxSkillLabel->setGeometry(QRect(1370, 90, 41, 41));
+        TransfersSceneMaxSkillLabel->setStyleSheet(QString::fromUtf8("QLabel{  \n"
+"         background-color: transparent; \n"
+"         border: none; \n"
+"         background-repeat: none; \n"
+"         background: transparent; \n"
+"         font-size: 14px; \n"
+"         font-weight: bold; \n"
+"         font-family: Comic Sans MS; \n"
+"         color: rgb(211, 242, 254); \n"
+"         text-align: center; \n"
+"     } "));
+        TransfersSceneFilterSearchName = new QLineEdit(TransfersScene);
+        TransfersSceneFilterSearchName->setObjectName(QString::fromUtf8("TransfersSceneFilterSearchName"));
+        TransfersSceneFilterSearchName->setGeometry(QRect(300, 210, 251, 30));
+        TransfersSceneSearchNameLabel = new QLabel(TransfersScene);
+        TransfersSceneSearchNameLabel->setObjectName(QString::fromUtf8("TransfersSceneSearchNameLabel"));
+        TransfersSceneSearchNameLabel->setGeometry(QRect(300, 190, 251, 20));
+        TransfersSceneSearchNameLabel->setStyleSheet(QString::fromUtf8("QLabel{  \n"
+"         background-color: transparent; \n"
+"         border: none; \n"
+"         background-repeat: none; \n"
+"         background: transparent; \n"
+"         font-size: 14px; \n"
+"         font-weight: bold; \n"
+"         font-family: Comic Sans MS; \n"
+"         color: rgb(211, 242, 254); \n"
+"         text-align: center; \n"
+"     } "));
+        stackedWidget->addWidget(TransfersScene);
 
         gridLayout->addWidget(stackedWidget, 0, 0, 1, 1);
 
@@ -445,10 +890,44 @@ public:
         HomeSceneSSANation->setText(QCoreApplication::translate("MainWindow", "Nation", nullptr));
         HomeSceneSSAPos->setText(QCoreApplication::translate("MainWindow", "Position", nullptr));
         HomeSceneSSAAge->setText(QCoreApplication::translate("MainWindow", "Age", nullptr));
-        HomeSceneSSARating->setText(QCoreApplication::translate("MainWindow", "Value", nullptr));
-        HomeSceneSSAValue->setText(QCoreApplication::translate("MainWindow", "Rating", nullptr));
+        HomeSceneSSAValue->setText(QCoreApplication::translate("MainWindow", "Value", nullptr));
+        HomeSceneSSARating->setText(QCoreApplication::translate("MainWindow", "Rating", nullptr));
         HomeSceneSSAName->setText(QCoreApplication::translate("MainWindow", "Name", nullptr));
         HomeSceneCalendarLabel->setText(QString());
+        TransfersSceneNLTransfers->setText(QCoreApplication::translate("MainWindow", "Transfers", nullptr));
+        TransfersSceneNLHome->setText(QCoreApplication::translate("MainWindow", "Home", nullptr));
+        TransfersSceneNLCompetitions->setText(QCoreApplication::translate("MainWindow", "Competitions", nullptr));
+        TransfersSceneSSANation->setText(QCoreApplication::translate("MainWindow", "Nation", nullptr));
+        TransfersSceneSSAName->setText(QCoreApplication::translate("MainWindow", "Name", nullptr));
+        TransfersSceneSSAPos->setText(QCoreApplication::translate("MainWindow", "Position", nullptr));
+        TransfersSceneSSAAge->setText(QCoreApplication::translate("MainWindow", "Age", nullptr));
+        TransfersSceneSSAValue->setText(QCoreApplication::translate("MainWindow", "Value", nullptr));
+        TransfersSceneSSARating->setText(QCoreApplication::translate("MainWindow", "Rating", nullptr));
+        TransfersSceneSSATeam->setText(QCoreApplication::translate("MainWindow", "Team", nullptr));
+        TransfersSceneSearch->setText(QCoreApplication::translate("MainWindow", "Search", nullptr));
+        TransfersSceneFilterFN->setCurrentText(QString());
+        TransfersSceneFilterFN->setPlaceholderText(QString());
+        TransfersSceneFNLabel->setText(QCoreApplication::translate("MainWindow", "First nationality", nullptr));
+        TransfersSceneSNLabel->setText(QCoreApplication::translate("MainWindow", "Second nationality", nullptr));
+        TransfersSceneLeagueLabel->setText(QCoreApplication::translate("MainWindow", "League", nullptr));
+        TransfersSceneTeamLabel->setText(QCoreApplication::translate("MainWindow", "Team", nullptr));
+        TransfersSceneMainPosLabel->setText(QCoreApplication::translate("MainWindow", "Main \n"
+"position", nullptr));
+        TransfersSceneSecondPosLabel->setText(QCoreApplication::translate("MainWindow", "Second \n"
+"position", nullptr));
+        TransfersSceneFilterMinAge->setText(QString());
+        TransfersSceneMinAgeLabel->setText(QCoreApplication::translate("MainWindow", "Min \n"
+"age", nullptr));
+        TransfersSceneFilterMaxAge->setText(QString());
+        TransfersSceneMaxAgeLabel->setText(QCoreApplication::translate("MainWindow", "Max \n"
+"age", nullptr));
+        TransfersSceneFilterMinSkill->setText(QString());
+        TransfersSceneMinSkillLabel->setText(QCoreApplication::translate("MainWindow", "Min \n"
+"skill", nullptr));
+        TransfersSceneFilterMaxSkill->setText(QString());
+        TransfersSceneMaxSkillLabel->setText(QCoreApplication::translate("MainWindow", "Max \n"
+"skill", nullptr));
+        TransfersSceneSearchNameLabel->setText(QCoreApplication::translate("MainWindow", "Search by name", nullptr));
     } // retranslateUi
 
 };

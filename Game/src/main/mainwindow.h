@@ -94,6 +94,8 @@ private slots:
 
     void on_HomeSceneNLTransfers_clicked();
 
+    void on_TransfersSceneNLHome_clicked();
+
 private:
     //Window properties
     Ui::MainWindow *ui;
@@ -282,6 +284,7 @@ private:
     void HomeSceneDrawDayOnCalendarBar(DATE date, int row, QPainter &painter);
 
     void HomeSceneSetupSSALay();
+    void HomeSceneDeleteDynamicWidgetsList();
 
     //TRANSFERS SCENE
     QWidget* transfersSceneMainWidget;

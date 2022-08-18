@@ -522,3 +522,8 @@ void MainWindow::TransfersSceneSetupSkillFilter()
     transfersSceneMaxSkillFilter->setValidator(lineEditValidator);
     transfersSceneMaxSkillFilter->setClearButtonEnabled(true);
 }
+
+void MainWindow::on_TransfersSceneNLHome_clicked()
+{
+    SetupHomeScene();
+}

@@ -271,6 +271,12 @@ void MainWindow::HomeSceneReversePlayers()
     std::reverse(homeScenePlayers.begin(), homeScenePlayers.end());
 }
 
+void MainWindow::on_HomeSceneNLTransfers_clicked()
+{
+    SetupTransfersScene();
+}
+
+
 //Old UI code
 /*
 sceneSwitch->Switch(HOME_SCENE);

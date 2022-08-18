@@ -3,11 +3,15 @@
 #include "game/data/player.h"
 #include "game/data/player_position.h"
 #include "game/data/game_data.h"
+#include "ui_mainwindow.h"
 
 void MainWindow::SetupTransfersScene()
 {
     transfersSceneLoaded = false;
 
+    ui->stackedWidget->setCurrentIndex(SW_TRANSFERS_SCENE);
+
+    /*
     sceneSwitch->Switch(TRANSFERS_SCENE);
     ClearLay(transfersSceneMainLayout);
 
@@ -24,6 +28,7 @@ void MainWindow::SetupTransfersScene()
     transfersSceneMainLayout->addWidget(transfersScenePlayersScrollArea, 2, 1, Qt::AlignCenter);
 
     TakeSpaceInLay(transfersSceneMainLayout, 150, 3, 3);
+    */
 }
 
 void MainWindow::TransfersSceneAddPlayersToLay(){
@@ -300,6 +305,22 @@ void MainWindow::TransfersSceneSetupFilters()
             ":hover{"
                 "background-image:url(:/greenLay160x60Highlighted.png);"
             "}";
+
+    /*
+     *  QPushButton{
+                 background-color: transparent;
+                 border: none;
+                 background-repeat: none;
+                 background: none;
+                 background-image:url(:/greenLay160x60.png);
+                 font-size: 24px;
+                 font-family: Comic Sans MS;
+                 color: white;
+             }
+             :hover{
+                 background-image:url(:/greenLay160x60Highlighted.png);
+             };
+     */
 
     transfersSceneFiltersLay = new QGridLayout;
 

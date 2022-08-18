@@ -92,6 +92,8 @@ private slots:
 
     void on_HomeSceneSSAValue_clicked();
 
+    void on_HomeSceneNLTransfers_clicked();
+
 private:
     //Window properties
     Ui::MainWindow *ui;

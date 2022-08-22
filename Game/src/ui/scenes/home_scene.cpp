@@ -31,7 +31,9 @@ void MainWindow::SetupHomeScene(){
         ui->HomeSceneSSAPos,
         ui->HomeSceneSSARating,
         ui->HomeSceneSSAValue,
-        ui->HomeSceneSSA
+        ui->HomeSceneSSA,
+        ui->HomeSceneSSAWidget,
+        ui->HomeSceneCalendarLabel,
     });
 
     ResizeMultipleWidgetsToFitRes({
@@ -44,7 +46,9 @@ void MainWindow::SetupHomeScene(){
         ui->HomeSceneSSAPos,
         ui->HomeSceneSSARating,
         ui->HomeSceneSSAValue,
-        ui->HomeSceneSSA
+        ui->HomeSceneSSA,
+        ui->HomeSceneSSAWidget,
+        ui->HomeSceneCalendarLabel
     });
 
     for(QWidget* wid : HomeSceneDynamicWidgetsList){

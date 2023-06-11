@@ -7,9 +7,13 @@
 
 void MainWindow::SetupTransfersScene()
 {
-    transfersSceneLoaded = false;
-
     ui->stackedWidget->setCurrentIndex(SW_TRANSFERS_SCENE);
+
+    transfersSceneLoaded = false;
+    transfersScenePlayers = gameData->getPlayersListConditional(50);
+    transfersSceneLastSortClicked = None;
+
+    TransfersSceneAddPlayersToLay();
 
     /*
     sceneSwitch->Switch(TRANSFERS_SCENE);
@@ -78,7 +82,9 @@ void MainWindow::TransfersSceneAddPlayersToLay(){
 
     const int playerLabelHeight = 40;
 
-    ClearLay(transfersScenePlayersLay);
+    ClearLay(TransfersSceneSSALay_UI);
+    delete TransfersSceneSSALay_UI;
+    TransfersSceneSSALay_UI = new QGridLayout(ui->TransfersSceneSSAWidget);
 
     int totalPlayers = transfersScenePlayers.size();
 
@@ -87,7 +93,7 @@ void MainWindow::TransfersSceneAddPlayersToLay(){
         QLabel* noPlayersLabel = new QLabel("No players found with given requirements");
         noPlayersLabel->setStyleSheet(infoLabelStyle);
         noPlayersLabel->setFixedSize(400, playerLabelHeight);
-        transfersScenePlayersLay->addWidget(noPlayersLabel, 0, 0, Qt::AlignCenter);
+        TransfersSceneSSALay_UI->addWidget(noPlayersLabel, 0, 0, Qt::AlignCenter);
         ++totalPlayers;
         ++curRow;
     }
@@ -127,14 +133,14 @@ void MainWindow::TransfersSceneAddPlayersToLay(){
             options->setFixedSize(170, playerLabelHeight);
             options->setStyleSheet(optionsButtonStyle);
 
-            transfersScenePlayersLay->addWidget(flag, curRow, 0, Qt::AlignCenter);
-            transfersScenePlayersLay->addWidget(name, curRow, 1, Qt::AlignCenter);
-            transfersScenePlayersLay->addWidget(pos, curRow, 2, Qt::AlignCenter);
-            transfersScenePlayersLay->addWidget(team, curRow, 3, Qt::AlignCenter);
-            transfersScenePlayersLay->addWidget(age, curRow, 4, Qt::AlignCenter);
-            transfersScenePlayersLay->addWidget(TV, curRow, 5, Qt::AlignCenter);
-            transfersScenePlayersLay->addWidget(skill, curRow, 6, Qt::AlignCenter);
-            transfersScenePlayersLay->addWidget(options, curRow, 7, Qt::AlignCenter);
+            TransfersSceneSSALay_UI->addWidget(flag, curRow, 0, Qt::AlignCenter);
+            TransfersSceneSSALay_UI->addWidget(name, curRow, 1, Qt::AlignCenter);
+            TransfersSceneSSALay_UI->addWidget(pos, curRow, 2, Qt::AlignCenter);
+            TransfersSceneSSALay_UI->addWidget(team, curRow, 3, Qt::AlignCenter);
+            TransfersSceneSSALay_UI->addWidget(age, curRow, 4, Qt::AlignCenter);
+            TransfersSceneSSALay_UI->addWidget(TV, curRow, 5, Qt::AlignCenter);
+            TransfersSceneSSALay_UI->addWidget(skill, curRow, 6, Qt::AlignCenter);
+            TransfersSceneSSALay_UI->addWidget(options, curRow, 7, Qt::AlignCenter);
             ++curRow;
         }
     }
@@ -142,7 +148,7 @@ void MainWindow::TransfersSceneAddPlayersToLay(){
         QLabel* blankLabel = new QLabel("");
         blankLabel->setStyleSheet(infoLabelStyle);
         blankLabel->setFixedSize(1, playerLabelHeight);
-        transfersScenePlayersLay->addWidget(blankLabel, curRow, 0, Qt::AlignCenter);
+        TransfersSceneSSALay_UI->addWidget(blankLabel, curRow, 0, Qt::AlignCenter);
         ++curRow;
         ++totalPlayers;
     }

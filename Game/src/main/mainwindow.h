@@ -316,6 +316,8 @@ private:
     QLineEdit* transfersSceneMinSkillFilter;
     QLineEdit* transfersSceneMaxSkillFilter;
 
+    QGridLayout* TransfersSceneSSALay_UI = nullptr;
+
     void SetupTransfersScene();
     void TransfersSceneAddPlayersToLay();
     QVector<FEDERATION*> TransfersSceneGetCurContents();

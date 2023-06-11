@@ -96,6 +96,8 @@ private slots:
 
     void on_TransfersSceneNLHome_clicked();
 
+    void on_StartingSceneSettingsButton_clicked();
+
 private:
     //Window properties
     Ui::MainWindow *ui;
@@ -151,6 +153,7 @@ private:
     void RecountPlayersContractExp();
     void RecountPlayersDates();
     void RecountEverything();
+    void CompleteExtractionFromAPI();
     void SetupCountryMap();
     void FillCountryMap();
     void LoadGameData();

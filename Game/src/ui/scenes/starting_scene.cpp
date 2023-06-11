@@ -27,6 +27,13 @@ void MainWindow::on_StartingSceneNewGame_clicked()
     SetupNewGameScene();
 }
 
+
+void MainWindow::on_StartingSceneSettingsButton_clicked()
+{
+    SetupSettingsScene();
+}
+
+
 /*
 
   Old UI system for starting scene

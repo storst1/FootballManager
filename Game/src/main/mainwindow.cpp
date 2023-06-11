@@ -18,6 +18,8 @@ MainWindow::MainWindow(QWidget *parent)
     SetupGameHandler();
     SetupMainLay();
     SetupStartingScene();
+
+    //CompleteExtractionFromAPI();
 }
 
 MainWindow::~MainWindow()
@@ -141,4 +143,13 @@ QString MainWindow::ProjectDir() noexcept
 QString MainWindow::GeneralResDir() noexcept
 {
     return MainWindow::ProjectDir() + "/Resources";
+}
+
+// This method is used to simply extract and immediatly save all possible data using API
+// as well as recouting necessary variables by one call
+void MainWindow::CompleteExtractionFromAPI()
+{
+    LoadAllDataFromAPI();
+    SaveAllDataDefault();
+    RecountEverything();
 }

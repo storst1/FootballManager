@@ -1,6 +1,6 @@
 # FootballManager
  
-Some screenshoots from the game (as of right now some widgets might be missing QSS style):
+Some screenshots from the game (as of right now some widgets might be missing QSS style):
 
 ![image](https://github.com/storst1/FootballManager/assets/89082426/92aafd4d-e810-40e3-87ef-ee04fe99015b)
 ![image](https://github.com/storst1/FootballManager/assets/89082426/d50aebd8-5c75-4b02-837a-e2de71069939)
